@@ -47,6 +47,7 @@ convenience of online shopping and the ability to explore an extensive catalog o
 6. User Profile page 👤
 7. Basket page 🛒
 8. About Us page 🌏🚻
+9. 404 (Not Found) ❓
 
 ## <a id="technology-stack">Technology Stack 💻📚</a>
 
