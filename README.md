@@ -110,22 +110,22 @@ process to ensure a seamless workflow and successful delivery of the application
 
 2. **Collaborative Communication**: Communication was key to our team's success. We utilized `Discord` and `Google Meet`
    for real-time
-   discussions, team meetings, and daily stand-up reports. Daily stand-ups allowed each team member to share their
-   progress, identify any blockers, and coordinate efforts effectively. In addition, we utilized `Telegram` for
+   discussions, team meetings and daily stand-up reports. Daily stand-ups allowed each team member to share their
+   progress, identify any blockers and coordinate efforts effectively. In addition, we utilized `Telegram` for
    quick and immediate communication, ensuring swift responses and addressing any urgent queries that arose during
    development.
 
 3. **Version Control with Git**: We followed the Gitflow workflow to manage version control. The project repository had
    a `main` branch for stable releases and a `develop` branch for ongoing development. For each task, team members
-   created feature branches from the `develop` branch, worked on the changes, and submitted pull requests for code
+   created feature branches from the `develop` branch, worked on the changes and submitted pull requests for code
    review.
 
 4. **Code Review and Collaboration**: Pull requests were an essential part of our development process. Each pull request
    underwent a thorough code review by team members before merging into the `develop` branch. This practice
-   ensured code quality, consistency, and adherence to project standards.
+   ensured code quality, consistency and adherence to project standards.
 
 5. **Husky for Git Hooks**: To maintain code quality and ensure a consistent codebase, we utilized Husky, a Git hook
-   manager. With Husky, we automated tasks such as code formatting, linting, and running tests before each commit and
+   manager. With Husky, we automated tasks such as code formatting, linting and running tests before each commit and
    push. This ensured that only clean and valid code was added to the repository.
 
 ## <a id="testing">Testing</a>
