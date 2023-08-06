@@ -65,6 +65,11 @@ convenience of online shopping and the ability to explore an extensive catalog o
 
 ## <a id="scripts">Scripts</a>
 
+<code>npm install</code>: This command will install `npm` package, all modules listed as dependencies in `package.json`
+and triggered
+prepare
+script automatically.
+
 <code>npm run start</code>: This script starts the development server using Webpack in
 development mode. It serves the application and automatically opens it in the default web browser.
 
