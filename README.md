@@ -86,11 +86,10 @@ proper
 functionality and identify potential issues.
 
 <code>npm run prepare</code>: The prepare script is triggered automatically when you run npm install. It installs Husky,
-which sets up Git hooks for running tasks like linting and testing before committing or pushing code.
+which sets up Git hooks for running tasks like linting and formatting before committing or pushing code.
 
-These scripts help streamline the development process and maintain code quality by enforcing linting, formatting, and
-testing practices. Husky ensures that code quality checks are executed before committing, while Jest provides a robust
-testing framework to validate the application's functionality.
+These scripts help streamline the development process and maintain code quality. Husky ensures that code quality checks
+are executed before committing.
 
 ## <a id="getting-started">Getting Started</a>
 
