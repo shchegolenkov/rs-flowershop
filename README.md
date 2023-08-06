@@ -104,7 +104,7 @@ individuals, each contributing their expertise and skills. Throughout the projec
 efficient development
 process to ensure a seamless workflow and successful delivery of the application.
 
-1. **Task Management**: We used `GitHub Project management` as our project management tool to keep track of tasks and
+1. **Task Management**: We used `GitHub Project` as our project management tool to keep track of tasks and
    their progress. Tasks were organized into lists representing different stages (To Do, In Progress, Review & Testing,
    Done) and consisted of smaller subtasks for better granularity. Each team member was responsible for specific tasks.
 
