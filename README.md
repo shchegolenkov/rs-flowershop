@@ -91,7 +91,7 @@ testing framework to validate the application's functionality.
 
 ### To run the application locally, follow these steps:
 
-1. Clone the repository: `git clone [repository URL]`.
+1. Clone the repository: `git clone https://github.com/shchegolenkov/rs-flowershop`.
 2. Ask the [Authors](#authors) for access to the api.
 3. Install dependencies: `npm install`.
 4. Start the development server: `npm start`.
