@@ -2,6 +2,14 @@
   "name": "rs-flowershop",
   "version": "1.0.0",
   "description": "It's a comprehensive online shopping portal that provides an interactive and seamless experience to users.",
+  "scripts": {
+    "start": "webpack serve --config webpack/webpack.config.js --env env=development --mode=development --open",
+    "build": "webpack --config webpack/webpack.config.js --env env=production --mode=production",
+    "test": "npx jest",
+    "lint": "eslint src",
+    "prettier": "prettier --write src/**/*.*",
+    "prepare": "husky install"
+  },
   "devDependencies": {
     "@babel/core": "7.22.9",
     "@babel/plugin-transform-runtime": "7.22.9",
