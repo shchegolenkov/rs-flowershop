@@ -4,7 +4,8 @@
   "description": "It's a comprehensive online shopping portal that provides an interactive and seamless experience to users.",
   "scripts": {
     "start": "webpack serve --config webpack/webpack.config.js --env env=development --mode=development --open",
-    "build": "webpack --config webpack/webpack.config.js --env env=production --mode=production",
+    "build:dev": "webpack --config webpack/webpack.config.js --env env=development --mode=development",
+    "build:prod": "webpack --config webpack/webpack.config.js --env env=production --mode=production",
     "test": "npx jest",
     "lint": "eslint src",
     "prettier": "prettier --write --ignore-unknown src/**/*.*",
