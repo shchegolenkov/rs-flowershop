@@ -1,0 +1,112 @@
+.h1 {
+  font-size: 67px;
+  font-weight: 500;
+  line-height: 120%;
+
+  @include media-mobile {
+    font-size: 38px;
+  }
+}
+
+.h2 {
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 120%;
+
+  @include media-mobile {
+    font-size: 32px;
+  }
+}
+
+.h3 {
+  font-size: 38px;
+  line-height: 120%;
+  font-weight: 400;
+
+  @include media-mobile {
+    font-size: 26px;
+  }
+}
+
+.h4 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+
+  @include media-mobile {
+    font-size: 22px;
+    font-weight: 300;
+  }
+}
+
+.h5 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+
+  @include media-mobile {
+    font-size: 18px;
+  }
+}
+
+.h6 {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 120%;
+
+  @include media-mobile {
+    line-height: 100%;
+  }
+}
+
+.subtitle {
+  font-size: 17px;
+  line-height: 140%;
+
+  @include media-mobile {
+    font-size: 16px;
+  }
+}
+
+.body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%;
+
+  @include media-mobile {
+    font-weight: 300;
+  }
+}
+
+.overline {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
+  text-transform: uppercase;
+
+  @include media-mobile {
+    font-size: 12px;
+  }
+}
+
+.caption {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 120%;
+
+  @include media-mobile {
+    font-size: 14px;
+  }
+}
+
+.captionSmall {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.captionBold {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 120%;
+}

@@ -1,0 +1,18 @@
+@import "./_constants.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-X: hidden;
+  min-width: 375px;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: transparent;
+}

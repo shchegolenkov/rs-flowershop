@@ -24,6 +24,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
+              additionalData: '@import "src/styles/_mixins.scss";',
             },
           },
         ],
@@ -38,6 +39,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
+              additionalData: '@import "src/styles/_mixins.scss";',
             },
           },
         ],
