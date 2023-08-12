@@ -17,13 +17,27 @@ module.exports = {
               },
             },
           },
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: '@import "src/styles/_mixins.scss";',
+            },
+          },
         ],
         include: /\.module\.(scss|css)$/,
       },
       {
         test: /\.(scss|css)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: '@import "src/styles/_mixins.scss";',
+            },
+          },
+        ],
         exclude: /\.module\.(scss|css)$/,
       },
     ],
