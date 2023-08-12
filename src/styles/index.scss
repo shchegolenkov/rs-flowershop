@@ -3,10 +3,12 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   overflow-X: hidden;
+  min-width: 375px;
 }
 
 button {
