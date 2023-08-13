@@ -1,0 +1,39 @@
+.link,
+.linkIco {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--color-black);
+  text-decoration: none;
+  padding: 5px;
+  position: relative;
+
+  @include media-mobile {
+    font-size: 14px;
+  }
+}
+
+.link::after,
+.linkIco::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0%;
+  left: -1px;
+  bottom: 3px;
+  height: 1px;
+  background-color: var(--color-black);
+  transition: width 0.4s ease-in-out;
+}
+
+.link:hover::after,
+.linkIco:hover::after {
+  width: 100%;
+}
+
+
+.linkIco {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
