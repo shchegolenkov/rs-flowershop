@@ -20,7 +20,7 @@ const anonymLinks = [
 ];
 
 const userLinks = [
-  { to: '/', text: 'Log out', ico: <LogoutIco />, action: () => console.log('link action') },
+  { to: '/', text: 'Log out', ico: <LogoutIco /> },
   { to: '/profile', text: 'Profile', ico: <ProfileIco /> },
 ];
 
