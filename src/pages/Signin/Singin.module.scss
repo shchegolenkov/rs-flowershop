@@ -44,111 +44,162 @@
   }
 }
 
-.form__element_left {
-  justify-content: flex-start;
-}
-
 .signin__header {
   height: 372px;
   @media (max-width: 900px) {
     height: 100%;
   }
+}
 
-  .header__img {
-    flex-basis: auto;
-    width: 50%;
-    background-image: url('/src/assets/signin-header.png');
-    background-size: cover;
-    background-position: top right;
+.header__img {
+  flex-basis: auto;
+  width: 50%;
+  background-image: url('/src/assets/signin-header.png');
+  background-size: cover;
+  background-position: top right;
 
+  @media (max-width: 900px) {
+    width: 100%;
+    height: 315px;
+    background-position: top;
+  }
+
+  @media (max-width: 515px) {
+    height: 234px;
+  }
+}
+
+.header__message {
+  width: 560px;
+  flex-flow: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: start;
+  padding-right: 60px;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    padding: 80px 0 80px 80px;
+  }
+
+  @media (max-width: 620px) {
+    padding: 80px 0;
+  }
+  @media (max-width: 515px) {
+    padding: 44px 0;
+  }
+}
+
+.header__message_container {
+  width: 520px;
+  padding-left: 60px;
+
+  @media (max-width: 900px) {
+    width: 100%;
+    padding: 0;
+  }
+
+  .welcome {
+    width: 560px;
+    text-align: left;
     @media (max-width: 900px) {
       width: 100%;
-      height: 315px;
-      background-position: top;
     }
-
+    @media (max-width: 620px) {
+      text-align: center;
+    }
     @media (max-width: 515px) {
-      height: 234px;
+      font-size: 32px;
     }
   }
 
-  .header__message {
+  .login__text {
     width: 560px;
-    flex-flow: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: start;
-    padding-right: 60px;
+    @include link-text;
+    padding-top: 36px;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    color: var(--color-gray);
 
     @media (max-width: 900px) {
       width: 100%;
-      padding: 80px 0 80px 80px;
     }
 
     @media (max-width: 620px) {
-      padding: 80px 0;
+      justify-content: center;
     }
     @media (max-width: 515px) {
-      padding: 44px 0;
+      font-size: 14px;
     }
 
-    .welcome {
-      width: 560px;
-      text-align: left;
-      @media (max-width: 900px) {
-        width: 100%;
-      }
-      @media (max-width: 620px) {
-        text-align: center;
-      }
-      @media (max-width: 515px) {
-        font-size: 32px;
-      }
-    }
-
-    .login__text {
-      width: 560px;
-      @include link-text;
-      padding-top: 36px;
-      display: flex;
-      flex-flow: row;
-      justify-content: flex-start;
+    .login__link {
+      display: inline-flex;
       align-items: center;
-      text-align: left;
-      color: var(--color-gray);
+      margin-left: 16px;
+      text-align: center;
+      text-decoration: none;
 
-      @media (max-width: 900px) {
-        width: 100%;
-      }
-
-      @media (max-width: 620px) {
-        justify-content: center;
-      }
-      @media (max-width: 515px) {
-        font-size: 14px;
-      }
-
-      .login__link {
-        display: inline-flex;
-        align-items: center;
-        margin-left: 16px;
-        text-align: center;
-        text-decoration: none;
-
-        .login__btn {
-          @include button-secondary;
-        }
+      .login__btn {
+        @include button-secondary;
       }
     }
   }
+}
 
-  .header__message_container {
-    width: 520px;
-    padding-left: 60px;
+.form__element_left {
+  justify-content: flex-start;
 
-    @media (max-width: 900px) {
-      width: 100%;
-      padding: 0;
-    }
+  @media (max-width: 1080px) {
+    text-align: center;
+  }
+
+  @include media-tablet {
+    text-align: left;
+  }
+}
+
+.form__element_right {
+}
+
+.form__title_size {
+  width: 100%;
+  max-width: 576px;
+  padding: 80px 0 0 80px;
+
+  @media (max-width: 1080px) {
+    padding: 80px 0;
+  }
+
+  @include media-tablet {
+    padding: 80px;
+  }
+
+  @media (max-width: 550px) {
+    padding: 80px 0;
+    text-align: center;
+  }
+
+  @include media-mobile {
+    padding: 40px 0;
+  }
+}
+
+.form__fields_flow_size {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-flow: column;
+  padding: 70px 40px 30px 40px;
+  gap: 30px;
+
+  @include media-tablet {
+    max-width: 608px;
+  }
+
+  @include media-mobile {
+    padding: 40px 16px;
   }
 }

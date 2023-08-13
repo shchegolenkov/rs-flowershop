@@ -1,11 +1,45 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import RootLayout from '../../layouts/index';
-import clsx from 'clsx';
-import { Typography } from '../../components/ui/Typography';
+import React, { useState } from 'react';
 import s from './Singin.module.scss';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
+import { ThemeProvider } from '@mui/material/styles';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+
+import RootLayout from '../../layouts/index';
+import { Typography } from '../../components/ui/Typography';
+import FormTheme from '../../themes/FormTheme';
+import { validateEmail } from '../../utils/validators';
+import { CustomerData } from '../../types';
+import EmailInput from '../../components/UI/EmailInput';
 
 const Signin: React.FC = () => {
+  const [emailError, setEmailError] = useState('');
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .required('Email is required')
+      .email('Invalid email (e.g., example@example.com)')
+      .test('custom-email-validation', `${emailError}`, (value) => {
+        return validateEmail(value as string, setEmailError);
+      })
+      .matches(/^\S[^]*\S$/, 'Email should not contain spaces at the beginning or end'),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CustomerData>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
+
+  const onSubmit = (data: CustomerData) => {
+    console.log(data);
+  };
+
   return (
     <RootLayout>
       <div className={s.main}>
@@ -27,6 +61,21 @@ const Signin: React.FC = () => {
           </div>
         </div>
       </div>
+      <ThemeProvider theme={FormTheme}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={clsx(s.elements__flow)}>
+            <div className={clsx(s.form__element, s.form__element_left)}>
+              <Typography variant="h2" className={s.form__title_size}>
+                1. Account Info
+              </Typography>
+            </div>
+            <div className={clsx(s.form__element, s.form__element_right)}>
+              <EmailInput register={register} errors={errors} />
+            </div>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </ThemeProvider>
     </RootLayout>
   );
 };
