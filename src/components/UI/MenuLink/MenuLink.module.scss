@@ -15,7 +15,7 @@
 
 .link::after,
 .linkIco::after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   width: 0%;
@@ -30,7 +30,6 @@
 .linkIco:hover::after {
   width: 100%;
 }
-
 
 .linkIco {
   display: flex;
