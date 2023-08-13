@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import RootLayout from '../../layouts/index';
 import clsx from 'clsx';
 import { Typography } from '../../components/ui/Typography';
@@ -16,6 +17,12 @@ const Signin: React.FC = () => {
                 Welcome! Create
                 <br /> your account now
               </Typography>
+              <span className={s.login__text}>
+                Already have an account?
+                <Link to="/login" className={s.login__link}>
+                  <button className={s.login__btn}>LOG IN</button>
+                </Link>
+              </span>
             </div>
           </div>
         </div>
