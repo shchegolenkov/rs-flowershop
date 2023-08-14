@@ -35,11 +35,10 @@
   display: grid;
   flex-grow: 2;
   grid-template-columns:
-    repeat(2, max(135px, calc((25% - 42.5px) / 2)))
+    repeat(2, max(135px, calc((50% - 83px) / 4)))
     1fr
-    repeat(2, max(135px, calc((25% - 42.5px) / 2)));
+    repeat(2, max(135px, calc((50% - 83px) / 4)));
   grid-template-areas: '. . empty . .';
-  border-left: 1px solid var(--color-black);
 
   @include media-large {
     grid-template-columns: repeat(4, 1fr);
@@ -51,7 +50,6 @@
     background-color: var(--color-white);
     border-left: 1px solid var(--color-black);
     border-top: 1px solid var(--color-black);
-    border-right: 1px solid var(--color-black);
     right: 0px;
     top: 0px;
     transform: translateX(100dvw);
@@ -73,6 +71,10 @@
 
 .items > li {
   border-right: 1px solid var(--color-black);
+
+  @include media-tablet {
+    border-right: none;
+  }
 }
 
 .active {
@@ -100,9 +102,8 @@
 
 .listItem {
   @include media-tablet {
-    padding-left: 20px;
+    padding: 0 20px;
     justify-content: flex-start;
-    border-right: none;
     border-bottom: 1px solid var(--color-black);
   }
 }
@@ -144,10 +145,8 @@
 .ico {
   aspect-ratio: 1 / 1;
 
-  @include media-tablet {
-    &:first-child {
-      border-right: 1px solid var(--color-black);
-    }
+  &:first-child {
+    border-right: 1px solid var(--color-black);
   }
 }
 
