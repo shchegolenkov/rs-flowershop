@@ -1,6 +1,11 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, Theme } from '@mui/material/styles';
+import { TypographyOptions } from '@mui/material/styles/createTypography';
 
-const FormTheme = createTheme({
+interface CustomTypographyOptions extends TypographyOptions {
+  fontWeight?: number;
+}
+
+const FormTheme: Theme = createTheme({
   palette: {
     primary: {
       main: '#D2D2D7',
@@ -16,28 +21,32 @@ const FormTheme = createTheme({
     lineHeight: '17px',
     letterSpacing: 0,
     textAlign: 'left',
-  },
-  overrides: {
+  } as CustomTypographyOptions,
+  components: {
     MuiOutlinedInput: {
-      root: {
-        borderRadius: 0,
-        '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#D2D2D7',
-        },
-        '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#F55F56',
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#D2D2D7',
+          },
+          '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#F55F56',
+          },
         },
       },
     },
     MuiFormHelperText: {
-      root: {
-        fontFamily: 'Poppins, Roboto, sans-serif',
-        fontSize: 14,
-        fontWeight: 500,
-        lineHeight: '17px',
-        letterSpacing: 0,
-        textAlign: 'left',
-        color: '#F55F56',
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins, Roboto, sans-serif',
+          fontSize: 14,
+          fontWeight: 500,
+          lineHeight: '17px',
+          letterSpacing: 0,
+          textAlign: 'left',
+          color: '#F55F56',
+        },
       },
     },
   },
