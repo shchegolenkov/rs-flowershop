@@ -13,9 +13,11 @@ import FormTheme from '../../themes/FormTheme';
 import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types';
 import EmailInput from '../../components/UI/EmailInput';
+import PasswordInput from '../../components/UI/PasswordInput';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -25,6 +27,18 @@ const Signin: React.FC = () => {
         return validateEmail(value as string, setEmailError);
       })
       .matches(/^\S[^]*\S$/, 'Email should not contain spaces at the beginning or end'),
+    password: yup
+      .string()
+      .required('Password is required')
+      .min(8, 'Password must be at least 8 characters')
+      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter (e.g., [A-Z])')
+      .matches(/[a-z]/, 'Password must contain at least one lowercase letter (e.g., [a-z])')
+      .matches(/[0-9]/, 'Password must contain at least one digit (e.g., [0-9])')
+      .matches(
+        /[!@#$%^&*]/,
+        'Password must contain at least one special character (e.g., !@#$%^&*)'
+      )
+      .matches(/^\S*$/, 'Password cannot contain spaces'),
   });
 
   const {
@@ -69,8 +83,14 @@ const Signin: React.FC = () => {
                 1. Account Info
               </Typography>
             </div>
-            <div className={clsx(s.form__element, s.form__element_right)}>
+            <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
               <EmailInput register={register} errors={errors} />
+              <PasswordInput
+                register={register}
+                errors={errors}
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+              />
             </div>
           </div>
           <button type="submit">Submit</button>

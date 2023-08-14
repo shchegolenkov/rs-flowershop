@@ -187,19 +187,9 @@
   }
 }
 
-.form__fields_flow_size {
-  width: 100%;
-  max-width: 560px;
+.form__element_flow {
   display: flex;
   flex-flow: column;
   padding: 70px 40px 30px 40px;
   gap: 30px;
-
-  @include media-tablet {
-    max-width: 608px;
-  }
-
-  @include media-mobile {
-    padding: 40px 16px;
-  }
-}
+ }
