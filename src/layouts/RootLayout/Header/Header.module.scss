@@ -17,20 +17,33 @@
 .nav {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--color-black);
-  border-left: 1px solid var(--color-black);
   border-bottom: 1px solid var(--color-black);
 
   @include media-tablet {
     justify-content: flex-start;
+    position: relative;
+    overflow-x: clip;
+  }
+
+  @include media-limit {
+    border-left: 1px solid var(--color-black);
+    border-right: 1px solid var(--color-black);
   }
 }
 
 .items {
   display: grid;
   flex-grow: 2;
-  grid-template-columns: repeat(2, 135px) 1fr repeat(2, 135px);
+  grid-template-columns:
+    repeat(2, max(135px, calc((25% - 42.5px) / 2)))
+    1fr
+    repeat(2, max(135px, calc((25% - 42.5px) / 2)));
   grid-template-areas: '. . empty . .';
+  border-left: 1px solid var(--color-black);
+
+  @include media-large {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
   @include media-tablet {
     position: absolute;
@@ -53,9 +66,13 @@
   }
 
   @include media-mobile {
-    grid-template-columns: calc(100dvw - 2px);
-    transform: translateX(100dvw);
+    grid-template-columns: 100dvw;
+    transform: translateX(110vw);
   }
+}
+
+.items > li {
+  border-right: 1px solid var(--color-black);
 }
 
 .active {
@@ -71,7 +88,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid var(--color-black);
 
   @include media-tablet {
     height: 53px;
@@ -98,6 +114,7 @@
     display: flex;
     margin-left: auto;
     border-left: 1px solid var(--color-black);
+    border-right: 1px solid var(--color-black);
   }
 }
 
@@ -114,15 +131,24 @@
 }
 
 .menuClose button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: transform 0.2s;
 }
 
 .menuClose button:hover {
-  transform: rotate(45deg);
+  transform: rotate(90deg);
 }
 
 .ico {
   aspect-ratio: 1 / 1;
+
+  @include media-tablet {
+    &:first-child {
+      border-right: 1px solid var(--color-black);
+    }
+  }
 }
 
 .logoIco {
@@ -135,7 +161,7 @@
   grid-area: empty;
   @extend .listItem;
 
-  @include media-tablet {
+  @include media-large {
     display: none;
   }
 }
