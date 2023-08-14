@@ -15,19 +15,3 @@ declare module '*.module.scss' {
   const classNames: ClassNames;
   export = classNames;
 }
-
-export interface Address {
-  street: string;
-  city: string;
-  postalCode: string;
-  country: string;
-}
-
-export interface CustomerData {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  birthDate: Date | null;
-  addresses: Address[];
-}
