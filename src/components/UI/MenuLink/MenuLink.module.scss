@@ -23,16 +23,33 @@
   bottom: 3px;
   height: 1px;
   background-color: var(--color-black);
-  transition: width 0.4s ease-in-out;
-}
-
-.link:hover::after,
-.linkIco:hover::after {
-  width: 100%;
+  transition: all 0.2s ease-in-out;
 }
 
 .linkIco {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+@media (hover: hover) {
+  .link:hover,
+  .linkIco:hover {
+    color: var(--color-gray);
+  }
+
+  .link:hover::after,
+  .linkIco:hover::after {
+    width: 100%;
+  }
+}
+
+.link:active,
+.linkIco:active {
+  color: var(--color-black);
+}
+
+.link:active::after,
+.linkIco:active::after {
+  width: 100%;
 }
