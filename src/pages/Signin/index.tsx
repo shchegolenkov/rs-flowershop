@@ -11,7 +11,7 @@ import RootLayout from '../../layouts/index';
 import { Typography } from '../../components/ui/Typography';
 import FormTheme from '../../themes/FormTheme';
 import { validateEmail } from '../../utils/validators';
-import { CustomerData } from '../../types';
+import { CustomerData } from '../../types/types';
 import EmailInput from '../../components/UI/EmailInput';
 import PasswordInput from '../../components/UI/PasswordInput';
 
