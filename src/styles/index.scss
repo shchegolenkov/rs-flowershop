@@ -1,4 +1,4 @@
-@import "./_constants.scss";
+@import './_constants.scss';
 
 * {
   margin: 0;
@@ -7,8 +7,9 @@
 }
 
 body {
-  overflow-X: hidden;
   min-width: 375px;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 button {
