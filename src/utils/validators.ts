@@ -1,4 +1,8 @@
-export const validateEmail = (email: string, setEmailError) => {
+import { Dispatch, SetStateAction } from 'react';
+
+type EmailValidator = (email: string, setEmailError: Dispatch<SetStateAction<string>>) => boolean;
+
+export const validateEmail: EmailValidator = (email: string, setEmailError) => {
   setEmailError('');
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const emailLeftPartPattern = /^[a-zA-Z0-9._%+-]+$/;
