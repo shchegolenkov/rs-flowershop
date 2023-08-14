@@ -17,7 +17,7 @@ import PasswordInput from '../../components/UI/PasswordInput';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -85,12 +85,7 @@ const Signin: React.FC = () => {
             </div>
             <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
               <EmailInput register={register} errors={errors} />
-              <PasswordInput
-                register={register}
-                errors={errors}
-                showPassword={showPassword}
-                setShowPassword={setShowPassword}
-              />
+              <PasswordInput register={register} errors={errors} />
             </div>
           </div>
           <button type="submit">Submit</button>

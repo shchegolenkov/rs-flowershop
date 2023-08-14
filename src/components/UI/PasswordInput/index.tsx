@@ -1,5 +1,5 @@
 import s from './PasswordInput.module.scss';
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import ErrorIcon from '@mui/icons-material/Error';
 import {
   FormControl,
@@ -11,21 +11,17 @@ import {
   OutlinedInput,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { DeepMap, FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface PasswordInputProps {
   register: UseFormRegister<FieldValues>;
-  errors: DeepMap<FieldValues, FieldError>;
-  showPassword: boolean;
-  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  errors: {
+    password?: FieldError;
+  };
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({
-  register,
-  errors,
-  showPassword,
-  setShowPassword,
-}) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({ register, errors }) => {
+  const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
