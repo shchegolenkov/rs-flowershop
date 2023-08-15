@@ -1,6 +1,5 @@
 import s from './FirstNameInput.module.scss';
 import TextField from '@mui/material/TextField';
-import { ListItemIcon, ListItemText } from '@mui/material';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
@@ -20,19 +19,13 @@ const FirstNameInput: React.FC<FirstNameInputProps> = ({ register, errors }) => 
         fullWidth
         label="First name *"
         error={!!errors.firstName}
-        id="outlined-basic"
+        id="firstName-input"
         {...register('firstName')}
         helperText={
           errors.firstName ? (
-            <ListItemText>
-              {errors.firstName ? (
-                <ListItemIcon>
-                  <ErrorIcon color="error" /> {errors.firstName.message}
-                </ListItemIcon>
-              ) : (
-                ''
-              )}
-            </ListItemText>
+            <span className={s.err__message}>
+              <ErrorIcon color="error" /> {errors.firstName.message}
+            </span>
           ) : (
             ''
           )

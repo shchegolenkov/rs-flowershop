@@ -7,7 +7,6 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
-  ListItemIcon,
   OutlinedInput,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -36,7 +35,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ register, errors }) => {
         <OutlinedInput
           label="Password"
           error={!!errors.password}
-          id="outlined-adornment-password"
+          id="password-input"
           {...register('password')}
           type={showPassword ? 'text' : 'password'}
           endAdornment={
@@ -54,10 +53,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ register, errors }) => {
         />
         <FormHelperText id="component-error-text">
           {errors.password ? (
-            <ListItemIcon>
-              <ErrorIcon color="error" />
-              {errors.password.message}
-            </ListItemIcon>
+            <span className={s.err__message}>
+              <ErrorIcon color="error" /> {errors.password.message}
+            </span>
           ) : (
             ''
           )}
