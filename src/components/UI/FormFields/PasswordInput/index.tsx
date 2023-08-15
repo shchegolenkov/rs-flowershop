@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FieldError, UseFormRegister } from 'react-hook-form';
-import { CustomerData } from '../../../types/types';
+import { CustomerData } from '../../../../types/types';
 
 interface PasswordInputProps {
   register: UseFormRegister<CustomerData>;

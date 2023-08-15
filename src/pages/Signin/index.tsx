@@ -12,9 +12,9 @@ import { Typography } from '../../components/UI/Typography';
 import FormTheme from '../../themes/FormTheme';
 import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types/types';
-import EmailInput from '../../components/UI/EmailInput';
-import PasswordInput from '../../components/UI/PasswordInput';
-import FirstNameInput from '../../components/UI/FirstNameInput';
+import EmailInput from '../../components/UI/FormFields/EmailInput';
+import PasswordInput from '../../components/UI/FormFields/PasswordInput';
+import FirstNameInput from '../../components/UI/FormFields/FirstNameInput';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
