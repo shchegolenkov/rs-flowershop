@@ -3,10 +3,11 @@ import TextField from '@mui/material/TextField';
 import { ListItemIcon, ListItemText } from '@mui/material';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
-import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldError, UseFormRegister } from 'react-hook-form';
+import { CustomerData } from '../../../types/types';
 
 interface EmailInputProps {
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<CustomerData>;
   errors: {
     email?: FieldError;
   };
