@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { ThemeProvider } from '@mui/material/styles';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 
 import RootLayout from '../../layouts/index';
 import { Typography } from '../../components/UI/Typography';
@@ -46,9 +46,13 @@ const Signin: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<CustomerData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as Resolver<CustomerData>,
+    defaultValues: {
+      email: '',
+      password: '',
+    },
     mode: 'onChange',
-  });
+  } as UseFormProps<CustomerData>);
 
   const onSubmit = (data: CustomerData) => {
     console.log(data);
