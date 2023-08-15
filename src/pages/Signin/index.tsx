@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
 import RootLayout from '../../layouts/index';
-import { Typography } from '../../components/ui/Typography';
+import { Typography } from '../../components/UI/Typography';
 import FormTheme from '../../themes/FormTheme';
 import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types/types';
