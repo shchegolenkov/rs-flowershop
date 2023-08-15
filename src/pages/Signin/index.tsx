@@ -14,6 +14,7 @@ import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types/types';
 import EmailInput from '../../components/UI/EmailInput';
 import PasswordInput from '../../components/UI/PasswordInput';
+import FirstNameInput from '../../components/UI/FirstNameInput';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
@@ -39,6 +40,14 @@ const Signin: React.FC = () => {
         'Password must contain at least one special character (e.g., !@#$%^&*)'
       )
       .matches(/^\S*$/, 'Password cannot contain spaces'),
+    firstName: yup
+      .string()
+      .required('First name is required')
+      .matches(
+        /^[^0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/`|]*$/,
+        'First name cannot contain special characters or numbers.'
+      )
+      .matches(/^[a-zA-Z]+$/, 'First name must contain at least one character (e.g., a-z,A-Z)'),
   });
 
   const {
@@ -50,6 +59,7 @@ const Signin: React.FC = () => {
     defaultValues: {
       email: '',
       password: '',
+      firstName: '',
     },
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
@@ -90,6 +100,16 @@ const Signin: React.FC = () => {
             <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
               <EmailInput register={register} errors={errors} />
               <PasswordInput register={register} errors={errors} />
+            </div>
+          </div>
+          <div className={clsx(s.elements__flow)}>
+            <div className={clsx(s.form__element, s.form__element_left)}>
+              <Typography variant="h2" className={s.form__title_size}>
+                2. User Info
+              </Typography>
+            </div>
+            <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
+              <FirstNameInput register={register} errors={errors} />
             </div>
           </div>
           <button type="submit">Submit</button>
