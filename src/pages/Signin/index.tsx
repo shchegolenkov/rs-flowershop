@@ -15,6 +15,7 @@ import { CustomerData } from '../../types/types';
 import EmailInput from '../../components/UI/FormFields/EmailInput';
 import PasswordInput from '../../components/UI/FormFields/PasswordInput';
 import FirstNameInput from '../../components/UI/FormFields/FirstNameInput';
+import LastNameInput from '../../components/UI/FormFields/LastNameInput';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
@@ -48,6 +49,14 @@ const Signin: React.FC = () => {
         'First name cannot contain special characters or numbers.'
       )
       .matches(/^[a-zA-Z]+$/, 'First name must contain at least one character (e.g., a-z,A-Z)'),
+    lastName: yup
+      .string()
+      .required('Last name is required')
+      .matches(
+        /^[^0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/`|]*$/,
+        'Last name cannot contain special characters or numbers.'
+      )
+      .matches(/^[a-zA-Z]+$/, 'Last name must contain at least one character (e.g., a-z,A-Z)'),
   });
 
   const {
@@ -60,6 +69,7 @@ const Signin: React.FC = () => {
       email: '',
       password: '',
       firstName: '',
+      lastName: '',
     },
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
@@ -110,6 +120,7 @@ const Signin: React.FC = () => {
             </div>
             <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
               <FirstNameInput register={register} errors={errors} />
+              <LastNameInput register={register} errors={errors} />
             </div>
           </div>
           <button type="submit">Submit</button>
