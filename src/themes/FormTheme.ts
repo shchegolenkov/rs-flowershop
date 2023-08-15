@@ -49,6 +49,20 @@ const FormTheme: Theme = createTheme({
         },
       },
     },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins, Roboto, sans-serif',
+          fontSize: 12,
+          fontWeight: 400,
+          lineHeight: '15px',
+          letterSpacing: 0,
+          textAlign: 'left',
+          color: '#F55F56',
+          alignItems: 'center',
+        },
+      },
+    },
   },
 });
 
