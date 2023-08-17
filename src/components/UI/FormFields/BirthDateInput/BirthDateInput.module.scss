@@ -1,3 +1,23 @@
+.form__field_size {
+  width: 50%;
+  height: 100%;
+  min-height: 120px;
+
+  @media (max-width: 830px) {
+    width: 100%;
+    max-width: 165px;
+  }
+
+  @include media-tablet {
+    width: 50%;
+    max-width: 608px;
+  }
+
+  @include media-mobile {
+    width: 100%;
+  }
+}
+
 .err__message {
   display: flex;
   align-items: center;

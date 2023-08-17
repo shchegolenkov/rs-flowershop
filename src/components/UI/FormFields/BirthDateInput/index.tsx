@@ -93,33 +93,36 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, contr
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Controller
-        name="birthDate"
-        control={control}
-        render={({ field }) => {
-          const dayjsValue = field.value ? dayjs(field.value) : null;
+      <div className={s.form__field_size}>
+        <Controller
+          name="birthDate"
+          control={control}
+          render={({ field }) => {
+            const dayjsValue = field.value ? dayjs(field.value) : null;
 
-          return (
-            <DatePicker
-              {...field}
-              value={dayjsValue}
-              error={!!errors.birthDate}
-              maxDate={thirteenYearsAgo}
-              minDate={minDate1900}
-              onError={(newError) => setDataError(newError)}
-              {...register('birthDate')}
-              format="DD/MM/YYYY"
-              label="Date of birth *"
-              onChange={handleDateChange}
-              slotProps={{
-                textField: {
-                  helperText: errorMessage,
-                },
-              }}
-            />
-          );
-        }}
-      />
+            return (
+              <DatePicker
+                {...field}
+                value={dayjsValue}
+                error={!!errors.birthDate}
+                maxDate={thirteenYearsAgo}
+                minDate={minDate1900}
+                onError={(newError) => setDataError(newError)}
+                {...register('birthDate')}
+                format="DD/MM/YYYY"
+                label="Date of birth *"
+                onChange={handleDateChange}
+                slotProps={{
+                  textField: {
+                    helperText: errorMessage,
+                    fullWidth: true,
+                  },
+                }}
+              />
+            );
+          }}
+        />
+      </div>
     </LocalizationProvider>
   );
 };
