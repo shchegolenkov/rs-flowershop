@@ -37,10 +37,15 @@ function Header() {
       }
     };
 
+    if (isMenuActive) {
+      document.body.style.position = 'fixed';
+    }
+
     document.addEventListener('mousedown', checkOutside);
 
     return () => {
       document.removeEventListener('mousedown', checkOutside);
+      document.body.style.position = 'static';
     };
   }, [isMenuActive]);
 
