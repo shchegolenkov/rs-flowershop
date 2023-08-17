@@ -16,9 +16,18 @@ import EmailInput from '../../components/UI/FormFields/EmailInput';
 import PasswordInput from '../../components/UI/FormFields/PasswordInput';
 import FirstNameInput from '../../components/UI/FormFields/FirstNameInput';
 import LastNameInput from '../../components/UI/FormFields/LastNameInput';
+import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
+
+  const currentDate = new Date();
+  const thirteenYearsAgo2 = new Date(
+    currentDate.getFullYear() - 13,
+    currentDate.getMonth(),
+    currentDate.getDate()
+  );
+  const minDate = new Date(1900, 1, 1);
 
   const schema = yup.object().shape({
     email: yup
@@ -57,11 +66,19 @@ const Signin: React.FC = () => {
         'Last name cannot contain special characters or numbers.'
       )
       .matches(/^[a-zA-Z]+$/, 'Last name must contain at least one character (e.g., a-z,A-Z)'),
+    birthDate: yup
+      .date()
+      .max(thirteenYearsAgo2)
+      .min(minDate)
+      .typeError('Please enter a valid date')
+      .required('Date is required'),
   });
 
   const {
+    control,
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CustomerData>({
     resolver: yupResolver(schema) as Resolver<CustomerData>,
@@ -70,6 +87,7 @@ const Signin: React.FC = () => {
       password: '',
       firstName: '',
       lastName: '',
+      birthDate: null,
     },
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
@@ -121,6 +139,7 @@ const Signin: React.FC = () => {
             <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
               <FirstNameInput register={register} errors={errors} />
               <LastNameInput register={register} errors={errors} />
+              <BirthDateInput register={register} errors={errors} control={control} reset={reset} />
             </div>
           </div>
           <button type="submit">Submit</button>
