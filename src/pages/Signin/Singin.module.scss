@@ -191,5 +191,18 @@
   display: flex;
   flex-flow: column;
   padding: 70px 40px 30px 40px;
-  gap: 30px;
- }
+  gap: 15px;
+
+  @include media-tablet {
+    align-items: center;
+  }
+
+  @include media-mobile {
+    padding: 50px 16px 20px 16px;
+  }
+}
+
+.err__message {
+  display: flex;
+  align-items: center;
+}
