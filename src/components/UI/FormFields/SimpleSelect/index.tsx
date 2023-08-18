@@ -30,6 +30,7 @@ const SimpleSelect: React.FC<SelectInputProps> = ({
   label,
   id,
   selectData,
+  defaultValue,
 }) => {
   return (
     <div className={s.form__field_size}>
@@ -37,6 +38,7 @@ const SimpleSelect: React.FC<SelectInputProps> = ({
         fullWidth
         id={id}
         select
+        defaultValue={defaultValue}
         error={!!err}
         label={label}
         {...register(name)}
