@@ -104,7 +104,6 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, contr
               <DatePicker
                 {...field}
                 value={dayjsValue}
-                error={!!errors.birthDate}
                 maxDate={thirteenYearsAgo}
                 minDate={minDate1900}
                 onError={(newError) => setDataError(newError)}
@@ -116,6 +115,7 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, contr
                   textField: {
                     helperText: errorMessage,
                     fullWidth: true,
+                    error: !!errors?.birthDate,
                   },
                 }}
               />
