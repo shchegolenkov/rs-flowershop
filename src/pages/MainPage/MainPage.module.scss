@@ -33,7 +33,7 @@
   }
 
   @include media-mobile {
-    padding: 16px;
+    padding: 40px 16px;
   }
 }
 
@@ -52,6 +52,7 @@
 
   @include media-mobile {
     aspect-ratio: 1.5 / 1;
+    padding: 16px;
   }
 }
 
@@ -106,6 +107,10 @@
     text-align: center;
   }
 
+  @include media-large {
+    padding: 130px;
+  }
+
   @include media-tablet {
     padding: 76px;
   }
@@ -117,5 +122,5 @@
 }
 
 .button {
-  margin-top: 16px;
+  margin-top: 64px;
 }

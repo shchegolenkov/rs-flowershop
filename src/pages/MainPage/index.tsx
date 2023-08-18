@@ -80,10 +80,8 @@ function MainPage() {
         </div>
       </div>
       <section className={s.quote}>
-        <Typography variant="overline" className={s.quoteOverline}>
-          Inspiration
-        </Typography>
-        <Typography variant="h2" className={s.quoteHeader}>
+        <Typography variant="overline">Inspiration</Typography>
+        <Typography variant="h2">
           Elevate Moments, Embrace Nature: Where Bouquets Blossom into Memories
         </Typography>
       </section>
