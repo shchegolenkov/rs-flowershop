@@ -6,4 +6,5 @@ export interface CustomerData {
   birthDate: Date | null;
   shippingStreet: string;
   shippingCity: string;
+  shippingPostalCode: string;
 }

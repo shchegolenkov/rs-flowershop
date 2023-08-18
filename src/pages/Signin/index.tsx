@@ -81,6 +81,10 @@ const Signin: React.FC = () => {
       .string()
       .required('City is required')
       .max(100, 'City must be at most 100 characters'),
+    shippingPostalCode: yup
+      .string()
+      .required('Postal code is required')
+      .matches(/^(?:NL-)?(\d{4})\s*([A-Z]{2})$/i, 'Invalid postal code (e.g., 2378SS)'),
   });
 
   const {
@@ -99,6 +103,7 @@ const Signin: React.FC = () => {
       birthDate: null,
       shippingStreet: '',
       shippingCity: '',
+      shippingPostalCode: '',
     },
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
@@ -166,7 +171,7 @@ const Signin: React.FC = () => {
                 err={errors.shippingStreet}
                 errMessage={errors.shippingStreet?.message}
                 name={'shippingStreet'}
-                label="Street"
+                label="Street *"
                 id="street-input"
               />
               <SimpleInput
@@ -175,9 +180,20 @@ const Signin: React.FC = () => {
                 err={errors.shippingCity}
                 errMessage={errors.shippingCity?.message}
                 name="shippingCity"
-                label="City"
+                label="City *"
                 id="shipping-input"
               />
+              <div>
+                <SimpleInput
+                  register={register}
+                  errors={errors}
+                  err={errors.shippingPostalCode}
+                  errMessage={errors.shippingPostalCode?.message}
+                  name={'shippingPostalCode'}
+                  label="Postal Code *"
+                  id="shippingPostalCode-input"
+                />
+              </div>
             </div>
           </div>
           <button type="submit">Submit</button>
