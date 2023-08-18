@@ -17,6 +17,7 @@ import PasswordInput from '../../components/UI/FormFields/PasswordInput';
 import FirstNameInput from '../../components/UI/FormFields/FirstNameInput';
 import LastNameInput from '../../components/UI/FormFields/LastNameInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
+import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
@@ -72,6 +73,14 @@ const Signin: React.FC = () => {
       .min(minDate)
       .typeError('Please enter a valid date')
       .required('Date is required'),
+    shippingStreet: yup
+      .string()
+      .required('Street is required')
+      .max(100, 'Street must be at most 100 characters'),
+    shippingCity: yup
+      .string()
+      .required('City is required')
+      .max(100, 'City must be at most 100 characters'),
   });
 
   const {
@@ -88,6 +97,8 @@ const Signin: React.FC = () => {
       firstName: '',
       lastName: '',
       birthDate: null,
+      shippingStreet: '',
+      shippingCity: '',
     },
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
@@ -140,6 +151,33 @@ const Signin: React.FC = () => {
               <FirstNameInput register={register} errors={errors} />
               <LastNameInput register={register} errors={errors} />
               <BirthDateInput register={register} errors={errors} control={control} reset={reset} />
+            </div>
+          </div>
+          <div className={clsx(s.elements__flow)}>
+            <div className={clsx(s.form__element, s.form__element_left)}>
+              <Typography variant="h2" className={s.form__title_size}>
+                2. Shipping Address
+              </Typography>
+            </div>
+            <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
+              <SimpleInput
+                register={register}
+                errors={errors}
+                err={errors.shippingStreet}
+                errMessage={errors.shippingStreet?.message}
+                name={'shippingStreet'}
+                label="Street"
+                id="street-input"
+              />
+              <SimpleInput
+                register={register}
+                errors={errors}
+                err={errors.shippingCity}
+                errMessage={errors.shippingCity?.message}
+                name="shippingCity"
+                label="City"
+                id="shipping-input"
+              />
             </div>
           </div>
           <button type="submit">Submit</button>
