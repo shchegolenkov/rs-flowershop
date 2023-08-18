@@ -18,6 +18,8 @@ import FirstNameInput from '../../components/UI/FormFields/FirstNameInput';
 import LastNameInput from '../../components/UI/FormFields/LastNameInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
+import SimpleSelect from '../../components/UI/FormFields/SimpleSelect';
+import { countries } from '../../constants/const';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
@@ -85,6 +87,7 @@ const Signin: React.FC = () => {
       .string()
       .required('Postal code is required')
       .matches(/^(?:NL-)?(\d{4})\s*([A-Z]{2})$/i, 'Invalid postal code (e.g., 2378SS)'),
+    shippingCountry: yup.string().required('Country is required'),
   });
 
   const {
@@ -104,6 +107,7 @@ const Signin: React.FC = () => {
       shippingStreet: '',
       shippingCity: '',
       shippingPostalCode: '',
+      shippingCountry: '',
     },
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
@@ -141,7 +145,7 @@ const Signin: React.FC = () => {
                 1. Account Info
               </Typography>
             </div>
-            <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
+            <div className={clsx(s.form__element, s.form__element_flow)}>
               <EmailInput register={register} errors={errors} />
               <PasswordInput register={register} errors={errors} />
             </div>
@@ -152,7 +156,7 @@ const Signin: React.FC = () => {
                 2. User Info
               </Typography>
             </div>
-            <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
+            <div className={clsx(s.form__element, s.form__element_flow)}>
               <FirstNameInput register={register} errors={errors} />
               <LastNameInput register={register} errors={errors} />
               <BirthDateInput register={register} errors={errors} control={control} reset={reset} />
@@ -164,7 +168,7 @@ const Signin: React.FC = () => {
                 2. Shipping Address
               </Typography>
             </div>
-            <div className={clsx(s.form__element, s.form__element_right, s.form__element_flow)}>
+            <div className={clsx(s.form__element, s.form__element_flow)}>
               <SimpleInput
                 register={register}
                 errors={errors}
@@ -183,7 +187,7 @@ const Signin: React.FC = () => {
                 label="City *"
                 id="shipping-input"
               />
-              <div>
+              <div className={s.two__items_container}>
                 <SimpleInput
                   register={register}
                   errors={errors}
@@ -192,6 +196,17 @@ const Signin: React.FC = () => {
                   name={'shippingPostalCode'}
                   label="Postal Code *"
                   id="shippingPostalCode-input"
+                />
+                <SimpleSelect
+                  register={register}
+                  errors={errors}
+                  err={errors.shippingCountry}
+                  errMessage={errors.shippingCountry?.message}
+                  name={'shippingCountry'}
+                  label="Country *"
+                  id="shippingCountry-input"
+                  selectData={countries}
+                  defaultValue=""
                 />
               </div>
             </div>

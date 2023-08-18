@@ -152,33 +152,26 @@
 .form__element_left {
   justify-content: flex-start;
 
-  @media (max-width: 1080px) {
-    text-align: center;
+  @media (max-width: 550px) {
+    font-size: 32px !important;
   }
-
-  @include media-tablet {
-    text-align: left;
-  }
-}
-
-.form__element_right {
 }
 
 .form__title_size {
   width: 100%;
-  max-width: 576px;
   padding: 80px 0 0 80px;
 
   @media (max-width: 1080px) {
-    padding: 80px 0;
+    padding: 80px 30px 0 40px;
   }
 
   @include media-tablet {
-    padding: 80px;
+    padding: 80px 30px 80px 40px;
   }
 
   @media (max-width: 550px) {
-    padding: 80px 0;
+    font-size: 32px !important;
+    padding: 40px 0;
     text-align: center;
   }
 
@@ -198,11 +191,22 @@
   }
 
   @include media-mobile {
-    padding: 50px 16px 20px 16px;
+    padding: 50px 16px 0 16px;
   }
 }
 
 .err__message {
   display: flex;
   align-items: center;
+}
+
+.two__items_container {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  gap: 24px;
+
+  @include media-mobile {
+    flex-flow: column;
+  }
 }

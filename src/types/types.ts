@@ -7,4 +7,5 @@ export interface CustomerData {
   shippingStreet: string;
   shippingCity: string;
   shippingPostalCode: string;
+  shippingCountry: string;
 }
