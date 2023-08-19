@@ -326,9 +326,28 @@ const Signin: React.FC = () => {
                 />
               </div>
               {checkedShipBillAddress ? (
-                <button type="submit" className={s.submit__btn}>
-                  JOIN US
-                </button>
+                <div className={s.submit__btn__container}>
+                  <button type="submit" onClick={onClickSubmit} className={s.submit__btn}>
+                    JOIN US
+                  </button>
+                  <div className={s.alert_position}>
+                    {formError ? (
+                      <Alert variant="outlined" severity="error">
+                        Something went wrong - please check the form!
+                      </Alert>
+                    ) : null}
+                    {isSuccess ? (
+                      <Alert severity="success" variant="outlined">
+                        Registration was successful!
+                      </Alert>
+                    ) : null}
+                    {registerApiError ? (
+                      <Alert variant="outlined" severity="error">
+                        {registerApiError}
+                      </Alert>
+                    ) : null}
+                  </div>
+                </div>
               ) : null}
             </div>
           </div>
@@ -391,7 +410,7 @@ const Signin: React.FC = () => {
                   />
                 </div>
                 {checkedShipBillAddress ? null : (
-                  <div>
+                  <div className={s.submit__btn__container}>
                     <button type="submit" onClick={onClickSubmit} className={s.submit__btn}>
                       JOIN US
                     </button>

@@ -73,7 +73,7 @@
   @media (max-width: 1125px) {
     padding: 0 20px 0 20px;
   }
-  @include media-tablet{
+  @include media-tablet {
     padding: 80px 0 0 80px;
   }
   @media (max-width: 620px) {
@@ -120,8 +120,7 @@
     @include media-mobile {
       width: 190px;
     }
-
-     }
+  }
   .login__link {
     margin-left: 16px;
   }
@@ -131,13 +130,17 @@
   @include button-secondary;
 }
 
-.submit__btn {
-  @include button-primary;
+.submit__btn__container {
   width: 100%;
   margin-bottom: 107px;
   @include media-mobile {
     margin-bottom: 72px;
   }
+}
+
+.submit__btn {
+  @include button-primary;
+  width: 100%;
 }
 
 .form__element_left {
@@ -213,7 +216,7 @@
 }
 
 .alert_position {
-  margin-top: -70px;
+  margin-top: 10px;
   display: flex;
   flex-flow: column;
   gap: 10px;
