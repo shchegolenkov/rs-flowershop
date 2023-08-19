@@ -14,8 +14,6 @@ import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types/types';
 import EmailInput from '../../components/UI/FormFields/EmailInput';
 import PasswordInput from '../../components/UI/FormFields/PasswordInput';
-import FirstNameInput from '../../components/UI/FormFields/FirstNameInput';
-import LastNameInput from '../../components/UI/FormFields/LastNameInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import SimpleSelect from '../../components/UI/FormFields/SimpleSelect';
@@ -255,8 +253,24 @@ const Signin: React.FC = () => {
               </Typography>
             </div>
             <div className={clsx(s.form__element, s.form__element_flow)}>
-              <FirstNameInput register={register} errors={errors} />
-              <LastNameInput register={register} errors={errors} />
+              <SimpleInput
+                register={register}
+                errors={errors}
+                err={errors.firstName}
+                errMessage={errors.firstName?.message}
+                name={'firstName'}
+                label="First name *"
+                id="firstName-input"
+              />
+              <SimpleInput
+                register={register}
+                errors={errors}
+                err={errors.lastName}
+                errMessage={errors.lastName?.message}
+                name={'lastName'}
+                label="Last name *"
+                id="lastName-input"
+              />
               <BirthDateInput register={register} errors={errors} control={control} reset={reset} />
             </div>
           </div>
