@@ -27,4 +27,9 @@ button {
 
 main {
   flex: 1;
+
+  @include media-limit {
+    border-left: 1px solid var(--color-black);
+    border-right: 1px solid var(--color-black);
+  }
 }
