@@ -184,8 +184,8 @@ const Signin: React.FC = () => {
   } as UseFormProps<CustomerData>);
 
   const onSubmit = (data: CustomerData) => {
-    //логика переносится в функцию апи регистрации
-    setRegisterApiError('err message');
+    //логика переносится в функцию апи регистрации с асинхронными доработками
+    setRegisterApiError('');
     if (!registerApiError && !formError) {
       setIsSuccess(true);
       setTimeout(() => {

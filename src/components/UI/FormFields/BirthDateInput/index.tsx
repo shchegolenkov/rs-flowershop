@@ -23,7 +23,6 @@ const validateDate = (date: Dayjs | null): DateValidationError | null => {
     return 'invalidDate';
   } else {
     if (date.format('YYYY')[0] !== '0' && date.format('DD')[0] !== '0') {
-      console.log(date.format('YYYY'));
       const currentDate = dayjs();
       const ageLimit = 13;
       const minDate = new Date(1900, 1, 1);
@@ -83,7 +82,6 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, contr
   const handleDateChange = (newValue: Dayjs | null) => {
     if (newValue !== null) {
       const validationError = validateDate(newValue);
-      console.log(newValue);
       if (validationError) {
         setDataError(validationError);
       }
