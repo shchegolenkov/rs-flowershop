@@ -1,0 +1,33 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+
+.content {
+  border-right: 1px solid var(--color-black);
+  height: 100%;
+}
+
+.wrapper {
+  padding: 80px;
+}
+
+.overline {
+  margin-bottom: 24px;
+}
+
+.h2 {
+  margin-bottom: 16px;
+}
+
+.imageBlock {
+  background-image: url('../../assets/images/notFoundBg.jpg');
+  background-size: cover;
+  background-position: center;
+  max-width: 100%;
+}
+
+.button {
+  margin-top: 64px;
+}
