@@ -294,6 +294,11 @@ const Signin: React.FC = () => {
                   setChecked={setCheckedShipDefAddress}
                 />
               </div>
+              {checkedShipBillAddress ? (
+                <button type="submit" className={s.submit__btn}>
+                  JOIN US
+                </button>
+              ) : null}
             </div>
           </div>
           {checkedShipBillAddress ? null : (
@@ -354,11 +359,14 @@ const Signin: React.FC = () => {
                     setChecked={setCheckedBillDefAddress}
                   />
                 </div>
+                {checkedShipBillAddress ? null : (
+                  <button type="submit" className={s.submit__btn}>
+                    JOIN US
+                  </button>
+                )}
               </div>
             </div>
           )}
-
-          <button type="submit">Submit</button>
         </form>
       </ThemeProvider>
     </RootLayout>

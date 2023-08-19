@@ -57,3 +57,25 @@
     padding: 16px 48.5px;
   }
 }
+
+@mixin button-primary {
+  @include button-secondary;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  &:hover {
+    border: 1px solid var(--color-dark-gray);
+    background-color: var(--color-dark-gray);
+    color: var(--color-white);
+  }
+  &:active {
+    border: 1px solid var(--color-black);
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+
+  &:disabled {
+    border: 1px solid var(--color-light-gray);
+    color: var(--color-gray);
+    background-color: var(--color-light-gray);
+  }
+}

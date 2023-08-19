@@ -141,11 +141,20 @@
       margin-left: 16px;
       text-align: center;
       text-decoration: none;
-
-      .login__btn {
-        @include button-secondary;
-      }
     }
+  }
+}
+
+.login__btn {
+  @include button-secondary;
+}
+
+.submit__btn {
+  @include button-primary;
+  width: 100%;
+  margin-bottom: 107px;
+  @include media-mobile {
+    margin-bottom: 72px;
   }
 }
 
@@ -218,7 +227,5 @@
   flex-flow: column;
   gap: 0;
   justify-content: flex-start;
-  @include media-mobile {
-    padding-bottom: 40px;
-  }
+  padding-bottom: 40px;
 }
