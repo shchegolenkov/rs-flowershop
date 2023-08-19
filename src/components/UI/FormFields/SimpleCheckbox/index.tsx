@@ -1,4 +1,3 @@
-/*import s from './SimpleSelect.module.scss';*/
 import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { CustomerData } from '../../../../types/types';
@@ -10,12 +9,27 @@ interface SimpleCheckboxProps {
   name: keyof CustomerData;
   label: string;
   id: string;
+  isChecked: boolean;
+  setChecked: (value: boolean) => void;
 }
 
-const SimpleCheckbox: React.FC<SimpleCheckboxProps> = ({ register, name, label, id }) => {
+const SimpleCheckbox: React.FC<SimpleCheckboxProps> = ({
+  register,
+  name,
+  label,
+  id,
+  isChecked,
+  setChecked,
+}) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
+
   return (
     <FormControlLabel
-      control={<Checkbox {...register(name)} color="default" />}
+      control={
+        <Checkbox checked={isChecked} {...register(name)} onChange={handleChange} color="default" />
+      }
       label={label}
       id={id}
     />
