@@ -33,33 +33,30 @@
 }
 
 .signin__header_flow {
-  @media (max-width: 900px) {
+  @include media-tablet {
     flex-flow: column;
   }
 }
 
 .signin__header_element {
-  @media (max-width: 900px) {
+  @include media-tablet {
     flex-basis: auto;
   }
 }
 
 .signin__header {
   height: 372px;
-  @media (max-width: 900px) {
+  @include media-tablet {
     height: 100%;
   }
 }
 
 .header__img {
-  flex-basis: auto;
-  width: 50%;
   background-image: url('/src/assets/signin-header.png');
   background-size: cover;
   background-position: top right;
 
-  @media (max-width: 900px) {
-    width: 100%;
+  @include media-tablet {
     height: 315px;
     background-position: top;
   }
@@ -70,78 +67,63 @@
 }
 
 .header__message {
-  width: 560px;
+  display: flex;
   flex-flow: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: start;
-  padding-right: 60px;
-
-  @media (max-width: 900px) {
-    width: 100%;
-    padding: 80px 0 80px 80px;
+  padding: 0 20px 0 80px;
+  @media (max-width: 1125px) {
+    padding: 0 20px 0 20px;
   }
-
+  @include media-tablet{
+    padding: 80px 0 0 80px;
+  }
   @media (max-width: 620px) {
-    padding: 80px 0;
+    padding: 80px 0 0 0;
+    align-items: center;
   }
   @media (max-width: 515px) {
-    padding: 44px 0;
+    padding: 44px 0 0 0;
   }
 }
 
-.header__message_container {
-  width: 520px;
-  padding-left: 60px;
-
-  @media (max-width: 900px) {
-    width: 100%;
-    padding: 0;
+.welcome {
+  @media (max-width: 515px) {
+    font-size: 32px !important;
   }
+}
 
-  .welcome {
-    width: 560px;
-    text-align: left;
-    @media (max-width: 900px) {
-      width: 100%;
-    }
-    @media (max-width: 620px) {
-      text-align: center;
-    }
-    @media (max-width: 515px) {
-      font-size: 32px;
-    }
+.login__container {
+  padding-top: 36px;
+  display: flex;
+  align-items: center;
+  @media (max-width: 1005px) {
+    padding-top: 10px;
   }
-
-  .login__text {
-    width: 560px;
-    @include link-text;
+  @include media-tablet {
     padding-top: 36px;
-    display: flex;
-    flex-flow: row;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
+    padding-bottom: 80px;
+  }
+  @media (max-width: 515px) {
+    padding-bottom: 44px;
+  }
+  .login__text {
+    @include link-text;
     color: var(--color-gray);
-
-    @media (max-width: 900px) {
-      width: 100%;
+    @media (max-width: 1005px) {
+      width: 140px;
     }
-
-    @media (max-width: 620px) {
-      justify-content: center;
+    @include media-tablet {
+      width: 220px;
     }
     @media (max-width: 515px) {
-      font-size: 14px;
+      width: 150px;
+    }
+    @include media-mobile {
+      width: 190px;
     }
 
-    .login__link {
-      display: inline-flex;
-      align-items: center;
-      margin-left: 16px;
-      text-align: center;
-      text-decoration: none;
-    }
+     }
+  .login__link {
+    margin-left: 16px;
   }
 }
 

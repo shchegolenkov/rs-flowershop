@@ -222,17 +222,15 @@ const Signin: React.FC = () => {
         <div className={clsx(s.elements__flow, s.signin__header, s.signin__header_flow)}>
           <div className={clsx(s.form__element, s.signin__header_element, s.header__img)}></div>
           <div className={clsx(s.form__element, s.signin__header_element, s.header__message)}>
-            <div className={s.header__message_container}>
-              <Typography variant="h2" className={s.welcome}>
-                Welcome! Create
-                <br /> your account now
-              </Typography>
-              <span className={s.login__text}>
-                Already have an account?
-                <Link to="/login" className={s.login__link}>
-                  <button className={s.login__btn}>LOG IN</button>
-                </Link>
-              </span>
+            <Typography variant="h2" className={s.welcome}>
+              Welcome! Create
+              <br /> your account now
+            </Typography>
+            <div className={s.login__container}>
+              <span className={s.login__text}>Already have an account?</span>
+              <Link to="/login" className={s.login__link}>
+                <button className={s.login__btn}>LOG IN</button>
+              </Link>
             </div>
           </div>
         </div>
