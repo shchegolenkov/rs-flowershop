@@ -20,6 +20,7 @@ import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import SimpleSelect from '../../components/UI/FormFields/SimpleSelect';
 import { countries } from '../../constants/const';
+import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
@@ -108,6 +109,8 @@ const Signin: React.FC = () => {
       shippingCity: '',
       shippingPostalCode: '',
       shippingCountry: '',
+      shippingBillingAddress: false,
+      shippingDefaultAddress: false,
     },
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
@@ -207,6 +210,20 @@ const Signin: React.FC = () => {
                   id="shippingCountry-input"
                   selectData={countries}
                   defaultValue=""
+                />
+              </div>
+              <div className={s.checkboxes_container}>
+                <SimpleCheckbox
+                  id="shippingBillingAddress"
+                  register={register}
+                  name={'shippingBillingAddress'}
+                  label="Set as default billing address"
+                />
+                <SimpleCheckbox
+                  id="shippingDefaultAddress"
+                  register={register}
+                  name={'shippingDefaultAddress'}
+                  label="Set as default shipping address"
                 />
               </div>
             </div>

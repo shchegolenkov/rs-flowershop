@@ -211,3 +211,14 @@
     flex-flow: column;
   }
 }
+
+.checkboxes_container {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  justify-content: flex-start;
+  @include media-mobile {
+    padding-bottom: 40px;
+  }
+}
