@@ -2,15 +2,33 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100%;
+
+  @include media-tablet {
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+  }
 }
 
 .content {
   border-right: 1px solid var(--color-black);
   height: 100%;
+
+  @include media-tablet {
+    border-right: none;
+    border-bottom: 1px solid var(--color-black);
+  }
+
+  @include media-mobile {
+    padding: 40px 16px;
+  }
 }
 
 .wrapper {
   padding: 80px;
+
+  @include media-mobile {
+    padding: 16px;
+  }
 }
 
 .overline {
@@ -26,6 +44,15 @@
   background-size: cover;
   background-position: center;
   max-width: 100%;
+
+  @include media-tablet {
+    aspect-ratio: 1.66/1;
+    min-height: 350px;
+  }
+
+  @include media-mobile {
+    aspect-ratio: 1;
+  }
 }
 
 .button {
