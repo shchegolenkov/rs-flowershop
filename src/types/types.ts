@@ -10,4 +10,9 @@ export interface CustomerData {
   shippingCountry: string;
   shippingBillingAddress: boolean;
   shippingDefaultAddress: boolean;
+  billingStreet: string;
+  billingCity: string;
+  billingPostalCode: string;
+  billingCountry: string;
+  billingDefaultAddress: boolean;
 }
