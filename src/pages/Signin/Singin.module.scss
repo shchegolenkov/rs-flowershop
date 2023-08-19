@@ -229,3 +229,10 @@
   justify-content: flex-start;
   padding-bottom: 40px;
 }
+
+.alert_position {
+  margin-top: -70px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}

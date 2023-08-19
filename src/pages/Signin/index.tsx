@@ -21,12 +21,16 @@ import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import SimpleSelect from '../../components/UI/FormFields/SimpleSelect';
 import { countries } from '../../constants/const';
 import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
+import Alert from '@mui/material/Alert';
 
 const Signin: React.FC = () => {
   const [emailError, setEmailError] = useState('');
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(true);
   const [checkedBillDefAddress, setCheckedBillDefAddress] = React.useState(true);
+  const [registerApiError, setRegisterApiError] = React.useState('');
+  const [formError, setFormError] = React.useState(false);
+  const [isSuccess, setIsSuccess] = React.useState(false);
   const currentDate = new Date();
   const thirteenYearsAgo = new Date(
     currentDate.getFullYear() - 13,
@@ -180,7 +184,36 @@ const Signin: React.FC = () => {
   } as UseFormProps<CustomerData>);
 
   const onSubmit = (data: CustomerData) => {
+    //логика переносится в функцию апи регистрации
+    setRegisterApiError('err message');
+    if (!registerApiError && !formError) {
+      setIsSuccess(true);
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 2000);
+    }
     console.log(data);
+  };
+
+  const onClickSubmit = () => {
+    setFormError(false);
+    if (
+      errors.email ||
+      errors.password ||
+      errors.lastName ||
+      errors.firstName ||
+      errors.birthDate ||
+      errors.shippingStreet ||
+      errors.shippingCity ||
+      errors.shippingPostalCode ||
+      errors.shippingCountry ||
+      errors.billingStreet ||
+      errors.billingCity ||
+      errors.billingPostalCode ||
+      errors.billingCountry
+    ) {
+      setFormError(true);
+    }
   };
 
   return (
@@ -360,9 +393,28 @@ const Signin: React.FC = () => {
                   />
                 </div>
                 {checkedShipBillAddress ? null : (
-                  <button type="submit" className={s.submit__btn}>
-                    JOIN US
-                  </button>
+                  <div>
+                    <button type="submit" onClick={onClickSubmit} className={s.submit__btn}>
+                      JOIN US
+                    </button>
+                    <div className={s.alert_position}>
+                      {formError ? (
+                        <Alert variant="outlined" severity="error">
+                          Something went wrong - please check the form!
+                        </Alert>
+                      ) : null}
+                      {isSuccess ? (
+                        <Alert severity="success" variant="outlined">
+                          Registration was successful!
+                        </Alert>
+                      ) : null}
+                      {registerApiError ? (
+                        <Alert variant="outlined" severity="error">
+                          {registerApiError}
+                        </Alert>
+                      ) : null}
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
