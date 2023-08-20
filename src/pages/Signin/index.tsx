@@ -351,12 +351,7 @@ const Signin: React.FC = () => {
               </div>
               {checkedShipBillAddress ? (
                 <div className={s.submit__btn__container}>
-                  <Button
-                    type="submit"
-                    className={s.submit__btn}
-                    variant="primary"
-                    onClick={onClickSubmit}
-                  >
+                  <Button type="submit" full={true} variant="primary" onClick={onClickSubmit}>
                     JOIN US
                   </Button>
                   <div className={s.alert_position}>
@@ -454,12 +449,7 @@ const Signin: React.FC = () => {
                 </div>
                 {checkedShipBillAddress ? null : (
                   <div className={s.submit__btn__container}>
-                    <Button
-                      type="submit"
-                      className={s.submit__btn}
-                      variant="primary"
-                      onClick={onClickSubmit}
-                    >
+                    <Button full={true} type="submit" variant="primary" onClick={onClickSubmit}>
                       JOIN US
                     </Button>
                     <div className={s.alert_position}>
