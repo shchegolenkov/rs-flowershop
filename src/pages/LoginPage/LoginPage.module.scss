@@ -1,0 +1,35 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.headerBlock {
+  border-right: 1px solid var(--color-black);
+}
+
+.wrapper {
+  padding: 80px;
+}
+
+.body {
+  color: var(--color-gray);
+}
+
+.h2 {
+  margin-bottom: 36px;
+}
+
+.imageBlock {
+  background-image: url('/src/assets/images/loginBg.jpg');
+  background-size: cover;
+  background-position: 50% 80%;
+  max-width: 100%;
+  min-height: 370px;
+  border-bottom: 1px solid var(--color-black);
+}
+
+.regBlock {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
