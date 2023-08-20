@@ -5,7 +5,7 @@ import React from 'react';
 import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
 import { CustomerData } from '../../../../types/types';
 
-interface StreetInputProps {
+interface SimpleInputProps {
   register: UseFormRegister<CustomerData>;
   name: keyof CustomerData;
   err: FieldError | undefined;
@@ -15,7 +15,7 @@ interface StreetInputProps {
   id: string;
 }
 
-const SimpleInput: React.FC<StreetInputProps> = ({
+const SimpleInput: React.FC<SimpleInputProps> = ({
   register,
   err,
   errMessage,
