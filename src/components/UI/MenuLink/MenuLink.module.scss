@@ -1,0 +1,55 @@
+.link,
+.linkIco {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--color-black);
+  text-decoration: none;
+  padding: 5px;
+  position: relative;
+
+  @include media-mobile {
+    font-size: 14px;
+  }
+}
+
+.link::after,
+.linkIco::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0%;
+  left: -1px;
+  bottom: 3px;
+  height: 1px;
+  background-color: var(--color-black);
+  transition: all 0.2s ease-in-out;
+}
+
+.linkIco {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (hover: hover) {
+  .link:hover,
+  .linkIco:hover {
+    color: var(--color-gray);
+  }
+
+  .link:hover::after,
+  .linkIco:hover::after {
+    width: 100%;
+  }
+}
+
+.link:active,
+.linkIco:active {
+  color: var(--color-black);
+}
+
+.link:active::after,
+.linkIco:active::after {
+  width: 100%;
+}
