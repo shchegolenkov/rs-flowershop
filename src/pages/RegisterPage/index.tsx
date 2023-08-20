@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import s from './Singin.module.scss';
+import s from './RegisterPage.module.scss';
 import clsx from 'clsx';
 import { ThemeProvider } from '@mui/material/styles';
 import * as yup from 'yup';
@@ -21,7 +21,7 @@ import { countries } from '../../constants/const';
 import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
 
-const Signin: React.FC = () => {
+const Registration: React.FC = () => {
   const navigate = useNavigate();
   const [emailError, setEmailError] = useState('');
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
@@ -479,4 +479,4 @@ const Signin: React.FC = () => {
     </main>
   );
 };
-export default Signin;
+export default Registration;

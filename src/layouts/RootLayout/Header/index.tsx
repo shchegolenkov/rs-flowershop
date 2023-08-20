@@ -16,7 +16,7 @@ const links = [
 
 const anonymLinks = [
   { to: '/login', text: 'Log In', ico: <LoginIco /> },
-  { to: '/signin', text: 'Sign in', ico: <ProfileIco /> },
+  { to: '/register', text: 'Sign in', ico: <ProfileIco /> },
 ];
 
 const userLinks = [
@@ -28,7 +28,7 @@ function Header() {
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [isMenuActive, setMenuActive] = useState(false);
 
-  const isAuth = true;
+  const isAuth = false;
 
   useEffect(() => {
     const checkOutside = (e: MouseEvent) => {
