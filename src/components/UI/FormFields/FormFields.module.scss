@@ -14,9 +14,15 @@
     max-width: 165px;
   }
 
+  @include media-large {
+    width: 100%;
+    max-width: 500px;
+  }
+
   @include media-tablet {
     width: 50%;
     align-self: start;
+    max-width: 500px;
   }
 
   @include media-mobile {
