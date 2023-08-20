@@ -1,4 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+import { DateValidationError } from '@mui/x-date-pickers/models';
 
 type EmailValidator = (email: string, setEmailError: Dispatch<SetStateAction<string>>) => boolean;
 
@@ -48,4 +50,26 @@ export const validateEmail: EmailValidator = (email: string, setEmailError) => {
   }
   setEmailError('');
   return true;
+};
+
+export const validateDate = (date: Dayjs | null): DateValidationError | null => {
+  if (!date) {
+    return 'invalidDate';
+  } else {
+    if (date.format('YYYY')[0] !== '0' && date.format('DD')[0] !== '0') {
+      const currentDate = dayjs();
+      const ageLimit = 13;
+      const minDate = new Date(1900, 1, 1);
+
+      if (currentDate.diff(date, 'years') < ageLimit) {
+        return 'maxDate';
+      }
+
+      if (date.toDate() < minDate) {
+        return 'minDate';
+      }
+    }
+  }
+
+  return null;
 };
