@@ -1,4 +1,4 @@
-import s from './PasswordInput.module.scss';
+import s from '../FormFields.module.scss';
 import React, { MouseEvent, useState } from 'react';
 import ErrorIcon from '@mui/icons-material/Error';
 import {

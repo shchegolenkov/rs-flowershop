@@ -1,4 +1,4 @@
-import s from './BirthDateInput.module.scss';
+import s from '../FormFields.module.scss';
 
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
@@ -45,7 +45,7 @@ interface BirthDateInputProps {
   errors: {
     birthDate?: FieldError;
   };
-  control: Control<CustomerData>; // Добавьте это
+  control: Control<CustomerData>;
   reset: (
     values?: DefaultValues<CustomerData> | CustomerData,
     keepStateOptions?: KeepStateOptions
@@ -99,7 +99,7 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, contr
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className={s.form__field_size}>
+      <div className={s.form__field_size_birthday}>
         <Controller
           name="birthDate"
           control={control}

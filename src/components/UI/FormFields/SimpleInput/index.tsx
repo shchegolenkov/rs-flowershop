@@ -1,4 +1,4 @@
-import s from './SimpleInput.module.scss';
+import s from '../FormFields.module.scss';
 import TextField from '@mui/material/TextField';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';

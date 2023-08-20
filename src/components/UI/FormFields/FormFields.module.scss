@@ -1,4 +1,10 @@
 .form__field_size {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+}
+
+.form__field_size_birthday {
   width: 50%;
   height: 100%;
   min-height: 120px;
@@ -15,6 +21,16 @@
 
   @include media-mobile {
     width: 100%;
+  }
+}
+
+.form__field_size_select {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+
+  @include media-tablet {
+    max-width: 608px;
   }
 }
 

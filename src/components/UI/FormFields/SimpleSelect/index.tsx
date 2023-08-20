@@ -1,4 +1,4 @@
-import s from './SimpleSelect.module.scss';
+import s from '../FormFields.module.scss';
 import TextField from '@mui/material/TextField';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
@@ -33,7 +33,7 @@ const SimpleSelect: React.FC<SelectInputProps> = ({
   defaultValue,
 }) => {
   return (
-    <div className={s.form__field_size}>
+    <div className={s.form__field_size_select}>
       <TextField
         fullWidth
         id={id}
