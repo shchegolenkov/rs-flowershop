@@ -63,3 +63,9 @@
   align-items: center;
   gap: 16px;
 }
+
+.button.buttonSignUp {
+  @include media-mobile {
+    width: 175px;
+  }
+}

@@ -1,9 +1,14 @@
 import React from 'react';
-import s from './LoginPage.module.scss';
+import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
 
+import s from './LoginPage.module.scss';
+import Button from '../../components/UI/Button';
 import { Typography } from '../../components/UI/Typography';
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <main>
       <div className={s.imageBlock}></div>
@@ -17,6 +22,16 @@ const LoginPage: React.FC = () => {
               <Typography variant={'body'} className={s.body}>
                 No account yet?
               </Typography>
+              <Button
+                className={clsx(s.button, s.buttonSignUp)}
+                variant="secondary"
+                onClick={() => {
+                  const path = '/register';
+                  navigate(path);
+                }}
+              >
+                Sign up
+              </Button>
             </div>
           </div>
         </div>
