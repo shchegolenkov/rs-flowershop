@@ -15,3 +15,13 @@ declare module '*.module.scss' {
   const classNames: ClassNames;
   export = classNames;
 }
+
+declare module '*.svg' {
+  const value: string;
+  export = value;
+}
+
+declare module '*.svg?url' {
+  const value: string;
+  export = value;
+}
