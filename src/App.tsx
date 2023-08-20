@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
 import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/NotFoundPage';
-import Registration from './pages/RegisterPage';
+import RegisterPage from './pages/RegisterPage';
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
         <Route path="/" element={<RootLayout />}>
           <Route index element={<MainPage />} />
           <Route path="*" element={<NotFoundPage />} />
-          <Route path="/register" element={<Registration />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

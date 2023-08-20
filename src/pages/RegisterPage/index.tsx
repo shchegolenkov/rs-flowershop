@@ -21,7 +21,7 @@ import { countries } from '../../constants/const';
 import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
 
-const Registration: React.FC = () => {
+const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const [emailError, setEmailError] = useState('');
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
@@ -479,4 +479,4 @@ const Registration: React.FC = () => {
     </main>
   );
 };
-export default Registration;
+export default RegisterPage;
