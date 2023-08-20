@@ -1,6 +1,5 @@
 .container {
   margin: 0 auto;
-  box-sizing: border-box;
 }
 
 .form__element {
@@ -8,7 +7,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  box-sizing: border-box;
 }
 
 .elements__flow {
@@ -45,7 +43,6 @@
 }
 
 .signin__header {
-  height: 372px;
   @include media-tablet {
     height: 100%;
   }
@@ -54,14 +51,14 @@
 .header__img {
   background-image: url('/src/assets/images/signin-header.png');
   background-size: cover;
-  background-position: top right;
+  background-position: center;
 
   @include media-tablet {
     height: 315px;
     background-position: top;
   }
 
-  @media (max-width: 515px) {
+  @include media-mobile {
     height: 234px;
   }
 }
@@ -69,57 +66,26 @@
 .header__message {
   display: flex;
   flex-flow: column;
-  padding: 0 20px 0 80px;
-  @media (max-width: 1125px) {
-    padding: 0 20px 0 20px;
-  }
-  @include media-tablet {
-    padding: 80px 0 0 80px;
-  }
-  @media (max-width: 620px) {
-    padding: 80px 0 0 0;
-    align-items: center;
-  }
-  @media (max-width: 515px) {
-    padding: 44px 0 0 0;
-  }
-}
+  padding: 80px;
 
-.welcome {
-  @media (max-width: 515px) {
-    font-size: 32px !important;
+  @include media-large {
+    padding: 70px 40px 30px 40px;
+  }
+
+  @include media-tablet {
+    padding: 80px 20px;
+    align-items: center;
   }
 }
 
 .login__container {
-  padding-top: 36px;
+  margin-top: 36px;
   display: flex;
   align-items: center;
-  @media (max-width: 1005px) {
-    padding-top: 10px;
-  }
-  @include media-tablet {
-    padding-top: 36px;
-    padding-bottom: 80px;
-  }
-  @media (max-width: 515px) {
-    padding-bottom: 44px;
-  }
+
   .login__text {
     @include link-text;
     color: var(--color-gray);
-    @media (max-width: 1005px) {
-      width: 140px;
-    }
-    @include media-tablet {
-      width: 220px;
-    }
-    @media (max-width: 515px) {
-      width: 150px;
-    }
-    @include media-mobile {
-      width: 190px;
-    }
   }
 }
 
@@ -141,32 +107,22 @@
 
 .form__element_left {
   justify-content: flex-start;
+  padding: 80px;
 
-  @media (max-width: 550px) {
-    font-size: 32px !important;
+  @include media-large {
+    padding: 80px 40px;
+  }
+
+  @include media-mobile {
+    padding: 40px 16px;
   }
 }
 
 .form__title_size {
   width: 100%;
-  padding: 80px 0 0 80px;
-
-  @media (max-width: 1080px) {
-    padding: 80px 30px 0 40px;
-  }
-
-  @include media-tablet {
-    padding: 80px 30px 80px 40px;
-  }
-
-  @media (max-width: 550px) {
-    font-size: 32px !important;
-    padding: 40px 0;
-    text-align: center;
-  }
 
   @include media-mobile {
-    padding: 40px 0;
+    text-align: center;
   }
 }
 
@@ -178,7 +134,6 @@
 
   @include media-tablet {
     align-items: center;
-    padding: 70px 40px 30px 40px;
   }
 
   @include media-mobile {
@@ -222,13 +177,13 @@
   border-bottom: none !important;
 }
 
+.add__border_top {
+  border-top: 1px solid var(--color-black);
+}
+
 .no__border_bottom_shipping {
   border-bottom: none !important;
   @include media-tablet {
     border-bottom: 1px solid var(--color-black) !important;
   }
-}
-
-.add__border_top {
-  border-top: 1px solid var(--color-black);
 }
