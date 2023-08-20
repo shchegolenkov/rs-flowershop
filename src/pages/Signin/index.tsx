@@ -8,7 +8,6 @@ import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/UI/Button';
 
-import RootLayout from '../../layouts/index';
 import { Typography } from '../../components/UI/Typography';
 import FormTheme from '../../themes/FormTheme';
 import { validateEmail } from '../../utils/validators';
@@ -217,8 +216,8 @@ const Signin: React.FC = () => {
   };
 
   return (
-    <RootLayout>
-      <div className={s.main}>
+    <main>
+      <div className={s.container}>
         <div className={clsx(s.elements__flow, s.signin__header, s.signin__header_flow)}>
           <div className={clsx(s.form__element, s.signin__header_element, s.header__img)}></div>
           <div className={clsx(s.form__element, s.signin__header_element, s.header__message)}>
@@ -475,7 +474,7 @@ const Signin: React.FC = () => {
           )}
         </form>
       </ThemeProvider>
-    </RootLayout>
+    </main>
   );
 };
 export default Signin;
