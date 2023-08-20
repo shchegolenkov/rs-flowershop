@@ -283,7 +283,9 @@ const Signin: React.FC = () => {
             </div>
           </div>
           <div className={clsx(s.elements__flow)}>
-            <div className={clsx(s.form__element, s.form__element_left, s.no__border_bottom)}>
+            <div
+              className={clsx(s.form__element, s.form__element_left, s.no__border_bottom_shipping)}
+            >
               <Typography variant="h2" className={s.form__title_size}>
                 3. Shipping Address
               </Typography>
