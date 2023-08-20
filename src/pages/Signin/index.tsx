@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import s from './Singin.module.scss';
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { ThemeProvider } from '@mui/material/styles';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import Button from '../../components/UI/Button';
 
 import RootLayout from '../../layouts/index';
 import { Typography } from '../../components/UI/Typography';
@@ -22,6 +23,7 @@ import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
 
 const Signin: React.FC = () => {
+  const navigate = useNavigate();
   const [emailError, setEmailError] = useState('');
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(true);
@@ -226,9 +228,16 @@ const Signin: React.FC = () => {
             </Typography>
             <div className={s.login__container}>
               <span className={s.login__text}>Already have an account?</span>
-              <Link to="/login" className={s.login__link}>
-                <button className={s.login__btn}>LOG IN</button>
-              </Link>
+              <Button
+                className={s.login__btn}
+                variant="secondary"
+                onClick={() => {
+                  const path = '/login';
+                  navigate(path);
+                }}
+              >
+                LOG IN
+              </Button>
             </div>
           </div>
         </div>
@@ -341,9 +350,16 @@ const Signin: React.FC = () => {
               </div>
               {checkedShipBillAddress ? (
                 <div className={s.submit__btn__container}>
-                  <button type="submit" onClick={onClickSubmit} className={s.submit__btn}>
+                  <Button
+                    type="submit"
+                    className={s.submit__btn}
+                    variant="primary"
+                    onClick={() => {
+                      onClickSubmit;
+                    }}
+                  >
                     JOIN US
-                  </button>
+                  </Button>
                   <div className={s.alert_position}>
                     {formError ? (
                       <Alert variant="outlined" severity="error">
@@ -425,9 +441,16 @@ const Signin: React.FC = () => {
                 </div>
                 {checkedShipBillAddress ? null : (
                   <div className={s.submit__btn__container}>
-                    <button type="submit" onClick={onClickSubmit} className={s.submit__btn}>
+                    <Button
+                      type="submit"
+                      className={s.submit__btn}
+                      variant="primary"
+                      onClick={() => {
+                        onClickSubmit;
+                      }}
+                    >
                       JOIN US
-                    </button>
+                    </Button>
                     <div className={s.alert_position}>
                       {formError ? (
                         <Alert variant="outlined" severity="error">

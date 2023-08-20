@@ -10,6 +10,18 @@
   }
 }
 
+@mixin media-large {
+  @media (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin media-limit {
+  @media (min-width: 1921px) {
+    @content;
+  }
+}
+
 @mixin link-text {
   font-size: 16px;
   font-weight: 400;
@@ -19,63 +31,5 @@
   @include media-mobile {
     font-size: 14px;
     line-height: 17px;
-  }
-}
-
-@mixin button-secondary {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 19px;
-  letter-spacing: 0.05em;
-  color: var(--color-black);
-  border: 1px solid var(--color-black);
-  text-align: center;
-  padding: 16px 60px;
-  transition: 0.3s ease-in-out;
-
-  &:hover {
-    background-color: var(--color-black);
-    color: white;
-  }
-
-  &:active {
-    background-color: white;
-    color: var(--color-black);
-  }
-
-  &:disabled {
-    border: 1px solid var(--color-light-gray);
-    color: var(--color-gray);
-    background-color: white;
-  }
-
-  @include media-mobile {
-    font-size: 14px;
-    line-height: 14px;
-    letter-spacing: 0.01em;
-    padding: 16px 48.5px;
-  }
-}
-
-@mixin button-primary {
-  @include button-secondary;
-  background-color: var(--color-black);
-  color: var(--color-white);
-  &:hover {
-    border: 1px solid var(--color-dark-gray);
-    background-color: var(--color-dark-gray);
-    color: var(--color-white);
-  }
-  &:active {
-    border: 1px solid var(--color-black);
-    background-color: var(--color-black);
-    color: var(--color-white);
-  }
-
-  &:disabled {
-    border: 1px solid var(--color-light-gray);
-    color: var(--color-gray);
-    background-color: var(--color-light-gray);
   }
 }

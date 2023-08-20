@@ -121,13 +121,10 @@
       width: 190px;
     }
   }
-  .login__link {
-    margin-left: 16px;
-  }
 }
 
 .login__btn {
-  @include button-secondary;
+  margin-left: 16px;
 }
 
 .submit__btn__container {
@@ -139,8 +136,7 @@
 }
 
 .submit__btn {
-  @include button-primary;
-  width: 100%;
+  width: 100% !important;
 }
 
 .form__element_left {
