@@ -217,3 +217,11 @@
   flex-flow: column;
   gap: 10px;
 }
+
+.no__border_bottom {
+  border-bottom: none !important;
+}
+
+.add__border_top {
+  border-top: 1px solid var(--color-black);
+}

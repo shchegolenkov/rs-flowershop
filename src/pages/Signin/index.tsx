@@ -283,12 +283,12 @@ const Signin: React.FC = () => {
             </div>
           </div>
           <div className={clsx(s.elements__flow)}>
-            <div className={clsx(s.form__element, s.form__element_left)}>
+            <div className={clsx(s.form__element, s.form__element_left, s.no__border_bottom)}>
               <Typography variant="h2" className={s.form__title_size}>
                 3. Shipping Address
               </Typography>
             </div>
-            <div className={clsx(s.form__element, s.form__element_flow)}>
+            <div className={clsx(s.form__element, s.form__element_flow, s.no__border_bottom)}>
               <SimpleInput
                 register={register}
                 errors={errors}
@@ -353,9 +353,7 @@ const Signin: React.FC = () => {
                     type="submit"
                     className={s.submit__btn}
                     variant="primary"
-                    onClick={() => {
-                      onClickSubmit;
-                    }}
+                    onClick={onClickSubmit}
                   >
                     JOIN US
                   </Button>
@@ -382,12 +380,26 @@ const Signin: React.FC = () => {
           </div>
           {checkedShipBillAddress ? null : (
             <div className={clsx(s.elements__flow)}>
-              <div className={clsx(s.form__element, s.form__element_left)}>
+              <div
+                className={clsx(
+                  s.form__element,
+                  s.form__element_left,
+                  s.no__border_bottom,
+                  s.add__border_top
+                )}
+              >
                 <Typography variant="h2" className={s.form__title_size}>
                   4. Billing Address
                 </Typography>
               </div>
-              <div className={clsx(s.form__element, s.form__element_flow)}>
+              <div
+                className={clsx(
+                  s.form__element,
+                  s.form__element_flow,
+                  s.no__border_bottom,
+                  s.add__border_top
+                )}
+              >
                 <SimpleInput
                   register={register}
                   errors={errors}
@@ -444,9 +456,7 @@ const Signin: React.FC = () => {
                       type="submit"
                       className={s.submit__btn}
                       variant="primary"
-                      onClick={() => {
-                        onClickSubmit;
-                      }}
+                      onClick={onClickSubmit}
                     >
                       JOIN US
                     </Button>
