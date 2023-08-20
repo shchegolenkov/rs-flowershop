@@ -221,7 +221,7 @@ const Signin: React.FC = () => {
         <div className={clsx(s.elements__flow, s.signin__header, s.signin__header_flow)}>
           <div className={clsx(s.form__element, s.signin__header_element, s.header__img)}></div>
           <div className={clsx(s.form__element, s.signin__header_element, s.header__message)}>
-            <Typography variant="h2" className={s.welcome}>
+            <Typography variant="h2">
               Welcome! Create
               <br /> your account now
             </Typography>
