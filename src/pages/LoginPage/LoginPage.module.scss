@@ -1,14 +1,36 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
+  @include media-tablet {
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+  }
 }
 
 .headerBlock {
   border-right: 1px solid var(--color-black);
+
+  @include media-tablet {
+    border-right: none;
+    border-bottom: 1px solid var(--color-black);
+  }
 }
 
 .wrapper {
   padding: 80px;
+
+  @include media-large {
+    padding: 80px 5vw;
+  }
+
+  @include media-tablet {
+    padding: 80px 10vw;
+  }
+
+  @include media-mobile {
+    padding: 40px 16px;
+  }
 }
 
 .body {
@@ -26,6 +48,14 @@
   max-width: 100%;
   min-height: 370px;
   border-bottom: 1px solid var(--color-black);
+
+  @include media-tablet {
+    min-height: 315px;
+  }
+
+  @include media-mobile {
+    min-height: 234px;
+  }
 }
 
 .regBlock {
