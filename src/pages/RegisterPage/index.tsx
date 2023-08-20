@@ -160,7 +160,7 @@ const Registration: React.FC = () => {
     reset,
     formState: { errors },
   } = useForm<CustomerData>({
-    resolver: yupResolver(schema) as Resolver<CustomerData>,
+    resolver: yupResolver(schema) as unknown as Resolver<CustomerData>,
     defaultValues: {
       email: '',
       password: '',
