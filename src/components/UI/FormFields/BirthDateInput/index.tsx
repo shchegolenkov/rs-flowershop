@@ -61,7 +61,11 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, contr
   const errorMessage = React.useMemo(() => {
     switch (dataError) {
       case 'maxDate': {
-        return 'You must be at least 13 years old';
+        return (
+          <span className={s.err__message}>
+            <ErrorIcon color="error" /> You must be at least 13 years old
+          </span>
+        );
       }
       case 'minDate': {
         return (
@@ -71,7 +75,11 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, contr
         );
       }
       case 'invalidDate': {
-        return 'Please select a valid date';
+        return (
+          <span className={s.err__message}>
+            <ErrorIcon color="error" /> Please select a valid date
+          </span>
+        );
       }
       default: {
         return '';
