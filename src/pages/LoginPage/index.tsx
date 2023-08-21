@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import * as yup from 'yup';
@@ -14,11 +14,22 @@ import EmailInput from '../../components/UI/FormFields/EmailInput';
 import PasswordInput from '../../components/UI/FormFields/PasswordInput';
 import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types/types';
+import { useDispatch } from 'react-redux';
+import { clearMessage } from '../../app/slices/message';
+import { loginUser } from '../../app/slices/auth';
+import { useSelector } from 'react-redux';
+import Alert from '@mui/material/Alert';
 
 const LoginPage: React.FC = () => {
   const [emailError, setEmailError] = useState('');
   const [formError, setFormError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { message } = useSelector((state) => state.message);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
   const schema = yup.object().shape({
     email: yup
@@ -65,7 +76,16 @@ const LoginPage: React.FC = () => {
 
   // реализовать логику взаимодействия с api
   const onSubmit = (data: CustomerData) => {
-    if (!formError) console.log(data);
+    setIsSuccess(false);
+    dispatch(loginUser(data))
+      .unwrap()
+      .then(() => {
+        setIsSuccess(true);
+        navigate('/');
+      })
+      .catch(() => {
+        setIsSuccess(false);
+      });
   };
 
   return (
@@ -103,6 +123,11 @@ const LoginPage: React.FC = () => {
                 <Button full={true} type="submit" onClick={onClickSubmit}>
                   Login
                 </Button>
+                {message ? (
+                  <Alert variant="outlined" severity="error">
+                    {message}
+                  </Alert>
+                ) : null}
               </form>
             </ThemeProvider>
           </div>
