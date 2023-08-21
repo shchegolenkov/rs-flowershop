@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import s from './RegisterPage.module.scss';
 import clsx from 'clsx';
 import { ThemeProvider } from '@mui/material/styles';
@@ -21,13 +21,21 @@ import { countries } from '../../constants/const';
 import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../app/slices/auth';
+import { clearMessage } from '../../app/slices/message';
+
 const RegisterPage: React.FC = () => {
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
   const navigate = useNavigate();
   const [emailError, setEmailError] = useState('');
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(true);
   const [checkedBillDefAddress, setCheckedBillDefAddress] = React.useState(true);
-  const [registerApiError, setRegisterApiError] = React.useState('');
   const [formError, setFormError] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const currentDate = new Date();
@@ -183,15 +191,26 @@ const RegisterPage: React.FC = () => {
   } as UseFormProps<CustomerData>);
 
   const onSubmit = (data: CustomerData) => {
+    setIsSuccess(false);
+    dispatch(registerUser(data))
+      .unwrap()
+      .then(() => {
+        setIsSuccess(true);
+      })
+      .catch(() => {
+        setIsSuccess(false);
+      });
+
     //логика переносится в функцию апи регистрации с асинхронными доработками
-    setRegisterApiError('');
+
+    /* setRegisterApiError('');
     if (!registerApiError && !formError) {
       setIsSuccess(true);
       setTimeout(() => {
         window.location.href = '/';
       }, 2000);
     }
-    console.log(data);
+    console.log(data);*/
   };
 
   const onClickSubmit = () => {
@@ -365,9 +384,9 @@ const RegisterPage: React.FC = () => {
                         Registration was successful!
                       </Alert>
                     ) : null}
-                    {registerApiError ? (
+                    {message ? (
                       <Alert variant="outlined" severity="error">
-                        {registerApiError}
+                        {message}
                       </Alert>
                     ) : null}
                   </div>
@@ -463,9 +482,9 @@ const RegisterPage: React.FC = () => {
                           Registration was successful!
                         </Alert>
                       ) : null}
-                      {registerApiError ? (
+                      {message ? (
                         <Alert variant="outlined" severity="error">
-                          {registerApiError}
+                          {message}
                         </Alert>
                       ) : null}
                     </div>
