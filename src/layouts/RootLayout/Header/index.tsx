@@ -8,6 +8,7 @@ import CloseIco from '../../../assets/svg/close.svg';
 import LogoutIco from '../../../assets/svg/logout.svg';
 import { MenuLink } from '../../../components/UI/MenuLink';
 import s from './header.module.scss';
+import { useSelector } from 'react-redux';
 
 const links = [
   { to: '/notFound', text: 'Catalog' },
@@ -16,7 +17,7 @@ const links = [
 
 const anonymLinks = [
   { to: '/login', text: 'Log In', ico: <LoginIco /> },
-  { to: '/register', text: 'Sign in', ico: <ProfileIco /> },
+  { to: '/register', text: 'Sign up', ico: <ProfileIco /> },
 ];
 
 const userLinks = [
@@ -27,8 +28,7 @@ const userLinks = [
 function Header() {
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [isMenuActive, setMenuActive] = useState(false);
-
-  const isAuth = false;
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const checkOutside = (e: MouseEvent) => {
@@ -73,21 +73,28 @@ function Header() {
               <MenuLink to={link.to}>{link.text}</MenuLink>
             </li>
           ))}
-          {isAuth
-            ? userLinks.map((link) => (
-                <li key={link.text} className={s.listItem}>
-                  <MenuLink to={link.to} ico={link.ico}>
-                    {link.text}
-                  </MenuLink>
-                </li>
-              ))
-            : anonymLinks.map((link) => (
-                <li key={link.text} className={s.listItem}>
-                  <MenuLink to={link.to} ico={link.ico}>
-                    {link.text}
-                  </MenuLink>
-                </li>
-              ))}
+          {isLoggedIn ? (
+            <>
+              <li className={s.listItem}>
+                <MenuLink to={'/'} ico={<LogoutIco />}>
+                  Log Out
+                </MenuLink>
+              </li>
+              <li className={s.listItem}>
+                <MenuLink to={'/profile'} ico={<ProfileIco />}>
+                  Profile
+                </MenuLink>
+              </li>
+            </>
+          ) : (
+            anonymLinks.map((link) => (
+              <li key={link.text} className={s.listItem}>
+                <MenuLink to={link.to} ico={link.ico}>
+                  {link.text}
+                </MenuLink>
+              </li>
+            ))
+          )}
           <li className={s.empty}></li>
         </ul>
         <div className={[s.menuOpen, s.ico].join(' ')}>
