@@ -7,10 +7,10 @@ const ACC_TOKEN_URL = process.env.CTP_ACCTOKEN_URL as string;
 const REG_USER_URL = process.env.CTP_REGUSER_URL as string;
 const CLIENT_ID = process.env.CTP_CLIENT_ID as string;
 const CLIENT_SECRET = process.env.CTP_CLIENT_SECRET as string;
+const AUTH_USER_URL = process.env.CTP_LOGINUSER_URL as string;
 
 const getAccessToken = async () => {
   try {
-    console.log(ACC_TOKEN_URL);
     const response = await axios.post(ACC_TOKEN_URL, null, {
       params: {
         grant_type: 'client_credentials',
@@ -76,8 +76,23 @@ const registerUser = async (data: CustomerData) => {
   }
 };
 
+const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
+  const accessToken = await getAccessToken();
+  localStorage.setItem('accesToken', accessToken);
+  if (accessToken) {
+    const requestPayload: Pick<RequestPayload, 'email' | 'password'> = {
+      email: data.email,
+      password: data.password,
+    };
+    return axios.post(AUTH_USER_URL, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  }
+};
+
 const AuthService = {
   registerUser,
+  loginUser,
 };
 
 export default AuthService;

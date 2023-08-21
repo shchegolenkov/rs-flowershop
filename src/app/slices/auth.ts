@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { setMessage } from './message';
 import { CustomerData } from '../../types/types';
@@ -15,14 +16,37 @@ export const registerUser = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          (error.response.data as { message: string }).message) ||
-        (error as string) ||
-        error.toString();
-      thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      if (axios.isAxiosError(error)) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            (error.response.data as { message: string }).message) ||
+          (error as unknown as string) ||
+          error.toString();
+        thunkAPI.dispatch(setMessage(message));
+        return thunkAPI.rejectWithValue(null);
+      }
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  'auth/login',
+  async (data: Pick<CustomerData, 'email' | 'password'>, thunkAPI) => {
+    try {
+      const response = await AuthService.loginUser(data);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            (error.response.data as { message: string }).message) ||
+          (error as unknown as string) ||
+          error.toString();
+        thunkAPI.dispatch(setMessage(message));
+        return thunkAPI.rejectWithValue(null);
+      }
     }
   }
 );
@@ -40,13 +64,19 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
-  extraReducers: {
-    [registerUser.fulfilled]: (state, action: PayloadAction<boolean>) => {
+  extraReducers: (builder) => {
+    builder.addCase(registerUser.fulfilled, (state, action) => {
       state.isLoggedIn = false;
-    },
-    [registerUser.rejected]: (state, action: PayloadAction<boolean>) => {
-      state.isLoggedIn = false;
-    },
+    }),
+      builder.addCase(registerUser.rejected, (state, action) => {
+        state.isLoggedIn = false;
+      });
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+    }),
+      builder.addCase(loginUser.rejected, (state, action) => {
+        state.isLoggedIn = false;
+      });
   },
 });
 
