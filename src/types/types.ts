@@ -16,3 +16,21 @@ export interface CustomerData {
   billingCountry: string;
   billingDefaultAddress: boolean;
 }
+
+export type Address = {
+  streetName: string;
+  postalCode: string;
+  country: string;
+  city: string;
+};
+
+export type RequestPayload = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  addresses: Address[];
+  defaultShippingAddress?: number;
+  defaultBillingAddress?: number;
+};
