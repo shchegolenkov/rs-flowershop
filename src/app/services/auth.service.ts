@@ -52,6 +52,7 @@ const registerUser = async (data: CustomerData) => {
         country: data.shippingCountry,
         city: data.shippingCity,
       });
+      requestPayload['shippingAddresses'] = [0];
     }
     if (data.billingStreet && data.billingCity && data.billingPostalCode && data.billingCountry) {
       requestPayload.addresses.push({
@@ -60,6 +61,7 @@ const registerUser = async (data: CustomerData) => {
         country: data.billingCountry,
         city: data.billingCity,
       });
+      requestPayload['billingAddresses'] = [1];
     }
     if (data.shippingDefaultAddress) {
       requestPayload['defaultShippingAddress'] = 0;
@@ -69,6 +71,7 @@ const registerUser = async (data: CustomerData) => {
     }
     if (data.shippingBillingAddress) {
       requestPayload['defaultBillingAddress'] = 0;
+      requestPayload['billingAddresses'] = [0];
     }
     return axios.post(REG_USER_URL, requestPayload, {
       headers: { Authorization: `Bearer ${accessToken}` },

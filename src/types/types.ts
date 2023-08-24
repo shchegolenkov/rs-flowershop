@@ -33,4 +33,6 @@ export type RequestPayload = {
   addresses: Address[];
   defaultShippingAddress?: number;
   defaultBillingAddress?: number;
+  shippingAddresses?: number[];
+  billingAddresses?: number[];
 };
