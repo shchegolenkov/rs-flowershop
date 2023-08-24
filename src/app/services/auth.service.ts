@@ -8,6 +8,9 @@ const REG_USER_URL = process.env.CTP_REGUSER_URL as string;
 const CLIENT_ID = process.env.CTP_CLIENT_ID as string;
 const CLIENT_SECRET = process.env.CTP_CLIENT_SECRET as string;
 const AUTH_USER_URL = process.env.CTP_LOGINUSER_URL as string;
+const LOGIN_URL = process.env.CTP_LOGIN_URL as string;
+const LOGOUT_URL = process.env.CTP_LOGOUT_URL as string;
+const INTROSPECT_URL = process.env.CTP_INTROSPECT_URL as string;
 
 const getAccessToken = async () => {
   try {
@@ -26,6 +29,27 @@ const getAccessToken = async () => {
   } catch (error) {
     console.log('Error getting access token:', error);
     return null;
+  }
+};
+
+const getAccessClientToken = async (data: Pick<CustomerData, 'email' | 'password'>) => {
+  try {
+    const response = await axios.post(AUTH_USER_URL, null, {
+      params: {
+        grant_type: 'password',
+        username: data.email,
+        password: data.password,
+      },
+      auth: {
+        username: CLIENT_ID,
+        password: CLIENT_SECRET,
+      },
+    });
+
+    const accessToken = response.data.access_token;
+    return accessToken;
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -80,22 +104,70 @@ const registerUser = async (data: CustomerData) => {
 };
 
 const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
-  const accessToken = await getAccessToken();
-  localStorage.setItem('accesToken', accessToken);
-  if (accessToken) {
-    const requestPayload: Pick<RequestPayload, 'email' | 'password'> = {
-      email: data.email,
-      password: data.password,
-    };
-    return axios.post(AUTH_USER_URL, requestPayload, {
-      headers: { Authorization: `Bearer ${accessToken}` },
+  try {
+    const accessToken = await getAccessClientToken(data);
+    localStorage.setItem('accessToken', accessToken);
+
+    if (accessToken) {
+      const requestPayload: Pick<RequestPayload, 'email' | 'password'> = {
+        email: data.email,
+        password: data.password,
+      };
+
+      return axios.post(LOGIN_URL, requestPayload, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const logoutUser = () => {
+  const token = localStorage.getItem('accessToken');
+  return axios
+    .post(LOGOUT_URL, null, {
+      params: {
+        token: token,
+        token_type_hint: 'access_token',
+      },
+      auth: {
+        username: CLIENT_ID,
+        password: CLIENT_SECRET,
+      },
+    })
+    .then((response) => {
+      return response.data;
     });
+};
+
+const tokenIntrospection = async () => {
+  const accessToken = localStorage.getItem('accessToken');
+
+  if (!accessToken) {
+    return null;
+  }
+
+  try {
+    const response = await axios.post(INTROSPECT_URL, null, {
+      params: { token: accessToken },
+      auth: {
+        username: CLIENT_ID,
+        password: CLIENT_SECRET,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error introspecting token:', error);
   }
 };
 
 const AuthService = {
   registerUser,
   loginUser,
+  logoutUser,
+  tokenIntrospection,
 };
 
 export default AuthService;

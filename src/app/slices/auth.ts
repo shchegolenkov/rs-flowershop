@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
 import { CustomerData } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
@@ -35,7 +35,7 @@ export const loginUser = createAsyncThunk(
   async (data: Pick<CustomerData, 'email' | 'password'>, thunkAPI) => {
     try {
       const response = await AuthService.loginUser(data);
-      return response.data;
+      if (response) return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message =
@@ -51,6 +51,26 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
+  try {
+    await AuthService.logoutUser();
+    localStorage.removeItem('accessToken');
+    return true;
+  } catch (error) {
+    console.error('Error during logout:', error);
+    return false;
+  }
+});
+
+export const tokenIntrospection = createAsyncThunk('auth/tokenIntrospection', async () => {
+  try {
+    const response = await AuthService.tokenIntrospection();
+    return response;
+  } catch (error) {
+    console.log('tokenIntrospection err', error);
+  }
+});
+
 interface AuthState {
   isLoggedIn: boolean;
   user: CustomerData | null;
@@ -65,16 +85,33 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.isLoggedIn = false;
-    }),
-      builder.addCase(registerUser.rejected, (state, action) => {
+    builder
+      .addCase(registerUser.fulfilled, (state) => {
         state.isLoggedIn = false;
-      });
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.isLoggedIn = true;
-    }),
-      builder.addCase(loginUser.rejected, (state, action) => {
+      })
+      .addCase(registerUser.rejected, (state) => {
+        state.isLoggedIn = false;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.user = action.payload.user;
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.user = null;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.isLoggedIn = false;
+        state.user = null;
+      })
+      .addCase(tokenIntrospection.fulfilled, (state, action) => {
+        if (action.payload.active) {
+          state.isLoggedIn = true;
+        } else {
+          state.isLoggedIn = false;
+        }
+      })
+      .addCase(tokenIntrospection.rejected, (state) => {
         state.isLoggedIn = false;
       });
   },
