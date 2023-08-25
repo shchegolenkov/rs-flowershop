@@ -4,11 +4,16 @@ import clsx from 'clsx';
 
 interface IMenuLink extends LinkProps {
   ico?: JSX.Element;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-export function MenuLink({ children, className, ico, ...props }: IMenuLink) {
+export function MenuLink({ children, className, ico, onClick, ...props }: IMenuLink) {
   return (
-    <Link className={ico ? clsx(s.linkIco, className) : clsx(s.link, className)} {...props}>
+    <Link
+      className={ico ? clsx(s.linkIco, className) : clsx(s.link, className)}
+      onClick={onClick}
+      {...props}
+    >
       {ico}
       {children}
     </Link>
