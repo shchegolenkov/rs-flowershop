@@ -31,10 +31,17 @@ const LoginPage: React.FC = () => {
     dispatch(clearMessage());
   }, [dispatch]);
 
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
+
   const schema = yup.object().shape({
     email: yup
       .string()
-      .required('Email is required')
+      .required('Email is required.')
       .email('Invalid email (e.g., example@example.com)')
       .matches(/^[^@]+@[^.]+\..+$/, 'Email should contain a dot in the domain')
       .test('custom-email-validation', `${emailError}`, (value) => {

@@ -20,14 +20,14 @@ import SimpleSelect from '../../components/UI/FormFields/SimpleSelect';
 import { countries } from '../../constants/const';
 import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
-
+import { RootState, AppDispatch } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, loginUser } from '../../app/slices/auth';
 import { clearMessage } from '../../app/slices/message';
 
 const RegisterPage: React.FC = () => {
-  const { message } = useSelector((state) => state.message);
-  const dispatch = useDispatch();
+  const { message } = useSelector((state: RootState) => state.message);
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
@@ -46,11 +46,19 @@ const RegisterPage: React.FC = () => {
   );
   const minDate = new Date(1900, 1, 1);
 
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
+
   const schema = yup.object().shape({
     email: yup
       .string()
       .required('Email is required.')
       .email('Invalid email (e.g., example@example.com)')
+      .matches(/^[^@]+@[^.]+\..+$/, 'Email should contain a dot in the domain')
       .test('custom-email-validation', `${emailError}`, (value) => {
         return validateEmail(value as string, setEmailError);
       })
