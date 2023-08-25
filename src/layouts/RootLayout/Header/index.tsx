@@ -9,10 +9,13 @@ import LogoutIco from '../../../assets/svg/logout.svg';
 import { MenuLink } from '../../../components/UI/MenuLink';
 import s from './header.module.scss';
 import { useSelector } from 'react-redux';
+import { logoutUser, tokenIntrospection } from '../../../app/slices/auth';
+import { useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../../app/store';
 
 const links = [
-  { to: '/notFound', text: 'Catalog' },
-  { to: '/notFound', text: 'About us' },
+  { to: '/catalog', text: 'Catalog' },
+  { to: '/about', text: 'About us' },
 ];
 
 const anonymLinks = [
@@ -20,17 +23,19 @@ const anonymLinks = [
   { to: '/register', text: 'Sign up', ico: <ProfileIco /> },
 ];
 
-const userLinks = [
-  { to: '/', text: 'Log out', ico: <LogoutIco /> },
-  { to: '/profile', text: 'Profile', ico: <ProfileIco /> },
-];
-
 function Header() {
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [isMenuActive, setMenuActive] = useState(false);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      dispatch(tokenIntrospection());
+    }
+
     const checkOutside = (e: MouseEvent) => {
       if (isMenuActive && ref.current && ref.current.contains(e.target as Node)) {
         setMenuActive(false);
@@ -47,11 +52,15 @@ function Header() {
       document.removeEventListener('mousedown', checkOutside);
       document.body.style.position = 'static';
     };
-  }, [isMenuActive]);
+  }, [dispatch, isMenuActive]);
 
   function handleMenuClick() {
     setMenuActive(!isMenuActive);
   }
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <header>
@@ -76,7 +85,7 @@ function Header() {
           {isLoggedIn ? (
             <>
               <li className={s.listItem}>
-                <MenuLink to={'/'} ico={<LogoutIco />}>
+                <MenuLink to={'/'} ico={<LogoutIco />} onClick={handleLogout}>
                   Log Out
                 </MenuLink>
               </li>

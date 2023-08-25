@@ -3,21 +3,27 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { MemoryRouter } from 'react-router-dom';
 import Header from './';
+import { Provider } from 'react-redux';
+import { store } from '../../../app/store';
 
 describe('Header', () => {
   it('renders without errors', () => {
     render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      </Provider>
     );
   });
 
   it('displays the logo', () => {
     render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      </Provider>
     );
     const logo = screen.getByAltText('logo');
     expect(logo).toBeInTheDocument();
@@ -25,9 +31,11 @@ describe('Header', () => {
 
   it('displays navigation links', () => {
     render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      </Provider>
     );
     const navigationLinks = ['Catalog', 'About us'];
     navigationLinks.forEach((linkText) => {
