@@ -18,15 +18,15 @@ import { useDispatch } from 'react-redux';
 import { clearMessage } from '../../app/slices/message';
 import { loginUser } from '../../app/slices/auth';
 import { useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../app/store';
 import Alert from '@mui/material/Alert';
 
 const LoginPage: React.FC = () => {
   const [emailError, setEmailError] = useState('');
-  const [formError, setFormError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { message } = useSelector((state) => state.message);
+  const { message } = useSelector((state: RootState) => state.message);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
@@ -36,6 +36,7 @@ const LoginPage: React.FC = () => {
       .string()
       .required('Email is required')
       .email('Invalid email (e.g., example@example.com)')
+      .matches(/^[^@]+@[^.]+\..+$/, 'Email should contain a dot in the domain')
       .test('custom-email-validation', `${emailError}`, (value) => {
         return validateEmail(value as string, setEmailError);
       })
@@ -67,21 +68,16 @@ const LoginPage: React.FC = () => {
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
 
-  const onClickSubmit = () => {
-    setFormError(false);
-    if (errors.email || errors.password) {
-      setFormError(true);
-    }
-  };
-
-  // реализовать логику взаимодействия с api
   const onSubmit = (data: CustomerData) => {
     setIsSuccess(false);
+    dispatch(clearMessage());
     dispatch(loginUser(data))
       .unwrap()
       .then(() => {
         setIsSuccess(true);
-        navigate('/');
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       })
       .catch(() => {
         setIsSuccess(false);
@@ -120,9 +116,14 @@ const LoginPage: React.FC = () => {
               <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
                 <EmailInput register={register} errors={errors} />
                 <PasswordInput register={register} errors={errors} />
-                <Button full={true} type="submit" onClick={onClickSubmit}>
+                <Button full={true} type="submit" className={s.buttonLogin}>
                   Login
                 </Button>
+                {isSuccess ? (
+                  <Alert severity="success" variant="outlined">
+                    Successful!
+                  </Alert>
+                ) : null}
                 {message ? (
                   <Alert variant="outlined" severity="error">
                     {message}
