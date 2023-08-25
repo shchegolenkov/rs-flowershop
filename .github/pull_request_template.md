@@ -31,7 +31,7 @@
 
 <!-- Please check all items as completed before merge by putting an "x" inside the brackets: -->
 
-- [ ] This pull request merges to develop branch
+- [ ] This pull request merges to the current sprint branch
 - [ ] I have reviewed the code for potential issues.
 - [ ] I have fixed any warnings or errors
 - [ ] Approved by team developers
