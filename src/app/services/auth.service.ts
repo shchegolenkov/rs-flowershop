@@ -163,11 +163,20 @@ const tokenIntrospection = async () => {
   }
 };
 
+const getUser = async () => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  return axios.get(`${REG_USER_URL}/${userId}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+};
+
 const AuthService = {
   registerUser,
   loginUser,
   logoutUser,
   tokenIntrospection,
+  getUser,
 };
 
 export default AuthService;
