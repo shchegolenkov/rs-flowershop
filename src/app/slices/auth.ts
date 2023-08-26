@@ -35,7 +35,11 @@ export const loginUser = createAsyncThunk(
   async (data: Pick<CustomerData, 'email' | 'password'>, thunkAPI) => {
     try {
       const response = await AuthService.loginUser(data);
-      if (response) return response.data;
+      if (response) {
+        localStorage.setItem('userId', response.data.customer.id);
+        localStorage.setItem('user', JSON.stringify(response.data.customer));
+        return response.data.customer;
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message =
@@ -55,6 +59,8 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
   try {
     await AuthService.logoutUser();
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
     return true;
   } catch (error) {
     console.error('Error during logout:', error);
@@ -68,6 +74,16 @@ export const tokenIntrospection = createAsyncThunk('auth/tokenIntrospection', as
     return response;
   } catch (error) {
     console.log('tokenIntrospection err', error);
+  }
+});
+
+export const getUser = createAsyncThunk('auth/getUser', async () => {
+  try {
+    const response = await AuthService.getUser();
+    localStorage.setItem('user', JSON.stringify(response.data));
+    return response.data;
+  } catch (error) {
+    console.log('Get user error:', error);
   }
 });
 
@@ -113,6 +129,12 @@ const authSlice = createSlice({
       })
       .addCase(tokenIntrospection.rejected, (state) => {
         state.isLoggedIn = false;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(getUser.rejected, (state) => {
+        state.user = null;
       });
   },
 });
