@@ -22,7 +22,7 @@ import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
 import { RootState, AppDispatch } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, loginUser } from '../../app/slices/auth';
+import { registerUser, loginUser, getUser } from '../../app/slices/auth';
 import { clearMessage } from '../../app/slices/message';
 
 const RegisterPage: React.FC = () => {
@@ -205,6 +205,9 @@ const RegisterPage: React.FC = () => {
       .then(() => {
         dispatch(loginUser(data))
           .unwrap()
+          .then(() => {
+            dispatch(getUser());
+          })
           .then(() => {
             setIsSuccess(true);
             setTimeout(() => {
