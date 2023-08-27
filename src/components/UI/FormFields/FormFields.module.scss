@@ -5,7 +5,7 @@
 }
 
 .form__field_size_birthday {
-  width: 50%;
+  width: 52%;
   height: 100%;
   min-height: 120px;
 
@@ -44,4 +44,20 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.edit__field_container {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  gap: 24px;
+  align-items: flex-start;
+
+  button {
+    margin-top: 10px;
+  }
+}
+
+.err_edit_btn {
+  cursor: default;
 }
