@@ -148,6 +148,9 @@ const ProfilePage: React.FC = () => {
     setIsSuccess(false);
     dispatch(clearMessage());
     reset();
+    reset({
+      dateOfBirth: user && user.dateOfBirth ? new Date(user.dateOfBirth) : undefined,
+    });
   };
 
   const handleEmailClick = () => {
@@ -274,7 +277,7 @@ const ProfilePage: React.FC = () => {
                 isDisabled={isDisabledDateOfBirth}
                 switchEditModeField={handleDateOfBirthClick}
               />
-              {!isDisabledFirstName || !isDisabledLastName ? (
+              {!isDisabledFirstName || !isDisabledLastName || !isDisabledDateOfBirth ? (
                 <div>
                   <ProfileEditBlock
                     onClickSubmit={onClickSubmit}
