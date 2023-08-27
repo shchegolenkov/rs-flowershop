@@ -3,7 +3,7 @@ export interface CustomerData {
   password: string;
   firstName: string;
   lastName: string;
-  birthDate: Date | null;
+  dateOfBirth: Date | null;
   shippingStreet: string;
   shippingCity: string;
   shippingPostalCode: string;
