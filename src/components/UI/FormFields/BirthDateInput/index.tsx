@@ -20,6 +20,7 @@ import { DateValidationError } from '@mui/x-date-pickers/models';
 import { validateDate } from '../../../../utils/validators';
 import EditIco from '../../../../assets/svg/edit.svg';
 import EditIcoActive from '../../../../assets/svg/editActive.svg';
+import EditIcoErr from '../../../../assets/svg/editErr.svg';
 
 interface BirthDateInputProps {
   register: UseFormRegister<CustomerData>;
@@ -123,8 +124,16 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({
                   }}
                 />
                 {isEditField ? (
-                  <button type="button" onClick={switchEditModeField}>
-                    {isDisabled ? <EditIco /> : <EditIcoActive />}
+                  <button type="button" onClick={!dataError ? switchEditModeField : undefined}>
+                    {isDisabled ? (
+                      <EditIco />
+                    ) : !dataError ? (
+                      <EditIcoActive />
+                    ) : (
+                      <div className={s.err_edit_btn}>
+                        <EditIcoErr />
+                      </div>
+                    )}
                   </button>
                 ) : null}
               </div>
