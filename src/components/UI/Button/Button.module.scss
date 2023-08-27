@@ -69,3 +69,48 @@
     border: 1px solid var(--color-light-gray);
   }
 }
+
+.red {
+  color: var(--color-error);
+  text-transform: inherit;
+  border: none;
+
+  &:hover {
+    border: 1px solid var(--color-black);
+    background-color: var(--color-black);
+  }
+
+  &:active {
+    color: var(--color-black);
+    background-color: var(--color-white);
+  }
+
+  &:disabled {
+    color: var(--color-gray);
+    background-color: (--color-light-gray);
+    border: 1px solid var(--color-light-gray);
+  }
+}
+
+.success {
+  color: var(--color-black);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+
+  &:hover {
+    color: var(--color-success);
+    border: 1px solid var(--color-black);
+    background-color: var(--color-black);
+  }
+
+  &:active {
+    color: var(--color-black);
+    background-color: var(--color-white);
+  }
+
+  &:disabled {
+    color: var(--color-gray);
+    background-color: (--color-light-gray);
+    border: 1px solid var(--color-light-gray);
+  }
+}
