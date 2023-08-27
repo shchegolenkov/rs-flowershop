@@ -61,7 +61,7 @@ const registerUser = async (data: CustomerData) => {
       password: data.password,
       firstName: data.firstName,
       lastName: data.lastName,
-      dateOfBirth: dayjs(data.birthDate).format('YYYY-MM-DD'),
+      dateOfBirth: dayjs(data.dateOfBirth).format('YYYY-MM-DD'),
       addresses: [],
     };
     if (
@@ -171,12 +171,65 @@ const getUser = async () => {
   });
 };
 
+type Action =
+  | { action: 'changeEmail'; email: string }
+  | { action: 'setFirstName'; firstName: string }
+  | { action: 'setLastName'; lastName: string }
+  | { action: 'setDateOfBirth'; dateOfBirth: string };
+
+const updateUser = async (data: CustomerData) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  console.log(data);
+  const requestPayload = {
+    version: user.version,
+    actions: [] as Action[],
+  };
+
+  if (data.email) {
+    requestPayload.actions.push({
+      action: 'changeEmail',
+      email: data.email,
+    });
+  }
+
+  if (data.firstName) {
+    requestPayload.actions.push({
+      action: 'setFirstName',
+      firstName: data.firstName,
+    });
+  }
+
+  if (data.lastName) {
+    requestPayload.actions.push({
+      action: 'setLastName',
+      lastName: data.lastName,
+    });
+  }
+
+  if (data.dateOfBirth) {
+    requestPayload.actions.push({
+      action: 'setDateOfBirth',
+      dateOfBirth: dayjs(data.dateOfBirth).format('YYYY-MM-DD'),
+    });
+  }
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 const AuthService = {
   registerUser,
   loginUser,
   logoutUser,
   tokenIntrospection,
   getUser,
+  updateUser,
 };
 
 export default AuthService;

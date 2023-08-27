@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
 import { CustomerData } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
-
 import AuthService from '../services/auth.service';
 
 export const registerUser = createAsyncThunk(
@@ -86,6 +85,30 @@ export const getUser = createAsyncThunk('auth/getUser', async () => {
     console.log('Get user error:', error);
   }
 });
+
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async (data: CustomerData, thunkAPI) => {
+    try {
+      const response = await AuthService.updateUser(data);
+      if (response) {
+        thunkAPI.dispatch(setMessage(response.data.message));
+        return response.data;
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            (error.response.data as { message: string }).message) ||
+          (error as unknown as string) ||
+          error.toString();
+        thunkAPI.dispatch(setMessage(message));
+        return thunkAPI.rejectWithValue(null);
+      }
+    }
+  }
+);
 
 interface AuthState {
   isLoggedIn: boolean;
