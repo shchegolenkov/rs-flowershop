@@ -4,7 +4,7 @@ import s from './ProfilePage.module.scss';
 import clsx from 'clsx';
 
 import { Typography } from '../../components/UI/Typography';
-import ProfileEditBlock from './ProfileEditBlock/index';
+import ProfileEditBlock from './ProfileEditBlock/';
 import EmailInput from '../../components/UI/FormFields/EmailInput';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
