@@ -181,7 +181,6 @@ const updateUser = async (data: CustomerData) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
   const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
-  console.log(data);
   const requestPayload = {
     version: user.version,
     actions: [] as Action[],
