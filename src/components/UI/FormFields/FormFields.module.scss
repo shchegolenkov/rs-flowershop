@@ -16,13 +16,13 @@
 
   @include media-large {
     width: 100%;
-    max-width: 500px;
+    max-width: 1000px;
   }
 
   @include media-tablet {
-    width: 50%;
+    width: 100%;
     align-self: start;
-    max-width: 500px;
+    max-width: 1000px;
   }
 
   @include media-mobile {
