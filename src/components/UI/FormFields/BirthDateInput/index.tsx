@@ -18,23 +18,39 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, { Dayjs } from 'dayjs';
 import { DateValidationError } from '@mui/x-date-pickers/models';
 import { validateDate } from '../../../../utils/validators';
+import EditIco from '../../../../assets/svg/edit.svg';
+import EditIcoActive from '../../../../assets/svg/editActive.svg';
+import EditIcoErr from '../../../../assets/svg/editErr.svg';
 
 interface BirthDateInputProps {
   register: UseFormRegister<CustomerData>;
   errors: {
-    birthDate?: FieldError;
+    dateOfBirth?: FieldError;
   };
   control: Control<CustomerData>;
   reset: (
     values?: DefaultValues<CustomerData> | CustomerData,
     keepStateOptions?: KeepStateOptions
   ) => void;
+  defaultValue?: Date | null;
+  isEditField?: boolean;
+  isDisabled?: boolean;
+  switchEditModeField?: () => void;
 }
 
 const thirteenYearsAgo = dayjs().subtract(13, 'year');
 const minDate1900 = dayjs('1900-01-01');
 
-const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, control, reset }) => {
+const BirthDateInput: React.FC<BirthDateInputProps> = ({
+  register,
+  errors,
+  control,
+  reset,
+  defaultValue,
+  isEditField,
+  isDisabled,
+  switchEditModeField,
+}) => {
   const [dataError, setDataError] = React.useState<DateValidationError | null>(null);
 
   const errorMessage = React.useMemo(() => {
@@ -73,37 +89,54 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({ register, errors, contr
         setDataError(validationError);
       }
       const formattedDate: Date | null = newValue ? newValue.toDate() : null;
-      reset({ birthDate: formattedDate || undefined });
+      reset({ dateOfBirth: formattedDate || undefined });
     }
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className={s.form__field_size_birthday}>
         <Controller
-          name="birthDate"
+          name="dateOfBirth"
+          defaultValue={defaultValue}
           control={control}
           render={({ field }) => {
-            const dayjsValue = field.value ? dayjs(field.value) : null;
+            const dayjsValue = field.value instanceof Date ? dayjs(field.value) : null;
 
             return (
-              <DatePicker
-                {...field}
-                value={dayjsValue}
-                maxDate={thirteenYearsAgo}
-                minDate={minDate1900}
-                onError={(newError) => setDataError(newError)}
-                {...register('birthDate')}
-                format="DD/MM/YYYY"
-                label="Date of birth *"
-                onChange={handleDateChange}
-                slotProps={{
-                  textField: {
-                    helperText: errorMessage,
-                    fullWidth: true,
-                    error: !!errors?.birthDate,
-                  },
-                }}
-              />
+              <div className={s.edit__field_container}>
+                <DatePicker
+                  {...field}
+                  disabled={isEditField ? isDisabled : false}
+                  value={dayjsValue}
+                  maxDate={thirteenYearsAgo}
+                  minDate={minDate1900}
+                  onError={(newError) => setDataError(newError)}
+                  {...register('dateOfBirth')}
+                  format="DD/MM/YYYY"
+                  label="Date of birth *"
+                  onChange={handleDateChange}
+                  slotProps={{
+                    textField: {
+                      helperText: errorMessage,
+                      fullWidth: true,
+                      error: !!errors?.dateOfBirth,
+                    },
+                  }}
+                />
+                {isEditField ? (
+                  <button type="button" onClick={!dataError ? switchEditModeField : undefined}>
+                    {isDisabled ? (
+                      <EditIco />
+                    ) : !dataError ? (
+                      <EditIcoActive />
+                    ) : (
+                      <div className={s.err_edit_btn}>
+                        <EditIcoErr />
+                      </div>
+                    )}
+                  </button>
+                ) : null}
+              </div>
             );
           }}
         />

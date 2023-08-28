@@ -22,7 +22,7 @@ import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
 import { RootState, AppDispatch } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, loginUser } from '../../app/slices/auth';
+import { registerUser, loginUser, getUser } from '../../app/slices/auth';
 import { clearMessage } from '../../app/slices/message';
 
 const RegisterPage: React.FC = () => {
@@ -83,7 +83,7 @@ const RegisterPage: React.FC = () => {
       .string()
       .required('Last name is required.')
       .matches(/^[a-zA-Z]+$/, 'Last name cannot contain special characters or numbers.'),
-    birthDate: yup
+    dateOfBirth: yup
       .date()
       .max(thirteenYearsAgo)
       .min(minDate)
@@ -182,7 +182,7 @@ const RegisterPage: React.FC = () => {
       password: '',
       firstName: '',
       lastName: '',
-      birthDate: null,
+      dateOfBirth: null,
       shippingStreet: '',
       shippingCity: '',
       shippingPostalCode: '',
@@ -206,6 +206,9 @@ const RegisterPage: React.FC = () => {
         dispatch(loginUser(data))
           .unwrap()
           .then(() => {
+            dispatch(getUser());
+          })
+          .then(() => {
             setIsSuccess(true);
             setTimeout(() => {
               navigate('/');
@@ -227,7 +230,7 @@ const RegisterPage: React.FC = () => {
       errors.password ||
       errors.lastName ||
       errors.firstName ||
-      errors.birthDate ||
+      errors.dateOfBirth ||
       errors.shippingStreet ||
       errors.shippingCity ||
       errors.shippingPostalCode ||
@@ -305,7 +308,13 @@ const RegisterPage: React.FC = () => {
                 label="Last name *"
                 id="lastName-input"
               />
-              <BirthDateInput register={register} errors={errors} control={control} reset={reset} />
+              <BirthDateInput
+                register={register}
+                errors={errors}
+                control={control}
+                reset={reset}
+                defaultValue={new Date('01-01-2010')}
+              />
             </div>
           </div>
           <div className={clsx(s.elements__flow)}>

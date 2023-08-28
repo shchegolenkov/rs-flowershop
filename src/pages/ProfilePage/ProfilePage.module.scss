@@ -114,3 +114,30 @@
     padding: 50px 16px 0 16px;
   }
 }
+
+.width_full {
+  width: 100%;
+}
+
+.save_edit_container {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  @include media-mobile {
+    justify-content: space-between;
+  }
+}
+
+.alert_position {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+
+.change_password_btn {
+  margin-bottom: 50px;
+}

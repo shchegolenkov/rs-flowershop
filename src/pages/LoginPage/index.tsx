@@ -16,7 +16,7 @@ import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types/types';
 import { useDispatch } from 'react-redux';
 import { clearMessage } from '../../app/slices/message';
-import { loginUser } from '../../app/slices/auth';
+import { getUser, loginUser } from '../../app/slices/auth';
 import { useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../app/store';
 import Alert from '@mui/material/Alert';
@@ -80,6 +80,7 @@ const LoginPage: React.FC = () => {
     dispatch(clearMessage());
     dispatch(loginUser(data))
       .unwrap()
+      .then(() => dispatch(getUser()))
       .then(() => {
         setIsSuccess(true);
         setTimeout(() => {
