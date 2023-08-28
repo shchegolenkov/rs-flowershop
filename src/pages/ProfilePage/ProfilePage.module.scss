@@ -115,12 +115,20 @@
   }
 }
 
+.width_full {
+  width: 100%;
+}
+
 .save_edit_container {
   width: 100%;
   display: flex;
   flex-flow: row;
   gap: 24px;
   align-items: flex-start;
+  flex-wrap: wrap;
+  @include media-mobile {
+    justify-content: space-between;
+  }
 }
 
 .alert_position {

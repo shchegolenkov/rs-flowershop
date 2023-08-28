@@ -222,15 +222,13 @@ const ProfilePage: React.FC = () => {
                 CHANGE PASSWORD
               </Button>
               {!isDisabledEmail ? (
-                <div>
-                  <ProfileEditBlock
-                    onClickSubmit={onClickSubmit}
-                    onClickCancel={onClickCancel}
-                    formError={formError}
-                    isSuccess={isSuccess}
-                    message={message}
-                  />
-                </div>
+                <ProfileEditBlock
+                  onClickSubmit={onClickSubmit}
+                  onClickCancel={onClickCancel}
+                  formError={formError}
+                  isSuccess={isSuccess}
+                  message={message}
+                />
               ) : null}
             </div>
           </div>
@@ -278,7 +276,7 @@ const ProfilePage: React.FC = () => {
                 switchEditModeField={handleDateOfBirthClick}
               />
               {!isDisabledFirstName || !isDisabledLastName || !isDisabledDateOfBirth ? (
-                <div>
+                <div className={clsx(s.width_full)}>
                   <ProfileEditBlock
                     onClickSubmit={onClickSubmit}
                     onClickCancel={onClickCancel}

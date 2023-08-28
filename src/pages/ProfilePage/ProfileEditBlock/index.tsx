@@ -20,12 +20,12 @@ const ProfileEditBlock: React.FC<ProfileEditBlockProps> = ({
   message,
 }) => {
   return (
-    <div>
+    <div className={clsx(s.width_full)}>
       <div className={clsx(s.save_edit_container)}>
-        <Button type="submit" variant="success" onClick={onClickSubmit}>
+        <Button type="submit" variant="secondary" onClick={onClickSubmit}>
           SAVE EDIT
         </Button>
-        <Button type="button" variant="red" onClick={onClickCancel}>
+        <Button type="button" variant="underlined" onClick={onClickCancel}>
           Cancel edit
         </Button>
       </div>
