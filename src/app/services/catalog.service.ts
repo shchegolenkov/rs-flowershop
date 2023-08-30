@@ -40,6 +40,7 @@ const getProducts = async (pageNumber: number, query = '') => {
         params: {
           limit: ITEMS_PER_PAGE,
           offset: ITEMS_PER_PAGE * pageNumber - ITEMS_PER_PAGE,
+          filter: 'variants.prices:exists',
           'text.en-US': `${query}`,
         },
       }
