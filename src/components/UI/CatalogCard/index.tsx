@@ -36,13 +36,13 @@ function CatalogCard({ data }: ICatalogCard) {
         <div className={s.prices}>
           {discountPrice ? (
             <>
-              <Typography variant={'h5'}>{formatPrice(price)}€</Typography>
-              <Typography variant={'h6'} className={s.discount}>
-                {formatPrice(discountPrice)}€
+              <Typography variant={'h5'}>{formatPrice(discountPrice)} €</Typography>
+              <Typography variant={'h6'} className={s.oldPrice}>
+                {formatPrice(price)} €
               </Typography>
             </>
           ) : (
-            <Typography variant={'h5'}>{formatPrice(price)}€</Typography>
+            <Typography variant={'h5'}>{formatPrice(price)} €</Typography>
           )}
         </div>
       </div>
