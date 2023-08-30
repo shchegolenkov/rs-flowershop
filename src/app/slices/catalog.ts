@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import CatalogService from '../services/catalog.service';
 import { Status, IPageQueryResult } from '../../types/types';
 import { RootState } from '../store';
+import { ITEMS_PER_PAGE } from '../../constants/const';
 
 export const fetchProducts = createAsyncThunk(
   'catalog/allProducts',
@@ -24,12 +25,14 @@ interface CatalogState {
   queryResult: IPageQueryResult | undefined | null;
   status: Status;
   query: string;
+  pages: number;
 }
 
 const initialState: CatalogState = {
   queryResult: null,
   status: Status.LOADING,
   query: '',
+  pages: 1,
 };
 
 const catalogSlice = createSlice({
@@ -49,12 +52,13 @@ const catalogSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.status = Status.SUCCESS;
       state.queryResult = action.payload;
+      state.pages = Math.ceil((action.payload?.total || 1) / ITEMS_PER_PAGE);
     });
 
     builder.addCase(fetchProducts.rejected, (state) => {
       state.status = Status.ERROR;
-      console.log(state.status);
       state.queryResult = null;
+      state.pages = 1;
     });
   },
 });
