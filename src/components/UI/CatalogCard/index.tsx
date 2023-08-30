@@ -1,5 +1,6 @@
 import { IProduct } from '../../../types/types';
 import { Typography } from '../Typography';
+import productLabel from '../../../assets/svg/dummy.svg?url';
 import s from './CatalogCard.module.scss';
 
 interface ICatalogCard {
@@ -11,11 +12,12 @@ function formatPrice(price: number): string {
 }
 
 function CatalogCard({ data }: ICatalogCard) {
-  const imgUrl = data.masterVariant.images[0].url;
-  const responseDescription = data.masterVariant.attributes.filter(
-    (item: { name: string }) => item.name === 'composition'
-  )[0];
-  const description = responseDescription || 'description';
+  const responceImg = data.masterVariant.images;
+  const imgUrl = responceImg.length > 0 ? responceImg[0].url : productLabel;
+  const description =
+    data.masterVariant.attributes.filter(
+      (item: { name: string }) => item.name === 'composition'
+    )[0] || 'no description';
   const size = data.masterVariant.attributes.filter(
     (item: { name: string }) => item.name === 'size'
   )[0].value.key;
