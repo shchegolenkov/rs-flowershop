@@ -141,3 +141,54 @@
 .change_password_btn {
   margin-bottom: 50px;
 }
+
+.no__border_bottom {
+  border-bottom: none !important;
+}
+
+.two__items_container {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  gap: 24px;
+
+  @include media-mobile {
+    flex-flow: column;
+  }
+}
+
+.checkboxes_container {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 0;
+  justify-content: flex-start;
+  padding-bottom: 40px;
+}
+
+.err_edit_btn {
+  cursor: default;
+}
+
+.adress_control {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  padding-bottom: 30px;
+  align-items: center;
+  div {
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
+  }
+}
+
+.dont_have_address_message {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.hr {
+  padding: 50px 10%;
+}

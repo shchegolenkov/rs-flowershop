@@ -10,7 +10,7 @@ import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import Button from '../../components/UI/Button';
 import { validateEmail } from '../../utils/validators';
-import { CustomerData } from '../../types/types';
+import { CustomerData, ProfileAddress } from '../../types/types';
 
 import FormTheme from '../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
@@ -29,6 +29,7 @@ import {
 } from '../../app/slices/profile';
 import { clearMessage } from '../../app/slices/message';
 import { getUser, updateUser } from '../../app/slices/auth';
+import ProfileAddressBlock from './ProfileAddressBlock';
 
 const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);
@@ -138,7 +139,13 @@ const ProfilePage: React.FC = () => {
 
   const onClickSubmit = () => {
     setFormError(false);
-    if (errors.email || errors.firstName || errors.lastName || errors.dateOfBirth) {
+    if (
+      errors.email ||
+      errors.firstName ||
+      errors.lastName ||
+      errors.dateOfBirth ||
+      errors.addresses
+    ) {
       setFormError(true);
     }
   };
@@ -290,6 +297,98 @@ const ProfilePage: React.FC = () => {
           </div>
         </form>
       </ThemeProvider>
+      <div className={clsx(s.elements__flow)}>
+        <div className={clsx(s.form__element, s.form__element_left)}>
+          <Typography variant="h2" className={s.form__title_size}>
+            3. Shipping Address
+          </Typography>
+        </div>
+        <div className={clsx(s.form__element, s.form__element_flow)}>
+          {user && user.addresses && user.shippingAddressIds
+            ? user.shippingAddressIds.map((id, index) => {
+                const address: ProfileAddress | undefined = user.addresses.find(
+                  (address) => address.id === id
+                );
+                return address !== undefined && address.id === user.defaultShippingAddressId ? (
+                  <ProfileAddressBlock
+                    key={index}
+                    address={address}
+                    indexMap={index}
+                    user={user}
+                    typeAddress={'shipping'}
+                  />
+                ) : null;
+              })
+            : null}
+          {user && user.addresses && user.shippingAddressIds
+            ? user.shippingAddressIds.map((id, index) => {
+                const address: ProfileAddress | undefined = user.addresses.find(
+                  (address) => address.id === id
+                );
+                return address !== undefined && address.id !== user.defaultShippingAddressId ? (
+                  <ProfileAddressBlock
+                    key={index}
+                    address={address}
+                    indexMap={index}
+                    user={user}
+                    typeAddress={'shipping'}
+                  />
+                ) : null;
+              })
+            : null}
+          {user && user.shippingAddressIds?.length === 0 ? (
+            <Typography variant="h4" className={s.dont_have_address_message}>
+              You don&#96;t have a shipping address, would you like to add one?
+            </Typography>
+          ) : null}
+        </div>
+      </div>
+      <div className={clsx(s.elements__flow)}>
+        <div className={clsx(s.form__element, s.form__element_left)}>
+          <Typography variant="h2" className={s.form__title_size}>
+            4. Billing Address
+          </Typography>
+        </div>
+        <div className={clsx(s.form__element, s.form__element_flow)}>
+          {user && user.addresses && user.billingAddressIds
+            ? user.billingAddressIds.map((id, index) => {
+                const address: ProfileAddress | undefined = user.addresses.find(
+                  (address) => address.id === id
+                );
+                return address !== undefined && address.id === user.defaultBillingAddressId ? (
+                  <ProfileAddressBlock
+                    key={index}
+                    address={address}
+                    indexMap={index}
+                    user={user}
+                    typeAddress={'billing'}
+                  />
+                ) : null;
+              })
+            : null}
+          {user && user.addresses && user.billingAddressIds
+            ? user.billingAddressIds.map((id, index) => {
+                const address: ProfileAddress | undefined = user.addresses.find(
+                  (address) => address.id === id
+                );
+                return address !== undefined && address.id !== user.defaultBillingAddressId ? (
+                  <ProfileAddressBlock
+                    key={index}
+                    address={address}
+                    indexMap={index}
+                    user={user}
+                    typeAddress={'billing'}
+                  />
+                ) : null;
+              })
+            : null}
+          {user && user.billingAddressIds?.length === 0 ? (
+            <Typography variant="h4" className={s.dont_have_address_message}>
+              You don&#96;t have a billing address, would you like to add one?
+            </Typography>
+          ) : null}
+        </div>
+      </div>
     </main>
   );
 };
