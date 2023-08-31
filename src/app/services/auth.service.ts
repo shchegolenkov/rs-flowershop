@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-import { CustomerData, RequestPayload } from '../../types/types';
+import { CustomerData, DelAddress, ProfileForm, RequestPayload } from '../../types/types';
 
 const ACC_TOKEN_URL = process.env.CTP_ACCTOKEN_URL as string;
 const REG_USER_URL = process.env.CTP_REGUSER_URL as string;
@@ -175,7 +175,12 @@ type Action =
   | { action: 'changeEmail'; email: string }
   | { action: 'setFirstName'; firstName: string }
   | { action: 'setLastName'; lastName: string }
-  | { action: 'setDateOfBirth'; dateOfBirth: string };
+  | { action: 'setDateOfBirth'; dateOfBirth: string }
+  | {
+      action: 'changeAddress';
+      addressId: string;
+      address: { streetName: string; postalCode: string; country: string; city: string };
+    };
 
 const updateUser = async (data: CustomerData) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
@@ -222,6 +227,149 @@ const updateUser = async (data: CustomerData) => {
   }
 };
 
+const updateUserAddress = async (data: ProfileForm) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const requestPayload = {
+    version: user.version,
+    actions: [
+      {
+        action: 'changeAddress',
+        addressId: data.id,
+        address: {
+          streetName: data.streetName,
+          postalCode: data.postalCode,
+          country: data.country,
+          city: data.city,
+        },
+      },
+    ],
+  };
+
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateBillingAddress = async (data: ProfileForm) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const action = data.shippingBillingAddress ? 'addBillingAddressId' : 'removeBillingAddressId';
+  const requestPayload = {
+    version: user.version,
+    actions: [
+      {
+        action: action,
+        addressId: data.id,
+      },
+    ],
+  };
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateShippingAddress = async (data: ProfileForm) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const action = data.billingShippingAddress ? 'addShippingAddressId' : 'removeShippingAddressId';
+  const requestPayload = {
+    version: user.version,
+    actions: [
+      {
+        action: action,
+        addressId: data.id,
+      },
+    ],
+  };
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const setDefaultShippingAddress = async (data: ProfileForm) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const action = 'setDefaultShippingAddress';
+  const requestPayload = {
+    version: user.version,
+    actions: [
+      {
+        action: action,
+        addressId: data.id,
+      },
+    ],
+  };
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const setDefaultBillingAddress = async (data: ProfileForm) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const action = 'setDefaultBillingAddress';
+  const requestPayload = {
+    version: user.version,
+    actions: [
+      {
+        action: action,
+        addressId: data.id,
+      },
+    ],
+  };
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const removeAddress = async (data: DelAddress) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const requestPayload = {
+    version: user.version,
+    actions: [
+      {
+        action: data.action,
+        addressId: data.id,
+      },
+    ],
+  };
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 const AuthService = {
   registerUser,
   loginUser,
@@ -229,6 +377,12 @@ const AuthService = {
   tokenIntrospection,
   getUser,
   updateUser,
+  updateUserAddress,
+  updateBillingAddress,
+  updateShippingAddress,
+  setDefaultShippingAddress,
+  setDefaultBillingAddress,
+  removeAddress,
 };
 
 export default AuthService;
