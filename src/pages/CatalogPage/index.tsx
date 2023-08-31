@@ -4,6 +4,7 @@ import { Pagination } from '@mui/material';
 import { AppDispatch, RootState } from '../../app/store';
 import { fetchProducts } from '../../app/slices/catalog';
 import CatalogCards from '../../components/UI/CatalogCards';
+import SearchBar from '../../components/UI/SearchBar';
 import s from './CatalogPage.module.scss';
 
 function CatalogPage() {
@@ -23,6 +24,7 @@ function CatalogPage() {
   return (
     <main>
       <div className={s.wrapper}>
+        <SearchBar className={s.search} />
         <CatalogCards className={s.items} />
         <Pagination
           count={totalPages}
