@@ -1,0 +1,98 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+
+.sliderBlock {
+  position: relative;
+  border-right: 1px solid var(--color-black);
+}
+
+.saleBlock {
+  position: absolute;
+  top: 34px;
+  right: 40px;
+  background: rgba($color: #fff, $alpha: 0.3);
+  border-radius: 8px;
+}
+
+.saleText {
+  text-transform: uppercase;
+  padding: 8px 12px;
+}
+
+.contentBlock {
+  height: 100%;
+}
+
+.wrapper {
+  padding: 40px;
+}
+
+.h2 {
+  margin-bottom: 8px;
+}
+
+.h4 {
+  color: var(--color-gray);
+  text-decoration: line-through;
+}
+
+.subtitle {
+  margin-bottom: 8px;
+  color: var(--color-gray);
+}
+
+.sliderImage {
+  background-image: url('../../assets/images/notFoundBg.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.descriptionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 16px 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-gray);
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.priceBlock {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.sizeBlock {
+  display: flex;
+  gap: 6px;
+}
+
+.button {
+  margin: 40px 0;
+}
+
+.contentBlock .breadcrumbs {
+  color: var(--color-black);
+  line-height: inherit;
+  margin-bottom: 24px;
+  font-family: inherit;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.overline {
+  color: var(--color-gray);
+  line-height: initial;
+}
+
+.linkText {
+  color: var(--color-black);
+  line-height: initial;
+}
