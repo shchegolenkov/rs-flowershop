@@ -1,5 +1,7 @@
 import s from './ProductPage.module.scss';
 import { Typography } from '../../components/UI/Typography';
+import { Link } from 'react-router-dom';
+import { Breadcrumbs } from '@mui/material';
 import Button from '../../components/UI/Button';
 
 function ProductPage() {
@@ -16,6 +18,21 @@ function ProductPage() {
         </div>
         <div className={s.contentBlock}>
           <div className={s.wrapper}>
+            <Breadcrumbs className={s.breadcrumbs}>
+              <Link to={'/catalog'} className={s.link}>
+                <Typography variant={'overline'} className={s.linkText}>
+                  Catalog
+                </Typography>
+              </Link>
+              <Link to={'/catalog/fresh-flowers'} className={s.link}>
+                <Typography variant={'overline'} className={s.linkText}>
+                  Fresh flowers
+                </Typography>
+              </Link>
+              <Typography variant={'overline'} className={s.overline}>
+                Rosy Delight
+              </Typography>
+            </Breadcrumbs>
             <Typography variant={'h2'} className={s.h2}>
               Rosy Delight
             </Typography>
