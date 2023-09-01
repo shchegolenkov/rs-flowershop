@@ -35,9 +35,15 @@ export interface ProfileForm extends Address {
   shippingDefaultAddress?: boolean;
   billingDefaultAddress?: boolean;
   id: string;
+  typeAddress?: AddressAction;
 }
 
 export interface ProfileAddress extends Address {
+  id: string;
+}
+
+export interface AddShipBillProperty {
+  typeAddress: string;
   id: string;
 }
 
