@@ -5,27 +5,28 @@ import { Status, IPageQueryResult } from '../../types/types';
 import { RootState } from '../store';
 import { ITEMS_PER_PAGE } from '../../constants/const';
 
-export const fetchProducts = createAsyncThunk(
-  'catalog/allProducts',
-  async (pageNumber: number, thunkAPI) => {
-    try {
-      const state = thunkAPI.getState() as RootState;
-      const query = state.products.query ? state.products.query : '';
-      const response = await CatalogService.getProducts(pageNumber, query);
-      if (response) {
-        return response.data;
-      }
-    } catch (error) {
-      throw thunkAPI.rejectWithValue(error);
+export const fetchProducts = createAsyncThunk('catalog/allProducts', async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState() as RootState;
+    const query = state.products.query;
+    const sort = state.products.sort;
+    const pageNumber = state.products.page;
+    const response = await CatalogService.getProducts(pageNumber, query, sort);
+    if (response) {
+      return response.data;
     }
+  } catch (error) {
+    throw thunkAPI.rejectWithValue(error);
   }
-);
+});
 
 interface CatalogState {
   queryResult: IPageQueryResult | undefined | null;
   status: Status;
   query: string;
   pages: number;
+  page: number;
+  sort: string;
 }
 
 const initialState: CatalogState = {
@@ -33,6 +34,8 @@ const initialState: CatalogState = {
   status: Status.LOADING,
   query: '',
   pages: 1,
+  page: 1,
+  sort: '',
 };
 
 const catalogSlice = createSlice({
@@ -41,6 +44,15 @@ const catalogSlice = createSlice({
   reducers: {
     setQuery: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
+      state.page = 1;
+    },
+    setSort: (state, action: PayloadAction<string>) => {
+      state.sort = action.payload;
+      state.page = 1;
+    },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+      console.log(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -59,10 +71,12 @@ const catalogSlice = createSlice({
       state.status = Status.ERROR;
       state.queryResult = null;
       state.pages = 1;
+      state.page = 1;
+      state.sort = '';
     });
   },
 });
 
 const { reducer, actions } = catalogSlice;
-export const { setQuery } = actions;
+export const { setQuery, setSort, setPage } = actions;
 export default reducer;

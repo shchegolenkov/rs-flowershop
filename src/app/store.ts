@@ -1,8 +1,8 @@
-import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
+import { configureStore, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import authReducer from './slices/auth';
 import messageReducer from './slices/message';
 import profileReducer from './slices/profile';
-import productsReducer, { fetchProducts, setQuery } from './slices/catalog';
+import productsReducer, { fetchProducts, setQuery, setSort, setPage } from './slices/catalog';
 
 const reducer = {
   auth: authReducer,
@@ -14,9 +14,9 @@ const reducer = {
 const listenerMiddleware = createListenerMiddleware();
 
 listenerMiddleware.startListening({
-  actionCreator: setQuery,
-  effect: async (_action, listenerApi) => {
-    listenerApi.dispatch(fetchProducts(1));
+  matcher: isAnyOf(setQuery, setSort, setPage),
+  effect: (_action, listenerApi) => {
+    listenerApi.dispatch(fetchProducts());
   },
 });
 

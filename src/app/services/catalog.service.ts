@@ -28,20 +28,37 @@ const getAccessToken = async () => {
   }
 };
 
-const getProducts = async (pageNumber: number, query = '') => {
+interface IQueryParams {
+  limit: string;
+  offset: string;
+  filter: string | string[];
+  'text.en-US': string;
+  sort?: string;
+}
+
+const getProducts = async (pageNumber: number, query = '', sortQuery = '') => {
   const accessToken = localStorage.getItem('accessToken')
     ? localStorage.getItem('accessToken')
     : await getAccessToken();
   try {
+    const queryParams: IQueryParams = {
+      limit: `${ITEMS_PER_PAGE}`,
+      offset: `${ITEMS_PER_PAGE * pageNumber - ITEMS_PER_PAGE}`,
+      filter: 'variants.prices:exists',
+      'text.en-US': `${query}`,
+    };
+    if (sortQuery) {
+      queryParams.sort = sortQuery;
+    } else if (Object.hasOwn(queryParams, 'sort') && !sortQuery) {
+      delete queryParams.sort;
+    }
     const response = await axios.get<IPageQueryResult>(
       `${API_URL}/${PROJECT_KEY}/product-projections/search`,
       {
         headers: { Authorization: `Bearer ${accessToken}` },
-        params: {
-          limit: ITEMS_PER_PAGE,
-          offset: ITEMS_PER_PAGE * pageNumber - ITEMS_PER_PAGE,
-          filter: 'variants.prices:exists',
-          'text.en-US': `${query}`,
+        params: queryParams,
+        paramsSerializer: {
+          indexes: null,
         },
       }
     );
