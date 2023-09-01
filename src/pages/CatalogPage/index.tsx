@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchProducts } from '../../app/slices/catalog';
+import { fetchProducts, resetCatalogState } from '../../app/slices/catalog';
 import { AppDispatch } from '../../app/store';
 import CatalogCards from '../../components/UI/CatalogCards';
 import CatalogPagination from '../../components/UI/CatalogPagination';
@@ -13,6 +13,9 @@ function CatalogPage() {
 
   useEffect(() => {
     dispatch(fetchProducts());
+    return () => {
+      dispatch(resetCatalogState());
+    };
   }, [dispatch]);
 
   return (

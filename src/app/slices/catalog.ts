@@ -52,7 +52,11 @@ const catalogSlice = createSlice({
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
-      console.log(action.payload);
+    },
+    resetCatalogState: (state) => {
+      state.query = '';
+      state.sort = '';
+      state.page = 1;
     },
   },
   extraReducers: (builder) => {
@@ -78,5 +82,5 @@ const catalogSlice = createSlice({
 });
 
 const { reducer, actions } = catalogSlice;
-export const { setQuery, setSort, setPage } = actions;
+export const { setQuery, setSort, setPage, resetCatalogState } = actions;
 export default reducer;
