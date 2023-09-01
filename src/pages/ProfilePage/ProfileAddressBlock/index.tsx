@@ -246,7 +246,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
     };
 
     return (
-      <div className={s.adress_control}>
+      <div className={s.address_control}>
         <Typography variant="h4" className={s.form__title_size}>
           {message}
         </Typography>
