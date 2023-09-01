@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
-import { CustomerData, User, ProfileForm, DelAddress } from '../../types/types';
+import {
+  CustomerData,
+  User,
+  ProfileForm,
+  DelAddress,
+  AddShipBillProperty,
+} from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
 import AuthService from '../services/auth.service';
 
@@ -134,6 +140,34 @@ export const updateUserAddress = createAsyncThunk(
   }
 );
 
+export const addAddress = createAsyncThunk(
+  'auth/addAddress',
+  async (data: ProfileForm, thunkAPI) => {
+    try {
+      const response = await AuthService.addAddress(data);
+      if (response) {
+        localStorage.setItem(
+          'addAddressId',
+          response.data.addresses[response.data.addresses.length - 1].id
+        );
+        thunkAPI.dispatch(setMessage(response.data.message));
+        return response.data;
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            (error.response.data as { message: string }).message) ||
+          (error as unknown as string) ||
+          error.toString();
+        thunkAPI.dispatch(setMessage(message));
+        return thunkAPI.rejectWithValue(null);
+      }
+    }
+  }
+);
+
 export const updateBillingAddress = createAsyncThunk(
   'auth/updateBillingAddress',
   async (data: ProfileForm, thunkAPI) => {
@@ -163,6 +197,30 @@ export const updateShippingAddress = createAsyncThunk(
   async (data: ProfileForm, thunkAPI) => {
     try {
       const response = await AuthService.updateShippingAddress(data);
+      if (response) {
+        thunkAPI.dispatch(setMessage(response.data.message));
+        return response.data;
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            (error.response.data as { message: string }).message) ||
+          (error as unknown as string) ||
+          error.toString();
+        thunkAPI.dispatch(setMessage(message));
+        return thunkAPI.rejectWithValue(null);
+      }
+    }
+  }
+);
+
+export const addShippingBillingAddresses = createAsyncThunk(
+  'auth/addShippingBillingAddresses',
+  async (data: AddShipBillProperty, thunkAPI) => {
+    try {
+      const response = await AuthService.addShippingBillingAddresses(data);
       if (response) {
         thunkAPI.dispatch(setMessage(response.data.message));
         return response.data;

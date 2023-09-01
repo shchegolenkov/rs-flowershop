@@ -1,7 +1,13 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-import { CustomerData, DelAddress, ProfileForm, RequestPayload } from '../../types/types';
+import {
+  AddShipBillProperty,
+  CustomerData,
+  DelAddress,
+  ProfileForm,
+  RequestPayload,
+} from '../../types/types';
 
 const ACC_TOKEN_URL = process.env.CTP_ACCTOKEN_URL as string;
 const REG_USER_URL = process.env.CTP_REGUSER_URL as string;
@@ -256,6 +262,34 @@ const updateUserAddress = async (data: ProfileForm) => {
   }
 };
 
+const addAddress = async (data: ProfileForm) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const requestPayload = {
+    version: user.version,
+    actions: [
+      {
+        action: 'addAddress',
+        address: {
+          streetName: data.streetName,
+          postalCode: data.postalCode,
+          country: data.country,
+          city: data.city,
+        },
+      },
+    ],
+  };
+
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 const updateBillingAddress = async (data: ProfileForm) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
   const userId = localStorage.getItem('userId') || 'notFoundId';
@@ -284,6 +318,30 @@ const updateShippingAddress = async (data: ProfileForm) => {
   const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
   const action = data.billingShippingAddress ? 'addShippingAddressId' : 'removeShippingAddressId';
+  const requestPayload = {
+    version: user.version,
+    actions: [
+      {
+        action: action,
+        addressId: data.id,
+      },
+    ],
+  };
+  try {
+    return axios.post(`${REG_USER_URL}/${userId}`, requestPayload, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const addShippingBillingAddresses = async (data: AddShipBillProperty) => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const action = data.typeAddress === 'shipping' ? 'addShippingAddressId' : 'addBillingAddressId';
+
   const requestPayload = {
     version: user.version,
     actions: [
@@ -383,6 +441,8 @@ const AuthService = {
   setDefaultShippingAddress,
   setDefaultBillingAddress,
   removeAddress,
+  addAddress,
+  addShippingBillingAddresses,
 };
 
 export default AuthService;
