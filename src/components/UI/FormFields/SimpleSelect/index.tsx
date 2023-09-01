@@ -13,7 +13,7 @@ interface SelectInputProps {
   errors: FieldErrors<CustomerData> | FieldErrors<ProfileForm>;
   label: string;
   id: string;
-  defaultValue: string;
+  defaultValue?: string;
   selectData: SelectData[];
   isEditField?: boolean;
   isDisabled?: boolean;
