@@ -272,7 +272,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
 
   return (
     <ThemeProvider theme={FormTheme}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
         {typeAddress === 'shipping'
           ? shippingAddressIds.includes(address.id)
             ? addressName()
