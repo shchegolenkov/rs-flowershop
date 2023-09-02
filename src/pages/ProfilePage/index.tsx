@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import s from './ProfilePage.module.scss';
 import clsx from 'clsx';
@@ -30,12 +30,14 @@ import {
 import { clearMessage } from '../../app/slices/message';
 import { getUser, updateUser } from '../../app/slices/auth';
 import ProfileAddressBlock from './ProfileAddressBlock';
+import NewAddressBlock from './NewAddressBlock';
 
 const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [formError, setFormError] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = React.useState(true);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -43,6 +45,14 @@ const ProfilePage: React.FC = () => {
   const { message } = useSelector((state: RootState) => state.message);
   const { isDisabledEmail, isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } =
     useSelector((state: RootState) => state.profile);
+
+  const newShippingAddressBlockRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToNewShippingAddressBlockRef = () => {
+    if (newShippingAddressBlockRef.current) {
+      newShippingAddressBlockRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -189,6 +199,13 @@ const ProfilePage: React.FC = () => {
     }
   };
 
+  const handleAddAddress = () => {
+    setIsCancelledAddShippingAddress(!isCancelledAddShippingAddress);
+    setTimeout(() => {
+      scrollToNewShippingAddressBlockRef();
+    }, 0);
+  };
+
   return (
     <main>
       <div className={s.container}>
@@ -299,9 +316,16 @@ const ProfilePage: React.FC = () => {
       </ThemeProvider>
       <div className={clsx(s.elements__flow)}>
         <div className={clsx(s.form__element, s.form__element_left)}>
-          <Typography variant="h2" className={s.form__title_size}>
-            3. Shipping Address
-          </Typography>
+          <div className={s.address_addBtn}>
+            <Typography variant="h2" className={s.form__title_size}>
+              3. Shipping Address
+            </Typography>
+            {isCancelledAddShippingAddress ? (
+              <Button type="submit" variant="primary" onClick={handleAddAddress}>
+                ADD ADDRESS
+              </Button>
+            ) : null}
+          </div>
         </div>
         <div className={clsx(s.form__element, s.form__element_flow)}>
           {user && user.addresses && user.shippingAddressIds
@@ -336,10 +360,19 @@ const ProfilePage: React.FC = () => {
                 ) : null;
               })
             : null}
-          {user && user.shippingAddressIds?.length === 0 ? (
+          {user && user.shippingAddressIds?.length === 0 && isCancelledAddShippingAddress ? (
             <Typography variant="h4" className={s.dont_have_address_message}>
               You don&#96;t have a shipping address, would you like to add one?
             </Typography>
+          ) : null}
+          {user && !isCancelledAddShippingAddress ? (
+            <div ref={newShippingAddressBlockRef}>
+              <NewAddressBlock
+                user={user}
+                typeAddress={'shipping'}
+                setIsCancelledAdd={setIsCancelledAddShippingAddress}
+              />
+            </div>
           ) : null}
         </div>
       </div>
