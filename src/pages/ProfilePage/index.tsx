@@ -334,7 +334,7 @@ const ProfilePage: React.FC = () => {
             <Typography variant="h2" className={s.form__title_size}>
               3. Shipping Address
             </Typography>
-            {isCancelledAddShippingAddress ? (
+            {isCancelledAddShippingAddress && user && user.shippingAddressIds?.length !== 0 ? (
               <Button type="submit" variant="primary" onClick={handleAddShippingAddress}>
                 ADD ADDRESS
               </Button>
@@ -375,9 +375,14 @@ const ProfilePage: React.FC = () => {
               })
             : null}
           {user && user.shippingAddressIds?.length === 0 && isCancelledAddShippingAddress ? (
-            <Typography variant="h4" className={s.dont_have_address_message}>
-              You don&#96;t have a shipping address, would you like to add one?
-            </Typography>
+            <div className={s.address_addBtn}>
+              <Typography variant="h4" className={s.dont_have_address_message}>
+                You don&#96;t have a shipping address, would you like to add one?
+              </Typography>
+              <Button type="submit" variant="primary" onClick={handleAddShippingAddress}>
+                ADD ADDRESS
+              </Button>
+            </div>
           ) : null}
           {user && !isCancelledAddShippingAddress ? (
             <div ref={newShippingAddressBlockRef}>
@@ -396,7 +401,7 @@ const ProfilePage: React.FC = () => {
             <Typography variant="h2" className={s.form__title_size}>
               4. Billing Address
             </Typography>
-            {isCancelledAddBillingAddress ? (
+            {isCancelledAddBillingAddress && user && user.billingAddressIds?.length !== 0 ? (
               <Button type="submit" variant="primary" onClick={handleAddBillingAddress}>
                 ADD ADDRESS
               </Button>
@@ -437,9 +442,14 @@ const ProfilePage: React.FC = () => {
               })
             : null}
           {user && user.billingAddressIds?.length === 0 && isCancelledAddBillingAddress ? (
-            <Typography variant="h4" className={s.dont_have_address_message}>
-              You don&#96;t have a billing address, would you like to add one?
-            </Typography>
+            <div className={s.address_addBtn}>
+              <Typography variant="h4" className={s.dont_have_address_message}>
+                You don&#96;t have a billing address, would you like to add one?
+              </Typography>
+              <Button type="submit" variant="primary" onClick={handleAddBillingAddress}>
+                ADD ADDRESS
+              </Button>
+            </div>
           ) : null}
           {user && !isCancelledAddBillingAddress ? (
             <div ref={newBillingAddressBlockRef}>
