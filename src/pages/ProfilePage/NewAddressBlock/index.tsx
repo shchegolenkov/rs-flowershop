@@ -97,7 +97,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
     if (user) {
       try {
         const response = await dispatch(addAddress(data));
-
+        console.log('ответ сервера', response);
         if (response.meta.requestStatus === 'rejected') {
           setIsSuccess(false);
           return;
