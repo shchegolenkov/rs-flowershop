@@ -38,6 +38,8 @@ const ProfilePage: React.FC = () => {
   const [formError, setFormError] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = React.useState(true);
+  const [isCancelledAddBillingAddress, setIsCancelledAddBillingAddress] = React.useState(true);
+
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -47,10 +49,16 @@ const ProfilePage: React.FC = () => {
     useSelector((state: RootState) => state.profile);
 
   const newShippingAddressBlockRef = useRef<HTMLDivElement | null>(null);
+  const newBillingAddressBlockRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToNewShippingAddressBlockRef = () => {
     if (newShippingAddressBlockRef.current) {
       newShippingAddressBlockRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  const scrollToNewBillingAddressBlockRef = () => {
+    if (newBillingAddressBlockRef.current) {
+      newBillingAddressBlockRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -199,10 +207,16 @@ const ProfilePage: React.FC = () => {
     }
   };
 
-  const handleAddAddress = () => {
+  const handleAddShippingAddress = () => {
     setIsCancelledAddShippingAddress(!isCancelledAddShippingAddress);
     setTimeout(() => {
       scrollToNewShippingAddressBlockRef();
+    }, 0);
+  };
+  const handleAddBillingAddress = () => {
+    setIsCancelledAddBillingAddress(!isCancelledAddBillingAddress);
+    setTimeout(() => {
+      scrollToNewBillingAddressBlockRef();
     }, 0);
   };
 
@@ -321,7 +335,7 @@ const ProfilePage: React.FC = () => {
               3. Shipping Address
             </Typography>
             {isCancelledAddShippingAddress ? (
-              <Button type="submit" variant="primary" onClick={handleAddAddress}>
+              <Button type="submit" variant="primary" onClick={handleAddShippingAddress}>
                 ADD ADDRESS
               </Button>
             ) : null}
@@ -378,9 +392,16 @@ const ProfilePage: React.FC = () => {
       </div>
       <div className={clsx(s.elements__flow)}>
         <div className={clsx(s.form__element, s.form__element_left)}>
-          <Typography variant="h2" className={s.form__title_size}>
-            4. Billing Address
-          </Typography>
+          <div className={s.address_addBtn}>
+            <Typography variant="h2" className={s.form__title_size}>
+              4. Billing Address
+            </Typography>
+            {isCancelledAddBillingAddress ? (
+              <Button type="submit" variant="primary" onClick={handleAddBillingAddress}>
+                ADD ADDRESS
+              </Button>
+            ) : null}
+          </div>
         </div>
         <div className={clsx(s.form__element, s.form__element_flow)}>
           {user && user.addresses && user.billingAddressIds
@@ -415,10 +436,19 @@ const ProfilePage: React.FC = () => {
                 ) : null;
               })
             : null}
-          {user && user.billingAddressIds?.length === 0 ? (
+          {user && user.billingAddressIds?.length === 0 && isCancelledAddBillingAddress ? (
             <Typography variant="h4" className={s.dont_have_address_message}>
               You don&#96;t have a billing address, would you like to add one?
             </Typography>
+          ) : null}
+          {user && !isCancelledAddBillingAddress ? (
+            <div ref={newBillingAddressBlockRef}>
+              <NewAddressBlock
+                user={user}
+                typeAddress={'billing'}
+                setIsCancelledAdd={setIsCancelledAddBillingAddress}
+              />
+            </div>
           ) : null}
         </div>
       </div>
