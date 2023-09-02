@@ -26,16 +26,16 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
     <div className={className}>
       <Typography variant={'h5'}>Sorting by</Typography>
       <ul className={s.group}>
-        {sortOptions.map((option) => (
-          <li key={option.id}>
+        {sortOptions.map(({ id, name, value }) => (
+          <li key={id}>
             <RadioButton
               className={s.radio}
-              name={option.name}
-              value={option.value}
+              name={name}
+              value={value}
               id={'default_option'}
-              checked={sort === `${option.value}`}
-              onChange={(e) => handleChangeValue(e)}
-              disabled={status === Status.LOADING || status === Status.ERROR ? true : false}
+              checked={sort === value}
+              onChange={handleChangeValue}
+              disabled={status === Status.LOADING || status === Status.ERROR}
             />
           </li>
         ))}
