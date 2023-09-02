@@ -375,7 +375,7 @@ const ProfilePage: React.FC = () => {
               })
             : null}
           {user && user.shippingAddressIds?.length === 0 && isCancelledAddShippingAddress ? (
-            <div className={s.address_addBtn}>
+            <div className={clsx(s.address_addBtn, s.add_pb)}>
               <Typography variant="h4" className={s.dont_have_address_message}>
                 You don&#96;t have a shipping address, would you like to add one?
               </Typography>
@@ -408,7 +408,7 @@ const ProfilePage: React.FC = () => {
             ) : null}
           </div>
         </div>
-        <div className={clsx(s.form__element, s.form__element_flow)}>
+        <div className={clsx(s.form__element, s.form__element_flow, s.no__border_bottom)}>
           {user && user.addresses && user.billingAddressIds
             ? user.billingAddressIds.map((id, index) => {
                 const address: ProfileAddress | undefined = user.addresses.find(
@@ -442,7 +442,7 @@ const ProfilePage: React.FC = () => {
               })
             : null}
           {user && user.billingAddressIds?.length === 0 && isCancelledAddBillingAddress ? (
-            <div className={s.address_addBtn}>
+            <div className={clsx(s.address_addBtn, s.add_pb)}>
               <Typography variant="h4" className={s.dont_have_address_message}>
                 You don&#96;t have a billing address, would you like to add one?
               </Typography>
