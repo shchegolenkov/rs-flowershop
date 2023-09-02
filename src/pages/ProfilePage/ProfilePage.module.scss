@@ -153,6 +153,13 @@
   border-bottom: none !important;
 }
 
+.no__border_bottom_billing {
+  border-bottom: none !important;
+  @include media-tablet {
+    border-bottom: 1px solid var(--color-black) !important;
+  }
+}
+
 .two__items_container {
   width: 100%;
   display: flex;
@@ -209,3 +216,4 @@
 .hr {
   padding: 50px 10%;
 }
+

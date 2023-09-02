@@ -396,7 +396,7 @@ const ProfilePage: React.FC = () => {
         </div>
       </div>
       <div className={clsx(s.elements__flow)}>
-        <div className={clsx(s.form__element, s.form__element_left)}>
+        <div className={clsx(s.form__element, s.form__element_left, s.no__border_bottom_billing)}>
           <div className={s.address_addBtn}>
             <Typography variant="h2" className={s.form__title_size}>
               4. Billing Address
