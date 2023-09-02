@@ -207,7 +207,6 @@ const ProfilePage: React.FC = () => {
       });
     }
   };
-
   const handleAddShippingAddress = () => {
     setIsCancelledAddShippingAddress(!isCancelledAddShippingAddress);
     setTimeout(() => {
@@ -350,7 +349,7 @@ const ProfilePage: React.FC = () => {
                 );
                 return address !== undefined && address.id === user.defaultShippingAddressId ? (
                   <ProfileAddressBlock
-                    key={index}
+                    key={address.id}
                     address={address}
                     indexMap={index}
                     user={user}
@@ -366,7 +365,7 @@ const ProfilePage: React.FC = () => {
                 );
                 return address !== undefined && address.id !== user.defaultShippingAddressId ? (
                   <ProfileAddressBlock
-                    key={index}
+                    key={address.id}
                     address={address}
                     indexMap={index}
                     user={user}
@@ -417,7 +416,7 @@ const ProfilePage: React.FC = () => {
                 );
                 return address !== undefined && address.id === user.defaultBillingAddressId ? (
                   <ProfileAddressBlock
-                    key={index}
+                    key={address.id}
                     address={address}
                     indexMap={index}
                     user={user}
@@ -433,7 +432,7 @@ const ProfilePage: React.FC = () => {
                 );
                 return address !== undefined && address.id !== user.defaultBillingAddressId ? (
                   <ProfileAddressBlock
-                    key={index}
+                    key={address.id}
                     address={address}
                     indexMap={index}
                     user={user}
