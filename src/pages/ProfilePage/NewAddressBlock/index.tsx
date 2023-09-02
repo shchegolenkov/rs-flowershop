@@ -8,13 +8,13 @@ import { countries } from '../../../constants/const';
 
 import { AddressAction, ProfileForm, User } from '../../../types/types';
 
+import { getUser } from '../../../app/slices/auth';
 import {
-  getUser,
   setDefaultShippingAddress,
   setDefaultBillingAddress,
   addAddress,
   addShippingBillingAddresses,
-} from '../../../app/slices/auth';
+} from '../../../app/slices/profile';
 import { clearMessage } from '../../../app/slices/message';
 
 import FormTheme from '../../../themes/FormTheme';
@@ -97,7 +97,6 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
     if (user) {
       try {
         const response = await dispatch(addAddress(data));
-        console.log('ответ сервера', response);
         if (response.meta.requestStatus === 'rejected') {
           setIsSuccess(false);
           return;

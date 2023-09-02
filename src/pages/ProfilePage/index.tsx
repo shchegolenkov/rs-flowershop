@@ -28,7 +28,8 @@ import {
   setIsDisabledEmail,
 } from '../../app/slices/profile';
 import { clearMessage } from '../../app/slices/message';
-import { getUser, updateUser } from '../../app/slices/auth';
+import { getUser } from '../../app/slices/auth';
+import { updateUser } from '../../app/slices/profile';
 import ProfileAddressBlock from './ProfileAddressBlock';
 import NewAddressBlock from './NewAddressBlock';
 

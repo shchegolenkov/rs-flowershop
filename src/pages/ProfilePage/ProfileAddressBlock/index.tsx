@@ -9,15 +9,15 @@ import { countries } from '../../../constants/const';
 import { AddressAction, ProfileAddress, ProfileForm, User } from '../../../types/types';
 import ProfileEditBlock from '../ProfileEditBlock';
 
+import { getUser } from '../../../app/slices/auth';
 import {
-  getUser,
   updateUserAddress,
   updateBillingAddress,
   updateShippingAddress,
   setDefaultShippingAddress,
   setDefaultBillingAddress,
   removeAddress,
-} from '../../../app/slices/auth';
+} from '../../../app/slices/profile';
 import { clearMessage } from '../../../app/slices/message';
 
 import FormTheme from '../../../themes/FormTheme';
@@ -61,16 +61,16 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
 
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(
     billingAddressIds.includes(address.id)
-  ); //set is billing address
+  );
   const [checkedBillShipAddress, setCheckedBillShipAddress] = React.useState(
     shippingAddressIds.includes(address.id)
-  ); //set is shipping address
+  );
   const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(
     defInitStateDefShippingAddress
-  ); //ship def add
+  );
   const [checkedBillDefAddress, setCheckedBillDefAddress] = React.useState(
     defInitStateDefBillAddress
-  ); //bill def add
+  );
 
   const disabledAllFields = () => {
     setIsDisabledAddress(true);
