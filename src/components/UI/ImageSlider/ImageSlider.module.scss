@@ -20,7 +20,7 @@
   padding: 15px;
 }
 
-.button_num {
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,15 +32,24 @@
   cursor: pointer;
   transition: 0.3s;
 
-  &:hover,
-  &:focus {
+  &_num_active {
+    border-color: var(--color-light-black);
+  }
+
+  &:hover {
     &:not(.button_num_active) {
       background-color: var(--color-light-gray);
       border-color: var(--color-light-gray);
     }
   }
-}
 
-.button_num_active {
-  border-color: var(--color-light-black);
+  &_num {
+    &:hover,
+    &:focus {
+      &:not(.button_num_active) {
+        background-color: var(--color-light-gray);
+        border-color: var(--color-light-gray);
+      }
+    }
+  }
 }

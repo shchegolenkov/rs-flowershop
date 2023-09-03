@@ -27,6 +27,18 @@ function ImageSlider({ className }: IImageSlider) {
     setCurrentIndex(slideIndex);
   };
 
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? data.images.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === data.images.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
   return (
     <div className={clsx(s.slider, className)}>
       <div
@@ -34,17 +46,45 @@ function ImageSlider({ className }: IImageSlider) {
         className={s.image_block}
       ></div>
       <div className={s.buttons_panel}>
+        <button className={s.button} onClick={prevSlide}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M15.41 16.58L10.83 12L15.41 7.41L14 6L8 12L14 18L15.41 16.58Z"
+              fill="#121212"
+            />
+          </svg>
+        </button>
         {data.images.map((slide, slideIndex) => (
           <button
             key={slideIndex}
             onClick={() => goToSlide(slideIndex)}
-            className={clsx(s.button_num, {
+            className={clsx(s.button, s.button_num, {
               [s.button_num_active]: slideIndex === currentIndex,
             })}
           >
             {slideIndex + 1}
           </button>
         ))}
+        <button className={s.button} onClick={nextSlide}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M8.58984 16.58L13.1698 12L8.58984 7.41L9.99984 6L15.9998 12L9.99984 18L8.58984 16.58Z"
+              fill="#121212"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );
