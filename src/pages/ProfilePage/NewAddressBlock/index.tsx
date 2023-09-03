@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import s from '../ProfilePage.module.scss';
 
@@ -42,13 +42,13 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { message } = useSelector((state: RootState) => state.message);
-  const [formError, setFormError] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [formError, setFormError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
-  const [checkedBillShipAddress, setCheckedBillShipAddress] = React.useState(false);
-  const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(false);
-  const [checkedBillDefAddress, setCheckedBillDefAddress] = React.useState(false);
+  const [checkedShipBillAddress, setCheckedShipBillAddress] = useState(false);
+  const [checkedBillShipAddress, setCheckedBillShipAddress] = useState(false);
+  const [checkedShipDefAddress, setCheckedShipDefAddress] = useState(false);
+  const [checkedBillDefAddress, setCheckedBillDefAddress] = useState(false);
 
   const schema = yup.object().shape({
     streetName: yup

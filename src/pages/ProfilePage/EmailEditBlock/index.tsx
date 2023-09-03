@@ -24,7 +24,7 @@ const EmailForm: React.FC = () => {
   const [emailError, setEmailError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [cancelSubmit, setCancelSubmit] = useState(false);
-  const [formError, setFormError] = React.useState(false);
+  const [formError, setFormError] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();

@@ -33,10 +33,10 @@ import EmailForm from './EmailEditBlock';
 
 const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);
-  const [formError, setFormError] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
-  const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = React.useState(true);
-  const [isCancelledAddBillingAddress, setIsCancelledAddBillingAddress] = React.useState(true);
+  const [formError, setFormError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = useState(true);
+  const [isCancelledAddBillingAddress, setIsCancelledAddBillingAddress] = useState(true);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();

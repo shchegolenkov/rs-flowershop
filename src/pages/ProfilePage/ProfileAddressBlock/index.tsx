@@ -51,9 +51,9 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
   const dispatch = useDispatch<AppDispatch>();
   const { message } = useSelector((state: RootState) => state.message);
   const [cancelSubmit, setCancelSubmit] = useState(false);
-  const [formError, setFormError] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
-  const [isDisabledAddress, setIsDisabledAddress] = React.useState(true);
+  const [formError, setFormError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isDisabledAddress, setIsDisabledAddress] = useState(true);
 
   const switchEditModeField = () => {
     setIsDisabledAddress(!isDisabledAddress);
