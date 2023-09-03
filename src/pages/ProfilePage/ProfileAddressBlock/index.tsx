@@ -204,7 +204,24 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
         }
       })
       .then(() => {
+        if (typeAddress === 'shipping' && !user.billingAddressIds.includes(address.id)) {
+          const newData = {
+            id: address.id,
+            action: 'removeAddress',
+          };
+          dispatch(removeAddress(newData));
+        }
+        if (typeAddress === 'billing' && !user.shippingAddressIds.includes(address.id)) {
+          const newData = {
+            id: address.id,
+            action: 'removeAddress',
+          };
+          dispatch(removeAddress(newData));
+        }
+      })
+      .then(() => {
         setTimeout(() => {
+          dispatch(getUser());
           dispatch(clearMessage());
           setIsSuccess(false);
           disabledAllFields();
