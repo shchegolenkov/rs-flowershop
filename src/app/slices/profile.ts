@@ -1,7 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { CustomerData, ProfileForm, DelAddress, AddShipBillProperty } from '../../types/types';
+import {
+  CustomerData,
+  ProfileForm,
+  DelAddress,
+  AddShipBillProperty,
+  ChangePassword,
+} from '../../types/types';
 
 import ProfileService from '../services/profile.service';
 import { setMessage } from './message';
@@ -148,6 +154,21 @@ export const removeAddress = createAsyncThunk(
   async (data: DelAddress, thunkAPI) => {
     try {
       const response = await ProfileService.removeAddress(data);
+      if (response) {
+        thunkAPI.dispatch(setMessage(response.data.message));
+        return response.data;
+      }
+    } catch (error) {
+      getErrorMessage(error, thunkAPI);
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk(
+  'profile/changePassword',
+  async (data: ChangePassword, thunkAPI) => {
+    try {
+      const response = await ProfileService.changePassword(data);
       if (response) {
         thunkAPI.dispatch(setMessage(response.data.message));
         return response.data;

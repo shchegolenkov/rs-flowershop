@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-import { AddShipBillProperty, CustomerData, DelAddress, ProfileForm } from '../../types/types';
+import {
+  AddShipBillProperty,
+  ChangePassword,
+  CustomerData,
+  DelAddress,
+  ProfileForm,
+} from '../../types/types';
 import dayjs from 'dayjs';
 
 const REG_USER_URL = process.env.CTP_REGUSER_URL as string;
@@ -256,6 +262,36 @@ const updateShippingAddress = async (data: ProfileForm) => {
   }
 };
 
+interface ChangePasswordPayload {
+  id: string;
+  version: string;
+  currentPassword: string;
+  newPassword: string;
+}
+
+const changePassword = async (data: ChangePassword) => {
+  try {
+    const accessToken = localStorage.getItem('accessToken');
+    const user = JSON.parse(localStorage.getItem('user') as string);
+    const resetPasswordUrl = `${REG_USER_URL}/password`;
+
+    if (accessToken && user) {
+      const requestPayload: ChangePasswordPayload = {
+        id: user.id,
+        version: user.version,
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      };
+
+      return axios.post(resetPasswordUrl, requestPayload, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 const ProfileService = {
   setDefaultShippingAddress,
   setDefaultBillingAddress,
@@ -266,6 +302,7 @@ const ProfileService = {
   updateUserAddress,
   updateBillingAddress,
   updateShippingAddress,
+  changePassword,
 };
 
 export default ProfileService;
