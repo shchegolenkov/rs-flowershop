@@ -5,6 +5,19 @@ import { CustomerData, User } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
 import AuthService from '../services/auth.service';
 
+const getErrorMessage = (error, thunkAPI) => {
+  if (axios.isAxiosError(error)) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        (error.response.data as { message: string }).message) ||
+      (error as unknown as string) ||
+      error.toString();
+    thunkAPI.dispatch(setMessage(message));
+    return thunkAPI.rejectWithValue(null);
+  }
+};
+
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (data: CustomerData, thunkAPI) => {
@@ -15,16 +28,7 @@ export const registerUser = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -40,16 +44,7 @@ export const loginUser = createAsyncThunk(
         return response.data.customer;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );

@@ -6,6 +6,19 @@ import { CustomerData, ProfileForm, DelAddress, AddShipBillProperty } from '../.
 import ProfileService from '../services/profile.service';
 import { setMessage } from './message';
 
+const getErrorMessage = (error, thunkAPI) => {
+  if (axios.isAxiosError(error)) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        (error.response.data as { message: string }).message) ||
+      (error as unknown as string) ||
+      error.toString();
+    thunkAPI.dispatch(setMessage(message));
+    return thunkAPI.rejectWithValue(null);
+  }
+};
+
 export const updateUser = createAsyncThunk(
   'profile/updateUser',
   async (data: CustomerData, thunkAPI) => {
@@ -16,16 +29,7 @@ export const updateUser = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -40,16 +44,7 @@ export const updateUserAddress = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -68,16 +63,7 @@ export const addAddress = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -92,16 +78,7 @@ export const updateBillingAddress = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -116,16 +93,7 @@ export const updateShippingAddress = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -140,16 +108,7 @@ export const addShippingBillingAddresses = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -164,16 +123,7 @@ export const setDefaultShippingAddress = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -188,16 +138,7 @@ export const setDefaultBillingAddress = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -212,16 +153,7 @@ export const removeAddress = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
