@@ -85,26 +85,22 @@ const EmailForm: React.FC = () => {
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
 
-  const onSubmit = (data: CustomerData) => {
+  const onSubmit = async (data: CustomerData) => {
     if (user) {
-      dispatch(updateUser(data))
-        .then((response) => {
-          if (response.meta.requestStatus === 'rejected') {
-            setIsSuccess(false);
-          } else {
-            setIsSuccess(true);
-          }
-        })
-        .then(() => {
-          dispatch(getUser());
-        })
-        .then(() => {
-          setTimeout(() => {
-            dispatch(clearMessage());
-            dispatch(setIsDisabledEmail());
-            setIsSuccess(false);
-          }, 4000);
-        });
+      try {
+        const response = await dispatch(updateUser(data));
+        if (!response.payload) {
+          setIsSuccess(false);
+          return;
+        }
+        setIsSuccess(true);
+        await dispatch(getUser());
+        setTimeout(() => {
+          dispatch(clearMessage());
+          dispatch(setIsDisabledEmail());
+          setIsSuccess(false);
+        }, 3000);
+      } catch (error) {}
     }
   };
 
