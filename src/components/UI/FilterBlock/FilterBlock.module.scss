@@ -6,7 +6,7 @@
 
 .group,
 .button {
-  margin: 32px 0;
+  margin: 20px 0;
 }
 
 .input {
@@ -16,4 +16,8 @@
 .block {
   display: flex;
   flex-direction: column;
+}
+
+.title {
+  margin-top: 32px;
 }

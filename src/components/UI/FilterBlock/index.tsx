@@ -84,10 +84,11 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
       onSubmit={handleSubmit}
       onReset={handleReset}
     >
+      <Typography variant={'h5'} className={s.title}>
+        Filter by
+      </Typography>
       <div className={s.group}>
-        <Typography variant={'h5'} className={s.title}>
-          Size
-        </Typography>
+        <Typography variant={'h6'}>Size</Typography>
         {sizeOptions.map(({ name, value, text }) => (
           <Checkbox
             key={value}
@@ -100,9 +101,7 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
         ))}
       </div>
       <div className={s.group}>
-        <Typography variant={'h5'} className={s.title}>
-          Price
-        </Typography>
+        <Typography variant={'h6'}>Price</Typography>
         {priceOptions.map(({ name, value, text }) => (
           <Checkbox
             key={value}
@@ -115,9 +114,7 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
         ))}
       </div>
       <div className={s.group}>
-        <Typography variant={'h5'} className={s.title}>
-          Price
-        </Typography>
+        <Typography variant={'h6'}>Special offers</Typography>
         <Checkbox
           className={s.input}
           name={'discount'}
