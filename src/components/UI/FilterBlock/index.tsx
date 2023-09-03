@@ -74,7 +74,7 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
     { name: 'price', value: '(* to 3000)', text: 'Up to 30 €' },
     { name: 'price', value: '(* to 5000)', text: 'Up to 50 €' },
     { name: 'price', value: '(* to 10000)', text: 'Up to 100 €' },
-    { name: 'price', value: '(10000 to *)', text: 'More than 100 €' },
+    { name: 'price', value: '(10001 to *)', text: 'From 100 €' },
   ];
 
   return (
