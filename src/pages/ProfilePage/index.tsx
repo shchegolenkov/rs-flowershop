@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import s from './ProfilePage.module.scss';
 import clsx from 'clsx';
 
 import { Typography } from '../../components/UI/Typography';
 import ProfileEditBlock from './ProfileEditBlock/';
-import EmailInput from '../../components/UI/FormFields/EmailInput';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import Button from '../../components/UI/Button';
-import { validateEmail } from '../../utils/validators';
-import { CustomerData } from '../../types/types';
+import { CustomerData, ProfileAddress } from '../../types/types';
 
 import FormTheme from '../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
@@ -25,23 +23,43 @@ import {
   setIsDisabledLastName,
   setIsDisabledDateOfBirth,
   setDisabledAllFields,
-  setIsDisabledEmail,
 } from '../../app/slices/profile';
 import { clearMessage } from '../../app/slices/message';
-import { getUser, updateUser } from '../../app/slices/auth';
+import { getUser } from '../../app/slices/auth';
+import { updateUser } from '../../app/slices/profile';
+import ProfileAddressBlock from './ProfileAddressBlock';
+import NewAddressBlock from './NewAddressBlock';
+import EmailForm from './EmailEditBlock';
 
 const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [formError, setFormError] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [formError, setFormError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = useState(true);
+  const [isCancelledAddBillingAddress, setIsCancelledAddBillingAddress] = useState(true);
+
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
   const { message } = useSelector((state: RootState) => state.message);
-  const { isDisabledEmail, isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } =
-    useSelector((state: RootState) => state.profile);
+  const { isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } = useSelector(
+    (state: RootState) => state.profile
+  );
+
+  const newShippingAddressBlockRef = useRef<HTMLDivElement | null>(null);
+  const newBillingAddressBlockRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToNewShippingAddressBlockRef = () => {
+    if (newShippingAddressBlockRef.current) {
+      newShippingAddressBlockRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  const scrollToNewBillingAddressBlockRef = () => {
+    if (newBillingAddressBlockRef.current) {
+      newBillingAddressBlockRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -63,22 +81,6 @@ const ProfilePage: React.FC = () => {
   const minDate = new Date(1900, 1, 1);
 
   const schema = yup.object().shape({
-    email: isDisabledEmail
-      ? yup.string()
-      : yup
-          .string()
-          .required('Email is required.')
-          .email('Invalid email (e.g., example@example.com)')
-          .matches(/^[^@]+@[^.]+\..+$/, 'Email should contain a dot in the domain')
-          .test('custom-email-validation', `${emailError}`, (value) => {
-            return validateEmail(value as string, setEmailError);
-          })
-          .test('not-default-email', 'Email should not be the previous value', (value) => {
-            if (user) {
-              return value !== user.email;
-            }
-          }),
-
     firstName: isDisabledFirstName
       ? yup.string()
       : yup
@@ -108,11 +110,26 @@ const ProfilePage: React.FC = () => {
     register,
     handleSubmit,
     reset,
+    setFocus,
     formState: { errors },
   } = useForm<CustomerData>({
     resolver: yupResolver(schema) as unknown as Resolver<CustomerData>,
-    mode: 'onChange',
+    defaultValues: {
+      password: user ? user.password : '',
+      firstName: user ? user.firstName : '',
+      lastName: user ? user.lastName : '',
+    },
+    mode: 'onTouched',
   } as UseFormProps<CustomerData>);
+
+  useEffect(() => {
+    if (!isDisabledFirstName) {
+      setFocus('firstName');
+    }
+    if (!isDisabledLastName) {
+      setFocus('lastName');
+    }
+  }, [setFocus, isDisabledFirstName, isDisabledLastName]);
 
   const onSubmit = (data: CustomerData) => {
     if (user) {
@@ -138,7 +155,7 @@ const ProfilePage: React.FC = () => {
 
   const onClickSubmit = () => {
     setFormError(false);
-    if (errors.email || errors.firstName || errors.lastName || errors.dateOfBirth) {
+    if (errors.firstName || errors.lastName || errors.dateOfBirth || errors.addresses) {
       setFormError(true);
     }
   };
@@ -151,13 +168,6 @@ const ProfilePage: React.FC = () => {
     reset({
       dateOfBirth: user && user.dateOfBirth ? new Date(user.dateOfBirth) : undefined,
     });
-  };
-
-  const handleEmailClick = () => {
-    dispatch(setIsDisabledEmail());
-    if (!isDisabledEmail) {
-      reset({ email: user ? user.email : '' });
-    }
   };
 
   const handleFirstNameClick = () => {
@@ -181,6 +191,18 @@ const ProfilePage: React.FC = () => {
       });
     }
   };
+  const handleAddShippingAddress = () => {
+    setIsCancelledAddShippingAddress(!isCancelledAddShippingAddress);
+    setTimeout(() => {
+      scrollToNewShippingAddressBlockRef();
+    }, 0);
+  };
+  const handleAddBillingAddress = () => {
+    setIsCancelledAddBillingAddress(!isCancelledAddBillingAddress);
+    setTimeout(() => {
+      scrollToNewBillingAddressBlockRef();
+    }, 0);
+  };
 
   return (
     <main>
@@ -192,46 +214,18 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
       </div>
+      <div className={clsx(s.elements__flow)}>
+        <div className={clsx(s.form__element, s.form__element_left)}>
+          <Typography variant="h2" className={s.form__title_size}>
+            1. Account Info
+          </Typography>
+        </div>
+        <div className={clsx(s.form__element, s.form__element_flow)}>
+          <EmailForm key={'email-form'} />
+        </div>
+      </div>
       <ThemeProvider theme={FormTheme}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={clsx(s.elements__flow)}>
-            <div className={clsx(s.form__element, s.form__element_left)}>
-              <Typography variant="h2" className={s.form__title_size}>
-                1. Account Info
-              </Typography>
-            </div>
-            <div className={clsx(s.form__element, s.form__element_flow)}>
-              <EmailInput
-                register={register}
-                errors={errors}
-                defaultValue={user ? user.email : ''}
-                isEditField={true}
-                isDisabled={isDisabledEmail}
-                switchEditModeField={handleEmailClick}
-              />
-              <Button
-                full={true}
-                type="button"
-                variant="secondary"
-                onClick={() => {
-                  const path = '/password';
-                  navigate(path);
-                }}
-                className={s.change_password_btn}
-              >
-                CHANGE PASSWORD
-              </Button>
-              {!isDisabledEmail ? (
-                <ProfileEditBlock
-                  onClickSubmit={onClickSubmit}
-                  onClickCancel={onClickCancel}
-                  formError={formError}
-                  isSuccess={isSuccess}
-                  message={message}
-                />
-              ) : null}
-            </div>
-          </div>
           <div className={clsx(s.elements__flow)}>
             <div className={clsx(s.form__element, s.form__element_left)}>
               <Typography variant="h2" className={s.form__title_size}>
@@ -290,6 +284,140 @@ const ProfilePage: React.FC = () => {
           </div>
         </form>
       </ThemeProvider>
+      <div className={clsx(s.elements__flow)}>
+        <div className={clsx(s.form__element, s.form__element_left)}>
+          <div className={s.address_addBtn}>
+            <Typography variant="h2" className={s.form__title_size}>
+              3. Shipping Address
+            </Typography>
+            {isCancelledAddShippingAddress && user && user.shippingAddressIds?.length !== 0 ? (
+              <Button type="submit" variant="primary" onClick={handleAddShippingAddress}>
+                ADD ADDRESS
+              </Button>
+            ) : null}
+          </div>
+        </div>
+        <div className={clsx(s.form__element, s.form__element_flow)}>
+          {user && user.addresses && user.shippingAddressIds
+            ? user.shippingAddressIds.map((id, index) => {
+                const address: ProfileAddress | undefined = user.addresses.find(
+                  (address) => address.id === id
+                );
+                return address !== undefined && address.id === user.defaultShippingAddressId ? (
+                  <ProfileAddressBlock
+                    key={address.id}
+                    address={address}
+                    indexMap={index}
+                    user={user}
+                    typeAddress={'shipping'}
+                  />
+                ) : null;
+              })
+            : null}
+          {user && user.addresses && user.shippingAddressIds
+            ? user.shippingAddressIds.map((id, index) => {
+                const address: ProfileAddress | undefined = user.addresses.find(
+                  (address) => address.id === id
+                );
+                return address !== undefined && address.id !== user.defaultShippingAddressId ? (
+                  <ProfileAddressBlock
+                    key={address.id}
+                    address={address}
+                    indexMap={index}
+                    user={user}
+                    typeAddress={'shipping'}
+                  />
+                ) : null;
+              })
+            : null}
+          {user && user.shippingAddressIds?.length === 0 && isCancelledAddShippingAddress ? (
+            <div className={clsx(s.address_addBtn, s.add_pb)}>
+              <Typography variant="h4" className={s.dont_have_address_message}>
+                You don&#96;t have a shipping address, would you like to add one?
+              </Typography>
+              <Button type="submit" variant="primary" onClick={handleAddShippingAddress}>
+                ADD ADDRESS
+              </Button>
+            </div>
+          ) : null}
+          {user && !isCancelledAddShippingAddress ? (
+            <div ref={newShippingAddressBlockRef} className={s.width_full}>
+              <NewAddressBlock
+                user={user}
+                typeAddress={'shipping'}
+                setIsCancelledAdd={setIsCancelledAddShippingAddress}
+              />
+            </div>
+          ) : null}
+        </div>
+      </div>
+      <div className={clsx(s.elements__flow)}>
+        <div className={clsx(s.form__element, s.form__element_left, s.no__border_bottom_billing)}>
+          <div className={s.address_addBtn}>
+            <Typography variant="h2" className={s.form__title_size}>
+              4. Billing Address
+            </Typography>
+            {isCancelledAddBillingAddress && user && user.billingAddressIds?.length !== 0 ? (
+              <Button type="submit" variant="primary" onClick={handleAddBillingAddress}>
+                ADD ADDRESS
+              </Button>
+            ) : null}
+          </div>
+        </div>
+        <div className={clsx(s.form__element, s.form__element_flow, s.no__border_bottom)}>
+          {user && user.addresses && user.billingAddressIds
+            ? user.billingAddressIds.map((id, index) => {
+                const address: ProfileAddress | undefined = user.addresses.find(
+                  (address) => address.id === id
+                );
+                return address !== undefined && address.id === user.defaultBillingAddressId ? (
+                  <ProfileAddressBlock
+                    key={address.id}
+                    address={address}
+                    indexMap={index}
+                    user={user}
+                    typeAddress={'billing'}
+                  />
+                ) : null;
+              })
+            : null}
+          {user && user.addresses && user.billingAddressIds
+            ? user.billingAddressIds.map((id, index) => {
+                const address: ProfileAddress | undefined = user.addresses.find(
+                  (address) => address.id === id
+                );
+                return address !== undefined && address.id !== user.defaultBillingAddressId ? (
+                  <ProfileAddressBlock
+                    key={address.id}
+                    address={address}
+                    indexMap={index}
+                    user={user}
+                    typeAddress={'billing'}
+                  />
+                ) : null;
+              })
+            : null}
+          {user && user.billingAddressIds?.length === 0 && isCancelledAddBillingAddress ? (
+            <div className={clsx(s.address_addBtn, s.add_pb)}>
+              <Typography variant="h4" className={s.dont_have_address_message}>
+                You don&#96;t have a billing address, would you like to add one?
+              </Typography>
+              <Button type="submit" variant="primary" onClick={handleAddBillingAddress}>
+                ADD ADDRESS
+              </Button>
+            </div>
+          ) : null}
+          {user && !isCancelledAddBillingAddress ? (
+            <div ref={newBillingAddressBlockRef} className={s.width_full}>
+              <NewAddressBlock
+                user={user}
+                typeAddress={'billing'}
+                setIsCancelledAdd={setIsCancelledAddBillingAddress}
+              />
+            </div>
+          ) : null}
+        </div>
+      </div>
     </main>
   );
 };

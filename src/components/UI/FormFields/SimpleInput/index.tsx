@@ -3,14 +3,14 @@ import TextField from '@mui/material/TextField';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
 import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
-import { CustomerData } from '../../../../types/types';
+import { CustomerData, ProfileForm } from '../../../../types/types';
 import EditIco from '../../../../assets/svg/edit.svg';
 import EditIcoActive from '../../../../assets/svg/editActive.svg';
 import EditIcoErr from '../../../../assets/svg/editErr.svg';
 
 interface SimpleInputProps {
-  register: UseFormRegister<CustomerData>;
-  name: keyof CustomerData;
+  register: UseFormRegister<CustomerData> | UseFormRegister<ProfileForm>;
+  name: keyof CustomerData | keyof ProfileForm;
   err: FieldError | undefined;
   errMessage: string | undefined;
   errors: FieldErrors<CustomerData>;
@@ -20,6 +20,7 @@ interface SimpleInputProps {
   isEditField?: boolean;
   isDisabled?: boolean;
   switchEditModeField?: () => void;
+  isAddressField?: boolean;
 }
 
 const SimpleInput: React.FC<SimpleInputProps> = ({
@@ -33,12 +34,13 @@ const SimpleInput: React.FC<SimpleInputProps> = ({
   isEditField,
   isDisabled,
   switchEditModeField,
+  isAddressField,
 }) => {
   return (
     <div className={s.edit__field_container}>
       <div className={s.form__field_size}>
         <TextField
-          disabled={isEditField ? isDisabled : false}
+          disabled={isEditField && isDisabled !== undefined ? isDisabled : false}
           defaultValue={defaultValue}
           fullWidth
           label={label}
@@ -56,7 +58,7 @@ const SimpleInput: React.FC<SimpleInputProps> = ({
           }
         />
       </div>
-      {isEditField ? (
+      {isEditField && isAddressField === undefined ? (
         <button type="button" onClick={!errMessage ? switchEditModeField : undefined}>
           {isDisabled ? (
             <EditIco />

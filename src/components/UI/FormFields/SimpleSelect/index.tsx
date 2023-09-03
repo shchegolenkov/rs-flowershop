@@ -3,18 +3,20 @@ import TextField from '@mui/material/TextField';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
 import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
-import { CustomerData } from '../../../../types/types';
+import { CustomerData, ProfileForm } from '../../../../types/types';
 
 interface SelectInputProps {
-  register: UseFormRegister<CustomerData>;
-  name: keyof CustomerData;
+  register: UseFormRegister<CustomerData> | UseFormRegister<ProfileForm>;
+  name: keyof CustomerData | keyof ProfileForm;
   err: FieldError | undefined;
   errMessage: string | undefined;
-  errors: FieldErrors<CustomerData>;
+  errors: FieldErrors<CustomerData> | FieldErrors<ProfileForm>;
   label: string;
   id: string;
-  defaultValue: string;
+  defaultValue?: string;
   selectData: SelectData[];
+  isEditField?: boolean;
+  isDisabled?: boolean;
 }
 
 interface SelectData {
@@ -31,10 +33,13 @@ const SimpleSelect: React.FC<SelectInputProps> = ({
   id,
   selectData,
   defaultValue,
+  isEditField,
+  isDisabled,
 }) => {
   return (
     <div className={s.form__field_size_select}>
       <TextField
+        disabled={isEditField && isDisabled !== undefined ? isDisabled : false}
         fullWidth
         id={id}
         select

@@ -1,9 +1,22 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
-import { CustomerData } from '../../types/types';
+import { CustomerData, User } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
 import AuthService from '../services/auth.service';
+
+const getErrorMessage = (error, thunkAPI) => {
+  if (axios.isAxiosError(error)) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        (error.response.data as { message: string }).message) ||
+      (error as unknown as string) ||
+      error.toString();
+    thunkAPI.dispatch(setMessage(message));
+    return thunkAPI.rejectWithValue(null);
+  }
+};
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
@@ -15,16 +28,7 @@ export const registerUser = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -40,16 +44,7 @@ export const loginUser = createAsyncThunk(
         return response.data.customer;
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
+      getErrorMessage(error, thunkAPI);
     }
   }
 );
@@ -86,33 +81,9 @@ export const getUser = createAsyncThunk('auth/getUser', async () => {
   }
 });
 
-export const updateUser = createAsyncThunk(
-  'auth/updateUser',
-  async (data: CustomerData, thunkAPI) => {
-    try {
-      const response = await AuthService.updateUser(data);
-      if (response) {
-        thunkAPI.dispatch(setMessage(response.data.message));
-        return response.data;
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            (error.response.data as { message: string }).message) ||
-          (error as unknown as string) ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue(null);
-      }
-    }
-  }
-);
-
 interface AuthState {
   isLoggedIn: boolean;
-  user: CustomerData | null;
+  user: User | null;
 }
 
 const initialState: AuthState = user
