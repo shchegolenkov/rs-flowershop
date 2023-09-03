@@ -3,11 +3,11 @@
 }
 
 .label {
-  display: inline-block;
+  display: grid;
+  grid-template-columns: 24px auto;
+  align-items: center;
+  gap: 14px;
   cursor: pointer;
-  position: relative;
-  padding-left: 36px;
-  margin-right: 0;
   user-select: none;
   background-color: transparent;
 }
@@ -17,10 +17,7 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  position: absolute;
   border-radius: 50%;
-  left: 0;
-  bottom: 0;
   background: url(../../../assets/svg/radioUnchecked.svg) 0 0 no-repeat;
   transition: all 0.2s;
 }
