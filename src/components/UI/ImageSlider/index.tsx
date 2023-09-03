@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import s from './ImageSlider.module.scss';
+import ArrowIco from '../../../assets/svg/arrowSlideRight.svg';
+import ArrowPageIco from '../../../assets/svg/arrowSlidePageRight.svg';
 
 const data = {
   images: [
@@ -41,24 +43,21 @@ function ImageSlider({ className }: IImageSlider) {
 
   return (
     <div className={clsx(s.slider, className)}>
-      <div
-        style={{ backgroundImage: `url(${data.images[currentIndex].url})` }}
-        className={s.image_block}
-      ></div>
+      <div className={s.image_wrapper}>
+        <button className={clsx(s.image_button, s.image_button_left)} onClick={prevSlide}>
+          <ArrowIco />
+        </button>
+        <div
+          style={{ backgroundImage: `url(${data.images[currentIndex].url})` }}
+          className={s.image_block}
+        ></div>
+        <button className={clsx(s.image_button, s.image_button_right)} onClick={nextSlide}>
+          <ArrowIco />
+        </button>
+      </div>
       <div className={s.buttons_panel}>
-        <button className={s.button} onClick={prevSlide}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path
-              d="M15.41 16.58L10.83 12L15.41 7.41L14 6L8 12L14 18L15.41 16.58Z"
-              fill="#121212"
-            />
-          </svg>
+        <button className={clsx(s.button, s.button_left)} onClick={prevSlide}>
+          <ArrowPageIco />
         </button>
         {data.images.map((slide, slideIndex) => (
           <button
@@ -72,18 +71,7 @@ function ImageSlider({ className }: IImageSlider) {
           </button>
         ))}
         <button className={s.button} onClick={nextSlide}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path
-              d="M8.58984 16.58L13.1698 12L8.58984 7.41L9.99984 6L15.9998 12L9.99984 18L8.58984 16.58Z"
-              fill="#121212"
-            />
-          </svg>
+          <ArrowPageIco />
         </button>
       </div>
     </div>
