@@ -32,7 +32,7 @@ export default function App() {
             <Route path="candles" element={<CandlesPage />} />
             <Route index element={<CatalogPage />} />
           </Route>
-          <Route path=":id" element={<ProductPage />} />
+          <Route path="catalog/:id" element={<ProductPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
