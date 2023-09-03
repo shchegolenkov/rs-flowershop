@@ -1,15 +1,17 @@
-import s from './ProductPage.module.scss';
-import { Typography } from '../../components/UI/Typography';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '@mui/material';
+import { Typography } from '../../components/UI/Typography';
 import Button from '../../components/UI/Button';
+import ImageSlider from '../../components/UI/ImageSlider';
+import s from './ProductPage.module.scss';
 
 function ProductPage() {
   return (
     <main>
       <div className={s.grid}>
         <div className={s.sliderBlock}>
-          <div className={s.sliderImage}></div>
+          {/* <div className={s.sliderImage}></div> */}
+          <ImageSlider />
           <div className={s.saleBlock}>
             <Typography variant={'h4'} className={s.saleText}>
               Sale
