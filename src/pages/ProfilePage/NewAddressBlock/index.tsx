@@ -195,7 +195,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
 
   return (
     <ThemeProvider theme={FormTheme}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
         {typeAddress === 'shipping' || typeAddress === 'billing' ? addressName() : null}
         <SimpleInput
           register={register}

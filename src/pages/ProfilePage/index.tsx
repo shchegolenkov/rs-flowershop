@@ -341,7 +341,7 @@ const ProfilePage: React.FC = () => {
             </div>
           ) : null}
           {user && !isCancelledAddShippingAddress ? (
-            <div ref={newShippingAddressBlockRef}>
+            <div ref={newShippingAddressBlockRef} className={s.width_full}>
               <NewAddressBlock
                 user={user}
                 typeAddress={'shipping'}
@@ -408,7 +408,7 @@ const ProfilePage: React.FC = () => {
             </div>
           ) : null}
           {user && !isCancelledAddBillingAddress ? (
-            <div ref={newBillingAddressBlockRef}>
+            <div ref={newBillingAddressBlockRef} className={s.width_full}>
               <NewAddressBlock
                 user={user}
                 typeAddress={'billing'}
