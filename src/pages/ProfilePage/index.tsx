@@ -5,7 +5,6 @@ import clsx from 'clsx';
 
 import { Typography } from '../../components/UI/Typography';
 import ProfileEditBlock from './ProfileEditBlock/';
-import EmailInput from '../../components/UI/FormFields/EmailInput';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import Button from '../../components/UI/Button';
@@ -25,13 +24,13 @@ import {
   setIsDisabledLastName,
   setIsDisabledDateOfBirth,
   setDisabledAllFields,
-  setIsDisabledEmail,
 } from '../../app/slices/profile';
 import { clearMessage } from '../../app/slices/message';
 import { getUser } from '../../app/slices/auth';
 import { updateUser } from '../../app/slices/profile';
 import ProfileAddressBlock from './ProfileAddressBlock';
 import NewAddressBlock from './NewAddressBlock';
+import EmailForm from './EmailEditBlock';
 
 const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);
@@ -131,6 +130,12 @@ const ProfilePage: React.FC = () => {
     formState: { errors },
   } = useForm<CustomerData>({
     resolver: yupResolver(schema) as unknown as Resolver<CustomerData>,
+    defaultValues: {
+      email: user ? user.email : '',
+      password: user ? user.password : '',
+      firstName: user ? user.firstName : '',
+      lastName: user ? user.lastName : '',
+    },
     mode: 'onChange',
   } as UseFormProps<CustomerData>);
 
@@ -158,13 +163,7 @@ const ProfilePage: React.FC = () => {
 
   const onClickSubmit = () => {
     setFormError(false);
-    if (
-      errors.email ||
-      errors.firstName ||
-      errors.lastName ||
-      errors.dateOfBirth ||
-      errors.addresses
-    ) {
+    if (errors.firstName || errors.lastName || errors.dateOfBirth || errors.addresses) {
       setFormError(true);
     }
   };
@@ -177,13 +176,6 @@ const ProfilePage: React.FC = () => {
     reset({
       dateOfBirth: user && user.dateOfBirth ? new Date(user.dateOfBirth) : undefined,
     });
-  };
-
-  const handleEmailClick = () => {
-    dispatch(setIsDisabledEmail());
-    if (!isDisabledEmail) {
-      reset({ email: user ? user.email : '' });
-    }
   };
 
   const handleFirstNameClick = () => {
@@ -230,46 +222,18 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
       </div>
+      <div className={clsx(s.elements__flow)}>
+        <div className={clsx(s.form__element, s.form__element_left)}>
+          <Typography variant="h2" className={s.form__title_size}>
+            1. Account Info
+          </Typography>
+        </div>
+        <div className={clsx(s.form__element, s.form__element_flow)}>
+          <EmailForm key={'email-form'} />
+        </div>
+      </div>
       <ThemeProvider theme={FormTheme}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={clsx(s.elements__flow)}>
-            <div className={clsx(s.form__element, s.form__element_left)}>
-              <Typography variant="h2" className={s.form__title_size}>
-                1. Account Info
-              </Typography>
-            </div>
-            <div className={clsx(s.form__element, s.form__element_flow)}>
-              <EmailInput
-                register={register}
-                errors={errors}
-                defaultValue={user ? user.email : ''}
-                isEditField={true}
-                isDisabled={isDisabledEmail}
-                switchEditModeField={handleEmailClick}
-              />
-              <Button
-                full={true}
-                type="button"
-                variant="secondary"
-                onClick={() => {
-                  const path = '/password';
-                  navigate(path);
-                }}
-                className={s.change_password_btn}
-              >
-                CHANGE PASSWORD
-              </Button>
-              {!isDisabledEmail ? (
-                <ProfileEditBlock
-                  onClickSubmit={onClickSubmit}
-                  onClickCancel={onClickCancel}
-                  formError={formError}
-                  isSuccess={isSuccess}
-                  message={message}
-                />
-              ) : null}
-            </div>
-          </div>
           <div className={clsx(s.elements__flow)}>
             <div className={clsx(s.form__element, s.form__element_left)}>
               <Typography variant="h2" className={s.form__title_size}>

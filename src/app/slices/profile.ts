@@ -257,7 +257,6 @@ const messageSlice = createSlice({
       state.isDisabledDateOfBirth = !state.isDisabledDateOfBirth;
     },
     setDisabledAllFields: (state) => {
-      state.isDisabledEmail = true;
       state.isDisabledFirstName = true;
       state.isDisabledLastName = true;
       state.isDisabledDateOfBirth = true;
