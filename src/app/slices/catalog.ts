@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-
 import CatalogService from '../services/catalog.service';
-import { Status, IPageQueryResult } from '../../types/types';
+import { Status, IPageQueryResult, Categories } from '../../types/types';
 import { RootState } from '../store';
 import { ITEMS_PER_PAGE } from '../../constants/const';
 
@@ -11,7 +10,8 @@ export const fetchProducts = createAsyncThunk('catalog/allProducts', async (_, t
     const query = state.products.query;
     const sort = state.products.sort;
     const pageNumber = state.products.page;
-    const response = await CatalogService.getProducts(pageNumber, query, sort);
+    const filters = state.products.filters;
+    const response = await CatalogService.getProducts(pageNumber, query, sort, filters);
     if (response) {
       return response.data;
     }
@@ -27,6 +27,11 @@ interface CatalogState {
   pages: number;
   page: number;
   sort: string;
+  filters: string[];
+  sizes: string;
+  prices: string;
+  discount: string;
+  category: string;
 }
 
 const initialState: CatalogState = {
@@ -36,6 +41,11 @@ const initialState: CatalogState = {
   pages: 1,
   page: 1,
   sort: '',
+  sizes: '',
+  prices: 'variants.prices:exists',
+  discount: '',
+  filters: ['variants.prices:exists'],
+  category: '',
 };
 
 const catalogSlice = createSlice({
@@ -53,11 +63,37 @@ const catalogSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
-    resetCatalogState: (state) => {
-      state.query = '';
-      state.sort = '';
+    setFilters: (state) => {
+      state.filters = [state.sizes, state.prices, state.discount, state.category].filter(
+        (item) => item.length > 0
+      );
       state.page = 1;
     },
+    setSizes: (state, action: PayloadAction<string>) => {
+      state.sizes = `variants.attributes.size.${action.payload}`;
+    },
+    resetSizes: (state) => {
+      state.sizes = '';
+    },
+    setPrices: (state, action: PayloadAction<string>) => {
+      state.prices = `variants.price.centAmount:range ${action.payload}`;
+    },
+    resetPrices: (state) => {
+      state.prices = 'variants.prices:exists';
+    },
+    setDiscount: (state) => {
+      state.discount = 'variants.attributes.discount:true';
+    },
+    resetDiscount: (state) => {
+      state.discount = '';
+    },
+    resetCategory: (state) => {
+      state.category = '';
+    },
+    setCategory: (state, action: PayloadAction<Categories>) => {
+      state.category = `categories.id:${action.payload}`;
+    },
+    resetCatalogState: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
@@ -82,5 +118,19 @@ const catalogSlice = createSlice({
 });
 
 const { reducer, actions } = catalogSlice;
-export const { setQuery, setSort, setPage, resetCatalogState } = actions;
+export const {
+  setQuery,
+  setSort,
+  setPage,
+  resetCatalogState,
+  setSizes,
+  resetSizes,
+  setPrices,
+  resetPrices,
+  setDiscount,
+  resetDiscount,
+  setFilters,
+  setCategory,
+  resetCategory,
+} = actions;
 export default reducer;

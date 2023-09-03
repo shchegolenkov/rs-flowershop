@@ -1,0 +1,19 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group,
+.button {
+  margin: 32px 0;
+}
+
+.input {
+  margin-left: 20px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+}

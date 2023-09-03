@@ -36,15 +36,18 @@ interface IQueryParams {
   sort?: string;
 }
 
-const getProducts = async (pageNumber: number, query = '', sortQuery = '') => {
-  const accessToken = localStorage.getItem('accessToken')
-    ? localStorage.getItem('accessToken')
-    : await getAccessToken();
+const getProducts = async (
+  pageNumber: number,
+  query: string,
+  sortQuery: string,
+  filters: string[]
+) => {
+  const accessToken = await getAccessToken();
   try {
     const queryParams: IQueryParams = {
       limit: `${ITEMS_PER_PAGE}`,
       offset: `${ITEMS_PER_PAGE * pageNumber - ITEMS_PER_PAGE}`,
-      filter: 'variants.prices:exists',
+      filter: filters,
       'text.en-US': `${query}`,
     };
     if (sortQuery) {
