@@ -11,6 +11,12 @@
   }
 }
 
+.single_image_wrapper {
+  & .image_block {
+    max-height: 86vh;
+  }
+}
+
 .image_block {
   width: 100%;
   height: auto;
