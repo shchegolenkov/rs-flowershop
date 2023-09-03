@@ -253,9 +253,13 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
         <div>
           <button type="button" onClick={isHasErrors() ? switchEditModeField : undefined}>
             {isDisabledAddress ? (
-              <EditIco />
+              <div>
+                <EditIco />
+              </div>
             ) : isHasErrors() ? (
-              <EditIcoActive />
+              <div>
+                <EditIcoActive />
+              </div>
             ) : (
               <div className={s.err_edit_btn}>
                 <EditIcoErr />
@@ -263,7 +267,9 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
             )}
           </button>
           <button type="button" onClick={deleteAddress}>
-            <DeleteAddress />
+            <div>
+              <DeleteAddress />
+            </div>
           </button>
         </div>
       </div>
