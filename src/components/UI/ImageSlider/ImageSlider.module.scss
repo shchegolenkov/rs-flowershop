@@ -4,7 +4,7 @@
   position: relative;
 }
 
-.slider__image_block {
+.image_block {
   width: 100%;
   height: auto;
   max-height: 760px;
@@ -12,4 +12,35 @@
   background-size: cover;
   background-position: center;
   transition-duration: 0.5s;
+}
+
+.buttons_panel {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.button_num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font: inherit;
+  outline: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover,
+  &:focus {
+    &:not(.button_num_active) {
+      background-color: var(--color-light-gray);
+      border-color: var(--color-light-gray);
+    }
+  }
+}
+
+.button_num_active {
+  border-color: var(--color-light-black);
 }

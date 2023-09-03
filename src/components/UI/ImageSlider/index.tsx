@@ -21,14 +21,31 @@ interface IImageSlider {
 }
 
 function ImageSlider({ className }: IImageSlider) {
-  const [currentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToSlide = (slideIndex: number) => {
+    setCurrentIndex(slideIndex);
+  };
 
   return (
     <div className={clsx(s.slider, className)}>
       <div
         style={{ backgroundImage: `url(${data.images[currentIndex].url})` }}
-        className={s.slider__image_block}
+        className={s.image_block}
       ></div>
+      <div className={s.buttons_panel}>
+        {data.images.map((slide, slideIndex) => (
+          <button
+            key={slideIndex}
+            onClick={() => goToSlide(slideIndex)}
+            className={clsx(s.button_num, {
+              [s.button_num_active]: slideIndex === currentIndex,
+            })}
+          >
+            {slideIndex + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
