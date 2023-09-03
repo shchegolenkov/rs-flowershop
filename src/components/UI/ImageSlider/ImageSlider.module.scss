@@ -1,0 +1,15 @@
+.slider {
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+
+.slider__image_block {
+  width: 100%;
+  height: auto;
+  max-height: 760px;
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  transition-duration: 0.5s;
+}
