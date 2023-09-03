@@ -17,8 +17,7 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  border-radius: 50%;
-  background: url(../../../assets/svg/radioUnchecked.svg) 0 0 no-repeat;
+  background: url(../../../assets/svg/checkboxUnchecked.svg) 0 0 no-repeat;
   transition: all 0.2s;
 }
 
@@ -27,7 +26,7 @@
 }
 
 .input:checked + .label::before {
-  background: url(../../../assets/svg/radioChecked.svg) 0 0 no-repeat;
+  background: url(../../../assets/svg/checkboxChecked.svg) 0 0 no-repeat;
 }
 
 .input:disabled + .label {

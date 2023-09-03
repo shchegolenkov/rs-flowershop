@@ -1,0 +1,25 @@
+.nav {
+  margin-bottom: 32px;
+}
+
+.listItem {
+  margin-left: 16px;
+}
+
+.link {
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.links {
+  margin-top: 16px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 12px;
+}

@@ -6,12 +6,12 @@ import Button from '../../components/UI/Button';
 import { useNavigate } from 'react-router-dom';
 
 const links = [
-  { to: '/notFound', title: 'All products' },
-  { to: '/notFound', title: 'Fresh flowers' },
-  { to: '/notFound', title: 'Dried flowers' },
-  { to: '/notFound', title: 'Live plants' },
-  { to: '/notFound', title: 'Aroma candles' },
-  { to: '/notFound', title: 'Fresheners' },
+  { to: '/catalog', title: 'All products' },
+  { to: '/catalog/fresh-flowers', title: 'Fresh flowers' },
+  { to: '/catalog/dried-flowers', title: 'Dried flowers' },
+  { to: '/catalog/live-plants', title: 'Live plants' },
+  { to: '/catalog/candles', title: 'Aroma candles' },
+  { to: '/catalog/fresheners', title: 'Fresheners' },
 ];
 
 function MainPage() {

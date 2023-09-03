@@ -1,5 +1,6 @@
 .wrapper {
   display: grid;
+  align-content: start;
   grid-template-columns: repeat(3, 1fr);
 }
 

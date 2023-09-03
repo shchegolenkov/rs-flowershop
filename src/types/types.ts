@@ -199,3 +199,11 @@ export interface IPageQueryResult {
   total: number;
   results: IProduct[];
 }
+
+export enum Categories {
+  FRESH = '"c54e10d9-2556-4433-93bf-f7b32ee7614a"',
+  DRY = '"7adbf30f-055b-485a-9914-6b778934373f"',
+  LIVE = '"cfa5c147-fac3-48d6-89e9-9a4be3ffa382"',
+  FRESHENERS = '"2093d9b8-4a2a-4db2-a49a-6af3de7ce3e0"',
+  CANDLES = '"b1898ea3-45ea-4306-ad02-3914c1e38610"',
+}

@@ -6,6 +6,9 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
   },
+  output: {
+    publicPath: '/',
+  },
   module: {
     rules: [
       {
