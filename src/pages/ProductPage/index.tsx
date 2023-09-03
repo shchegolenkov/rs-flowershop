@@ -10,7 +10,6 @@ function ProductPage() {
     <main>
       <div className={s.grid}>
         <div className={s.sliderBlock}>
-          {/* <div className={s.sliderImage}></div> */}
           <ImageSlider />
           <div className={s.saleBlock}>
             <Typography variant={'h4'} className={s.saleText}>

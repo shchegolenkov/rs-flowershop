@@ -41,7 +41,16 @@ function ImageSlider({ className }: IImageSlider) {
     setCurrentIndex(newIndex);
   };
 
-  return (
+  return data.images.length === 1 ? (
+    <div className={clsx(s.slider, className)}>
+      <div className={s.single_image_wrapper}>
+        <div
+          style={{ backgroundImage: `url(${data.images[0].url})` }}
+          className={s.image_block}
+        ></div>
+      </div>
+    </div>
+  ) : (
     <div className={clsx(s.slider, className)}>
       <div className={s.image_wrapper}>
         <button className={clsx(s.image_button, s.image_button_left)} onClick={prevSlide}>

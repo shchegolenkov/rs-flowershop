@@ -58,16 +58,6 @@
   color: var(--color-gray);
 }
 
-.sliderImage {
-  background-image: url('../../assets/images/notFoundBg.jpg');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: auto;
-  max-height: 78vh;
-  aspect-ratio: 1;
-}
-
 .descriptionBlock {
   display: flex;
   flex-direction: column;
