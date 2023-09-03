@@ -152,6 +152,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
         await dispatch(getUser());
 
         setTimeout(() => {
+          localStorage.removeItem('addAddressId');
           dispatch(clearMessage());
           setIsSuccess(false);
           setIsCancelledAdd(true);
