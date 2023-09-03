@@ -19,7 +19,7 @@ function LivePlantsPage() {
   return (
     <div className={s.wrapper}>
       <Typography variant={'h1'} className={s.name}>
-        Perfect fresh flowers
+        Wild urban jungle
       </Typography>
     </div>
   );
