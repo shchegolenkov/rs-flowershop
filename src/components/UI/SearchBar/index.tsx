@@ -4,12 +4,18 @@ import { AppDispatch, RootState } from '../../../app/store';
 import { setQuery } from '../../../app/slices/catalog';
 import Button from '../Button';
 import s from './SearchBar.module.scss';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function SearchBar({ className }: JSX.IntrinsicElements['form']) {
   const [isText, setIsText] = useState(false);
-  const { query } = useSelector((state: RootState) => state.products);
+  const { query, category } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref && ref.current.reset();
+  }, [category]);
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -35,6 +41,7 @@ function SearchBar({ className }: JSX.IntrinsicElements['form']) {
 
   return (
     <form
+      ref={ref}
       className={clsx(s.form, className)}
       onSubmit={(e) => handleSubmit(e)}
       onReset={handleReset}
