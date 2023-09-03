@@ -8,7 +8,6 @@ import ProfileEditBlock from './ProfileEditBlock/';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import Button from '../../components/UI/Button';
-import { validateEmail } from '../../utils/validators';
 import { CustomerData, ProfileAddress } from '../../types/types';
 
 import FormTheme from '../../themes/FormTheme';
@@ -34,7 +33,6 @@ import EmailForm from './EmailEditBlock';
 
 const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);
-  const [emailError, setEmailError] = useState('');
   const [formError, setFormError] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = React.useState(true);
@@ -45,8 +43,9 @@ const ProfilePage: React.FC = () => {
 
   const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
   const { message } = useSelector((state: RootState) => state.message);
-  const { isDisabledEmail, isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } =
-    useSelector((state: RootState) => state.profile);
+  const { isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } = useSelector(
+    (state: RootState) => state.profile
+  );
 
   const newShippingAddressBlockRef = useRef<HTMLDivElement | null>(null);
   const newBillingAddressBlockRef = useRef<HTMLDivElement | null>(null);
@@ -82,22 +81,6 @@ const ProfilePage: React.FC = () => {
   const minDate = new Date(1900, 1, 1);
 
   const schema = yup.object().shape({
-    email: isDisabledEmail
-      ? yup.string()
-      : yup
-          .string()
-          .required('Email is required.')
-          .email('Invalid email (e.g., example@example.com)')
-          .matches(/^[^@]+@[^.]+\..+$/, 'Email should contain a dot in the domain')
-          .test('custom-email-validation', `${emailError}`, (value) => {
-            return validateEmail(value as string, setEmailError);
-          })
-          .test('not-default-email', 'Email should not be the previous value', (value) => {
-            if (user) {
-              return value !== user.email;
-            }
-          }),
-
     firstName: isDisabledFirstName
       ? yup.string()
       : yup
@@ -127,17 +110,26 @@ const ProfilePage: React.FC = () => {
     register,
     handleSubmit,
     reset,
+    setFocus,
     formState: { errors },
   } = useForm<CustomerData>({
     resolver: yupResolver(schema) as unknown as Resolver<CustomerData>,
     defaultValues: {
-      email: user ? user.email : '',
       password: user ? user.password : '',
       firstName: user ? user.firstName : '',
       lastName: user ? user.lastName : '',
     },
-    mode: 'onChange',
+    mode: 'onTouched',
   } as UseFormProps<CustomerData>);
+
+  useEffect(() => {
+    if (!isDisabledFirstName) {
+      setFocus('firstName');
+    }
+    if (!isDisabledLastName) {
+      setFocus('lastName');
+    }
+  }, [setFocus, isDisabledFirstName, isDisabledLastName]);
 
   const onSubmit = (data: CustomerData) => {
     if (user) {
