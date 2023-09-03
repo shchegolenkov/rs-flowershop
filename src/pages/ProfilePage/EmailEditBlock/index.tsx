@@ -106,6 +106,9 @@ const EmailForm: React.FC = () => {
 
   const handleEmailClick = () => {
     dispatch(setIsDisabledEmail());
+    reset({
+      email: user && user.email ? user.email : '',
+    });
   };
 
   return (
