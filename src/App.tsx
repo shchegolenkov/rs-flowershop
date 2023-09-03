@@ -13,6 +13,7 @@ import DriedFlowersPage from './pages/CatalogPage/DriedFlowersPage';
 import LivePLantsPage from './pages/CatalogPage/LivePLantsPage';
 import FreshenersPage from './pages/CatalogPage/FreshenersPage';
 import CandlesPage from './pages/CatalogPage/CandlesPage';
+import ProductPage from './pages/ProductPage';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
             <Route path="candles" element={<CandlesPage />} />
             <Route index element={<CatalogPage />} />
           </Route>
+          <Route path=":id" element={<ProductPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
