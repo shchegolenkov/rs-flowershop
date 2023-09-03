@@ -123,7 +123,14 @@ const LoginPage: React.FC = () => {
             <ThemeProvider theme={FormTheme}>
               <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
                 <EmailInput register={register} errors={errors} />
-                <PasswordInput register={register} errors={errors} />
+                <PasswordInput
+                  register={register}
+                  name={'password'}
+                  err={errors.password}
+                  errMessage={errors.password?.message}
+                  label={'Password *'}
+                  id={'password-login'}
+                />
                 <Button full={true} type="submit" className={s.buttonLogin}>
                   Login
                 </Button>

@@ -280,7 +280,14 @@ const RegisterPage: React.FC = () => {
             </div>
             <div className={clsx(s.form__element, s.form__element_flow)}>
               <EmailInput register={register} errors={errors} />
-              <PasswordInput register={register} errors={errors} />
+              <PasswordInput
+                register={register}
+                name={'password'}
+                err={errors.password}
+                errMessage={errors.password?.message}
+                label={'Password *'}
+                id={'password-reg'}
+              />
             </div>
           </div>
           <div className={clsx(s.elements__flow)}>
