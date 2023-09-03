@@ -113,7 +113,7 @@ const EmailForm: React.FC = () => {
 
   return (
     <ThemeProvider theme={FormTheme}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
         <EmailInput
           register={register}
           errors={errors}
