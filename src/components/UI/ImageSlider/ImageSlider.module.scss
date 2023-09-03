@@ -31,11 +31,15 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  opacity: 0;
+  opacity: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition-duration: 0.5s;
+  transition-duration: 0.2s;
+
+  @media (hover: hover) {
+    opacity: 0;
+  }
   
   &_left {
     left: 0;

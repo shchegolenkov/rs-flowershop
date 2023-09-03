@@ -70,7 +70,7 @@ function ImageSlider({ className }: IImageSlider) {
         </button>
         {data.images.map((slide, slideIndex) => (
           <button
-            key={slideIndex}
+            key={slide.url}
             onClick={() => goToSlide(slideIndex)}
             className={clsx(s.button, s.button_num, {
               [s.button_num_active]: slideIndex === currentIndex,
