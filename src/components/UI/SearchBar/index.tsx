@@ -11,10 +11,10 @@ function SearchBar({ className }: JSX.IntrinsicElements['form']) {
   const { query, category } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLFormElement | null>(null);
 
   useEffect(() => {
-    ref && ref.current.reset();
+    ref.current && ref.current.reset();
   }, [category]);
 
   function handleSubmit(e: React.SyntheticEvent) {
@@ -46,15 +46,17 @@ function SearchBar({ className }: JSX.IntrinsicElements['form']) {
       onSubmit={(e) => handleSubmit(e)}
       onReset={handleReset}
     >
-      <input
-        type="text"
-        placeholder="Search"
-        name="search"
-        className={s.input}
-        onChange={(e) => handleChange(e)}
-        autoComplete="off"
-      ></input>
-      {isText && <button type="reset" className={s.reset}></button>}
+      <div className={s.borders}>
+        <input
+          type="text"
+          placeholder="Search"
+          name="search"
+          className={s.input}
+          onChange={(e) => handleChange(e)}
+          autoComplete="off"
+        />
+        {isText && <button type="reset" className={s.reset}></button>}
+      </div>
       <Button type={'submit'}>Search</Button>
     </form>
   );

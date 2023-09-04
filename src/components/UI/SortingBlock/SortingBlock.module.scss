@@ -1,0 +1,27 @@
+.group {
+  margin-top: 20px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  @include media-large {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  @include media-small {
+    display: flex;
+  }
+}
+
+.radio {
+  margin-left: 15px;
+  display: inline-block;
+
+  @include media-large {
+    margin-left: 0;
+  }
+}

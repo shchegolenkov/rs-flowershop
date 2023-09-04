@@ -17,9 +17,7 @@ function CatalogPage() {
 
   return (
     <div className={s.wrapper}>
-      <Typography variant={'h1'} className={s.name}>
-        Find the best flowers and gifts
-      </Typography>
+      <Typography variant={'h1'}>Find the best flowers and gifts</Typography>
     </div>
   );
 }

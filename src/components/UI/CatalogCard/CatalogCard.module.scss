@@ -1,5 +1,28 @@
 .link {
   color: var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  border-right: 1px solid var(--color-black);
+
+  &:nth-child(3n) {
+    border-right: none;
+  }
+
+  @include media-large {
+    &:nth-child(3n) {
+      border-right: 1px solid var(--color-black);
+    }
+
+    &:nth-child(even) {
+      border-right: none;
+    }
+  }
+
+  @include media-small {
+    border-right: none;
+    &:nth-child(3n) {
+      border-right: none;
+    }
+  }
 }
 
 .card {
@@ -8,12 +31,6 @@
   background-size: cover;
   position: relative;
   transition: opacity 0.3s;
-  border-bottom: 1px solid var(--color-black);
-  border-right: 1px solid var(--color-black);
-}
-
-.card:nth-child(3n) {
-  border-right: none;
 }
 
 .card:hover {
@@ -31,6 +48,10 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+
+  @include media-tablet {
+    padding: 20px 10px;
+  }
 }
 
 .caption {
