@@ -21,10 +21,10 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
   const { status, category } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLFormElement | null>(null);
 
   useEffect(() => {
-    ref && ref.current.reset();
+    ref.current && ref.current.reset();
   }, [category]);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -87,52 +87,56 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
       <Typography variant={'h5'} className={s.title}>
         Filter by
       </Typography>
-      <div className={s.group}>
-        <Typography variant={'h6'}>Size</Typography>
-        {sizeOptions.map(({ name, value, text }) => (
+      <div className={s.groups}>
+        <div className={s.group}>
+          <Typography variant={'h6'}>Size</Typography>
+          {sizeOptions.map(({ name, value, text }) => (
+            <Checkbox
+              key={value}
+              className={s.input}
+              name={name}
+              value={value}
+              text={text}
+              disabled={status === Status.LOADING || status === Status.ERROR}
+            />
+          ))}
+        </div>
+        <div className={s.group}>
+          <Typography variant={'h6'}>Price</Typography>
+          {priceOptions.map(({ name, value, text }) => (
+            <Checkbox
+              key={value}
+              className={s.input}
+              name={name}
+              value={value}
+              text={text}
+              disabled={status === Status.LOADING || status === Status.ERROR}
+            />
+          ))}
+        </div>
+        <div className={s.group}>
+          <Typography variant={'h6'}>Special offers</Typography>
           <Checkbox
-            key={value}
             className={s.input}
-            name={name}
-            value={value}
-            text={text}
+            name={'discount'}
+            text={'Discount only'}
             disabled={status === Status.LOADING || status === Status.ERROR}
           />
-        ))}
+        </div>
       </div>
-      <div className={s.group}>
-        <Typography variant={'h6'}>Price</Typography>
-        {priceOptions.map(({ name, value, text }) => (
-          <Checkbox
-            key={value}
-            className={s.input}
-            name={name}
-            value={value}
-            text={text}
-            disabled={status === Status.LOADING || status === Status.ERROR}
-          />
-        ))}
-      </div>
-      <div className={s.group}>
-        <Typography variant={'h6'}>Special offers</Typography>
-        <Checkbox
-          className={s.input}
-          name={'discount'}
-          text={'Discount only'}
+      <div className={s.buttons}>
+        <Button type={'submit'} disabled={status === Status.LOADING || status === Status.ERROR}>
+          Apply
+        </Button>
+        <Button
+          type={'reset'}
+          variant={'secondary'}
           disabled={status === Status.LOADING || status === Status.ERROR}
-        />
+          className={s.button}
+        >
+          Clear All
+        </Button>
       </div>
-      <Button type={'submit'} disabled={status === Status.LOADING || status === Status.ERROR}>
-        Apply
-      </Button>
-      <Button
-        type={'reset'}
-        variant={'secondary'}
-        disabled={status === Status.LOADING || status === Status.ERROR}
-        className={s.button}
-      >
-        Clear All
-      </Button>
     </form>
   );
 }

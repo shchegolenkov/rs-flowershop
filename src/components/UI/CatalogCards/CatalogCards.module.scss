@@ -2,6 +2,14 @@
   display: grid;
   align-content: start;
   grid-template-columns: repeat(3, 1fr);
+
+  @include media-large {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-small {
+    grid-template-columns: 1fr;
+  }
 }
 
 .wrapper > div {

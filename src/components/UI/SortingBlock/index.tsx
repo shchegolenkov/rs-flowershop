@@ -1,4 +1,4 @@
-import s from './FilterBlock.module.scss';
+import s from './SortingBlock.module.scss';
 import { Typography } from '../Typography';
 import RadioButton from '../RadioButton';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,20 +25,19 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
   return (
     <div className={className}>
       <Typography variant={'h5'}>Sorting by</Typography>
-      <ul className={s.group}>
+      <div className={s.group}>
         {sortOptions.map(({ id, name, value }) => (
-          <li key={id} className={s.radio}>
-            <RadioButton
-              name={name}
-              value={value}
-              id={'default_option'}
-              checked={sort === value}
-              onChange={handleChangeValue}
-              disabled={status === Status.LOADING || status === Status.ERROR}
-            />
-          </li>
+          <RadioButton
+            key={id}
+            className={s.radio}
+            name={name}
+            value={value}
+            checked={sort === value}
+            onChange={handleChangeValue}
+            disabled={status === Status.LOADING || status === Status.ERROR}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
