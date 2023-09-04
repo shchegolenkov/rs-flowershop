@@ -26,7 +26,6 @@ export const fetchProduct = createAsyncThunk(
     try {
       const response = await CatalogService.getProduct(productKey);
       if (response) {
-        console.log(response.data);
         return response.data;
       }
     } catch (error) {

@@ -2,6 +2,7 @@ import { configureStore, createListenerMiddleware, isAnyOf } from '@reduxjs/tool
 import authReducer from './slices/auth';
 import messageReducer from './slices/message';
 import profileReducer from './slices/profile';
+import productReducer from './slices/product';
 import productsReducer, {
   fetchProducts,
   setQuery,
@@ -15,6 +16,7 @@ const reducer = {
   message: messageReducer,
   profile: profileReducer,
   products: productsReducer,
+  product: productReducer,
 };
 
 const listenerMiddleware = createListenerMiddleware();
