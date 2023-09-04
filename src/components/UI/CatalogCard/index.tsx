@@ -26,7 +26,7 @@ function CatalogCard({ data }: ICatalogCard) {
   const price = data.masterVariant.prices[0].value.centAmount;
   const discountPrice = data.masterVariant.prices[0].discounted?.value.centAmount;
   return (
-    <Link to={`/${id}`} className={s.link}>
+    <Link to={`/catalog/${id}`} className={s.link}>
       <div className={s.card} style={{ backgroundImage: `url(${imgUrl})` }}>
         {discountPrice && (
           <Typography variant={'h4'} className={s.sale}>
@@ -35,8 +35,9 @@ function CatalogCard({ data }: ICatalogCard) {
         )}
         <div className={s.description}>
           <Typography variant={'h5'}>{data.name['en-US']}</Typography>
-          <Typography variant={'caption'} className={s.caption}>
-            {`${description.value} Size: ${size}`}
+          <Typography variant={'caption'} className={s.caption} as={'span'}>
+            {`${description.value} `}
+            {`Size: ${size}`}
           </Typography>
           <div className={s.prices}>
             {discountPrice ? (
