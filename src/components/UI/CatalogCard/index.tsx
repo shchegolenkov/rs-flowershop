@@ -13,7 +13,7 @@ function formatPrice(price: number): string {
 }
 
 function CatalogCard({ data }: ICatalogCard) {
-  const id = data.id;
+  const productUrl = data.slug['en-US'];
   const responceImg = data.masterVariant.images;
   const imgUrl = responceImg.length > 0 ? responceImg[0].url : productLabel;
   const description =
@@ -26,7 +26,7 @@ function CatalogCard({ data }: ICatalogCard) {
   const price = data.masterVariant.prices[0].value.centAmount;
   const discountPrice = data.masterVariant.prices[0].discounted?.value.centAmount;
   return (
-    <Link to={`/${id}`} className={s.link}>
+    <Link to={`${productUrl}`} className={s.link}>
       <div className={s.card} style={{ backgroundImage: `url(${imgUrl})` }}>
         {discountPrice && (
           <Typography variant={'h4'} className={s.sale}>
