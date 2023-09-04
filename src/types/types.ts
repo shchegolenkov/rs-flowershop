@@ -1,3 +1,5 @@
+import { Dispatch } from '@reduxjs/toolkit';
+
 export interface CustomerData {
   email: string;
   password: string;
@@ -217,4 +219,9 @@ export interface PasswordForm {
 export interface ChangePassword {
   currentPassword: string;
   newPassword: string;
+}
+
+export interface ThunkAPI {
+  dispatch: Dispatch;
+  rejectWithValue: (value: null) => void;
 }

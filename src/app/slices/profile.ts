@@ -7,12 +7,14 @@ import {
   DelAddress,
   AddShipBillProperty,
   ChangePassword,
+  ThunkAPI,
 } from '../../types/types';
 
 import ProfileService from '../services/profile.service';
 import { setMessage } from './message';
+import { AxiosError } from 'axios/index';
 
-const getErrorMessage = (error, thunkAPI) => {
+const getErrorMessage = (error: AxiosError | unknown, thunkAPI: ThunkAPI) => {
   if (axios.isAxiosError(error)) {
     const message =
       (error.response &&
