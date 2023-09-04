@@ -7,7 +7,7 @@
   position: relative;
 
   &:hover .image_button {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
@@ -40,7 +40,7 @@
   @media (hover: hover) {
     opacity: 0;
   }
-  
+
   &_left {
     left: 0;
 

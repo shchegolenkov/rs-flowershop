@@ -11,16 +11,25 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FieldError, UseFormRegister } from 'react-hook-form';
-import { CustomerData } from '../../../../types/types';
+import { CustomerData, PasswordForm } from '../../../../types/types';
 
 interface PasswordInputProps {
-  register: UseFormRegister<CustomerData>;
-  errors: {
-    password?: FieldError;
-  };
+  register: UseFormRegister<CustomerData> | UseFormRegister<PasswordForm>;
+  name: keyof CustomerData | keyof PasswordForm;
+  err: FieldError | undefined;
+  errMessage: string | undefined;
+  label: string;
+  id: string;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ register, errors }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({
+  register,
+  name,
+  err,
+  errMessage,
+  label,
+  id,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -30,13 +39,13 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ register, errors }) => {
 
   return (
     <div className={s.form__field_size}>
-      <FormControl error={!!errors.password} fullWidth variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password *</InputLabel>
+      <FormControl error={!!err} fullWidth variant="outlined">
+        <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
         <OutlinedInput
-          label="Password"
-          error={!!errors.password}
-          id="password-input"
-          {...register('password')}
+          label={label}
+          error={!!err}
+          id={id}
+          {...register(name)}
           type={showPassword ? 'text' : 'password'}
           endAdornment={
             <InputAdornment position="end">
@@ -52,9 +61,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ register, errors }) => {
           }
         />
         <FormHelperText id="component-error-text">
-          {errors.password ? (
+          {err ? (
             <span className={s.err__message}>
-              <ErrorIcon color="error" /> {errors.password.message}
+              <ErrorIcon color="error" /> {errMessage}
             </span>
           ) : (
             ''

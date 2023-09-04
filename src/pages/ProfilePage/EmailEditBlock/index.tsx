@@ -127,7 +127,7 @@ const EmailForm: React.FC = () => {
           type="button"
           variant="secondary"
           onClick={() => {
-            const path = '/password';
+            const path = '/profile/change-password';
             navigate(path);
           }}
           className={s.change_password_btn}

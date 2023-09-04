@@ -1,3 +1,5 @@
+import { Dispatch } from '@reduxjs/toolkit';
+
 export interface CustomerData {
   email: string;
   password: string;
@@ -206,4 +208,20 @@ export enum Categories {
   LIVE = '"cfa5c147-fac3-48d6-89e9-9a4be3ffa382"',
   FRESHENERS = '"2093d9b8-4a2a-4db2-a49a-6af3de7ce3e0"',
   CANDLES = '"b1898ea3-45ea-4306-ad02-3914c1e38610"',
+}
+
+export interface PasswordForm {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
+export interface ChangePassword {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface ThunkAPI {
+  dispatch: Dispatch;
+  rejectWithValue: (value: null) => void;
 }

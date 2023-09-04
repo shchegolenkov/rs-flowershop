@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
-import { CustomerData, User } from '../../types/types';
+import { CustomerData, ThunkAPI, User } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
 import AuthService from '../services/auth.service';
 
-const getErrorMessage = (error, thunkAPI) => {
+const getErrorMessage = (error: AxiosError | unknown, thunkAPI: ThunkAPI) => {
   if (axios.isAxiosError(error)) {
     const message =
       (error.response &&
