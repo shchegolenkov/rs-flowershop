@@ -1,4 +1,8 @@
+import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../app/store';
+import { fetchProduct } from '../../app/slices/catalog';
 import { Breadcrumbs } from '@mui/material';
 import { Typography } from '../../components/UI/Typography';
 import Button from '../../components/UI/Button';
@@ -95,8 +99,14 @@ const data: IProduct = {
 };
 
 function ProductPage() {
-  const productKey = useLocation().pathname.split('/').pop();
+  const productKey = useLocation().pathname.split('/').pop() || '';
   console.log(productKey);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchProduct(productKey));
+  }, [dispatch, productKey]);
 
   const productName = data.name['en-US'];
   const productDescription = data.description['en-US'];
