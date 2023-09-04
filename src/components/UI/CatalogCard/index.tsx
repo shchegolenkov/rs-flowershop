@@ -3,13 +3,10 @@ import { Typography } from '../Typography';
 import productLabel from '../../../assets/svg/dummy.svg?url';
 import s from './CatalogCard.module.scss';
 import { Link } from 'react-router-dom';
+import formatPrice from '../../../utils/formatPrice';
 
 interface ICatalogCard {
   data: IProduct;
-}
-
-function formatPrice(price: number): string {
-  return `${price}`.slice(0, -2) + '.' + `${price}`.slice(-2);
 }
 
 function CatalogCard({ data }: ICatalogCard) {
