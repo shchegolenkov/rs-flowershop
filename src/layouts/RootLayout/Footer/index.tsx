@@ -4,12 +4,12 @@ import { MenuLink } from '../../../components/UI/MenuLink';
 import s from './Footer.module.scss';
 
 const links = [
-  { to: '/notFound', text: 'All products' },
-  { to: '/notFound', text: 'Fresh Flowers' },
-  { to: '/notFound', text: 'Dried Flowers' },
-  { to: '/notFound', text: 'Live Plants' },
-  { to: '/notFound', text: 'Aroma Candles' },
-  { to: '/notFound', text: 'Freshener Diffuser' },
+  { to: '/catalog', text: 'All products' },
+  { to: '/catalog/fresh-flowers', text: 'Fresh Flowers' },
+  { to: '/catalog/dried-flowers', text: 'Dried Flowers' },
+  { to: '/catalog/live-plants', text: 'Live Plants' },
+  { to: '/catalog/candles', text: 'Aroma Candles' },
+  { to: '/catalog/fresheners', text: 'Freshener Diffuser' },
 ];
 
 function Footer() {
