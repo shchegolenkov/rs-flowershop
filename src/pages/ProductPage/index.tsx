@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store';
@@ -7,8 +7,9 @@ import { Breadcrumbs } from '@mui/material';
 import { Typography } from '../../components/UI/Typography';
 import Button from '../../components/UI/Button';
 import ImageSlider from '../../components/UI/ImageSlider';
+import ModalWindow from '../../components/UI/ModalWindow';
 import s from './ProductPage.module.scss';
-import { Status } from '../../types/types';
+import { CategoryAttr, CompositionAttr, SizeAttr, Status } from '../../types/types';
 import formatPrice from '../../utils/formatPrice';
 import NotFoundPage from '../../pages/NotFoundPage';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -18,6 +19,9 @@ function changeHyphenToSpace(input: string): string {
 }
 
 function ProductPage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const productKey = useLocation().pathname.split('/').pop() || '';
 
   const productState = useSelector((state: RootState) => state.product);
@@ -28,6 +32,15 @@ function ProductPage() {
   useEffect(() => {
     dispatch(fetchProduct(productKey));
   }, [dispatch, productKey]);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleImageClick = (currentIndex: number) => {
+    setCurrentIndex(currentIndex);
+    setModalOpen(true);
+  };
 
   if (status === Status.LOADING) {
     return (
@@ -49,18 +62,18 @@ function ProductPage() {
   const productPrice = product.masterVariant.prices[0].value.centAmount;
   const productSalePrice = product.masterVariant.prices[0].discounted?.value.centAmount;
 
-  const sizeAttribute = product.masterVariant.attributes.find(
-    (item: { name: string }) => item.name === 'size'
+  const sizeAttr = product.masterVariant.attributes.find(
+    (item): item is SizeAttr => item.name === 'size'
   );
-  const productSize = sizeAttribute?.value.key || 'no size';
+  const productSize = sizeAttr?.value.key || 'no size';
 
   const compositionAttr = product.masterVariant.attributes.find(
-    (item: { name: string }) => item.name === 'composition'
+    (item): item is CompositionAttr => item.name === 'composition'
   );
   const productComposition = compositionAttr ? compositionAttr.value : 'no description';
 
   const categoryAttr = product.masterVariant.attributes.find(
-    (item: { name: string }) => item.name === 'category'
+    (item): item is CategoryAttr => item.name === 'category'
   );
   const productCategory = categoryAttr ? categoryAttr.value : '';
 
@@ -68,7 +81,7 @@ function ProductPage() {
     <main>
       <div className={s.grid}>
         <div className={s.sliderBlock}>
-          <ImageSlider data={productImages} />
+          <ImageSlider data={productImages} imageClick={handleImageClick} />
           {productSalePrice && (
             <div className={s.saleBlock}>
               <Typography variant={'h4'} className={s.saleText}>
@@ -131,6 +144,13 @@ function ProductPage() {
           </div>
         </div>
       </div>
+      <ModalWindow open={modalOpen} handleClose={closeModal}>
+        <ImageSlider
+          data={productImages}
+          imageClick={handleImageClick}
+          initialIndex={currentIndex}
+        />
+      </ModalWindow>
     </main>
   );
 }
