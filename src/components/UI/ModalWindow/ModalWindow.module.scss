@@ -10,10 +10,10 @@
   outline: none;
   display: flex;
   flex-direction: column;
-  
+
   @include media-tablet {
-      width: 90vw;
-    }
+    width: 90vw;
+  }
 }
 
 .closeButton {
