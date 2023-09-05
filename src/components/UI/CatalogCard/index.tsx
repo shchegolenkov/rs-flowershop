@@ -3,17 +3,14 @@ import { Typography } from '../Typography';
 import productLabel from '../../../assets/svg/dummy.svg?url';
 import s from './CatalogCard.module.scss';
 import { Link } from 'react-router-dom';
+import formatPrice from '../../../utils/formatPrice';
 
 interface ICatalogCard {
   data: IProduct;
 }
 
-function formatPrice(price: number): string {
-  return `${price}`.slice(0, -2) + '.' + `${price}`.slice(-2);
-}
-
 function CatalogCard({ data }: ICatalogCard) {
-  const id = data.id;
+  const productUrl = data.slug['en-US'];
   const responceImg = data.masterVariant.images;
   const imgUrl = responceImg.length > 0 ? responceImg[0].url : productLabel;
   const description =
@@ -26,7 +23,7 @@ function CatalogCard({ data }: ICatalogCard) {
   const price = data.masterVariant.prices[0].value.centAmount;
   const discountPrice = data.masterVariant.prices[0].discounted?.value.centAmount;
   return (
-    <Link to={`/catalog/${id}`} className={s.link}>
+    <Link to={`${productUrl}`} className={s.link}>
       <div className={s.card} style={{ backgroundImage: `url(${imgUrl})` }}>
         {discountPrice && (
           <Typography variant={'h4'} className={s.sale}>

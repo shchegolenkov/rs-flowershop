@@ -71,8 +71,24 @@ const getProducts = async (
   }
 };
 
+const getProduct = async (productKey: string) => {
+  const accessToken = await getAccessToken();
+  try {
+    const response = await axios.get<IPageQueryResult>(
+      `${API_URL}/${PROJECT_KEY}/product-projections/key=${productKey}`,
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    throw new Error('error getting product');
+  }
+};
+
 const CatalogService = {
   getProducts,
+  getProduct,
 };
 
 export default CatalogService;
