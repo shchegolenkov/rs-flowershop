@@ -18,7 +18,7 @@ function CatalogBreadcrumbs() {
 
   const categoriesNames = {
     [`categories.id:${Categories.FRESH}`]: 'Fresh flowers',
-    [`categories.id:${Categories.DRY}`]: 'Dry flowers',
+    [`categories.id:${Categories.DRY}`]: 'Dried flowers',
     [`categories.id:${Categories.LIVE}`]: 'Live plants',
     [`categories.id:${Categories.FRESHENERS}`]: 'Fresheners',
     [`categories.id:${Categories.CANDLES}`]: 'Candles',

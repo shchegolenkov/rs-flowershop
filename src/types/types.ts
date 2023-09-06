@@ -131,6 +131,31 @@ export enum ProductSize {
   LARGE = 'L',
 }
 
+export interface SizeAttr {
+  name: 'size';
+  value: {
+    key: ProductSize;
+    label: ProductSize;
+  };
+}
+
+export interface DiscountAttr {
+  name: 'discount';
+  value: boolean;
+}
+
+export interface CompositionAttr {
+  name: 'composition';
+  value: string;
+}
+
+export interface CategoryAttr {
+  name: 'category';
+  value: string;
+}
+
+type ProductAttribute = SizeAttr | DiscountAttr | CompositionAttr | CategoryAttr;
+
 export interface IProduct {
   id: string;
   version: number;
@@ -163,23 +188,7 @@ export interface IProduct {
       },
     ];
     images: ProductImage[];
-    attributes: [
-      {
-        name: 'size';
-        value: {
-          key: ProductSize;
-          label: ProductSize;
-        };
-      },
-      {
-        name: 'discount';
-        value: boolean;
-      },
-      {
-        name: 'composition';
-        value: string;
-      },
-    ];
+    attributes: ProductAttribute[];
   };
   variants: [];
   hasStagedChanges: boolean;

@@ -8,10 +8,16 @@ import { ProductImage } from '../../../types/types';
 interface IImageSlider {
   data: ProductImage[];
   className?: string | undefined;
+  imageClick: (currentIndex: number) => void;
+  initialIndex?: number;
 }
 
-function ImageSlider({ data, className }: IImageSlider) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+function ImageSlider({ data, className, imageClick, initialIndex = 0 }: IImageSlider) {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+  const handleImageClick = () => {
+    imageClick(currentIndex);
+  };
 
   const goToSlide = (slideIndex: number) => {
     setCurrentIndex(slideIndex);
@@ -32,7 +38,11 @@ function ImageSlider({ data, className }: IImageSlider) {
   return data.length === 1 ? (
     <div className={clsx(s.slider, className)}>
       <div className={s.single_image_wrapper}>
-        <div style={{ backgroundImage: `url(${data[0].url})` }} className={s.image_block}></div>
+        <div
+          style={{ backgroundImage: `url(${data[0].url})` }}
+          className={s.image_block}
+          onClick={handleImageClick}
+        ></div>
       </div>
     </div>
   ) : (
@@ -44,6 +54,7 @@ function ImageSlider({ data, className }: IImageSlider) {
         <div
           style={{ backgroundImage: `url(${data[currentIndex].url})` }}
           className={s.image_block}
+          onClick={handleImageClick}
         ></div>
         <button className={clsx(s.image_button, s.image_button_right)} onClick={nextSlide}>
           <ArrowIco />

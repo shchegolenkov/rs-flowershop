@@ -1,4 +1,4 @@
-import { IProduct } from '../../../types/types';
+import { IProduct, SizeAttr } from '../../../types/types';
 import { Typography } from '../Typography';
 import productLabel from '../../../assets/svg/dummy.svg?url';
 import s from './CatalogCard.module.scss';
@@ -17,9 +17,10 @@ function CatalogCard({ data }: ICatalogCard) {
     data.masterVariant.attributes.filter(
       (item: { name: string }) => item.name === 'composition'
     )[0] || 'no description';
-  const size = data.masterVariant.attributes.filter(
-    (item: { name: string }) => item.name === 'size'
-  )[0].value.key;
+  const sizeAttr = data.masterVariant.attributes.find(
+    (item): item is SizeAttr => item.name === 'size'
+  );
+  const size = sizeAttr ? sizeAttr.value.key : 'no size';
   const price = data.masterVariant.prices[0].value.centAmount;
   const discountPrice = data.masterVariant.prices[0].discounted?.value.centAmount;
   return (

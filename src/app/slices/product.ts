@@ -11,7 +11,7 @@ export const fetchProduct = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      throw thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

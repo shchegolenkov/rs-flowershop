@@ -20,20 +20,6 @@ export const fetchProducts = createAsyncThunk('catalog/allProducts', async (_, t
   }
 });
 
-export const fetchProduct = createAsyncThunk(
-  'catalog/product',
-  async (productKey: string, thunkAPI) => {
-    try {
-      const response = await CatalogService.getProduct(productKey);
-      if (response) {
-        return response.data;
-      }
-    } catch (error) {
-      throw thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 interface CatalogState {
   queryResult: IPageQueryResult | undefined | null;
   status: Status;
