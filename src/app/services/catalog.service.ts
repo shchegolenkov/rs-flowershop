@@ -23,7 +23,6 @@ const getAccessToken = async () => {
     const accessToken = response.data.access_token;
     return accessToken;
   } catch (error) {
-    console.log('Error getting access token:', error);
     return null;
   }
 };
