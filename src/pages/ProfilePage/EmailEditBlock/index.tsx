@@ -47,6 +47,7 @@ const EmailForm: React.FC = () => {
     dispatch(setIsDisabledEmail());
     setCancelSubmit(!cancelSubmit);
     setIsSuccess(false);
+    setFormError(false);
     dispatch(clearMessage());
     reset({
       email: user && user.email ? user.email : '',
