@@ -239,6 +239,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
     disabledAllFields();
     setCancelSubmit(!cancelSubmit);
     setIsSuccess(false);
+    setFormError(false);
     dispatch(clearMessage());
     setCheckedShipBillAddress(billingAddressIds.includes(address.id));
     setCheckedShipDefAddress(defaultShippingAddressId === address.id);

@@ -163,6 +163,7 @@ const ProfilePage: React.FC = () => {
     dispatch(setDisabledAllFields());
     setCancelSubmit(!cancelSubmit);
     setIsSuccess(false);
+    setFormError(false);
     dispatch(clearMessage());
     reset();
     reset({
