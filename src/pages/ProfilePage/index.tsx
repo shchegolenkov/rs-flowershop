@@ -119,7 +119,7 @@ const ProfilePage: React.FC = () => {
       firstName: user ? user.firstName : '',
       lastName: user ? user.lastName : '',
     },
-    mode: 'onTouched',
+    mode: 'onChange',
   } as UseFormProps<CustomerData>);
 
   useEffect(() => {
