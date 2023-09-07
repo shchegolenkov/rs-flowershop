@@ -6,10 +6,10 @@ import FormTheme from '../../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
 import EmailInput from '../../../components/UI/FormFields/EmailInput';
 import Button from '../../../components/UI/Button';
-import { validateEmail } from '../../../utils/validators';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
+import isEmail from 'validator/lib/isEmail';
 
 import { RootState, AppDispatch } from '../../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,6 @@ import { CustomerData } from '../../../types/types';
 import ProfileEditBlock from '../ProfileEditBlock';
 
 const EmailForm: React.FC = () => {
-  const [emailError, setEmailError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);
@@ -61,10 +60,11 @@ const EmailForm: React.FC = () => {
           .string()
           .required('Email is required.')
           .email('Invalid email (e.g., example@example.com)')
-          .matches(/^[^@]+@[^.]+\..+$/, 'Email should contain a dot in the domain')
-          .test('custom-email-validation', `${emailError}`, (value) => {
-            return validateEmail(value as string, setEmailError);
-          })
+          .test('is-valid', 'Invalid email (e.g., example@example.com)', (value) =>
+            value
+              ? isEmail(value)
+              : new yup.ValidationError('Invalid email (e.g., example@example.com)')
+          )
           .test('not-default-email', 'Email should not be the previous value', (value) => {
             if (user) {
               return value !== user.email;
