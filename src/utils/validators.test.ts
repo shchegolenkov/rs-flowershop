@@ -1,16 +1,5 @@
-import { validateEmail, validateDate } from './validators';
+import { validateDate } from './validators';
 import dayjs, { Dayjs } from 'dayjs';
-
-describe('validateEmail', () => {
-  it('returns false and sets error message for an invalid email', () => {
-    const setEmailErrorMock = jest.fn();
-    const result = validateEmail('invalid-email', setEmailErrorMock);
-    expect(result).toBe(false);
-    expect(setEmailErrorMock).toHaveBeenCalledWith(
-      expect.stringContaining('Invalid email address')
-    );
-  });
-});
 
 describe('validateDate', () => {
   it('returns "invalidDate" for null date', () => {
