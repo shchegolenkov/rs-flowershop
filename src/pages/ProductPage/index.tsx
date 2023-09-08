@@ -11,12 +11,9 @@ import ModalWindow from '../../components/UI/ModalWindow';
 import s from './ProductPage.module.scss';
 import { CategoryAttr, CompositionAttr, SizeAttr, Status } from '../../types/types';
 import formatPrice from '../../utils/formatPrice';
+import changeHyphenToSpace from '../../utils/changeHyphenToSpace';
 import NotFoundPage from '../../pages/NotFoundPage';
 import CircularProgress from '@mui/material/CircularProgress';
-
-function changeHyphenToSpace(input: string): string {
-  return input.replace(/-/g, ' ');
-}
 
 function ProductPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -70,12 +67,12 @@ function ProductPage() {
   const compositionAttr = product.masterVariant.attributes.find(
     (item): item is CompositionAttr => item.name === 'composition'
   );
-  const productComposition = compositionAttr ? compositionAttr.value : 'no description';
+  const productComposition = compositionAttr?.value || 'no description';
 
   const categoryAttr = product.masterVariant.attributes.find(
     (item): item is CategoryAttr => item.name === 'category'
   );
-  const productCategory = categoryAttr ? categoryAttr.value : '';
+  const productCategory = categoryAttr?.value || '';
 
   return (
     <main>
