@@ -12,7 +12,6 @@ import { Typography } from '../../components/UI/Typography';
 import Button from '../../components/UI/Button';
 import EmailInput from '../../components/UI/FormFields/EmailInput';
 import PasswordInput from '../../components/UI/FormFields/PasswordInput';
-import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types/types';
 import { useDispatch } from 'react-redux';
 import { clearMessage } from '../../app/slices/message';
@@ -20,9 +19,9 @@ import { getUser, loginUser } from '../../app/slices/auth';
 import { useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../app/store';
 import Alert from '@mui/material/Alert';
+import isEmail from 'validator/lib/isEmail';
 
 const LoginPage: React.FC = () => {
-  const [emailError, setEmailError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const { message } = useSelector((state: RootState) => state.message);
   const navigate = useNavigate();
@@ -43,11 +42,11 @@ const LoginPage: React.FC = () => {
       .string()
       .required('Email is required.')
       .email('Invalid email (e.g., example@example.com)')
-      .matches(/^[^@]+@[^.]+\..+$/, 'Email should contain a dot in the domain')
-      .test('custom-email-validation', `${emailError}`, (value) => {
-        return validateEmail(value as string, setEmailError);
-      })
-      .matches(/^\S[^]*\S$/, 'Email should not contain spaces at the beginning or end'),
+      .test('is-valid', 'Invalid email (e.g., example@example.com)', (value) =>
+        value
+          ? isEmail(value)
+          : new yup.ValidationError('Invalid email (e.g., example@example.com)')
+      ),
     password: yup
       .string()
       .required('Password is required')
