@@ -1,0 +1,56 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.groups {
+  @include media-large {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-small {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.buttons {
+  display: grid;
+
+  @include media-large {
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    margin-top: 20px;
+  }
+
+  @include media-mobile {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.group,
+.button {
+  margin: 20px 0;
+}
+
+.input {
+  margin-left: 20px;
+}
+
+.button,
+.input {
+  @include media-large {
+    margin: 0;
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-top: 32px;
+}

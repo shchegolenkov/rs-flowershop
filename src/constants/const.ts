@@ -4,3 +4,5 @@ export const countries = [
     label: 'NL',
   },
 ];
+
+export const ITEMS_PER_PAGE = 9;

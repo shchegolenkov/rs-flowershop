@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import s from './RegisterPage.module.scss';
 import clsx from 'clsx';
 import { ThemeProvider } from '@mui/material/styles';
@@ -10,7 +10,6 @@ import Button from '../../components/UI/Button';
 
 import { Typography } from '../../components/UI/Typography';
 import FormTheme from '../../themes/FormTheme';
-import { validateEmail } from '../../utils/validators';
 import { CustomerData } from '../../types/types';
 import EmailInput from '../../components/UI/FormFields/EmailInput';
 import PasswordInput from '../../components/UI/FormFields/PasswordInput';
@@ -22,8 +21,9 @@ import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
 import { RootState, AppDispatch } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, loginUser } from '../../app/slices/auth';
+import { registerUser, loginUser, getUser } from '../../app/slices/auth';
 import { clearMessage } from '../../app/slices/message';
+import isEmail from 'validator/lib/isEmail';
 
 const RegisterPage: React.FC = () => {
   const { message } = useSelector((state: RootState) => state.message);
@@ -32,7 +32,6 @@ const RegisterPage: React.FC = () => {
     dispatch(clearMessage());
   }, [dispatch]);
   const navigate = useNavigate();
-  const [emailError, setEmailError] = useState('');
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(true);
   const [checkedBillDefAddress, setCheckedBillDefAddress] = React.useState(true);
@@ -58,11 +57,11 @@ const RegisterPage: React.FC = () => {
       .string()
       .required('Email is required.')
       .email('Invalid email (e.g., example@example.com)')
-      .matches(/^[^@]+@[^.]+\..+$/, 'Email should contain a dot in the domain')
-      .test('custom-email-validation', `${emailError}`, (value) => {
-        return validateEmail(value as string, setEmailError);
-      })
-      .matches(/^\S[^]*\S$/, 'Email should not contain spaces at the beginning or end'),
+      .test('is-valid', 'Invalid email (e.g., example@example.com)', (value) =>
+        value
+          ? isEmail(value)
+          : new yup.ValidationError('Invalid email (e.g., example@example.com)')
+      ),
     password: yup
       .string()
       .required('Password is required.')
@@ -83,7 +82,7 @@ const RegisterPage: React.FC = () => {
       .string()
       .required('Last name is required.')
       .matches(/^[a-zA-Z]+$/, 'Last name cannot contain special characters or numbers.'),
-    birthDate: yup
+    dateOfBirth: yup
       .date()
       .max(thirteenYearsAgo)
       .min(minDate)
@@ -182,7 +181,7 @@ const RegisterPage: React.FC = () => {
       password: '',
       firstName: '',
       lastName: '',
-      birthDate: null,
+      dateOfBirth: null,
       shippingStreet: '',
       shippingCity: '',
       shippingPostalCode: '',
@@ -206,6 +205,9 @@ const RegisterPage: React.FC = () => {
         dispatch(loginUser(data))
           .unwrap()
           .then(() => {
+            dispatch(getUser());
+          })
+          .then(() => {
             setIsSuccess(true);
             setTimeout(() => {
               navigate('/');
@@ -227,7 +229,7 @@ const RegisterPage: React.FC = () => {
       errors.password ||
       errors.lastName ||
       errors.firstName ||
-      errors.birthDate ||
+      errors.dateOfBirth ||
       errors.shippingStreet ||
       errors.shippingCity ||
       errors.shippingPostalCode ||
@@ -277,7 +279,14 @@ const RegisterPage: React.FC = () => {
             </div>
             <div className={clsx(s.form__element, s.form__element_flow)}>
               <EmailInput register={register} errors={errors} />
-              <PasswordInput register={register} errors={errors} />
+              <PasswordInput
+                register={register}
+                name={'password'}
+                err={errors.password}
+                errMessage={errors.password?.message}
+                label={'Password *'}
+                id={'password-reg'}
+              />
             </div>
           </div>
           <div className={clsx(s.elements__flow)}>
@@ -305,7 +314,13 @@ const RegisterPage: React.FC = () => {
                 label="Last name *"
                 id="lastName-input"
               />
-              <BirthDateInput register={register} errors={errors} control={control} reset={reset} />
+              <BirthDateInput
+                register={register}
+                errors={errors}
+                control={control}
+                reset={reset}
+                defaultValue={new Date('01-01-2010')}
+              />
             </div>
           </div>
           <div className={clsx(s.elements__flow)}>

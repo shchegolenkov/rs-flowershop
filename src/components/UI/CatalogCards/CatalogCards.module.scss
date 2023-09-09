@@ -1,0 +1,30 @@
+.wrapper {
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(3, 1fr);
+
+  @include media-large {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-small {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wrapper > div {
+  border-bottom: 1px solid var(--color-black);
+}
+
+.items {
+  grid-column-end: span 3;
+  padding: 80px;
+  min-height: 1fr;
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-bottom: 1px solid var(--color-black);
+}

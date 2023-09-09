@@ -27,7 +27,6 @@ const getAccessToken = async () => {
     const accessToken = response.data.access_token;
     return accessToken;
   } catch (error) {
-    console.log('Error getting access token:', error);
     return null;
   }
 };
@@ -61,7 +60,7 @@ const registerUser = async (data: CustomerData) => {
       password: data.password,
       firstName: data.firstName,
       lastName: data.lastName,
-      dateOfBirth: dayjs(data.birthDate).format('YYYY-MM-DD'),
+      dateOfBirth: dayjs(data.dateOfBirth).format('YYYY-MM-DD'),
       addresses: [],
     };
     if (
@@ -163,11 +162,20 @@ const tokenIntrospection = async () => {
   }
 };
 
+const getUser = async () => {
+  const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
+  const userId = localStorage.getItem('userId') || 'notFoundId';
+  return axios.get(`${REG_USER_URL}/${userId}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+};
+
 const AuthService = {
   registerUser,
   loginUser,
   logoutUser,
   tokenIntrospection,
+  getUser,
 };
 
 export default AuthService;
