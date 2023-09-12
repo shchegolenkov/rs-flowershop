@@ -234,3 +234,8 @@ export interface ThunkAPI {
   dispatch: Dispatch;
   rejectWithValue: (value: null) => void;
 }
+
+export interface UpdateCart {
+  productID: string;
+  quantity: number;
+}
