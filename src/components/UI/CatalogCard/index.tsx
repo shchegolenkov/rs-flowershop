@@ -1,4 +1,4 @@
-import { IProduct, SizeAttr } from '../../../types/types';
+import { IProduct, SizeAttr, Status, UpdateCart } from '../../../types/types';
 import { Typography } from '../Typography';
 import productLabel from '../../../assets/svg/dummy.svg?url';
 import s from './CatalogCard.module.scss';
@@ -6,13 +6,22 @@ import { Link } from 'react-router-dom';
 import formatPrice from '../../../utils/formatPrice';
 import Button from '../Button';
 import CartBtnIco from '../../../assets/svg/cartBtnIco.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../app/store';
+import { createCart, updateCart } from '../../../app/slices/cart';
+import { useEffect, useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useCallback } from 'react';
 
 interface ICatalogCard {
   data: IProduct;
 }
 
 function CatalogCard({ data }: ICatalogCard) {
-  const productId = data.id;
+  const dispatch = useDispatch<AppDispatch>();
+  const { status } = useSelector((state: RootState) => state.cart);
+  const [localStatus, setLocalStatus] = useState(Status.SUCCESS);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const productUrl = data.slug['en-US'];
   const responceImg = data.masterVariant.images;
   const imgUrl = responceImg.length > 0 ? responceImg[0].url : productLabel;
@@ -26,6 +35,38 @@ function CatalogCard({ data }: ICatalogCard) {
   const size = sizeAttr ? sizeAttr.value.key : 'no size';
   const price = data.masterVariant.prices[0].value.centAmount;
   const discountPrice = data.masterVariant.prices[0].discounted?.value.centAmount;
+
+  const handleCartBtnClick = async () => {
+    try {
+      setLocalStatus(Status.LOADING);
+      if (!localStorage.getItem('cart')) {
+        await dispatch(createCart());
+      }
+      const updateData: UpdateCart = {
+        productID: data.id,
+        quantity: 1,
+      };
+      await dispatch(updateCart(updateData));
+      setIsButtonDisabled(isDisable());
+      setLocalStatus(Status.SUCCESS);
+    } catch (error) {}
+  };
+
+  const isDisable = useCallback(() => {
+    const cartData = localStorage.getItem('cart') || null;
+    const cart = cartData ? JSON.parse(cartData) : '';
+    if (cart && cart.lineItems && Array.isArray(cart.lineItems)) {
+      for (const lineItem of cart.lineItems) {
+        if (lineItem.productId === data.id) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }, [data.id]);
+  useEffect(() => {
+    setIsButtonDisabled(isDisable());
+  }, [isDisable]);
   return (
     <div className={s.card}>
       <Link to={`${productUrl}`} className={s.link} style={{ backgroundImage: `url(${imgUrl})` }}>
@@ -54,9 +95,20 @@ function CatalogCard({ data }: ICatalogCard) {
           </div>
         </div>
       </Link>
-      <Button className={s.btn} variant={'ico'} onClick={() => console.log(productId)}>
-        <CartBtnIco />
-      </Button>
+      {localStatus === Status.LOADING ? (
+        <div>
+          <CircularProgress className={s.btn} />
+        </div>
+      ) : (
+        <Button
+          className={s.btn}
+          variant={'ico'}
+          onClick={handleCartBtnClick}
+          disabled={status === Status.LOADING ? true : isButtonDisabled}
+        >
+          <CartBtnIco />
+        </Button>
+      )}
     </div>
   );
 }
