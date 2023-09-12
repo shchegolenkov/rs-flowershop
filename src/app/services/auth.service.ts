@@ -124,7 +124,8 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
       };
 
       if (anonymousToken) {
-        const cart = JSON.parse(localStorage.getItem('cart')) || '';
+        const cartData = localStorage.getItem('cart') || null;
+        const cart = cartData ? JSON.parse(cartData) : '';
         if (cart.anonymousId) {
           requestPayload['anonymousCart'] = {
             id: cart.id,
