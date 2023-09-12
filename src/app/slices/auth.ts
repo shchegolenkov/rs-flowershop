@@ -41,6 +41,7 @@ export const loginUser = createAsyncThunk(
       if (response) {
         localStorage.setItem('userId', response.data.customer.id);
         localStorage.setItem('user', JSON.stringify(response.data.customer));
+        localStorage.setItem('cart', JSON.stringify(response.data.cart));
         return response.data.customer;
       }
     } catch (error) {
@@ -55,6 +56,9 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
     localStorage.removeItem('user');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('refreshAnonymousToken');
+    localStorage.removeItem('anonymousToken');
     return true;
   } catch (error) {
     console.error('Error during logout:', error);
