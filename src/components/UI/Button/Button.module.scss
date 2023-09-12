@@ -26,7 +26,14 @@
   width: 100%;
 }
 
-.primary {
+.ico {
+  width: auto;
+  padding: 6px;
+  line-height: 0;
+}
+
+.primary,
+.ico {
   color: var(--color-white);
   background-color: var(--color-black);
   border: 1px solid var(--color-black);
