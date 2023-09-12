@@ -4,12 +4,15 @@ import productLabel from '../../../assets/svg/dummy.svg?url';
 import s from './CatalogCard.module.scss';
 import { Link } from 'react-router-dom';
 import formatPrice from '../../../utils/formatPrice';
+import Button from '../Button';
+import CartBtnIco from '../../../assets/svg/cartBtnIco.svg';
 
 interface ICatalogCard {
   data: IProduct;
 }
 
 function CatalogCard({ data }: ICatalogCard) {
+  const productId = data.id;
   const productUrl = data.slug['en-US'];
   const responceImg = data.masterVariant.images;
   const imgUrl = responceImg.length > 0 ? responceImg[0].url : productLabel;
@@ -24,8 +27,8 @@ function CatalogCard({ data }: ICatalogCard) {
   const price = data.masterVariant.prices[0].value.centAmount;
   const discountPrice = data.masterVariant.prices[0].discounted?.value.centAmount;
   return (
-    <Link to={`${productUrl}`} className={s.link}>
-      <div className={s.card} style={{ backgroundImage: `url(${imgUrl})` }}>
+    <div className={s.card}>
+      <Link to={`${productUrl}`} className={s.link} style={{ backgroundImage: `url(${imgUrl})` }}>
         {discountPrice && (
           <Typography variant={'h4'} className={s.sale}>
             SALE
@@ -50,8 +53,11 @@ function CatalogCard({ data }: ICatalogCard) {
             )}
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+      <Button className={s.btn} variant={'ico'} onClick={() => console.log(productId)}>
+        <CartBtnIco />
+      </Button>
+    </div>
   );
 }
 
