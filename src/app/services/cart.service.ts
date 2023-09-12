@@ -46,9 +46,7 @@ const createCart = async () => {
     const cart = await response.data;
     localStorage.setItem('cart', JSON.stringify(cart));
     return response;
-  } catch (error) {
-    throw new Error('error creating cart');
-  }
+  } catch (error) {}
 };
 
 const updateCart = async (data: UpdateCart) => {
@@ -56,7 +54,8 @@ const updateCart = async (data: UpdateCart) => {
     localStorage.getItem('accessToken') ||
     localStorage.getItem('anonymousToken') ||
     (await getAnonymousToken());
-  const cart = JSON.parse(localStorage.getItem('cart')) || '';
+  const cartData = localStorage.getItem('cart') || null;
+  const cart = cartData ? JSON.parse(cartData) : '';
   if (cart) {
     const cartId = cart.id;
     const cartVersion = Number(cart.version);
@@ -80,9 +79,7 @@ const updateCart = async (data: UpdateCart) => {
       const cart = await response.data;
       localStorage.setItem('cart', JSON.stringify(cart));
       return response;
-    } catch (error) {
-      throw new Error('error updating cart');
-    }
+    } catch (error) {}
   }
 };
 
