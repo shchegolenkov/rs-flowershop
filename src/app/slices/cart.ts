@@ -32,7 +32,7 @@ interface CartState {
 }
 
 const initialState: CartState = {
-  status: Status.LOADING,
+  status: Status.SUCCESS,
 };
 
 const cartSlice = createSlice({
@@ -49,6 +49,17 @@ const cartSlice = createSlice({
     });
 
     builder.addCase(createCart.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+    builder.addCase(updateCart.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+
+    builder.addCase(updateCart.fulfilled, (state) => {
+      state.status = Status.SUCCESS;
+    });
+
+    builder.addCase(updateCart.rejected, (state) => {
       state.status = Status.ERROR;
     });
   },
