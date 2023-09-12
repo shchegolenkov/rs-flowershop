@@ -102,16 +102,36 @@ const registerUser = async (data: CustomerData) => {
   }
 };
 
+interface requestPayloadLogin {
+  email: string;
+  password: string;
+  anonymousCart?: {
+    id: string;
+    typeId: string;
+  };
+}
+
 const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
   try {
     const accessToken = await getAccessClientToken(data);
     localStorage.setItem('accessToken', accessToken);
+    const anonymousToken = localStorage.getItem('anonymousToken') || null;
 
     if (accessToken) {
-      const requestPayload: Pick<RequestPayload, 'email' | 'password'> = {
+      const requestPayload: requestPayloadLogin = {
         email: data.email,
         password: data.password,
       };
+
+      if (anonymousToken) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || '';
+        if (cart.anonymousId) {
+          requestPayload['anonymousCart'] = {
+            id: cart.id,
+            typeId: 'cart',
+          };
+        }
+      }
 
       return axios.post(LOGIN_URL, requestPayload, {
         headers: { Authorization: `Bearer ${accessToken}` },
