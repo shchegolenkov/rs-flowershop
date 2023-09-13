@@ -82,9 +82,6 @@ const LoginPage: React.FC = () => {
       .then(() => dispatch(getUser()))
       .then(() => {
         setIsSuccess(true);
-        setTimeout(() => {
-          navigate('/');
-        }, 2000);
       })
       .catch(() => {
         setIsSuccess(false);
