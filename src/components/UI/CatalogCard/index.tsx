@@ -9,9 +9,8 @@ import CartBtnIco from '../../../assets/svg/cartBtnIco.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../app/store';
 import { createCart, updateCart } from '../../../app/slices/cart';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useCallback } from 'react';
 
 interface ICatalogCard {
   data: IProduct;
@@ -96,8 +95,8 @@ function CatalogCard({ data }: ICatalogCard) {
         </div>
       </Link>
       {localStatus === Status.LOADING ? (
-        <div>
-          <CircularProgress className={s.btn} />
+        <div className={s.loadBlock}>
+          <CircularProgress color={'inherit'} size={26} />
         </div>
       ) : (
         <Button
