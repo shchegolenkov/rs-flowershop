@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { logoutUser, tokenIntrospection } from '../../../app/slices/auth';
 import { useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../../app/store';
+import { Typography } from '../../../components/UI/Typography';
 
 const links = [
   { to: '/catalog', text: 'Catalog' },
@@ -24,6 +25,7 @@ const anonymLinks = [
 ];
 
 function Header() {
+  const { cartData } = useSelector((state: RootState) => state.cart);
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [isMenuActive, setMenuActive] = useState(false);
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
@@ -112,8 +114,11 @@ function Header() {
           </button>
         </div>
         <div className={s.ico}>
-          <MenuLink to="/cart">
+          <MenuLink to="/cart" className={s.cartLink}>
             <CartIco />
+            <Typography className={s.counter} variant={'captionSmall'}>
+              {cartData ? cartData && cartData.totalLineItemQuantity : '0'}
+            </Typography>
           </MenuLink>
         </div>
       </nav>
