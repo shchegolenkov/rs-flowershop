@@ -53,12 +53,7 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
   try {
     await AuthService.logoutUser();
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('user');
-    localStorage.removeItem('cart');
-    localStorage.removeItem('refreshAnonymousToken');
-    localStorage.removeItem('anonymousToken');
+    localStorage.clear();
     return true;
   } catch (error) {
     console.error('Error during logout:', error);
