@@ -209,9 +209,6 @@ const RegisterPage: React.FC = () => {
           })
           .then(() => {
             setIsSuccess(true);
-            setTimeout(() => {
-              navigate('/');
-            }, 2000);
           })
           .catch(() => {
             setIsSuccess(false);

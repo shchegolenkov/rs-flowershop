@@ -10,6 +10,7 @@ import productsReducer, {
   setPage,
   setFilters,
 } from './slices/catalog';
+import cartReducer from './slices/cart';
 
 const reducer = {
   auth: authReducer,
@@ -17,6 +18,7 @@ const reducer = {
   profile: profileReducer,
   products: productsReducer,
   product: productReducer,
+  cart: cartReducer,
 };
 
 const listenerMiddleware = createListenerMiddleware();
