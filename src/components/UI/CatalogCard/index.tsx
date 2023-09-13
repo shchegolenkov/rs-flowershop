@@ -8,7 +8,7 @@ import Button from '../Button';
 import CartBtnIco from '../../../assets/svg/cartBtnIco.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../app/store';
-import { createCart, updateCart } from '../../../app/slices/cart';
+import { createCart, updateCart, setCartData } from '../../../app/slices/cart';
 import { useEffect, useState, useCallback } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -39,16 +39,20 @@ function CatalogCard({ data }: ICatalogCard) {
     try {
       setLocalStatus(Status.LOADING);
       if (!localStorage.getItem('cart')) {
-        await dispatch(createCart());
+        const cart = await dispatch(createCart());
+        dispatch(setCartData(JSON.stringify(cart.payload)));
       }
       const updateData: UpdateCart = {
         productID: data.id,
         quantity: 1,
       };
-      await dispatch(updateCart(updateData));
+      const cart = await dispatch(updateCart(updateData));
+      await dispatch(setCartData(cart.payload));
       setIsButtonDisabled(isDisable());
       setLocalStatus(Status.SUCCESS);
-    } catch (error) {}
+    } catch (error) {
+      console.log('Error create cart or added product to cart:', error);
+    }
   };
 
   const isDisable = useCallback(() => {

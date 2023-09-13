@@ -239,3 +239,86 @@ export interface UpdateCart {
   productID: string;
   quantity: number;
 }
+
+export interface Cart {
+  anonymousId?: string;
+  cartState: string;
+  createdAt: string;
+  createdBy: {
+    clientId: string;
+    isPlatformClient: boolean;
+    anonymousId: string;
+  };
+  customLineItems: [];
+  deleteDaysAfterLastModification: number;
+  directDiscounts: [];
+  discountCodes: [];
+  id: string;
+  inventoryMode: string;
+  itemShippingAddresses: [];
+  lastMessageSequenceNumber: number;
+  lastModifiedAt?: string;
+  lastModifiedBy?: {
+    clientId: string;
+    isPlatformClient: boolean;
+    anonymousId: string;
+  };
+  lineItems: LineItem[];
+  origin: string;
+  refusedGifts: [];
+  shipping: [];
+  shippingMode: string;
+  taxCalculationMode: string;
+  taxMode: string;
+  taxRoundingMode: string;
+  totalLineItemQuantity: number;
+  totalPrice: Money;
+  type: string;
+  version: number;
+  versionModifiedAt: string;
+}
+
+interface LineItem {
+  id: string;
+  productId: string;
+  productKey: string;
+  name: Record<string, string>;
+  productType: {
+    typeId: string;
+    id: string;
+    version: number;
+  };
+  productSlug: Record<string, string>;
+  variant: {
+    id: number;
+    sku: string;
+    prices: Money[];
+    images: ProductImage[];
+    attributes: ProductAttribute[];
+    assets?: [];
+  };
+  price: Money;
+  quantity: number;
+  discountedPricePerQuantity?: [];
+  perMethodTaxRate?: [];
+  addedAt: string;
+  lastModifiedAt?: string;
+  state: {
+    quantity: number;
+    state: {
+      typeId: string;
+      id: string;
+    };
+  }[];
+  priceMode: string;
+  lineItemMode: string;
+  totalPrice: Money;
+  taxedPricePortions?: [];
+}
+
+interface Money {
+  type: string;
+  currencyCode: string;
+  centAmount: number;
+  fractionDigits: number;
+}

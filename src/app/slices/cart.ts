@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { Status, UpdateCart } from '../../types/types';
+import { Cart, Status, UpdateCart } from '../../types/types';
 import CartService from '../services/cart.service';
+const cart = JSON.parse(localStorage.getItem('cart') as string);
 
 export const createCart = createAsyncThunk('cart/createCart', async (_, thunkAPI) => {
   try {
@@ -29,16 +30,22 @@ export const updateCart = createAsyncThunk(
 
 interface CartState {
   status: Status;
+  cartData: Cart;
 }
 
 const initialState: CartState = {
   status: Status.SUCCESS,
+  cartData: cart ? cart : null,
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {},
+  reducers: {
+    setCartData: (state, action) => {
+      state.cartData = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(createCart.pending, (state) => {
       state.status = Status.LOADING;
@@ -66,4 +73,5 @@ const cartSlice = createSlice({
 });
 
 const { reducer } = cartSlice;
+export const { setCartData } = cartSlice.actions;
 export default reducer;
