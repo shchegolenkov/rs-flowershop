@@ -7,7 +7,7 @@ const CTP_API_URL = process.env.CTP_API_URL as string;
 const CTP_PROJECT_KEY = process.env.CTP_PROJECT_KEY as string;
 const CTP_AUTH_URL = process.env.CTP_AUTH_URL as string;
 const URL_ANONIM = `${CTP_AUTH_URL}/oauth/${CTP_PROJECT_KEY}/anonymous/token`;
-const URL_CARD = `${CTP_API_URL}/${CTP_PROJECT_KEY}/me/carts`;
+const URL_CART = `${CTP_API_URL}/${CTP_PROJECT_KEY}/me/carts`;
 
 const getAnonymousToken = async () => {
   try {
@@ -35,7 +35,7 @@ const createCart = async () => {
   const accessToken = localStorage.getItem('accessToken') || (await getAnonymousToken());
   try {
     const response = await axios.post(
-      URL_CARD,
+      URL_CART,
       {
         currency: 'EUR',
       },
@@ -63,7 +63,7 @@ const updateCart = async (data: UpdateCart) => {
     const cartVersion = Number(cart.version);
     try {
       const response = await axios.post(
-        URL_CARD + `/${cartId}`,
+        URL_CART + `/${cartId}`,
         {
           version: cartVersion,
           actions: [
