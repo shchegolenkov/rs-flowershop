@@ -236,8 +236,10 @@ export interface ThunkAPI {
 }
 
 export interface UpdateCart {
-  productID: string;
-  quantity: number;
+  action: string;
+  productId?: string;
+  lineItemId?: string;
+  quantity?: number;
 }
 
 export interface Cart {
