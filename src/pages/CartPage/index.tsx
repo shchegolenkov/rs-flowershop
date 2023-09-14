@@ -1,6 +1,7 @@
 import s from './CartPage.module.scss';
 import { Typography } from '../../components/UI/Typography';
 import Button from '../../components/UI/Button';
+import ClearCartIco from '../../assets/svg/delCart.svg';
 import clsx from 'clsx';
 
 const CartPage: React.FC = () => {
@@ -13,6 +14,12 @@ const CartPage: React.FC = () => {
             <Typography variant={'overline'} className={s.overline}>
               Order summary
             </Typography>
+            <div className={s.itemsBlock}>
+              <button className={s.buttonClear}>
+                <Typography variant={'subtitle'}>Clear all cart</Typography>
+                <ClearCartIco />
+              </button>
+            </div>
             <div className={s.promoBlock}>
               <Typography variant={'body'}>
                 If you have our promo code, enter the code to get discount
