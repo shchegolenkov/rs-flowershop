@@ -34,7 +34,7 @@ const CartPage = () => {
                 </div>
               </div>
             ) : (
-              <div>Empty cart</div>
+              <div className={s.emptyCartBlock}>Empty cart</div>
             )}
             <div className={s.promoBlock}>
               <Typography variant={'body'}>
