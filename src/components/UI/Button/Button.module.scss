@@ -107,7 +107,7 @@
   }
 
   &:active {
-    color: var(--color-error);
+    color: var(--color-gray);
     &::after {
       width: 80%;
       background-color: var(--color-black);

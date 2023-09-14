@@ -14,6 +14,7 @@ import formatPrice from '../../utils/formatPrice';
 import changeHyphenToSpace from '../../utils/changeHyphenToSpace';
 import NotFoundPage from '../../pages/NotFoundPage';
 import CircularProgress from '@mui/material/CircularProgress';
+import clsx from 'clsx';
 
 function ProductPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -137,7 +138,12 @@ function ProductPage() {
                 <Typography variant={'body'}>{productSize}</Typography>
               </div>
             </div>
-            <Button className={s.button}>Add to cart</Button>
+            <div className={s.btnBlock}>
+              <Button className={s.button}>Add to cart</Button>
+              <Button className={clsx(s.button, s.buttonCancel)} variant="underlined">
+                Remove from Cart
+              </Button>
+            </div>
           </div>
         </div>
       </div>
