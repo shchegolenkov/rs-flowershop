@@ -1,0 +1,144 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--color-black);
+
+  @include media-large {
+    grid-template-columns: 1fr;
+  }
+}
+
+.textBlock {
+  padding: 80px;
+
+  @include media-small {
+    padding: 40px 16px;
+  }
+}
+
+.rsBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--color-black);
+
+  .logoLink {
+    display: block;
+    width: 158px;
+    justify-self: flex-start;
+    margin: 0 0 auto;
+    &::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 1px;
+      background-color: var(--color-black);
+      transition: width 0.3s;
+    }
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  .textWrapper {
+    text-align: center;
+    margin: 0 0 auto;
+
+    p {
+      margin-top: 24px;
+    }
+  }
+
+  @include media-large {
+    border-right: none;
+    border-bottom: 1px solid var(--color-black);
+    min-height: 500px;
+  }
+}
+
+.imageBlock {
+  min-height: 720px;
+  @include media-large {
+    min-height: 500px;
+  }
+}
+
+.rsBlockImage {
+  background:
+    center / cover no-repeat url('../../assets/images/heroImg.png'),
+    lightgray 0px -353.086px / 100% 149.97% no-repeat;
+}
+
+.aboutBlock {
+  border-bottom: 1px solid var(--color-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .aboutTitle {
+    margin: 12px 0 24px;
+  }
+
+  .aboutText {
+    max-width: 640px;
+  }
+}
+
+.persons {
+  grid-template-areas: 'leftBlock rightBlock';
+  &:nth-child(odd) > :first-of-type {
+    grid-area: rightBlock;
+  }
+  &:nth-child(odd) > .imageBlock {
+    grid-area: leftBlock;
+    border-right: 1px solid var(--color-black);
+  }
+
+  &:nth-child(even) > :first-of-type {
+    grid-area: leftBlock;
+    border-right: 1px solid var(--color-black);
+  }
+  &:nth-child(even) > .imageBlock {
+    grid-area: rightBlock;
+  }
+
+  @include media-large {
+    grid-template-areas:
+      'topBlock'
+      'bottomBlock';
+
+    &:nth-child(odd) > :first-of-type,
+    &:nth-child(even) > :first-of-type {
+      grid-area: bottomBlock;
+      border-right: none;
+    }
+
+    &:nth-child(odd) > .imageBlock,
+    &:nth-child(even) > .imageBlock {
+      grid-area: topBlock;
+      border-right: none;
+      border-bottom: 1px solid var(--color-black);
+    }
+  }
+}
+
+.denImg {
+  background: top / cover no-repeat url('../../assets/images/Den.jpg');
+}
+
+.aliakseyImg {
+  background: top / cover no-repeat url('../../assets/images/Aliaksey.jpg');
+}
+
+.glebImg {
+  background: top / cover no-repeat url('../../assets/images/Gleb.jpg');
+}
+
+.collaborationBlock {
+  text-align: center;
+  .collaborationTitle {
+    margin-bottom: 16px;
+  }
+}
