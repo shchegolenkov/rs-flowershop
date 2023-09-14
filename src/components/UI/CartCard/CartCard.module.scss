@@ -1,0 +1,12 @@
+.cardBlock {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.removeItemButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
