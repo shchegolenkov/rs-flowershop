@@ -9,20 +9,26 @@ import Button from '../../components/UI/Button';
 import ImageSlider from '../../components/UI/ImageSlider';
 import ModalWindow from '../../components/UI/ModalWindow';
 import s from './ProductPage.module.scss';
-import { CategoryAttr, CompositionAttr, SizeAttr, Status } from '../../types/types';
+import { CategoryAttr, CompositionAttr, SizeAttr, Status, UpdateCart } from '../../types/types';
 import formatPrice from '../../utils/formatPrice';
 import changeHyphenToSpace from '../../utils/changeHyphenToSpace';
 import NotFoundPage from '../../pages/NotFoundPage';
 import CircularProgress from '@mui/material/CircularProgress';
 import clsx from 'clsx';
+import { createCart, updateCart } from '../../app/slices/cart';
 
 function ProductPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isButtonAddDisabled, setIsButtonAddDisabled] = useState(false);
+  const [isButtonRemoveDisabled, setIsButtonRemoveDisabled] = useState(false);
+  const [responseStatus, setResponseStatus] = useState(Status.LOADING);
 
   const productKey = useLocation().pathname.split('/').pop() || '';
 
   const productState = useSelector((state: RootState) => state.product);
+  const { statusCart } = useSelector((state: RootState) => state.cart);
+
   const { status, product } = productState;
 
   const dispatch = useDispatch<AppDispatch>();
@@ -30,6 +36,11 @@ function ProductPage() {
   useEffect(() => {
     dispatch(fetchProduct(productKey));
   }, [dispatch, productKey]);
+
+  useEffect(() => {
+    setIsButtonAddDisabled(isDisable());
+    setIsButtonRemoveDisabled(!isButtonAddDisabled);
+  }, [isButtonAddDisabled, isDisable]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -53,7 +64,7 @@ function ProductPage() {
   if (!product) {
     return <NotFoundPage />;
   }
-
+  const productId = product.id;
   const productName = product.name['en-US'];
   const productDescription = product.description['en-US'];
   const productImages = product.masterVariant.images;
@@ -74,6 +85,40 @@ function ProductPage() {
     (item): item is CategoryAttr => item.name === 'category'
   );
   const productCategory = categoryAttr?.value || '';
+
+  const handleBtnAddClick = async () => {
+    try {
+      setResponseStatus(Status.LOADING);
+      if (!localStorage.getItem('cart')) {
+        await dispatch(createCart());
+      }
+      const updateData: UpdateCart = {
+        productID: productId,
+        quantity: 1,
+      };
+      await dispatch(updateCart(updateData));
+      await setIsButtonAddDisabled(isDisable());
+      setIsButtonRemoveDisabled(!isButtonAddDisabled);
+      setResponseStatus(Status.SUCCESS);
+    } catch (error) {
+      setResponseStatus(Status.ERROR);
+      console.log('Error create cart or added product to cart:', error);
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function isDisable() {
+    const cartData = localStorage.getItem('cart') || null;
+    const cart = cartData ? JSON.parse(cartData) : '';
+    if (cart && cart.lineItems && Array.isArray(cart.lineItems)) {
+      for (const lineItem of cart.lineItems) {
+        if (lineItem.productId === productId) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   return (
     <main>
@@ -139,11 +184,26 @@ function ProductPage() {
               </div>
             </div>
             <div className={s.btnBlock}>
-              <Button className={s.button}>Add to cart</Button>
-              <Button className={clsx(s.button, s.buttonCancel)} variant="underlined">
+              <Button
+                className={s.button}
+                disabled={statusCart === Status.LOADING ? true : isButtonAddDisabled}
+                onClick={handleBtnAddClick}
+              >
+                Add to cart
+              </Button>
+              <Button
+                className={clsx(s.button, s.buttonCancel)}
+                variant="underlined"
+                disabled={statusCart === Status.LOADING ? true : isButtonRemoveDisabled}
+              >
                 Remove from Cart
               </Button>
             </div>
+            {responseStatus === Status.SUCCESS ? (
+              <div>SUCCESS</div>
+            ) : responseStatus === Status.LOADING ? null : (
+              <div>ERROR</div>
+            )}
           </div>
         </div>
       </div>
