@@ -164,32 +164,40 @@
     }
   }
 
-  &:active {
-    &::after {
-      width: 80%;
-      left: 10%;
-      @include media-tablet {
-        width: 30%;
-        left: 35%;
+  &:not(:disabled) {
+    &:active {
+      &::after {
+        width: 80%;
+        left: 10%;
+
+        @include media-tablet {
+          width: 30%;
+          left: 35%;
+        }
+        @include media-mobile {
+          width: 40%;
+          left: 30%;
+        }
       }
-      @include media-mobile {
-        width: 40%;
-        left: 30%;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        &::after {
+          width: 100%;
+          left: 0;
+        }
+      }
+
+      &::after {
+        width: 0;
+        background-color: var(--color-gray);
       }
     }
   }
 
-  @media (hover: hover) {
-    &:hover {
-      &::after {
-        width: 100%;
-        left: 0;
-      }
-    }
-
-    &::after {
-      width: 0;
-      background-color: var(--color-gray);
-    }
+  &:disabled {
+    color: var(--color-gray);
+    pointer-events: none; /* Отключаем события мыши для disabled элемента */
   }
 }
