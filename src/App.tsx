@@ -15,6 +15,7 @@ import FreshenersPage from './pages/CatalogPage/FreshenersPage';
 import CandlesPage from './pages/CatalogPage/CandlesPage';
 import ProductPage from './pages/ProductPage';
 import PasswordPage from './pages/PasswordPage';
+import CartPage from './pages/CartPage';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route index element={<MainPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="cart" element={<CartPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="profile/change-password" element={<PasswordPage />} />
           <Route path="catalog" element={<CatalogLayout />}>
