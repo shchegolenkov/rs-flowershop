@@ -3,10 +3,15 @@ import { ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import FormTheme from '../../themes/FormTheme';
 import Button from '../../components/UI/Button';
+import CartCard from '../../components/UI/CartCard';
 import ClearCartIco from '../../assets/svg/delCart.svg';
+import { Cart } from '../../types/types';
 import s from './CartPage.module.scss';
 
-const CartPage: React.FC = () => {
+const CartPage = () => {
+  const cart = JSON.parse(localStorage.getItem('cart') as string) as Cart;
+  const cartItems = cart?.lineItems || null;
+
   return (
     <main>
       <div className={s.grid}>
@@ -16,12 +21,21 @@ const CartPage: React.FC = () => {
             <Typography variant={'overline'} className={s.overline}>
               Order summary
             </Typography>
-            <div className={s.itemsBlock}>
-              <button className={s.buttonClear}>
-                <Typography variant={'subtitle'}>Clear all cart</Typography>
-                <ClearCartIco />
-              </button>
-            </div>
+            {cartItems ? (
+              <div className={s.itemsBlock}>
+                <button className={s.buttonClear}>
+                  <Typography variant={'subtitle'}>Clear all cart</Typography>
+                  <ClearCartIco />
+                </button>
+                <div className={s.itemsList}>
+                  {cartItems.map((item) => (
+                    <CartCard key={item.id} data={item} />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div>Empty cart</div>
+            )}
             <div className={s.promoBlock}>
               <Typography variant={'body'}>
                 If you have our promo code, enter the code to get discount
