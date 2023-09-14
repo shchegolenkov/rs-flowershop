@@ -1,8 +1,10 @@
-import s from './CartPage.module.scss';
 import { Typography } from '../../components/UI/Typography';
+import { ThemeProvider } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import FormTheme from '../../themes/FormTheme';
 import Button from '../../components/UI/Button';
 import ClearCartIco from '../../assets/svg/delCart.svg';
-import clsx from 'clsx';
+import s from './CartPage.module.scss';
 
 const CartPage: React.FC = () => {
   return (
@@ -24,6 +26,19 @@ const CartPage: React.FC = () => {
               <Typography variant={'body'}>
                 If you have our promo code, enter the code to get discount
               </Typography>
+              <ThemeProvider theme={FormTheme}>
+                <form className={s.promoForm}>
+                  <TextField
+                    defaultValue={''}
+                    label={'Promo code'}
+                    id={'promocode-input'}
+                    className={s.textInput}
+                  />
+                  <Button type="submit" variant={'secondary'} className={s.promoButton}>
+                    Apply
+                  </Button>
+                </form>
+              </ThemeProvider>
             </div>
             <div className={s.checkoutBlock}>
               <div className={s.pricesBlock}>
@@ -36,7 +51,7 @@ const CartPage: React.FC = () => {
                   <Typography variant={'h4'}>$135</Typography>
                 </div>
               </div>
-              <Button className={clsx(s.button, s.buttonCheckout)}>Go to checkout</Button>
+              <Button className={s.buttonCheckout}>Proceed to checkout</Button>
             </div>
           </div>
         </div>
