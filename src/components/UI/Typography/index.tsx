@@ -32,7 +32,7 @@ export function Typography<T extends ElementType = 'p'>({
   let Tag = as ?? 'p';
 
   if (variant.includes('h')) {
-    Tag = variant;
+    Tag = as ?? variant;
   }
 
   return (
