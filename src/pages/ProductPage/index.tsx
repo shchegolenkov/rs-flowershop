@@ -93,7 +93,8 @@ function ProductPage() {
         await dispatch(createCart());
       }
       const updateData: UpdateCart = {
-        productID: productId,
+        action: 'addLineItem',
+        productId: productId,
         quantity: 1,
       };
       await dispatch(updateCart(updateData));
@@ -103,6 +104,26 @@ function ProductPage() {
     } catch (error) {
       setResponseStatus(Status.ERROR);
       console.log('Error create cart or added product to cart:', error);
+    }
+  };
+
+  const handleBtnRemoveClick = async () => {
+    try {
+      setResponseStatus(Status.LOADING);
+      const lineItemId = JSON.parse(localStorage.getItem('cart')).lineItems.find(
+        (lineItem) => lineItem.productId === productId
+      ).id;
+      const updateData: UpdateCart = {
+        action: 'removeLineItem',
+        lineItemId: lineItemId,
+      };
+      await dispatch(updateCart(updateData));
+      await setIsButtonAddDisabled(isDisable());
+      setIsButtonRemoveDisabled(!isButtonAddDisabled);
+      setResponseStatus(Status.SUCCESS);
+    } catch (error) {
+      setResponseStatus(Status.ERROR);
+      console.log('Error removing product:', error);
     }
   };
 
@@ -195,6 +216,7 @@ function ProductPage() {
                 className={clsx(s.button, s.buttonCancel)}
                 variant="underlined"
                 disabled={statusCart === Status.LOADING ? true : isButtonRemoveDisabled}
+                onClick={handleBtnRemoveClick}
               >
                 Remove from Cart
               </Button>
