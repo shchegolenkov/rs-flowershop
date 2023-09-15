@@ -9,25 +9,34 @@ import Button from '../../components/UI/Button';
 import ImageSlider from '../../components/UI/ImageSlider';
 import ModalWindow from '../../components/UI/ModalWindow';
 import s from './ProductPage.module.scss';
-import { CategoryAttr, CompositionAttr, SizeAttr, Status, UpdateCart } from '../../types/types';
+import {
+  CategoryAttr,
+  CompositionAttr,
+  SizeAttr,
+  Status,
+  UpdateCart,
+  LineItem,
+} from '../../types/types';
 import formatPrice from '../../utils/formatPrice';
 import changeHyphenToSpace from '../../utils/changeHyphenToSpace';
 import NotFoundPage from '../../pages/NotFoundPage';
 import CircularProgress from '@mui/material/CircularProgress';
 import clsx from 'clsx';
 import { createCart, updateCart } from '../../app/slices/cart';
+import AlertBlock from './AlertBlock';
 
 function ProductPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isButtonAddDisabled, setIsButtonAddDisabled] = useState(false);
-  const [isButtonRemoveDisabled, setIsButtonRemoveDisabled] = useState(false);
+
   const [responseStatus, setResponseStatus] = useState(Status.LOADING);
+  const [responseMessage, setResponseMessage] = useState('');
+  const [openAlert, setOpenAlert] = useState(true);
 
   const productKey = useLocation().pathname.split('/').pop() || '';
 
   const productState = useSelector((state: RootState) => state.product);
-  const { statusCart } = useSelector((state: RootState) => state.cart);
+  const { status: statusCart, cartData } = useSelector((state: RootState) => state.cart);
 
   const { status, product } = productState;
 
@@ -36,11 +45,6 @@ function ProductPage() {
   useEffect(() => {
     dispatch(fetchProduct(productKey));
   }, [dispatch, productKey]);
-
-  useEffect(() => {
-    setIsButtonAddDisabled(isDisable());
-    setIsButtonRemoveDisabled(!isButtonAddDisabled);
-  }, [isButtonAddDisabled, isDisable]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -86,59 +90,57 @@ function ProductPage() {
   );
   const productCategory = categoryAttr?.value || '';
 
-  const handleBtnAddClick = async () => {
+  async function isHasCart() {
+    if (!cartData) {
+      await dispatch(createCart());
+    }
+  }
+
+  async function handleCartAction(action: 'addLineItem' | 'removeLineItem') {
     try {
       setResponseStatus(Status.LOADING);
-      if (!localStorage.getItem('cart')) {
-        await dispatch(createCart());
-      }
-      const updateData: UpdateCart = {
-        action: 'addLineItem',
-        productId: productId,
-        quantity: 1,
-      };
-      await dispatch(updateCart(updateData));
-      await setIsButtonAddDisabled(isDisable());
-      setIsButtonRemoveDisabled(!isButtonAddDisabled);
-      setResponseStatus(Status.SUCCESS);
-    } catch (error) {
-      setResponseStatus(Status.ERROR);
-      console.log('Error create cart or added product to cart:', error);
-    }
-  };
-
-  const handleBtnRemoveClick = async () => {
-    try {
-      setResponseStatus(Status.LOADING);
-      const lineItemId = JSON.parse(localStorage.getItem('cart')).lineItems.find(
-        (lineItem) => lineItem.productId === productId
-      ).id;
-      const updateData: UpdateCart = {
-        action: 'removeLineItem',
-        lineItemId: lineItemId,
-      };
-      await dispatch(updateCart(updateData));
-      await setIsButtonAddDisabled(isDisable());
-      setIsButtonRemoveDisabled(!isButtonAddDisabled);
-      setResponseStatus(Status.SUCCESS);
-    } catch (error) {
-      setResponseStatus(Status.ERROR);
-      console.log('Error removing product:', error);
-    }
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  function isDisable() {
-    const cartData = localStorage.getItem('cart') || null;
-    const cart = cartData ? JSON.parse(cartData) : '';
-    if (cart && cart.lineItems && Array.isArray(cart.lineItems)) {
-      for (const lineItem of cart.lineItems) {
-        if (lineItem.productId === productId) {
-          return true;
+      await isHasCart();
+      if (localStorage.getItem('cart')) {
+        const updateData: UpdateCart = {
+          action: action,
+        };
+        if (action === 'addLineItem') {
+          updateData['productId'] = productId;
+          updateData['quantity'] = 1;
+        }
+        if (action === 'removeLineItem' && cartData) {
+          const lineItem = cartData.lineItems.find(
+            (lineItem: LineItem) => lineItem.productId === productId
+          );
+          if (lineItem) {
+            const lineItemId = lineItem.id;
+            updateData['lineItemId'] = lineItemId;
+          }
+        }
+        const response = await dispatch(updateCart(updateData));
+        if (!response.payload) {
+          setResponseMessage('Error updating cart');
+          throw new Error('Error updating cart');
+        } else {
+          setResponseStatus(Status.SUCCESS);
+          setResponseMessage('Cart updated successfully!');
         }
       }
+    } catch (error) {
+      setResponseStatus(Status.ERROR);
+    } finally {
+      setOpenAlert(true);
     }
-    return false;
+  }
+
+  function isProductAddedToCart() {
+    let added = false;
+    if (cartData) {
+      cartData.lineItems.forEach((item) => {
+        if (item.productId === productId) added = true;
+      });
+    }
+    return added;
   }
 
   return (
@@ -207,25 +209,31 @@ function ProductPage() {
             <div className={s.btnBlock}>
               <Button
                 className={s.button}
-                disabled={statusCart === Status.LOADING ? true : isButtonAddDisabled}
-                onClick={handleBtnAddClick}
+                disabled={statusCart === Status.LOADING || isProductAddedToCart()}
+                onClick={() => handleCartAction('addLineItem')}
               >
                 Add to cart
               </Button>
               <Button
                 className={clsx(s.button, s.buttonCancel)}
                 variant="underlined"
-                disabled={statusCart === Status.LOADING ? true : isButtonRemoveDisabled}
-                onClick={handleBtnRemoveClick}
+                disabled={statusCart === Status.LOADING || !isProductAddedToCart()}
+                onClick={() => handleCartAction('removeLineItem')}
               >
                 Remove from Cart
               </Button>
             </div>
-            {responseStatus === Status.SUCCESS ? (
-              <div>SUCCESS</div>
-            ) : responseStatus === Status.LOADING ? null : (
-              <div>ERROR</div>
-            )}
+            <div className={s.alertBlock}>
+              {responseStatus === Status.LOADING ? null : (
+                <AlertBlock
+                  openAlert={openAlert}
+                  setOpenAlert={setOpenAlert}
+                  setResponseMessage={setResponseMessage}
+                  responseStatus={responseStatus}
+                  responseMessage={responseMessage}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

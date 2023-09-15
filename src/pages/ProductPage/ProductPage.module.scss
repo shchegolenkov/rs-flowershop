@@ -148,8 +148,19 @@
   gap: 24px;
   align-items: flex-start;
   flex-wrap: wrap;
+
   @include media-mobile {
     justify-content: space-between;
+  }
+}
+
+.alertBlock {
+  min-height: 80px;
+  height: 100%;
+  margin-top: 30px;
+
+  div {
+    padding-top: 5px;
   }
 }
 
@@ -174,6 +185,7 @@
           width: 30%;
           left: 35%;
         }
+
         @include media-mobile {
           width: 40%;
           left: 30%;
