@@ -292,7 +292,7 @@ export interface LineItem {
   variant: {
     id: number;
     sku: string;
-    prices: Money[];
+    prices: Money[] & ItemMoney[];
     images: ProductImage[];
     attributes: ProductAttribute[];
     assets?: [];
@@ -316,9 +316,21 @@ export interface LineItem {
   taxedPricePortions?: [];
 }
 
-interface Money {
+type Money = {
   type: string;
   currencyCode: string;
   centAmount: number;
   fractionDigits: number;
-}
+};
+
+type ItemMoney = {
+  id: string;
+  value: Money;
+  discounted?: {
+    value: Money;
+    discount?: {
+      typeId: string;
+      id: string;
+    };
+  };
+};
