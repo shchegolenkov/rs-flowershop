@@ -8,18 +8,10 @@ import { Status } from '../../../types/types';
 interface AlertBlock {
   openAlert: boolean;
   setOpenAlert: (value: boolean) => void;
-  setResponseMessage: (value: string) => void;
   responseStatus: string;
-  responseMessage: string;
 }
 
-const AlertBlock: React.FC<AlertBlock> = ({
-  openAlert,
-  setOpenAlert,
-  setResponseMessage,
-  responseStatus,
-  responseMessage,
-}) => {
+const AlertBlock: React.FC<AlertBlock> = ({ openAlert, setOpenAlert, responseStatus }) => {
   return (
     <Collapse in={openAlert}>
       <Alert
@@ -31,7 +23,6 @@ const AlertBlock: React.FC<AlertBlock> = ({
             size="small"
             onClick={() => {
               setOpenAlert(false);
-              setResponseMessage('');
             }}
           >
             <CloseIcon fontSize="inherit" />
@@ -40,7 +31,7 @@ const AlertBlock: React.FC<AlertBlock> = ({
         sx={{ mb: 2 }}
         severity={responseStatus === Status.SUCCESS ? 'success' : 'error'}
       >
-        {responseMessage}
+        {responseStatus === Status.SUCCESS ? 'Cart updated successfuly' : 'Error updating cart'}
       </Alert>
     </Collapse>
   );
