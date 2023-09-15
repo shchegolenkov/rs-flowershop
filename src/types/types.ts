@@ -278,7 +278,7 @@ export interface Cart {
   versionModifiedAt: string;
 }
 
-interface LineItem {
+export interface LineItem {
   id: string;
   productId: string;
   productKey: string;
@@ -292,7 +292,7 @@ interface LineItem {
   variant: {
     id: number;
     sku: string;
-    prices: Money[];
+    prices: ItemMoney[];
     images: ProductImage[];
     attributes: ProductAttribute[];
     assets?: [];
@@ -316,9 +316,21 @@ interface LineItem {
   taxedPricePortions?: [];
 }
 
-interface Money {
+export interface Money {
   type: string;
   currencyCode: string;
   centAmount: number;
   fractionDigits: number;
 }
+
+type ItemMoney = {
+  id: string;
+  value: Money;
+  discounted?: {
+    value: Money;
+    discount?: {
+      typeId: string;
+      id: string;
+    };
+  };
+};
