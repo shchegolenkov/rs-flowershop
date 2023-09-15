@@ -29,7 +29,7 @@ const CartPage = () => {
                   <Typography variant={'subtitle'}>Clear all cart</Typography>
                   <ClearCartIco />
                 </button>
-                <div className={s.itemsList}>
+                <div>
                   {cartItems.map((item) => (
                     <CartCard key={item.id} data={item} />
                   ))}
@@ -57,7 +57,7 @@ const CartPage = () => {
               </ThemeProvider>
             </div>
             <div className={s.checkoutBlock}>
-              <div className={s.pricesBlock}>
+              <div>
                 <div className={s.subpriceBlock}>
                   <Typography variant={'body'}>Subtotal</Typography>
                   <Typography variant={'body'}>$135</Typography>
