@@ -70,7 +70,7 @@ function MainPage() {
               className={s.button}
               variant="secondary"
               onClick={() => {
-                const path = 'notFound';
+                const path = 'about';
                 navigate(path);
               }}
             >
