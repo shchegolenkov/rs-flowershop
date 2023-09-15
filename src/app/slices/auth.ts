@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
+import { setCartData } from './cart';
 import { CustomerData, ThunkAPI, User } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
 import AuthService from '../services/auth.service';
@@ -42,6 +43,7 @@ export const loginUser = createAsyncThunk(
         localStorage.setItem('userId', response.data.customer.id);
         localStorage.setItem('user', JSON.stringify(response.data.customer));
         localStorage.setItem('cart', JSON.stringify(response.data.cart));
+        thunkAPI.dispatch(setCartData(response.data.cart));
         return response.data.customer;
       }
     } catch (error) {
@@ -50,10 +52,11 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
+export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, thunkApi) => {
   try {
     await AuthService.logoutUser();
     localStorage.clear();
+    thunkApi.dispatch(setCartData(null));
     return true;
   } catch (error) {
     console.error('Error during logout:', error);
