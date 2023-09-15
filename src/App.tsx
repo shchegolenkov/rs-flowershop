@@ -15,6 +15,7 @@ import FreshenersPage from './pages/CatalogPage/FreshenersPage';
 import CandlesPage from './pages/CatalogPage/CandlesPage';
 import ProductPage from './pages/ProductPage';
 import PasswordPage from './pages/PasswordPage';
+import AboutPage from './pages/AboutPage';
 import CartPage from './pages/CartPage';
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
             <Route index element={<CatalogPage />} />
           </Route>
           <Route path="catalog/:id" element={<ProductPage />} />
+          <Route path="about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
