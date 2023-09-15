@@ -27,7 +27,7 @@ const getAnonymousToken = async () => {
     localStorage.setItem('refreshAnonymousToken', refreshAnonymousToken);
     return anonymousToken;
   } catch (error) {
-    throw new Error('error getting Anonymous Token');
+    throw new Error('Error getting Anonymous Token');
   }
 };
 
@@ -47,7 +47,7 @@ const createCart = async () => {
     localStorage.setItem('cart', JSON.stringify(cart));
     return response;
   } catch (error) {
-    throw new Error('error creating cart');
+    throw new Error('Error creating cart');
   }
 };
 
@@ -90,7 +90,7 @@ const updateCart = async (data: UpdateCart) => {
       localStorage.setItem('cart', JSON.stringify(cart));
       return response;
     } catch (error) {
-      throw new Error('error updating cart');
+      throw new Error('Error updating cart');
     }
   }
 };
