@@ -206,7 +206,7 @@ function ProductPage() {
               </Button>
             </div>
             <div className={s.alertBlock}>
-              {statusCart === Status.LOADING ? null : (
+              {statusCart !== Status.LOADING && (
                 <AlertBlock
                   openAlert={openAlert}
                   setOpenAlert={setOpenAlert}
