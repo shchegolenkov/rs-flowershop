@@ -15,7 +15,9 @@ const CartPage = () => {
   return (
     <main>
       <div className={s.grid}>
-        <div className={s.imageBlock}></div>
+        <div className={s.imageWrapper}>
+          <div className={s.imageBlock}></div>
+        </div>
         <div className={s.content}>
           <div className={s.wrapper}>
             <Typography variant={'overline'} className={s.overline}>
