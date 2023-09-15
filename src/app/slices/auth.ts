@@ -5,7 +5,6 @@ import { setCartData } from './cart';
 import { CustomerData, ThunkAPI, User } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
 import AuthService from '../services/auth.service';
-import { setCartData } from './cart';
 
 const getErrorMessage = (error: AxiosError | unknown, thunkAPI: ThunkAPI) => {
   if (axios.isAxiosError(error)) {
