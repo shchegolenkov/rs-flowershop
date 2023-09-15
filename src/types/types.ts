@@ -280,7 +280,7 @@ export interface Cart {
   versionModifiedAt: string;
 }
 
-interface LineItem {
+export interface LineItem {
   id: string;
   productId: string;
   productKey: string;
@@ -318,7 +318,7 @@ interface LineItem {
   taxedPricePortions?: [];
 }
 
-interface Money {
+export interface Money {
   type: string;
   currencyCode: string;
   centAmount: number;
