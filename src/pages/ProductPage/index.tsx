@@ -28,10 +28,7 @@ import AlertBlock from './AlertBlock';
 function ProductPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const [responseStatus, setResponseStatus] = useState(Status.LOADING);
-  const [responseMessage, setResponseMessage] = useState('');
-  const [openAlert, setOpenAlert] = useState(true);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const productKey = useLocation().pathname.split('/').pop() || '';
 
@@ -97,40 +94,25 @@ function ProductPage() {
   }
 
   async function handleCartAction(action: 'addLineItem' | 'removeLineItem') {
-    try {
-      setResponseStatus(Status.LOADING);
-      await isHasCart();
-      if (localStorage.getItem('cart')) {
-        const updateData: UpdateCart = {
-          action: action,
-        };
-        if (action === 'addLineItem') {
-          updateData['productId'] = productId;
-          updateData['quantity'] = 1;
-        }
-        if (action === 'removeLineItem' && cartData) {
-          const lineItem = cartData.lineItems.find(
-            (lineItem: LineItem) => lineItem.productId === productId
-          );
-          if (lineItem) {
-            const lineItemId = lineItem.id;
-            updateData['lineItemId'] = lineItemId;
-          }
-        }
-        const response = await dispatch(updateCart(updateData));
-        if (!response.payload) {
-          setResponseMessage('Error updating cart');
-          throw new Error('Error updating cart');
-        } else {
-          setResponseStatus(Status.SUCCESS);
-          setResponseMessage('Cart updated successfully!');
-        }
-      }
-    } catch (error) {
-      setResponseStatus(Status.ERROR);
-    } finally {
-      setOpenAlert(true);
+    await isHasCart();
+    const updateData: UpdateCart = {
+      action: action,
+    };
+    if (action === 'addLineItem') {
+      updateData['productId'] = productId;
+      updateData['quantity'] = 1;
     }
+    if (action === 'removeLineItem' && cartData) {
+      const lineItem = cartData.lineItems.find(
+        (lineItem: LineItem) => lineItem.productId === productId
+      );
+      if (lineItem) {
+        const lineItemId = lineItem.id;
+        updateData['lineItemId'] = lineItemId;
+      }
+    }
+    await dispatch(updateCart(updateData));
+    setOpenAlert(true);
   }
 
   function isProductAddedToCart() {
@@ -224,13 +206,11 @@ function ProductPage() {
               </Button>
             </div>
             <div className={s.alertBlock}>
-              {responseStatus === Status.LOADING ? null : (
+              {statusCart === Status.LOADING ? null : (
                 <AlertBlock
                   openAlert={openAlert}
                   setOpenAlert={setOpenAlert}
-                  setResponseMessage={setResponseMessage}
-                  responseStatus={responseStatus}
-                  responseMessage={responseMessage}
+                  responseStatus={statusCart}
                 />
               )}
             </div>
