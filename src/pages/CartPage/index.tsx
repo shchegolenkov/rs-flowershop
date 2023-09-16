@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Typography } from '../../components/UI/Typography';
 import { ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
@@ -5,12 +6,19 @@ import FormTheme from '../../themes/FormTheme';
 import Button from '../../components/UI/Button';
 import CartCard from '../../components/UI/CartCard';
 import ClearCartIco from '../../assets/svg/delCart.svg';
-import { Cart } from '../../types/types';
 import s from './CartPage.module.scss';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
+import ClearCart from './ClearCart/';
 
 const CartPage = () => {
-  const cart = JSON.parse(localStorage.getItem('cart') as string) as Cart;
-  const cartItems = cart?.lineItems || null;
+  const { cartData } = useSelector((state: RootState) => state.cart);
+  const cartItems = cartData?.lineItems || null;
+  const [openClearCart, setOpenClearCart] = useState(false);
+
+  const handleBtnClearCartClick = () => {
+    setOpenClearCart(!openClearCart);
+  };
 
   return (
     <main>
@@ -23,9 +31,9 @@ const CartPage = () => {
             <Typography variant={'overline'} className={s.overline}>
               Order summary
             </Typography>
-            {cartItems ? (
+            {cartItems?.length ? (
               <div className={s.itemsBlock}>
-                <button className={s.buttonClear}>
+                <button className={s.buttonClear} onClick={handleBtnClearCartClick}>
                   <Typography variant={'subtitle'}>Clear all cart</Typography>
                   <ClearCartIco />
                 </button>
@@ -72,6 +80,7 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+      <ClearCart open={openClearCart} setOpen={setOpenClearCart} />
     </main>
   );
 };
