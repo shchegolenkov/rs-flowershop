@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Typography } from '../../components/UI/Typography';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 import { ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import FormTheme from '../../themes/FormTheme';
 import Button from '../../components/UI/Button';
 import CartCard from '../../components/UI/CartCard';
+import { Typography } from '../../components/UI/Typography';
 import ClearCartIco from '../../assets/svg/delCart.svg';
-import s from './CartPage.module.scss';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
 import ClearCart from './ClearCart/';
+
+import s from './CartPage.module.scss';
 
 const CartPage = () => {
   const { cartData } = useSelector((state: RootState) => state.cart);
