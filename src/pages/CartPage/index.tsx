@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { ThemeProvider } from '@mui/material/styles';
@@ -13,8 +14,10 @@ import ClearCart from './ClearCart/';
 import s from './CartPage.module.scss';
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const { cartData } = useSelector((state: RootState) => state.cart);
   const cartItems = cartData?.lineItems || null;
+  
   const [openClearCart, setOpenClearCart] = useState(false);
 
   const handleBtnClearCartClick = () => {
@@ -45,11 +48,27 @@ const CartPage = () => {
                 </div>
               </div>
             ) : (
-              <div className={s.emptyCartBlock}>Empty cart</div>
+              <div className={s.emptyCartBlock}>
+                <Typography variant={'h2'} className={s.h2}>
+                  Your cart is&nbsp;empty
+                </Typography>
+                <Typography>
+                  Looks like you haven`t added anything to&nbsp;your&nbsp;cart&nbsp;yet
+                </Typography>
+                <Button
+                  className={s.buttonCatalog}
+                  onClick={() => {
+                    const path = '/catalog';
+                    navigate(path);
+                  }}
+                >
+                  Start shopping
+                </Button>
+              </div>
             )}
             <div className={s.promoBlock}>
               <Typography variant={'body'}>
-                If you have our promo code, enter the code to get discount
+                If you have our promo code, enter the&nbsp;code to&nbsp;get&nbsp;discount
               </Typography>
               <ThemeProvider theme={FormTheme}>
                 <form className={s.promoForm}>
@@ -58,8 +77,14 @@ const CartPage = () => {
                     label={'Promo code'}
                     id={'promocode-input'}
                     className={s.textInput}
+                    disabled={!cartItems}
                   />
-                  <Button type="submit" variant={'secondary'} className={s.promoButton}>
+                  <Button
+                    type="submit"
+                    variant={'secondary'}
+                    className={s.promoButton}
+                    disabled={!cartItems}
+                  >
                     Apply
                   </Button>
                 </form>
@@ -76,7 +101,9 @@ const CartPage = () => {
                   <Typography variant={'h4'}>$135</Typography>
                 </div>
               </div>
-              <Button className={s.buttonCheckout}>Proceed to checkout</Button>
+              <Button className={s.buttonCheckout} disabled={!cartItems}>
+                Proceed to checkout
+              </Button>
             </div>
           </div>
         </div>
