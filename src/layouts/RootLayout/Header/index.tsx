@@ -117,7 +117,7 @@ function Header() {
           <MenuLink to="/cart" className={s.cartLink}>
             <CartIco />
             <Typography className={s.counter} variant={'captionSmall'}>
-              {cartData ? cartData && cartData.totalLineItemQuantity : '0'}
+              {cartData && cartData.totalLineItemQuantity ? cartData.totalLineItemQuantity : '0'}
             </Typography>
           </MenuLink>
         </div>

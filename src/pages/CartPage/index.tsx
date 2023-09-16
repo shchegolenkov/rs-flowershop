@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
@@ -8,12 +9,20 @@ import Button from '../../components/UI/Button';
 import CartCard from '../../components/UI/CartCard';
 import { Typography } from '../../components/UI/Typography';
 import ClearCartIco from '../../assets/svg/delCart.svg';
+import ClearCart from './ClearCart/';
+
 import s from './CartPage.module.scss';
 
 const CartPage = () => {
   const navigate = useNavigate();
   const { cartData } = useSelector((state: RootState) => state.cart);
   const cartItems = cartData?.lineItems || null;
+
+  const [openClearCart, setOpenClearCart] = useState(false);
+
+  const handleBtnClearCartClick = () => {
+    setOpenClearCart(!openClearCart);
+  };
 
   return (
     <main>
@@ -28,7 +37,7 @@ const CartPage = () => {
             </Typography>
             {cartItems?.length ? (
               <div className={s.itemsBlock}>
-                <button className={s.buttonClear}>
+                <button className={s.buttonClear} onClick={handleBtnClearCartClick}>
                   <Typography variant={'subtitle'}>Clear all cart</Typography>
                   <ClearCartIco />
                 </button>
@@ -99,6 +108,7 @@ const CartPage = () => {
           </div>
         </div>
       </div>
+      <ClearCart open={openClearCart} setOpen={setOpenClearCart} />
     </main>
   );
 };
