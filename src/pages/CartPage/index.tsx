@@ -1,18 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import { Typography } from '../../components/UI/Typography';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 import { ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import FormTheme from '../../themes/FormTheme';
 import Button from '../../components/UI/Button';
 import CartCard from '../../components/UI/CartCard';
+import { Typography } from '../../components/UI/Typography';
 import ClearCartIco from '../../assets/svg/delCart.svg';
-import { Cart } from '../../types/types';
 import s from './CartPage.module.scss';
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const cart = JSON.parse(localStorage.getItem('cart') as string) as Cart;
-  const cartItems = cart?.lineItems || null;
+  const { cartData } = useSelector((state: RootState) => state.cart);
+  const cartItems = cartData?.lineItems || null;
 
   return (
     <main>
@@ -25,7 +26,7 @@ const CartPage = () => {
             <Typography variant={'overline'} className={s.overline}>
               Order summary
             </Typography>
-            {cartItems ? (
+            {cartItems?.length ? (
               <div className={s.itemsBlock}>
                 <button className={s.buttonClear}>
                   <Typography variant={'subtitle'}>Clear all cart</Typography>
