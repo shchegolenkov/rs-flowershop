@@ -27,7 +27,7 @@ const getAnonymousToken = async () => {
     localStorage.setItem('refreshAnonymousToken', refreshAnonymousToken);
     return anonymousToken;
   } catch (error) {
-    throw new Error('error getting Anonymous Token');
+    throw new Error('Error getting Anonymous Token');
   }
 };
 
@@ -47,9 +47,14 @@ const createCart = async () => {
     localStorage.setItem('cart', JSON.stringify(cart));
     return response;
   } catch (error) {
-    throw new Error('error creating cart');
+    throw new Error('Error creating cart');
   }
 };
+
+interface UpdateCartRequest {
+  version: number;
+  actions: UpdateCart[];
+}
 
 const updateCart = async (data: UpdateCart) => {
   const accessToken =
@@ -61,28 +66,31 @@ const updateCart = async (data: UpdateCart) => {
   if (cart) {
     const cartId = cart.id;
     const cartVersion = Number(cart.version);
+    const updateCartItem: UpdateCart = {
+      action: data.action,
+    };
+    if (data.productId) {
+      updateCartItem['productId'] = data.productId;
+    }
+    if (data.quantity) {
+      updateCartItem['quantity'] = data.quantity;
+    }
+    if (data.lineItemId) {
+      updateCartItem['lineItemId'] = data.lineItemId;
+    }
+    const requestPayload: UpdateCartRequest = {
+      version: cartVersion,
+      actions: [updateCartItem],
+    };
     try {
-      const response = await axios.post(
-        URL_CART + `/${cartId}`,
-        {
-          version: cartVersion,
-          actions: [
-            {
-              action: 'addLineItem',
-              productId: data.productID,
-              quantity: data.quantity,
-            },
-          ],
-        },
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }
-      );
+      const response = await axios.post(URL_CART + `/${cartId}`, requestPayload, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
       const cart = await response.data;
       localStorage.setItem('cart', JSON.stringify(cart));
       return response;
     } catch (error) {
-      throw new Error('error updating cart');
+      throw new Error('Error updating cart');
     }
   }
 };

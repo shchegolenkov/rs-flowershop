@@ -80,7 +80,7 @@
 }
 
 .button {
-  margin-top: 40px;
+  min-width: 200px;
 
   @include media-tablet {
     width: 100%;
@@ -138,4 +138,74 @@
   align-items: center;
   justify-content: center;
   color: var(--color-light-gray);
+}
+
+.btnBlock {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  @include media-mobile {
+    justify-content: space-between;
+  }
+}
+
+.alertBlock {
+  min-height: 80px;
+  height: 100%;
+  margin-top: 30px;
+}
+
+.buttonCancel {
+  &::after {
+    width: 100%;
+    left: 0;
+
+    @include media-mobile {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &:not(:disabled) {
+    &:active {
+      &::after {
+        width: 80%;
+        left: 10%;
+
+        @include media-tablet {
+          width: 30%;
+          left: 35%;
+        }
+
+        @include media-mobile {
+          width: 40%;
+          left: 30%;
+        }
+      }
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        &::after {
+          width: 100%;
+          left: 0;
+        }
+      }
+
+      &::after {
+        width: 0;
+        background-color: var(--color-gray);
+      }
+    }
+  }
+
+  &:disabled {
+    color: var(--color-gray);
+    pointer-events: none;
+  }
 }

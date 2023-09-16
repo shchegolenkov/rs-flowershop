@@ -42,7 +42,8 @@ function CatalogCard({ data }: ICatalogCard) {
         await dispatch(createCart());
       }
       const updateData: UpdateCart = {
-        productID: data.id,
+        action: 'addLineItem',
+        productId: data.id,
         quantity: 1,
       };
       await dispatch(updateCart(updateData));

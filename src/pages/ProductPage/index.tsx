@@ -9,19 +9,32 @@ import Button from '../../components/UI/Button';
 import ImageSlider from '../../components/UI/ImageSlider';
 import ModalWindow from '../../components/UI/ModalWindow';
 import s from './ProductPage.module.scss';
-import { CategoryAttr, CompositionAttr, SizeAttr, Status } from '../../types/types';
+import {
+  CategoryAttr,
+  CompositionAttr,
+  SizeAttr,
+  Status,
+  UpdateCart,
+  LineItem,
+} from '../../types/types';
 import formatPrice from '../../utils/formatPrice';
 import changeHyphenToSpace from '../../utils/changeHyphenToSpace';
 import NotFoundPage from '../../pages/NotFoundPage';
 import CircularProgress from '@mui/material/CircularProgress';
+import clsx from 'clsx';
+import { createCart, updateCart } from '../../app/slices/cart';
+import AlertBlock from './AlertBlock';
 
 function ProductPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const productKey = useLocation().pathname.split('/').pop() || '';
 
   const productState = useSelector((state: RootState) => state.product);
+  const { status: statusCart, cartData } = useSelector((state: RootState) => state.cart);
+
   const { status, product } = productState;
 
   const dispatch = useDispatch<AppDispatch>();
@@ -52,7 +65,7 @@ function ProductPage() {
   if (!product) {
     return <NotFoundPage />;
   }
-
+  const productId = product.id;
   const productName = product.name['en-US'];
   const productDescription = product.description['en-US'];
   const productImages = product.masterVariant.images;
@@ -73,6 +86,44 @@ function ProductPage() {
     (item): item is CategoryAttr => item.name === 'category'
   );
   const productCategory = categoryAttr?.value || '';
+
+  async function isHasCart() {
+    if (!cartData) {
+      await dispatch(createCart());
+    }
+  }
+
+  async function handleCartAction(action: 'addLineItem' | 'removeLineItem') {
+    await isHasCart();
+    const updateData: UpdateCart = {
+      action: action,
+    };
+    if (action === 'addLineItem') {
+      updateData['productId'] = productId;
+      updateData['quantity'] = 1;
+    }
+    if (action === 'removeLineItem' && cartData) {
+      const lineItem = cartData.lineItems.find(
+        (lineItem: LineItem) => lineItem.productId === productId
+      );
+      if (lineItem) {
+        const lineItemId = lineItem.id;
+        updateData['lineItemId'] = lineItemId;
+      }
+    }
+    await dispatch(updateCart(updateData));
+    setOpenAlert(true);
+  }
+
+  function isProductAddedToCart() {
+    let added = false;
+    if (cartData) {
+      cartData.lineItems.forEach((item) => {
+        if (item.productId === productId) added = true;
+      });
+    }
+    return added;
+  }
 
   return (
     <main>
@@ -137,7 +188,32 @@ function ProductPage() {
                 <Typography variant={'body'}>{productSize}</Typography>
               </div>
             </div>
-            <Button className={s.button}>Add to cart</Button>
+            <div className={s.btnBlock}>
+              <Button
+                className={s.button}
+                disabled={statusCart === Status.LOADING || isProductAddedToCart()}
+                onClick={() => handleCartAction('addLineItem')}
+              >
+                Add to cart
+              </Button>
+              <Button
+                className={clsx(s.button, s.buttonCancel)}
+                variant="underlined"
+                disabled={statusCart === Status.LOADING || !isProductAddedToCart()}
+                onClick={() => handleCartAction('removeLineItem')}
+              >
+                Remove from Cart
+              </Button>
+            </div>
+            <div className={s.alertBlock}>
+              {statusCart !== Status.LOADING && (
+                <AlertBlock
+                  openAlert={openAlert}
+                  setOpenAlert={setOpenAlert}
+                  responseStatus={statusCart}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
