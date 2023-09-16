@@ -17,7 +17,7 @@ const CartPage = () => {
   const navigate = useNavigate();
   const { cartData } = useSelector((state: RootState) => state.cart);
   const cartItems = cartData?.lineItems || null;
-  
+
   const [openClearCart, setOpenClearCart] = useState(false);
 
   const handleBtnClearCartClick = () => {
