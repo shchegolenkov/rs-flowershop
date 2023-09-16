@@ -133,3 +133,16 @@
 .emptyCartBlock {
   border-bottom: 1px solid var(--color-light-gray);
 }
+
+.h2 {
+  margin-bottom: 16px;
+}
+
+.buttonCatalog {
+  min-width: 215px;
+  margin: 60px 0 92px;
+
+  @include media-tablet {
+      margin-bottom: 24px;
+    }
+}
