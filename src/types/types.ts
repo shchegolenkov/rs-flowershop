@@ -240,6 +240,8 @@ export interface UpdateCart {
   productId?: string;
   lineItemId?: string;
   quantity?: number;
+  code?: string;
+  discountCode?: DiscountCode;
 }
 
 export interface Cart {
@@ -254,7 +256,7 @@ export interface Cart {
   customLineItems: [];
   deleteDaysAfterLastModification: number;
   directDiscounts: [];
-  discountCodes: [];
+  discountCodes: DiscountCode[];
   id: string;
   inventoryMode: string;
   itemShippingAddresses: [];
@@ -289,6 +291,10 @@ export interface LineItem {
     typeId: string;
     id: string;
     version: number;
+  };
+  discountedPrice: {
+    includedDiscounts: { discount: DiscountCode }[];
+    value: Money;
   };
   productSlug: Record<string, string>;
   variant: {
@@ -354,4 +360,15 @@ export interface ApiResponse {
     requestId: string;
     requestStatus: string;
   };
+}
+
+export type DiscountCode = {
+  discountCode: {
+    id: string;
+    typeId: string;
+  };
+};
+
+export enum WelcomeCodes {
+  WELCOME = '3019b1a7-de93-48e5-93a4-87e8d87fec25',
 }
