@@ -98,9 +98,21 @@
   margin-top: 16px;
 }
 
+.promoFormSuccess {
+  input,
+  label {
+    color: var(--color-success);
+  }
+
+  fieldset {
+    border-color: var(--color-success) !important;
+  }
+}
+
 .promoButton {
   width: 40%;
   max-width: 260px;
+  height: 56px;
 }
 
 .textInput {
@@ -150,4 +162,10 @@
   @include media-tablet {
     margin-bottom: 24px;
   }
+}
+
+.err__message {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
