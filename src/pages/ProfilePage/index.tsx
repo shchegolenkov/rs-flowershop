@@ -70,7 +70,6 @@ const ProfilePage: React.FC = () => {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    dispatch(getUser());
     dispatch(clearMessage());
   }, [dispatch, cancelSubmit]);
   const currentDate = new Date();
