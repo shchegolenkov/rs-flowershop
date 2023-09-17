@@ -63,6 +63,7 @@
   color: var(--color-error);
   text-decoration: none;
   position: relative;
+  cursor: default;
 
   &:before {
     content: '';
@@ -76,9 +77,13 @@
     transition: all 0.3s ease-in-out;
   }
 
-  &:hover::before {
-    visibility: visible;
-    width: 100%;
+  &:not(:disabled):hover {
+    cursor: pointer;
+
+    &::before {
+      visibility: visible;
+      width: 100%;
+    }
   }
 }
 

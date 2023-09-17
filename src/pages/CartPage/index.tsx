@@ -10,6 +10,7 @@ import CartCard from '../../components/UI/CartCard';
 import { Typography } from '../../components/UI/Typography';
 import ClearCartIco from '../../assets/svg/delCart.svg';
 import ClearCart from './ClearCart/';
+import { Status } from '../../types/types';
 import formatPrice from '../../utils/formatPrice';
 import s from './CartPage.module.scss';
 
@@ -19,6 +20,8 @@ const CartPage = () => {
   const cartItems = cartData?.lineItems || null;
 
   const [openClearCart, setOpenClearCart] = useState(false);
+
+  const { status: statusCart } = useSelector((state: RootState) => state.cart);
 
   const handleBtnClearCartClick = () => {
     setOpenClearCart(!openClearCart);
@@ -37,7 +40,11 @@ const CartPage = () => {
             </Typography>
             {cartItems?.length ? (
               <div className={s.itemsBlock}>
-                <button className={s.buttonClear} onClick={handleBtnClearCartClick}>
+                <button
+                  className={s.buttonClear}
+                  onClick={handleBtnClearCartClick}
+                  disabled={statusCart === Status.LOADING}
+                >
                   <Typography variant={'subtitle'}>Clear all cart</Typography>
                   <ClearCartIco />
                 </button>
