@@ -143,12 +143,11 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
   }
 };
 
-const logoutUser = () => {
-  const token = localStorage.getItem('accessToken');
+const logoutUser = (accessToken: string) => {
   return axios
     .post(LOGOUT_URL, null, {
       params: {
-        token: token,
+        token: accessToken,
         token_type_hint: 'access_token',
       },
       auth: {

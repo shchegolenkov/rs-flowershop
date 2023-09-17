@@ -4,6 +4,7 @@ import { setMessage } from './message';
 import { setCartData } from './cart';
 import { CustomerData, ThunkAPI, User } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
+const accessToken = localStorage.getItem('accessToken');
 import AuthService from '../services/auth.service';
 
 const getErrorMessage = (error: AxiosError | unknown, thunkAPI: ThunkAPI) => {
@@ -54,17 +55,20 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, thunkApi) => {
-  try {
-    await AuthService.logoutUser();
-    localStorage.clear();
-    thunkApi.dispatch(setCartData(null));
-    return true;
-  } catch (error) {
-    console.error('Error during logout:', error);
-    return false;
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async (accessToken: string, thunkApi) => {
+    try {
+      await AuthService.logoutUser(accessToken);
+      localStorage.clear();
+      thunkApi.dispatch(setCartData(null));
+      return true;
+    } catch (error) {
+      console.error('Error during logout:', error);
+      return false;
+    }
   }
-});
+);
 
 export const tokenIntrospection = createAsyncThunk('auth/tokenIntrospection', async () => {
   try {
@@ -88,11 +92,12 @@ export const getUser = createAsyncThunk('auth/getUser', async () => {
 interface AuthState {
   isLoggedIn: boolean;
   user: User | null;
+  accessToken: string | null;
 }
 
 const initialState: AuthState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
+  ? { isLoggedIn: true, user, accessToken: accessToken || null }
+  : { isLoggedIn: false, user: null, accessToken: accessToken || null };
 
 const authSlice = createSlice({
   name: 'auth',
@@ -109,6 +114,7 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.user = action.payload.user;
+        state.accessToken = localStorage.getItem('accessToken');
       })
       .addCase(loginUser.rejected, (state) => {
         state.isLoggedIn = false;
@@ -117,6 +123,7 @@ const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.isLoggedIn = false;
         state.user = null;
+        state.accessToken = null;
       })
       .addCase(tokenIntrospection.fulfilled, (state, action) => {
         if (action.payload.active) {

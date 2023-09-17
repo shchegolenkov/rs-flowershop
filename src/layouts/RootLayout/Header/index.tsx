@@ -28,7 +28,7 @@ function Header() {
   const { cartData } = useSelector((state: RootState) => state.cart);
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [isMenuActive, setMenuActive] = useState(false);
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const { isLoggedIn, accessToken } = useSelector((state: RootState) => state.auth);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -61,7 +61,9 @@ function Header() {
   }
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    if (accessToken) {
+      dispatch(logoutUser(accessToken));
+    }
   };
 
   return (
