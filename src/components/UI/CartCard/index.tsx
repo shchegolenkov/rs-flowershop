@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateCart } from '../../../app/slices/cart';
-import { AppDispatch } from '../../../app/store';
-import { LineItem, UpdateCart } from '../../../types/types';
+import { AppDispatch, RootState } from '../../../app/store';
+import { LineItem, Status, UpdateCart } from '../../../types/types';
 import { Typography } from '../Typography';
 import RemoveItemIco from '../../../assets/svg/delItem.svg';
 import formatPrice from '../../../utils/formatPrice';
@@ -16,6 +16,7 @@ const CartCard = ({ data }: ICartCard) => {
   const itemPrice = data.variant.prices[0].value.centAmount;
   const discountItemPrice = data.variant.prices[0].discounted?.value.centAmount || null;
   const dispatch = useDispatch<AppDispatch>();
+  const { status: statusCart } = useSelector((state: RootState) => state.cart);
 
   async function handleRemoveItem() {
     const updateData: UpdateCart = {
@@ -24,6 +25,7 @@ const CartCard = ({ data }: ICartCard) => {
     };
     await dispatch(updateCart(updateData));
   }
+
   const handleChangeItemQuantity = (action: 'increase' | 'decrease') => async () => {
     try {
       const newQuantity = action === 'increase' ? data.quantity + 1 : data.quantity - 1;
@@ -62,13 +64,18 @@ const CartCard = ({ data }: ICartCard) => {
             value={data.quantity}
             handleDecrease={handleChangeItemQuantity('decrease')}
             handleIncrease={handleChangeItemQuantity('increase')}
+            disableState={statusCart === Status.LOADING}
           />
           <Typography variant={'h5'} className={s.totalPrice}>
             {formatPrice(data.totalPrice.centAmount)} €
           </Typography>
         </div>
       </div>
-      <button className={s.removeItemButton} onClick={handleRemoveItem}>
+      <button
+        className={s.removeItemButton}
+        onClick={handleRemoveItem}
+        disabled={statusCart === Status.LOADING}
+      >
         <RemoveItemIco />
       </button>
     </div>

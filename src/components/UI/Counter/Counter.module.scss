@@ -24,12 +24,12 @@
   cursor: default;
 
   & > * {
-      transition: opacity 0.2s;
-    }
+    transition: opacity 0.2s;
+  }
 
   &:disabled > * {
-      opacity: 0.4;
-    }
+    opacity: 0.4;
+  }
 
   @media (hover: hover) {
     &:hover:not(:disabled) {
