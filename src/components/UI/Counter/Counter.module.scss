@@ -1,0 +1,32 @@
+.counterBlock {
+  display: flex;
+  height: 38px;
+  flex-shrink: 0;
+
+  & > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.counter {
+  min-width: 50px;
+  border-top: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  cursor: default;
+}
+
+.button {
+  width: 38px;
+  border: 1px solid var(--color-black);
+  transition: background-color 0.2s;
+  cursor: default;
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background-color: var(--color-extra-light);
+      cursor: pointer;
+    }
+  }
+}
