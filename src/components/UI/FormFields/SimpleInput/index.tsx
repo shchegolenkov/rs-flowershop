@@ -1,11 +1,12 @@
-import s from '../FormFields.module.scss';
-import TextField from '@mui/material/TextField';
-import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
 import { FieldError, FieldErrors, UseFormRegister, FieldValues, Path } from 'react-hook-form';
+import TextField from '@mui/material/TextField';
+import ErrorIcon from '@mui/icons-material/Error';
 import EditIco from '../../../../assets/svg/edit.svg';
 import EditIcoActive from '../../../../assets/svg/editActive.svg';
 import EditIcoErr from '../../../../assets/svg/editErr.svg';
+
+import s from '../FormFields.module.scss';
 
 interface SimpleInputProps<T extends FieldValues> {
   register: UseFormRegister<T>;

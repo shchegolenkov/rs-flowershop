@@ -1,5 +1,5 @@
-import s from '../FormFields.module.scss';
 import React, { MouseEvent, useState } from 'react';
+import { FieldError, UseFormRegister, FieldValues, Path } from 'react-hook-form';
 import ErrorIcon from '@mui/icons-material/Error';
 import {
   FormControl,
@@ -10,7 +10,8 @@ import {
   OutlinedInput,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { FieldError, UseFormRegister, FieldValues, Path } from 'react-hook-form';
+
+import s from '../FormFields.module.scss';
 
 interface PasswordInputProps<T extends FieldValues> {
   register: UseFormRegister<T>;

@@ -1,12 +1,13 @@
-import s from '../FormFields.module.scss';
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import ErrorIcon from '@mui/icons-material/Error';
-import React from 'react';
-import { FieldError, UseFormRegister } from 'react-hook-form';
-import { CustomerData } from '../../../../types/types';
 import EditIco from '../../../../assets/svg/edit.svg';
 import EditIcoActive from '../../../../assets/svg/editActive.svg';
 import EditIcoErr from '../../../../assets/svg/editErr.svg';
+import { FieldError, UseFormRegister } from 'react-hook-form';
+import { CustomerData } from '../../../../types/types';
+
+import s from '../FormFields.module.scss';
 
 interface EmailInputProps {
   register: UseFormRegister<CustomerData>;

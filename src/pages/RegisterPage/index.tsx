@@ -1,26 +1,29 @@
 import React, { useEffect } from 'react';
-import s from './RegisterPage.module.scss';
-import clsx from 'clsx';
-import { ThemeProvider } from '@mui/material/styles';
-import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, UseFormProps, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/UI/Button';
+import clsx from 'clsx';
+import s from './RegisterPage.module.scss';
 
+import Button from '../../components/UI/Button';
 import { Typography } from '../../components/UI/Typography';
-import FormTheme from '../../themes/FormTheme';
-import { CustomerData } from '../../types/types';
 import EmailInput from '../../components/UI/FormFields/EmailInput';
 import PasswordInput from '../../components/UI/FormFields/PasswordInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import SimpleSelect from '../../components/UI/FormFields/SimpleSelect';
-import { countries } from '../../constants/const';
 import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
 import Alert from '@mui/material/Alert';
+
+import { ThemeProvider } from '@mui/material/styles';
+import FormTheme from '../../themes/FormTheme';
+import { CustomerData } from '../../types/types';
+import { countries } from '../../constants/const';
+
+import * as yup from 'yup';
+
 import { RootState, AppDispatch } from '../../app/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, loginUser, getUser } from '../../app/slices/auth';
 import { clearMessage } from '../../app/slices/message';
 import isEmail from 'validator/lib/isEmail';

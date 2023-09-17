@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import s from '../ProfilePage.module.scss';
 
 import SimpleInput from '../../../components/UI/FormFields/SimpleInput';
 import SimpleSelect from '../../../components/UI/FormFields/SimpleSelect';
-import { countries } from '../../../constants/const';
+import SimpleCheckbox from '../../../components/UI/FormFields/SimpleCheckbox';
+import { Typography } from '../../../components/UI/Typography';
+import EditIco from '../../../assets/svg/edit.svg';
+import EditIcoActive from '../../../assets/svg/editActive.svg';
+import EditIcoErr from '../../../assets/svg/editErr.svg';
+import DeleteAddress from '../../../assets/svg/delAddress.svg';
 
+import { countries } from '../../../constants/const';
 import { AddressAction, ProfileAddress, ProfileForm, User } from '../../../types/types';
 import ProfileEditBlock from '../ProfileEditBlock';
 
@@ -22,17 +31,10 @@ import { clearMessage } from '../../../app/slices/message';
 
 import FormTheme from '../../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
+
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Resolver, useForm, UseFormProps } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { AppDispatch, RootState } from '../../../app/store';
-import SimpleCheckbox from '../../../components/UI/FormFields/SimpleCheckbox';
-import { Typography } from '../../../components/UI/Typography';
-import EditIco from '../../../assets/svg/edit.svg';
-import EditIcoActive from '../../../assets/svg/editActive.svg';
-import EditIcoErr from '../../../assets/svg/editErr.svg';
-import DeleteAddress from '../../../assets/svg/delAddress.svg';
 
 interface ProfileEditBlockProps {
   address: ProfileAddress;
