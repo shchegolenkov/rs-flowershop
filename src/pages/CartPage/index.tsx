@@ -10,7 +10,7 @@ import CartCard from '../../components/UI/CartCard';
 import { Typography } from '../../components/UI/Typography';
 import ClearCartIco from '../../assets/svg/delCart.svg';
 import ClearCart from './ClearCart/';
-
+import formatPrice from '../../utils/formatPrice';
 import s from './CartPage.module.scss';
 
 const CartPage = () => {
@@ -77,13 +77,13 @@ const CartPage = () => {
                     label={'Promo code'}
                     id={'promocode-input'}
                     className={s.textInput}
-                    disabled={!cartItems}
+                    disabled={!cartItems?.length}
                   />
                   <Button
                     type="submit"
                     variant={'secondary'}
                     className={s.promoButton}
-                    disabled={!cartItems}
+                    disabled={!cartItems?.length}
                   >
                     Apply
                   </Button>
@@ -94,14 +94,18 @@ const CartPage = () => {
               <div>
                 <div className={s.subpriceBlock}>
                   <Typography variant={'body'}>Subtotal</Typography>
-                  <Typography variant={'body'}>$135</Typography>
+                  <Typography variant={'body'}>
+                    {formatPrice(cartData?.totalPrice.centAmount || 0)} €
+                  </Typography>
                 </div>
                 <div className={s.totalpriceBlock}>
                   <Typography variant={'body'}>Total</Typography>
-                  <Typography variant={'h4'}>$135</Typography>
+                  <Typography variant={'h4'}>
+                    {formatPrice(cartData?.totalPrice.centAmount || 0)} €
+                  </Typography>
                 </div>
               </div>
-              <Button className={s.buttonCheckout} disabled={!cartItems}>
+              <Button className={s.buttonCheckout} disabled={!cartItems?.length}>
                 Proceed to checkout
               </Button>
             </div>
