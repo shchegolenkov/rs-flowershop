@@ -35,11 +35,23 @@
 
 .info {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   flex-grow: 1;
-  column-gap: 52px;
+  row-gap: 6px;
+  column-gap: 10px;
+
+  @media (max-width: 1200px) {
+    flex-wrap: wrap;
+  }
+
+  @include media-tablet {
+    flex-wrap: nowrap;
+  }
+
+  @media (max-width: 580px) {
+    flex-wrap: wrap;
+  }
 }
 
 .pricesBlock {
@@ -58,12 +70,31 @@
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  min-width: 210px;
   gap: 8px;
+
+  @media (max-width: 1200px) {
+    min-width: 146px;
+  }
+
+  @include media-tablet {
+    min-width: 210px;
+  }
+
+  @media (max-width: 580px) {
+    min-width: 146px;
+  }
 }
 
-.counter {
-  width: 146px;
-  height: 44px;
-  margin-left: auto;
-  background-color: var(--color-gray);
+.totalBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 6px;
+  column-gap: 40px;
+}
+
+.totalPrice {
+  min-width: 130px;
 }
