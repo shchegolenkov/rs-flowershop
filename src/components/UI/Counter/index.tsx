@@ -9,6 +9,23 @@ interface Counter {
   max?: number;
 }
 
+const DecreaseIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="2" viewBox="0 0 20 2" fill="none">
+      <path d="M19.5 1.5H0.5V0.5H19.5V1.5Z" fill="#121212" />
+    </svg>
+  );
+};
+
+const IncreaseIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M19.5 10.5H0.5V9.5H19.5V10.5Z" fill="#121212" />
+      <path d="M10.5 0.5V19.5H9.5V0.5H10.5Z" fill="#121212" />
+    </svg>
+  );
+};
+
 const Counter = ({
   value,
   handleDecrease,
@@ -24,15 +41,7 @@ const Counter = ({
         disabled={disableState || value === min}
         onClick={handleDecrease}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="2"
-          viewBox="0 0 20 2"
-          fill="none"
-        >
-          <path d="M19.5 1.5H0.5V0.5H19.5V1.5Z" fill="#121212" />
-        </svg>
+        {DecreaseIcon()}
       </button>
       <span className={s.counter}>{value}</span>
       <button
@@ -40,16 +49,7 @@ const Counter = ({
         onClick={handleIncrease}
         disabled={disableState || value === max}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-        >
-          <path d="M19.5 10.5H0.5V9.5H19.5V10.5Z" fill="#121212" />
-          <path d="M10.5 0.5V19.5H9.5V0.5H10.5Z" fill="#121212" />
-        </svg>
+        {IncreaseIcon()}
       </button>
     </div>
   );
