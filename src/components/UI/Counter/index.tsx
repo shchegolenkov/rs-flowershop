@@ -4,14 +4,26 @@ interface Counter {
   value: number;
   handleDecrease: () => void;
   handleIncrease: () => void;
+  disableState?: boolean;
   min?: number;
   max?: number;
 }
 
-const Counter = ({ value, handleDecrease, handleIncrease, min = 1, max = 99 }: Counter) => {
+const Counter = ({
+  value,
+  handleDecrease,
+  handleIncrease,
+  disableState = false,
+  min = 1,
+  max = 99,
+}: Counter) => {
   return (
     <div className={s.counterBlock}>
-      <button className={s.button} disabled={value === min} onClick={handleDecrease}>
+      <button
+        className={s.button}
+        disabled={disableState || value === min}
+        onClick={handleDecrease}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -23,7 +35,11 @@ const Counter = ({ value, handleDecrease, handleIncrease, min = 1, max = 99 }: C
         </svg>
       </button>
       <span className={s.counter}>{value}</span>
-      <button className={s.button} onClick={handleIncrease} disabled={value === max}>
+      <button
+        className={s.button}
+        onClick={handleIncrease}
+        disabled={disableState || value === max}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
