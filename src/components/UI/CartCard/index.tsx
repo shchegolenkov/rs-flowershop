@@ -1,11 +1,12 @@
-import s from './CartCard.module.scss';
 import { useDispatch } from 'react-redux';
 import { updateCart } from '../../../app/slices/cart';
-import RemoveItemIco from '../../../assets/svg/delItem.svg';
-import { LineItem, UpdateCart } from '../../../types/types';
-import formatPrice from '../../../utils/formatPrice';
-import { Typography } from '../Typography';
 import { AppDispatch } from '../../../app/store';
+import { LineItem, UpdateCart } from '../../../types/types';
+import { Typography } from '../Typography';
+import RemoveItemIco from '../../../assets/svg/delItem.svg';
+import formatPrice from '../../../utils/formatPrice';
+import Counter from '../Counter';
+import s from './CartCard.module.scss';
 
 interface ICartCard {
   data: LineItem;
@@ -23,6 +24,19 @@ const CartCard = ({ data }: ICartCard) => {
     };
     await dispatch(updateCart(updateData));
   }
+  const handleChangeItemQuantity = (action: 'increase' | 'decrease') => async () => {
+    try {
+      const newQuantity = action === 'increase' ? data.quantity + 1 : data.quantity - 1;
+      const updateData: UpdateCart = {
+        action: 'changeLineItemQuantity',
+        lineItemId: data.id,
+        quantity: newQuantity,
+      };
+      await dispatch(updateCart(updateData));
+    } catch (error) {
+      console.log('Error changing quantity of the product:', error);
+    }
+  };
 
   return (
     <div className={s.cardBlock}>
@@ -40,12 +54,19 @@ const CartCard = ({ data }: ICartCard) => {
               </Typography>
             </div>
           ) : (
-            <Typography variant={'subtitle'}>
-              {formatPrice(data.totalPrice.centAmount)} €
-            </Typography>
+            <Typography variant={'subtitle'}>{formatPrice(itemPrice)} €</Typography>
           )}
         </div>
-        <Typography variant={'h5'}>{formatPrice(data.totalPrice.centAmount)} €</Typography>
+        <div className={s.totalBlock}>
+          <Counter
+            value={data.quantity}
+            handleDecrease={handleChangeItemQuantity('decrease')}
+            handleIncrease={handleChangeItemQuantity('increase')}
+          />
+          <Typography variant={'h5'} className={s.totalPrice}>
+            {formatPrice(data.totalPrice.centAmount)} €
+          </Typography>
+        </div>
       </div>
       <button className={s.removeItemButton} onClick={handleRemoveItem}>
         <RemoveItemIco />
