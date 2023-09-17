@@ -336,3 +336,22 @@ type ItemMoney = {
     };
   };
 };
+
+export interface ApiResponse {
+  type: string;
+  payload: User;
+  meta: {
+    arg: {
+      streetName: string;
+      postalCode: string;
+      country: string;
+      city: string;
+      id: string;
+      shippingBillingAddress: boolean;
+      shippingDefaultAddress: boolean;
+      typeAddress: string;
+    };
+    requestId: string;
+    requestStatus: string;
+  };
+}

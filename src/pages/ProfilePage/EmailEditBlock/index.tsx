@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
+import isEmail from 'validator/lib/isEmail';
+import * as yup from 'yup';
+
 import s from '../ProfilePage.module.scss';
 
 import FormTheme from '../../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
 import EmailInput from '../../../components/UI/FormFields/EmailInput';
 import Button from '../../../components/UI/Button';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Resolver, useForm, UseFormProps } from 'react-hook-form';
-import isEmail from 'validator/lib/isEmail';
 
 import { RootState, AppDispatch } from '../../../app/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { setIsDisabledEmail } from '../../../app/slices/profile';
 import { clearMessage } from '../../../app/slices/message';
 import { getUser } from '../../../app/slices/auth';

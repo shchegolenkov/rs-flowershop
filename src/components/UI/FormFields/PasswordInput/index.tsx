@@ -1,5 +1,5 @@
-import s from '../FormFields.module.scss';
 import React, { MouseEvent, useState } from 'react';
+import { FieldError, UseFormRegister, FieldValues, Path } from 'react-hook-form';
 import ErrorIcon from '@mui/icons-material/Error';
 import {
   FormControl,
@@ -10,26 +10,26 @@ import {
   OutlinedInput,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { FieldError, UseFormRegister } from 'react-hook-form';
-import { CustomerData, PasswordForm } from '../../../../types/types';
 
-interface PasswordInputProps {
-  register: UseFormRegister<CustomerData> | UseFormRegister<PasswordForm>;
-  name: keyof CustomerData | keyof PasswordForm;
+import s from '../FormFields.module.scss';
+
+interface PasswordInputProps<T extends FieldValues> {
+  register: UseFormRegister<T>;
+  name: Path<T>;
   err: FieldError | undefined;
   errMessage: string | undefined;
   label: string;
   id: string;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({
+const PasswordInput = <T extends FieldValues>({
   register,
   name,
   err,
   errMessage,
   label,
   id,
-}) => {
+}: PasswordInputProps<T>) => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 

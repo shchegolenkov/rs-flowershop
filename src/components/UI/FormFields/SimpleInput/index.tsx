@@ -1,19 +1,19 @@
-import s from '../FormFields.module.scss';
+import React from 'react';
+import { FieldError, FieldErrors, UseFormRegister, FieldValues, Path } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import ErrorIcon from '@mui/icons-material/Error';
-import React from 'react';
-import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
-import { CustomerData, ProfileForm } from '../../../../types/types';
 import EditIco from '../../../../assets/svg/edit.svg';
 import EditIcoActive from '../../../../assets/svg/editActive.svg';
 import EditIcoErr from '../../../../assets/svg/editErr.svg';
 
-interface SimpleInputProps {
-  register: UseFormRegister<CustomerData> | UseFormRegister<ProfileForm>;
-  name: keyof CustomerData | keyof ProfileForm;
+import s from '../FormFields.module.scss';
+
+interface SimpleInputProps<T extends FieldValues> {
+  register: UseFormRegister<T>;
+  name: Path<T>;
   err: FieldError | undefined;
   errMessage: string | undefined;
-  errors: FieldErrors<CustomerData>;
+  errors: FieldErrors<T>;
   label: string;
   id: string;
   defaultValue?: string;
@@ -23,7 +23,7 @@ interface SimpleInputProps {
   isAddressField?: boolean;
 }
 
-const SimpleInput: React.FC<SimpleInputProps> = ({
+const SimpleInput = <T extends FieldValues>({
   register,
   err,
   errMessage,
@@ -35,7 +35,7 @@ const SimpleInput: React.FC<SimpleInputProps> = ({
   isDisabled,
   switchEditModeField,
   isAddressField,
-}) => {
+}: SimpleInputProps<T>) => {
   return (
     <div className={s.edit__field_container}>
       <div className={s.form__field_size}>

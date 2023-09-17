@@ -1,16 +1,16 @@
-import s from '../FormFields.module.scss';
+import React from 'react';
+import { UseFormRegister, FieldErrors, FieldError, FieldValues, Path } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import ErrorIcon from '@mui/icons-material/Error';
-import React from 'react';
-import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form';
-import { CustomerData, ProfileForm } from '../../../../types/types';
 
-interface SelectInputProps {
-  register: UseFormRegister<CustomerData> | UseFormRegister<ProfileForm>;
-  name: keyof CustomerData | keyof ProfileForm;
+import s from '../FormFields.module.scss';
+
+interface SelectInputProps<T extends FieldValues> {
+  register: UseFormRegister<T>;
+  name: Path<T>;
   err: FieldError | undefined;
   errMessage: string | undefined;
-  errors: FieldErrors<CustomerData> | FieldErrors<ProfileForm>;
+  errors: FieldErrors<T>;
   label: string;
   id: string;
   defaultValue?: string;
@@ -24,7 +24,7 @@ interface SelectData {
   label: string;
 }
 
-const SimpleSelect: React.FC<SelectInputProps> = ({
+const SimpleSelect = <T extends FieldValues>({
   register,
   err,
   errMessage,
@@ -35,7 +35,7 @@ const SimpleSelect: React.FC<SelectInputProps> = ({
   defaultValue,
   isEditField,
   isDisabled,
-}) => {
+}: SelectInputProps<T>) => {
   return (
     <div className={s.form__field_size_select}>
       <TextField

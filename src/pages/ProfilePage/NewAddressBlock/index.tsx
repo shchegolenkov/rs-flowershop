@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import s from '../ProfilePage.module.scss';
 
 import SimpleInput from '../../../components/UI/FormFields/SimpleInput';
 import SimpleSelect from '../../../components/UI/FormFields/SimpleSelect';
-import { countries } from '../../../constants/const';
+import SimpleCheckbox from '../../../components/UI/FormFields/SimpleCheckbox';
+import Button from '../../../components/UI/Button';
+import { Typography } from '../../../components/UI/Typography';
+import Alert from '@mui/material/Alert';
 
-import { AddressAction, ProfileForm, User } from '../../../types/types';
+import { countries } from '../../../constants/const';
+import { AddressAction, ApiResponse, ProfileForm, User } from '../../../types/types';
 
 import { getUser } from '../../../app/slices/auth';
 import {
@@ -19,15 +26,10 @@ import { clearMessage } from '../../../app/slices/message';
 
 import FormTheme from '../../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
+
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Resolver, useForm, UseFormProps } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { AppDispatch, RootState } from '../../../app/store';
-import SimpleCheckbox from '../../../components/UI/FormFields/SimpleCheckbox';
-import { Typography } from '../../../components/UI/Typography';
-import Button from '../../../components/UI/Button';
-import Alert from '@mui/material/Alert';
 
 interface ProfileEditBlockProps {
   user: User;
@@ -84,7 +86,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
     mode: 'onChange',
   } as UseFormProps<ProfileForm>);
 
-  const checkResponse = (apiResponse) => {
+  const checkResponse = (apiResponse: ApiResponse) => {
     if (apiResponse && apiResponse.meta.requestStatus === 'rejected') {
       setIsSuccess(false);
     } else setIsSuccess(true);
@@ -114,7 +116,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
           id: newAddressId,
         };
         const apiResponse = await dispatch(addShippingBillingAddresses(newData));
-        checkResponse(apiResponse);
+        checkResponse(apiResponse as ApiResponse);
         await dispatch(getUser());
         if (typeAddress === 'shipping' && checkedShipBillAddress) {
           const newData = {
@@ -133,21 +135,21 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
             id: newAddressId,
           };
           const apiResponse = await dispatch(addShippingBillingAddresses(newData));
-          checkResponse(apiResponse);
+          checkResponse(apiResponse as ApiResponse);
         }
         await dispatch(getUser());
         if (typeAddress === 'shipping' && checkedShipDefAddress) {
           const newData = data;
           newData.id = newAddressId;
           const apiResponse = await dispatch(setDefaultShippingAddress(newData));
-          checkResponse(apiResponse);
+          checkResponse(apiResponse as ApiResponse);
         }
         await dispatch(getUser());
         if (typeAddress === 'billing' && checkedBillDefAddress) {
           const newData = data;
           newData.id = newAddressId;
           const apiResponse = await dispatch(setDefaultBillingAddress(newData));
-          checkResponse(apiResponse);
+          checkResponse(apiResponse as ApiResponse);
         }
         await dispatch(getUser());
 

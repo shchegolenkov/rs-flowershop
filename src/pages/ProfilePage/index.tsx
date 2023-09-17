@@ -1,23 +1,28 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import s from './ProfilePage.module.scss';
 import clsx from 'clsx';
+import s from './ProfilePage.module.scss';
 
-import { Typography } from '../../components/UI/Typography';
-import ProfileEditBlock from './ProfileEditBlock/';
 import SimpleInput from '../../components/UI/FormFields/SimpleInput';
 import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
 import Button from '../../components/UI/Button';
+import ProfileEditBlock from './ProfileEditBlock/';
+import ProfileAddressBlock from './ProfileAddressBlock';
+import NewAddressBlock from './NewAddressBlock';
+import EmailForm from './EmailEditBlock';
+
+import { Typography } from '../../components/UI/Typography';
 import { CustomerData, ProfileAddress } from '../../types/types';
 
 import FormTheme from '../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
+
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 
 import { RootState, AppDispatch } from '../../app/store';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   setIsDisabledFirstName,
   setIsDisabledLastName,
@@ -27,9 +32,6 @@ import {
 import { clearMessage } from '../../app/slices/message';
 import { getUser } from '../../app/slices/auth';
 import { updateUser } from '../../app/slices/profile';
-import ProfileAddressBlock from './ProfileAddressBlock';
-import NewAddressBlock from './NewAddressBlock';
-import EmailForm from './EmailEditBlock';
 
 const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);
@@ -68,7 +70,6 @@ const ProfilePage: React.FC = () => {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    dispatch(getUser());
     dispatch(clearMessage());
   }, [dispatch, cancelSubmit]);
   const currentDate = new Date();
