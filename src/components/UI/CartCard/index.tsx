@@ -67,7 +67,7 @@ const CartCard = ({ data }: ICartCard) => {
             disableState={statusCart === Status.LOADING}
           />
           <Typography variant={'h5'} className={s.totalPrice}>
-            {formatPrice(data.totalPrice.centAmount)} €
+            {formatPrice((discountItemPrice ? discountItemPrice : itemPrice) * data.quantity)} €
           </Typography>
         </div>
       </div>
