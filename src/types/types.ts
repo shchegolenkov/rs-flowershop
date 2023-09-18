@@ -362,6 +362,11 @@ export interface ApiResponse {
   };
 }
 
+export interface Logout {
+  accessToken: string;
+  refreshToken: string;
+}
+
 export type DiscountCode = {
   discountCode: {
     id: string;

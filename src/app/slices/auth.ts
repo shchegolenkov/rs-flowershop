@@ -2,8 +2,10 @@ import axios, { AxiosError } from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
 import { setCartData, setPromoStatus } from './cart';
-import { CustomerData, Status, ThunkAPI, User } from '../../types/types';
+import { CustomerData, Logout, Status, ThunkAPI, User } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
+const accessToken = localStorage.getItem('accessToken');
+const refreshToken = localStorage.getItem('refreshToken');
 import AuthService from '../services/auth.service';
 
 const getErrorMessage = (error: AxiosError | unknown, thunkAPI: ThunkAPI) => {
@@ -55,11 +57,12 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, thunkApi) => {
+export const logoutUser = createAsyncThunk('auth/logoutUser', async (data: Logout, thunkApi) => {
   try {
-    await AuthService.logoutUser();
-    localStorage.clear();
+    await thunkApi.dispatch(revokeRefreshToken(data.refreshToken as string));
+    await AuthService.logoutUser(data.accessToken);
     thunkApi.dispatch(setCartData(null));
+    thunkApi.dispatch(resetCatalogState());
     thunkApi.dispatch(setPromoStatus(Status.LOADING));
     return true;
   } catch (error) {
@@ -68,38 +71,87 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, thunkApi
   }
 });
 
-export const tokenIntrospection = createAsyncThunk('auth/tokenIntrospection', async () => {
-  try {
-    const response = await AuthService.tokenIntrospection();
-    return response;
-  } catch (error) {
-    console.log('tokenIntrospection err', error);
+export const revokeRefreshToken = createAsyncThunk(
+  'auth/revokeRefreshToken',
+  async (revokeRefreshToken: string) => {
+    try {
+      await AuthService.revokeRefreshToken(revokeRefreshToken);
+      return true;
+    } catch (error) {
+      console.error('Error revoke Refresh Token:', error);
+      return false;
+    }
   }
-});
+);
 
-export const getUser = createAsyncThunk('auth/getUser', async () => {
+export const tokenIntrospection = createAsyncThunk(
+  'auth/tokenIntrospection',
+  async (_, thunkApi) => {
+    try {
+      const response = await AuthService.tokenIntrospection();
+      if (!response.active) {
+        thunkApi.dispatch(refreshAccessToken(refreshToken as string));
+      }
+      return response;
+    } catch (error) {
+      console.log('tokenIntrospection err', error);
+    }
+  }
+);
+
+export const refreshAccessToken = createAsyncThunk(
+  'auth/refreshAccessToken',
+  async (refreshToken: string, thunkApi) => {
+    try {
+      const response = await AuthService.refreshAccessToken(refreshToken);
+      localStorage.setItem('accessToken', response.access_token);
+      return response;
+    } catch (error) {
+      localStorage.clear();
+      thunkApi.dispatch(resetCatalogState());
+      console.log('Refresh Access Token error', error);
+    }
+  }
+);
+
+export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
   try {
     const response = await AuthService.getUser();
     localStorage.setItem('user', JSON.stringify(response.data));
     return response.data;
   } catch (error) {
-    console.log('Get user error:', error);
+    throw thunkAPI.rejectWithValue(error);
   }
 });
 
 interface AuthState {
   isLoggedIn: boolean;
   user: User | null;
+  accessToken: string | null;
+  refreshToken: string | null;
 }
 
 const initialState: AuthState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
+  ? { isLoggedIn: true, user, accessToken: accessToken || null, refreshToken: refreshToken || null }
+  : {
+      isLoggedIn: false,
+      user: null,
+      accessToken: accessToken || null,
+      refreshToken: refreshToken || null,
+    };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    resetCatalogState: (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+      state.accessToken = null;
+      state.refreshToken = null;
+      localStorage.clear();
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state) => {
@@ -111,12 +163,10 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.user = action.payload.user;
+        state.accessToken = localStorage.getItem('accessToken');
+        state.refreshToken = localStorage.getItem('refreshToken');
       })
       .addCase(loginUser.rejected, (state) => {
-        state.isLoggedIn = false;
-        state.user = null;
-      })
-      .addCase(logoutUser.fulfilled, (state) => {
         state.isLoggedIn = false;
         state.user = null;
       })
@@ -130,6 +180,9 @@ const authSlice = createSlice({
       .addCase(tokenIntrospection.rejected, (state) => {
         state.isLoggedIn = false;
       })
+      .addCase(refreshAccessToken.fulfilled, (state) => {
+        state.accessToken = localStorage.getItem('accessToken');
+      })
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload;
       })
@@ -140,4 +193,5 @@ const authSlice = createSlice({
 });
 
 const { reducer } = authSlice;
+export const { resetCatalogState } = authSlice.actions;
 export default reducer;

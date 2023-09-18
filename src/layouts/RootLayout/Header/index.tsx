@@ -13,6 +13,7 @@ import { logoutUser, tokenIntrospection } from '../../../app/slices/auth';
 import { useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../../app/store';
 import { Typography } from '../../../components/UI/Typography';
+import { Logout } from '../../../types/types';
 
 const links = [
   { to: '/catalog', text: 'Catalog' },
@@ -28,7 +29,7 @@ function Header() {
   const { cartData } = useSelector((state: RootState) => state.cart);
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [isMenuActive, setMenuActive] = useState(false);
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const { isLoggedIn, accessToken, refreshToken } = useSelector((state: RootState) => state.auth);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -61,7 +62,13 @@ function Header() {
   }
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    if (accessToken && refreshToken) {
+      const data: Logout = {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      };
+      dispatch(logoutUser(data));
+    }
   };
 
   return (
