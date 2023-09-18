@@ -112,13 +112,13 @@ export const refreshAccessToken = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk('auth/getUser', async () => {
+export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
   try {
     const response = await AuthService.getUser();
     localStorage.setItem('user', JSON.stringify(response.data));
     return response.data;
   } catch (error) {
-    console.log('Get user error:', error);
+    throw thunkAPI.rejectWithValue(error);
   }
 });
 
