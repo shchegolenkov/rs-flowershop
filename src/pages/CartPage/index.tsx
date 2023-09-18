@@ -137,7 +137,9 @@ const CartPage = () => {
                     label={'Promo code'}
                     id={'promocode-input'}
                     className={s.textInput}
-                    disabled={!cartItems || promoStatus === Status.SUCCESS}
+                    disabled={
+                      !cartItems || promoStatus === Status.SUCCESS || statusCart === Status.LOADING
+                    }
                     name="promo"
                     error={promoStatus === Status.ERROR}
                     helperText={
