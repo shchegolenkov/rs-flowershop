@@ -74,6 +74,13 @@ const CartPage = () => {
     if (promoStatus === Status.ERROR) dispatch(setPromoStatus(Status.LOADING));
   }, [location]);
 
+  useEffect(() => {
+    if ((cartItems?.length === 0 || !cartItems) && promoStatus === Status.ERROR) {
+      setInputValue('');
+      dispatch(setPromoStatus(Status.LOADING));
+    }
+  }, [cartItems]);
+
   return (
     <main>
       <div className={s.grid}>
@@ -138,7 +145,10 @@ const CartPage = () => {
                     id={'promocode-input'}
                     className={s.textInput}
                     disabled={
-                      !cartItems || promoStatus === Status.SUCCESS || statusCart === Status.LOADING
+                      !cartItems ||
+                      promoStatus === Status.SUCCESS ||
+                      statusCart === Status.LOADING ||
+                      cartItems.length === 0
                     }
                     name="promo"
                     error={promoStatus === Status.ERROR}
