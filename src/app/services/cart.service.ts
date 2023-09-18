@@ -122,10 +122,79 @@ const clearCart = async (data: UpdateCart[]) => {
   }
 };
 
+const applyPromo = async (data: UpdateCart) => {
+  const accessToken =
+    localStorage.getItem('accessToken') ||
+    localStorage.getItem('anonymousToken') ||
+    (await getAnonymousToken());
+  const cartData = localStorage.getItem('cart') || null;
+  const cart = cartData ? JSON.parse(cartData) : '';
+  if (cart) {
+    const cartId = cart.id;
+    const cartVersion = Number(cart.version);
+    const updateCartItem: UpdateCart = {
+      action: data.action,
+      code: data.code,
+    };
+    const requestPayload: UpdateCartRequest = {
+      version: cartVersion,
+      actions: [updateCartItem],
+    };
+    try {
+      const response = await axios.post(
+        URL_CART + `/${cartId}?expand=cartDiscounts%5B*%5D`,
+        requestPayload,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      const cart = await response.data;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return response;
+    } catch (error) {
+      throw new Error('Error applying promo');
+    }
+  }
+};
+
+const resetPromo = async () => {
+  const accessToken =
+    localStorage.getItem('accessToken') ||
+    localStorage.getItem('anonymousToken') ||
+    (await getAnonymousToken());
+  const cartData = localStorage.getItem('cart') || null;
+  const cart = cartData ? JSON.parse(cartData) : '';
+  if (cart) {
+    const cartId = cart.id;
+    const cartVersion = Number(cart.version);
+    const discountCode = cart.discountCodes[0].discountCode;
+    const updateCartItem: UpdateCart = {
+      action: 'removeDiscountCode',
+      discountCode: discountCode,
+    };
+    const requestPayload: UpdateCartRequest = {
+      version: cartVersion,
+      actions: [updateCartItem],
+    };
+    try {
+      const response = await axios.post(URL_CART + `/${cartId}`, requestPayload, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      const cart = await response.data;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return response;
+    } catch (error) {
+      throw new Error('Error resetting promo');
+    }
+  }
+};
+
 const CartService = {
   createCart,
   updateCart,
   clearCart,
+  applyPromo,
+  resetPromo,
 };
 
 export default CartService;

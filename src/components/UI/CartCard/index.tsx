@@ -14,7 +14,10 @@ interface ICartCard {
 
 const CartCard = ({ data }: ICartCard) => {
   const itemPrice = data.variant.prices[0].value.centAmount;
-  const discountItemPrice = data.variant.prices[0].discounted?.value.centAmount || null;
+  const discountItemPrice =
+    data?.discountedPrice?.value.centAmount ||
+    data.variant.prices[0].discounted?.value.centAmount ||
+    null;
   const dispatch = useDispatch<AppDispatch>();
   const { status: statusCart } = useSelector((state: RootState) => state.cart);
 

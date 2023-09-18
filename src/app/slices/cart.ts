@@ -42,14 +42,41 @@ export const clearCart = createAsyncThunk(
   }
 );
 
+export const applyPromo = createAsyncThunk(
+  'cart/applyPromo',
+  async (data: UpdateCart, thunkAPI) => {
+    try {
+      const response = await CartService.applyPromo(data);
+      if (response) {
+        return response.data;
+      }
+    } catch (error) {
+      throw thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const resetPromo = createAsyncThunk('cart/resetPromo', async (_, thunkAPI) => {
+  try {
+    const response = await CartService.resetPromo();
+    if (response) {
+      return response.data;
+    }
+  } catch (error) {
+    throw thunkAPI.rejectWithValue(error);
+  }
+});
+
 interface CartState {
   status: Status;
   cartData: Cart | null;
+  promoStatus: Status;
 }
 
 const initialState: CartState = {
   status: Status.SUCCESS,
   cartData: cart ? cart : null,
+  promoStatus: cart?.discountCodes.length > 0 ? Status.SUCCESS : Status.LOADING,
 };
 
 const cartSlice = createSlice({
@@ -58,6 +85,9 @@ const cartSlice = createSlice({
   reducers: {
     setCartData: (state, action) => {
       state.cartData = action.payload;
+    },
+    setPromoStatus: (state, action) => {
+      state.promoStatus = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -97,9 +127,41 @@ const cartSlice = createSlice({
     builder.addCase(clearCart.rejected, (state) => {
       state.status = Status.ERROR;
     });
+
+    builder.addCase(applyPromo.pending, (state) => {
+      state.status = Status.LOADING;
+      state.promoStatus = Status.LOADING;
+    });
+
+    builder.addCase(applyPromo.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
+      state.cartData = action.payload;
+      state.promoStatus = Status.SUCCESS;
+    });
+
+    builder.addCase(applyPromo.rejected, (state) => {
+      state.status = Status.ERROR;
+      state.promoStatus = Status.ERROR;
+    });
+
+    builder.addCase(resetPromo.pending, (state) => {
+      state.status = Status.LOADING;
+      state.promoStatus = Status.LOADING;
+    });
+
+    builder.addCase(resetPromo.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
+      state.cartData = action.payload;
+      state.promoStatus = Status.LOADING;
+    });
+
+    builder.addCase(resetPromo.rejected, (state) => {
+      state.status = Status.ERROR;
+      state.promoStatus = Status.LOADING;
+    });
   },
 });
 
 const { reducer } = cartSlice;
-export const { setCartData } = cartSlice.actions;
+export const { setCartData, setPromoStatus } = cartSlice.actions;
 export default reducer;
