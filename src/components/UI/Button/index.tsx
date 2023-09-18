@@ -4,7 +4,7 @@ import s from './Button.module.scss';
 
 interface IButton
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'underlined';
+  variant?: 'primary' | 'secondary' | 'underlined' | 'ico';
   full?: boolean;
   disabled?: boolean;
   children?: ReactNode;

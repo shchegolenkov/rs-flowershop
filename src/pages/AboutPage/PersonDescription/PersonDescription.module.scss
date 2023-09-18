@@ -1,0 +1,93 @@
+.person {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.personBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.name::before {
+  background: center / cover no-repeat url('../../../assets/svg/person.svg');
+}
+
+.job:before {
+  background: center / cover no-repeat url('../../../assets/svg/work.svg');
+}
+
+.bio:before {
+  background: center / cover no-repeat url('../../../assets/svg/editActive.svg');
+}
+
+.contributions:before {
+  background: top / cover no-repeat url('../../../assets/svg/trophy.svg');
+}
+
+.tasksList {
+  list-style: none;
+}
+
+.listItem {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: auto;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--color-black);
+  }
+}
+
+.link {
+  width: min-content;
+  display: grid;
+  grid-template-columns: min-content min-content;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-black);
+  text-decoration: none;
+  text-wrap: nowrap;
+  transition: all 0.3s;
+
+  &:after {
+    content: '';
+    display: block;
+    grid-column: auto / span 2;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-black);
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    color: var(--color-gray);
+
+    &:after {
+      width: 100%;
+    }
+  }
+}

@@ -45,7 +45,7 @@ const getAccessClientToken = async (data: Pick<CustomerData, 'email' | 'password
       },
     });
 
-    const accessToken = response.data.access_token;
+    const accessToken = response.data;
     return accessToken;
   } catch (error) {
     throw error;
@@ -102,16 +102,40 @@ const registerUser = async (data: CustomerData) => {
   }
 };
 
+interface requestPayloadLogin {
+  email: string;
+  password: string;
+  anonymousCart?: {
+    id: string;
+    typeId: string;
+  };
+}
+
 const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
   try {
-    const accessToken = await getAccessClientToken(data);
+    const tokenResponse = await getAccessClientToken(data);
+    const accessToken = await tokenResponse.access_token;
+    const refreshToken = await tokenResponse.refresh_token;
     localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    const anonymousToken = localStorage.getItem('anonymousToken') || null;
 
     if (accessToken) {
-      const requestPayload: Pick<RequestPayload, 'email' | 'password'> = {
+      const requestPayload: requestPayloadLogin = {
         email: data.email,
         password: data.password,
       };
+
+      if (anonymousToken) {
+        const cartData = localStorage.getItem('cart') || null;
+        const cart = cartData ? JSON.parse(cartData) : '';
+        if (cart.anonymousId) {
+          requestPayload['anonymousCart'] = {
+            id: cart.id,
+            typeId: 'cart',
+          };
+        }
+      }
 
       return axios.post(LOGIN_URL, requestPayload, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -122,13 +146,29 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
   }
 };
 
-const logoutUser = () => {
-  const token = localStorage.getItem('accessToken');
+const logoutUser = (accessToken: string) => {
   return axios
     .post(LOGOUT_URL, null, {
       params: {
-        token: token,
+        token: accessToken,
         token_type_hint: 'access_token',
+      },
+      auth: {
+        username: CLIENT_ID,
+        password: CLIENT_SECRET,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
+const revokeRefreshToken = (refreshToken: string) => {
+  return axios
+    .post(LOGOUT_URL, null, {
+      params: {
+        token: refreshToken,
+        token_type_hint: 'refresh_token',
       },
       auth: {
         username: CLIENT_ID,
@@ -144,7 +184,7 @@ const tokenIntrospection = async () => {
   const accessToken = localStorage.getItem('accessToken');
 
   if (!accessToken) {
-    return null;
+    throw new Error('Error: not found access token');
   }
 
   try {
@@ -162,6 +202,29 @@ const tokenIntrospection = async () => {
   }
 };
 
+const refreshAccessToken = async (refreshToken: string) => {
+  if (!refreshToken) {
+    return null;
+  }
+
+  try {
+    const response = await axios.post(ACC_TOKEN_URL, null, {
+      params: {
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+      },
+      auth: {
+        username: CLIENT_ID,
+        password: CLIENT_SECRET,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error refresh token:', error);
+  }
+};
+
 const getUser = async () => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
   const userId = localStorage.getItem('userId') || 'notFoundId';
@@ -176,6 +239,8 @@ const AuthService = {
   logoutUser,
   tokenIntrospection,
   getUser,
+  refreshAccessToken,
+  revokeRefreshToken,
 };
 
 export default AuthService;

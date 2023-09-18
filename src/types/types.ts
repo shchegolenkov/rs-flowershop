@@ -234,3 +234,146 @@ export interface ThunkAPI {
   dispatch: Dispatch;
   rejectWithValue: (value: null) => void;
 }
+
+export interface UpdateCart {
+  action: string;
+  productId?: string;
+  lineItemId?: string;
+  quantity?: number;
+  code?: string;
+  discountCode?: DiscountCode;
+}
+
+export interface Cart {
+  anonymousId?: string;
+  cartState: string;
+  createdAt: string;
+  createdBy: {
+    clientId: string;
+    isPlatformClient: boolean;
+    anonymousId: string;
+  };
+  customLineItems: [];
+  deleteDaysAfterLastModification: number;
+  directDiscounts: [];
+  discountCodes: DiscountCode[];
+  id: string;
+  inventoryMode: string;
+  itemShippingAddresses: [];
+  lastMessageSequenceNumber: number;
+  lastModifiedAt?: string;
+  lastModifiedBy?: {
+    clientId: string;
+    isPlatformClient: boolean;
+    anonymousId: string;
+  };
+  lineItems: LineItem[];
+  origin: string;
+  refusedGifts: [];
+  shipping: [];
+  shippingMode: string;
+  taxCalculationMode: string;
+  taxMode: string;
+  taxRoundingMode: string;
+  totalLineItemQuantity: number;
+  totalPrice: Money;
+  type: string;
+  version: number;
+  versionModifiedAt: string;
+}
+
+export interface LineItem {
+  id: string;
+  productId: string;
+  productKey: string;
+  name: Record<string, string>;
+  productType: {
+    typeId: string;
+    id: string;
+    version: number;
+  };
+  discountedPrice: {
+    includedDiscounts: { discount: DiscountCode }[];
+    value: Money;
+  };
+  productSlug: Record<string, string>;
+  variant: {
+    id: number;
+    sku: string;
+    prices: ItemMoney[];
+    images: ProductImage[];
+    attributes: ProductAttribute[];
+    assets?: [];
+  };
+  price: Money;
+  quantity: number;
+  discountedPricePerQuantity?: [];
+  perMethodTaxRate?: [];
+  addedAt: string;
+  lastModifiedAt?: string;
+  state: {
+    quantity: number;
+    state: {
+      typeId: string;
+      id: string;
+    };
+  }[];
+  priceMode: string;
+  lineItemMode: string;
+  totalPrice: Money;
+  taxedPricePortions?: [];
+}
+
+export interface Money {
+  type: string;
+  currencyCode: string;
+  centAmount: number;
+  fractionDigits: number;
+}
+
+type ItemMoney = {
+  id: string;
+  value: Money;
+  discounted?: {
+    value: Money;
+    discount?: {
+      typeId: string;
+      id: string;
+    };
+  };
+};
+
+export interface ApiResponse {
+  type: string;
+  payload: User;
+  meta: {
+    arg: {
+      streetName: string;
+      postalCode: string;
+      country: string;
+      city: string;
+      id: string;
+      shippingBillingAddress: boolean;
+      shippingDefaultAddress: boolean;
+      typeAddress: string;
+    };
+    requestId: string;
+    requestStatus: string;
+  };
+}
+
+export interface Logout {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export type DiscountCode = {
+  discountCode: {
+    id: string;
+    typeId: string;
+  };
+};
+
+export enum WelcomeCodes {
+  WELCOME = '3019b1a7-de93-48e5-93a4-87e8d87fec25',
+}

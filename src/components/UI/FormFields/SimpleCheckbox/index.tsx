@@ -1,12 +1,11 @@
 import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
-import { CustomerData, ProfileForm } from '../../../../types/types';
+import { UseFormRegister, FieldValues, Path } from 'react-hook-form';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-interface SimpleCheckboxProps {
-  register: UseFormRegister<CustomerData> | UseFormRegister<ProfileForm>;
-  name: keyof CustomerData | keyof ProfileForm;
+interface SimpleCheckboxProps<T extends FieldValues> {
+  register: UseFormRegister<T>;
+  name: Path<T>;
   label: string;
   id: string;
   isChecked: boolean;
@@ -15,7 +14,7 @@ interface SimpleCheckboxProps {
   isDisabled?: boolean;
 }
 
-const SimpleCheckbox: React.FC<SimpleCheckboxProps> = ({
+const SimpleCheckbox = <T extends FieldValues>({
   register,
   name,
   label,
@@ -24,7 +23,7 @@ const SimpleCheckbox: React.FC<SimpleCheckboxProps> = ({
   setChecked,
   isEditField,
   isDisabled,
-}) => {
+}: SimpleCheckboxProps<T>) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
