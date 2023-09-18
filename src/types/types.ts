@@ -355,3 +355,8 @@ export interface ApiResponse {
     requestStatus: string;
   };
 }
+
+export interface Logout {
+  accessToken: string;
+  refreshToken: string;
+}
