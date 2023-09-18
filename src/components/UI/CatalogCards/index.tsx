@@ -6,10 +6,11 @@ import { Typography } from '../Typography';
 import CatalogCard from '../CatalogCard';
 import s from './CatalogCards.module.scss';
 import { Skeleton } from '../CatalogCard/Skeleton';
+import { ITEMS_PER_PAGE } from '../../../constants/const';
 
 function CatalogCards({ className }: JSX.IntrinsicElements['div']) {
   const { status, queryResult } = useSelector((state: RootState) => state.products);
-  const skeletons = [...new Array(9)].map((_, index) => <Skeleton key={index} />);
+  const skeletons = [...new Array(ITEMS_PER_PAGE)].map((_, index) => <Skeleton key={index} />);
   return (
     <div className={clsx(s.wrapper, className)}>
       {status === Status.LOADING ? (
