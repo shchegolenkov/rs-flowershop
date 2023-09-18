@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store';
 import { applyPromo, resetPromo, setPromoStatus } from '../../app/slices/cart';
@@ -35,8 +35,6 @@ const CartPage = () => {
     cartData?.discountCodes[0]?.discountCode.id === WelcomeCodes.WELCOME ? 'welcome' : ''
   );
 
-  const ref = useRef<HTMLInputElement | null>(null);
-
   const subTotal = cartData?.lineItems.reduce(
     (acc, item) =>
       (acc += item.variant.prices[0].discounted
@@ -58,9 +56,6 @@ const CartPage = () => {
   const handleReset = () => {
     promoStatus === Status.SUCCESS && dispatch(resetPromo());
     setInputValue('');
-    if (ref.current) {
-      ref.current.value = '';
-    }
     dispatch(setPromoStatus(Status.LOADING));
   };
 
@@ -72,6 +67,12 @@ const CartPage = () => {
       dispatch(setPromoStatus(Status.LOADING));
     }
   };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (promoStatus === Status.ERROR) dispatch(setPromoStatus(Status.LOADING));
+  }, [location]);
 
   return (
     <main>
@@ -136,27 +137,28 @@ const CartPage = () => {
                     label={'Promo code'}
                     id={'promocode-input'}
                     className={s.textInput}
-                    disabled={!cartItems}
+                    disabled={!cartItems || promoStatus === Status.SUCCESS}
                     name="promo"
                     error={promoStatus === Status.ERROR}
-                    inputRef={ref}
                     helperText={
                       promoStatus === Status.ERROR ? (
-                        <span className={s.err__message}>
+                        <span className={clsx(s.errMessage, s.errMessageActive)}>
                           <ErrorIcon color="error" /> {'Enter valid promo code'}
                         </span>
                       ) : (
-                        ''
+                        <span className={s.errMessage}></span>
                       )
                     }
                     onChange={handleChange}
                   />
-                  {promoStatus === Status.LOADING ? (
+                  {promoStatus !== Status.SUCCESS ? (
                     <Button
                       type="submit"
                       variant={'secondary'}
                       className={s.promoButton}
-                      disabled={!cartItems || status === Status.LOADING}
+                      disabled={
+                        !cartItems || statusCart === Status.LOADING || inputValue.length === 0
+                      }
                     >
                       Apply
                     </Button>
@@ -165,7 +167,7 @@ const CartPage = () => {
                       type="reset"
                       variant={'secondary'}
                       className={s.promoButton}
-                      disabled={!cartItems || status === Status.LOADING}
+                      disabled={!cartItems || statusCart === Status.LOADING}
                     >
                       Reset
                     </Button>

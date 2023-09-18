@@ -101,7 +101,7 @@
 .promoFormSuccess {
   input,
   label {
-    color: var(--color-success);
+    color: var(--color-success) !important;
   }
 
   fieldset {
@@ -164,8 +164,18 @@
   }
 }
 
-.err__message {
+.errMessage {
   display: flex;
   align-items: center;
   gap: 5px;
+  height: 0px;
+  transition: height 0.3s;
+}
+
+.errMessageActive {
+  height: 24px;
+}
+
+.errMessageEmpty {
+  height: 24px;
 }
