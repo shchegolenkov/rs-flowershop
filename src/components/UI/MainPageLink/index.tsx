@@ -9,7 +9,7 @@ function MainPageLink({ to, title }: { to: string; title: string }) {
   return (
     <section className={s.item}>
       <div className={s.cover}>
-        <img className={s.coverImg} src={`images/${imgLink}Card.png`} alt={`${title} cover`} />
+        <img className={s.coverImg} src={`images/${imgLink}Card.jpg`} alt={`${title} cover`} />
       </div>
       <Link className={s.link} to={to}>
         <Typography variant={'h3'} className={s.linkName}>
