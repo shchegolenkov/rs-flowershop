@@ -98,13 +98,26 @@
   margin-top: 16px;
 }
 
+.promoFormSuccess {
+  input,
+  label {
+    color: var(--color-success) !important;
+  }
+
+  fieldset {
+    border-color: var(--color-success) !important;
+  }
+}
+
 .promoButton {
   width: 40%;
   max-width: 260px;
+  height: 56px;
 }
 
 .textInput {
   flex-grow: 1;
+  height: 80px;
 }
 
 .checkoutBlock {
@@ -150,4 +163,20 @@
   @include media-tablet {
     margin-bottom: 24px;
   }
+}
+
+.errMessage {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 0px;
+  transition: height 0.3s;
+}
+
+.errMessageActive {
+  height: 24px;
+}
+
+.errMessageEmpty {
+  height: 24px;
 }

@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
-import { setCartData } from './cart';
-import { CustomerData, Logout, ThunkAPI, User } from '../../types/types';
+import { setCartData, setPromoStatus } from './cart';
+import { CustomerData, Logout, Status, ThunkAPI, User } from '../../types/types';
 const user = JSON.parse(localStorage.getItem('user') as string);
 const accessToken = localStorage.getItem('accessToken');
 const refreshToken = localStorage.getItem('refreshToken');
@@ -44,9 +44,10 @@ export const loginUser = createAsyncThunk(
       if (response) {
         localStorage.setItem('userId', response.data.customer.id);
         localStorage.setItem('user', JSON.stringify(response.data.customer));
-        if (response.data.cart) {
-          localStorage.setItem('cart', JSON.stringify(response.data.cart));
-          thunkAPI.dispatch(setCartData(response.data.cart));
+        localStorage.setItem('cart', JSON.stringify(response.data.cart));
+        thunkAPI.dispatch(setCartData(response.data.cart));
+        if (response.data.cart.discountCodes.length > 0) {
+          thunkAPI.dispatch(setPromoStatus(Status.SUCCESS));
         }
         return response.data.customer;
       }
@@ -62,6 +63,7 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async (data: Logou
     await AuthService.logoutUser(data.accessToken);
     thunkApi.dispatch(setCartData(null));
     thunkApi.dispatch(resetCatalogState());
+    thunkApi.dispatch(setPromoStatus(Status.LOADING));
     return true;
   } catch (error) {
     console.error('Error during logout:', error);
