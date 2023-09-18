@@ -44,6 +44,9 @@ export const loginUser = createAsyncThunk(
         localStorage.setItem('user', JSON.stringify(response.data.customer));
         localStorage.setItem('cart', JSON.stringify(response.data.cart));
         thunkAPI.dispatch(setCartData(response.data.cart));
+        if (response.data.cart.discountCodes.length > 0) {
+          thunkAPI.dispatch(setPromoStatus(Status.SUCCESS));
+        }
         return response.data.customer;
       }
     } catch (error) {
