@@ -61,6 +61,7 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async (data: Logou
     await thunkApi.dispatch(revokeRefreshToken(data.refreshToken as string));
     await AuthService.logoutUser(data.accessToken);
     thunkApi.dispatch(setCartData(null));
+    thunkApi.dispatch(resetCatalogState());
     return true;
   } catch (error) {
     console.error('Error during logout:', error);
@@ -167,13 +168,6 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.user = null;
       })
-      .addCase(logoutUser.fulfilled, (state) => {
-        state.isLoggedIn = false;
-        state.user = null;
-        state.accessToken = null;
-        state.refreshToken = null;
-        localStorage.clear();
-      })
       .addCase(tokenIntrospection.fulfilled, (state, action) => {
         if (action.payload.active) {
           state.isLoggedIn = true;
@@ -186,13 +180,6 @@ const authSlice = createSlice({
       })
       .addCase(refreshAccessToken.fulfilled, (state) => {
         state.accessToken = localStorage.getItem('accessToken');
-      })
-      .addCase(refreshAccessToken.rejected, (state) => {
-        state.isLoggedIn = false;
-        state.user = null;
-        state.accessToken = null;
-        state.refreshToken = null;
-        localStorage.clear();
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload;
