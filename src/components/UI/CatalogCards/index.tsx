@@ -4,9 +4,9 @@ import { RootState } from '../../../app/store';
 import { Status } from '../../../types/types';
 import { Typography } from '../Typography';
 import CatalogCard from '../CatalogCard';
-import s from './CatalogCards.module.scss';
 import { Skeleton } from '../CatalogCard/Skeleton';
 import { ITEMS_PER_PAGE } from '../../../constants/const';
+import s from './CatalogCards.module.scss';
 
 function CatalogCards({ className }: JSX.IntrinsicElements['div']) {
   const { status, queryResult } = useSelector((state: RootState) => state.products);
