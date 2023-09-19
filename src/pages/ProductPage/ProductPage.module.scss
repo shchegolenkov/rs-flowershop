@@ -1,0 +1,211 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+
+  @include media-tablet {
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+  }
+}
+
+.sliderBlock {
+  position: relative;
+  border-right: 1px solid var(--color-black);
+
+  @include media-tablet {
+    border-right: none;
+    border-bottom: 1px solid var(--color-black);
+  }
+}
+
+.saleBlock {
+  position: absolute;
+  top: 34px;
+  right: 40px;
+  background: rgba($color: #fff, $alpha: 0.3);
+  border-radius: 8px;
+}
+
+.saleText {
+  text-transform: uppercase;
+  padding: 8px 12px;
+}
+
+.contentBlock {
+  height: 100%;
+}
+
+.wrapper {
+  padding: 40px;
+
+  @include media-mobile {
+    padding: 40px 16px;
+  }
+}
+
+.h2 {
+  margin-bottom: 8px;
+}
+
+.h4 {
+  color: var(--color-gray);
+  text-decoration: line-through;
+}
+
+.subtitle {
+  margin-bottom: 8px;
+  color: var(--color-gray);
+}
+
+.descriptionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 16px 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-gray);
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.priceBlock {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.sizeBlock {
+  display: flex;
+  gap: 6px;
+}
+
+.button {
+  min-width: 200px;
+
+  @include media-tablet {
+    width: 100%;
+  }
+}
+
+.contentBlock .breadcrumbs {
+  color: var(--color-black);
+  line-height: inherit;
+  margin-bottom: 24px;
+  font-family: inherit;
+  font-size: 14px;
+  text-transform: uppercase;
+
+  @include media-mobile {
+    font-size: 12px;
+  }
+}
+
+.overline {
+  color: var(--color-gray);
+  line-height: initial;
+}
+
+.linkText {
+  color: var(--color-black);
+  line-height: initial;
+}
+
+.link {
+  text-decoration: none;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-black);
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover::before {
+    visibility: visible;
+    width: 100%;
+  }
+}
+
+.loadingBlock {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-light-gray);
+}
+
+.btnBlock {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  @include media-mobile {
+    justify-content: space-between;
+  }
+}
+
+.alertBlock {
+  min-height: 80px;
+  height: 100%;
+  margin-top: 30px;
+}
+
+.buttonCancel {
+  &::after {
+    width: 100%;
+    left: 0;
+
+    @include media-mobile {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &:not(:disabled) {
+    &:active {
+      &::after {
+        width: 80%;
+        left: 10%;
+
+        @include media-tablet {
+          width: 30%;
+          left: 35%;
+        }
+
+        @include media-mobile {
+          width: 40%;
+          left: 30%;
+        }
+      }
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        &::after {
+          width: 100%;
+          left: 0;
+        }
+      }
+
+      &::after {
+        width: 0;
+        background-color: var(--color-gray);
+      }
+    }
+  }
+
+  &:disabled {
+    color: var(--color-gray);
+    pointer-events: none;
+  }
+}

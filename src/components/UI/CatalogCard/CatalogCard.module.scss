@@ -1,0 +1,101 @@
+.link {
+  display: block;
+  color: var(--color-black);
+  aspect-ratio: 1 / 1;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.card {
+  border-bottom: 1px solid var(--color-black);
+  border-right: 1px solid var(--color-black);
+  position: relative;
+
+  &:nth-child(3n) {
+    border-right: none;
+  }
+
+  @include media-large {
+    &:nth-child(3n) {
+      border-right: 1px solid var(--color-black);
+    }
+
+    &:nth-child(even) {
+      border-right: none;
+    }
+  }
+
+  @include media-small {
+    border-right: none;
+    &:nth-child(3n) {
+      border-right: none;
+    }
+  }
+}
+
+.description {
+  background-color: var(--color-white);
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding: 20px 65px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+
+  @include media-tablet {
+    padding: 20px 65px 20px 10px;
+  }
+}
+
+.caption {
+  color: var(--color-gray);
+}
+
+.prices {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.oldPrice {
+  color: var(--color-gray);
+  text-decoration: line-through;
+}
+
+.sale {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: var(--color-blur);
+  backdrop-filter: blur(15px);
+}
+
+.btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.loadBlock {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  background-color: var(--color-dark-gray);
+}

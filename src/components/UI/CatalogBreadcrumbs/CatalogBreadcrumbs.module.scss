@@ -1,0 +1,31 @@
+.nav {
+  margin-bottom: 32px;
+  @include media-large {
+    margin-bottom: 0px;
+  }
+}
+
+.listItem {
+  margin-left: 16px;
+}
+
+.link {
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.links {
+  margin-top: 16px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 12px;
+  @include media-large {
+    height: 100px;
+  }
+}
