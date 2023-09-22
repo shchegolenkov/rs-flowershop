@@ -8,6 +8,7 @@ import {
   AddShipBillProperty,
   ChangePassword,
   ThunkAPI,
+  Status,
 } from '../../types/types';
 
 import ProfileService from '../services/profile.service';
@@ -181,7 +182,37 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+const asyncActionHandlers = (builder, actions) => {
+  actions.forEach((action) => {
+    builder.addCase(action.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+
+    builder.addCase(action.fulfilled, (state) => {
+      state.status = Status.SUCCESS;
+    });
+
+    builder.addCase(action.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+  });
+};
+
+const asyncActions = [
+  updateUser,
+  updateUserAddress,
+  addAddress,
+  updateBillingAddress,
+  updateShippingAddress,
+  addShippingBillingAddresses,
+  setDefaultShippingAddress,
+  setDefaultBillingAddress,
+  removeAddress,
+  changePassword,
+];
+
 interface ProfileState {
+  status: Status;
   isDisabledEmail: boolean;
   isDisabledFirstName: boolean;
   isDisabledLastName: boolean;
@@ -189,6 +220,7 @@ interface ProfileState {
 }
 
 const initialState: ProfileState = {
+  status: Status.SUCCESS,
   isDisabledEmail: true,
   isDisabledFirstName: true,
   isDisabledLastName: true,
@@ -216,6 +248,9 @@ const messageSlice = createSlice({
       state.isDisabledLastName = true;
       state.isDisabledDateOfBirth = true;
     },
+  },
+  extraReducers: (builder) => {
+    asyncActionHandlers(builder, asyncActions);
   },
 });
 
