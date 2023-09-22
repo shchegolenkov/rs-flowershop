@@ -206,7 +206,9 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
         if (response.meta.requestStatus === 'rejected') {
           setIsSuccess(false);
         } else {
-          setIsSuccess(true);
+          setTimeout(() => {
+            setIsSuccess(true);
+          }, 1000);
           return dispatch(getUser());
         }
       })
@@ -298,7 +300,11 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
               </div>
             )}
           </button>
-          <button type="button" onClick={deleteAddress}>
+          <button
+            type="button"
+            onClick={deleteAddress}
+            disabled={isSuccess || status === Status.LOADING}
+          >
             <div>
               <DeleteAddress />
             </div>
