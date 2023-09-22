@@ -118,7 +118,7 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
     const refreshToken = await tokenResponse.refresh_token;
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
-    const anonymousToken = localStorage.getItem('anonymousToken') || null;
+    const cartData = localStorage.getItem('cart') || null;
 
     if (accessToken) {
       const requestPayload: requestPayloadLogin = {
@@ -126,8 +126,7 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
         password: data.password,
       };
 
-      if (anonymousToken) {
-        const cartData = localStorage.getItem('cart') || null;
+      if (cartData) {
         const cart = cartData ? JSON.parse(cartData) : '';
         if (cart.anonymousId) {
           requestPayload['anonymousCart'] = {
