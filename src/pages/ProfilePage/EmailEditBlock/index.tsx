@@ -20,11 +20,13 @@ import { getUser } from '../../../app/slices/auth';
 import { updateUser } from '../../../app/slices/profile';
 import { CustomerData } from '../../../types/types';
 import ProfileEditBlock from '../ProfileEditBlock';
+import ProfileAlertBlock from '../ProfileAlertBlock';
 
 const EmailForm: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);
+  const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -47,6 +49,7 @@ const EmailForm: React.FC = () => {
   const onClickCancel = () => {
     dispatch(setIsDisabledEmail());
     setCancelSubmit(!cancelSubmit);
+    setIsOpenEditBlock(false);
     setIsSuccess(false);
     setFormError(false);
     dispatch(clearMessage());
@@ -97,10 +100,11 @@ const EmailForm: React.FC = () => {
         }
         setIsSuccess(true);
         await dispatch(getUser());
+        dispatch(setIsDisabledEmail());
         setTimeout(() => {
           dispatch(clearMessage());
-          dispatch(setIsDisabledEmail());
           setIsSuccess(false);
+          setIsOpenEditBlock(false);
         }, 3000);
       } catch (error) {}
     }
@@ -108,6 +112,7 @@ const EmailForm: React.FC = () => {
 
   const handleEmailClick = () => {
     dispatch(setIsDisabledEmail());
+    setIsOpenEditBlock(!isOpenEditBlock);
     reset({
       email: user && user.email ? user.email : '',
     });
@@ -136,15 +141,14 @@ const EmailForm: React.FC = () => {
         >
           CHANGE PASSWORD
         </Button>
-        {!isDisabledEmail ? (
+        {isOpenEditBlock ? (
           <ProfileEditBlock
             onClickSubmit={onClickSubmit}
             onClickCancel={onClickCancel}
-            formError={formError}
-            isSuccess={isSuccess}
-            message={message}
+            disabled={isSuccess}
           />
         ) : null}
+        <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
       </form>
     </ThemeProvider>
   );
