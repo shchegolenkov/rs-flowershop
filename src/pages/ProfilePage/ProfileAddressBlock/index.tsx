@@ -145,6 +145,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
             }
           }
         })
+        .then(() => dispatch(getUser()))
         .then(() => {
           if (typeAddress === 'shipping') {
             if (
