@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import s from '../ProfilePage.module.scss';
@@ -13,14 +13,14 @@ import { Typography } from '../../../components/UI/Typography';
 import Alert from '@mui/material/Alert';
 
 import { countries } from '../../../constants/const';
-import { AddressAction, ApiResponse, ProfileForm, User } from '../../../types/types';
+import { AddressAction, ApiResponse, ProfileForm, Status, User } from '../../../types/types';
 
 import { getUser } from '../../../app/slices/auth';
 import {
-  setDefaultShippingAddress,
-  setDefaultBillingAddress,
   addAddress,
   addShippingBillingAddresses,
+  setDefaultBillingAddress,
+  setDefaultShippingAddress,
 } from '../../../app/slices/profile';
 import { clearMessage } from '../../../app/slices/message';
 
@@ -51,6 +51,8 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
   const [checkedBillShipAddress, setCheckedBillShipAddress] = useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = useState(false);
   const [checkedBillDefAddress, setCheckedBillDefAddress] = useState(false);
+
+  const { status } = useSelector((state: RootState) => state.profile);
 
   const schema = yup.object().shape({
     streetName: yup
@@ -282,10 +284,20 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
         <div className={clsx(s.width_full)}>
           <div className={s.submit__btn__container}>
             <div className={s.save_edit_container}>
-              <Button type="submit" variant="primary" onClick={onClickSubmit}>
+              <Button
+                type="submit"
+                variant="primary"
+                onClick={onClickSubmit}
+                disabled={isSuccess || status === Status.LOADING}
+              >
                 ADD ADDRESS
               </Button>
-              <Button type="button" variant="underlined" onClick={onClickCancel}>
+              <Button
+                type="button"
+                variant="underlined"
+                onClick={onClickCancel}
+                disabled={isSuccess || status === Status.LOADING}
+              >
                 Cancel
               </Button>
             </div>

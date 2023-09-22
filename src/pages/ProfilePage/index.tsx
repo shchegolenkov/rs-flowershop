@@ -16,7 +16,7 @@ import EmailForm from './EmailEditBlock';
 import ProfileAlertBlock from './ProfileAlertBlock';
 
 import { Typography } from '../../components/UI/Typography';
-import { CustomerData, ProfileAddress } from '../../types/types';
+import { CustomerData, ProfileAddress, Status } from '../../types/types';
 
 import FormTheme from '../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
@@ -47,7 +47,7 @@ const ProfilePage: React.FC = () => {
 
   const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
   const { message } = useSelector((state: RootState) => state.message);
-  const { isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } = useSelector(
+  const { status, isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } = useSelector(
     (state: RootState) => state.profile
   );
 
@@ -288,7 +288,7 @@ const ProfilePage: React.FC = () => {
                   <ProfileEditBlock
                     onClickSubmit={onClickSubmit}
                     onClickCancel={onClickCancel}
-                    disabled={isSuccess}
+                    disabled={isSuccess || status === Status.LOADING}
                   />
                 </div>
               ) : null}

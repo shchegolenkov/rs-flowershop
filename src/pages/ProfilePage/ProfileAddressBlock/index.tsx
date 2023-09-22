@@ -14,7 +14,7 @@ import EditIcoErr from '../../../assets/svg/editErr.svg';
 import DeleteAddress from '../../../assets/svg/delAddress.svg';
 
 import { countries } from '../../../constants/const';
-import { AddressAction, ProfileAddress, ProfileForm, User } from '../../../types/types';
+import { AddressAction, ProfileAddress, ProfileForm, Status, User } from '../../../types/types';
 import ProfileEditBlock from '../ProfileEditBlock';
 import ProfileAlertBlock from '../ProfileAlertBlock';
 
@@ -52,6 +52,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
   const defInitStateDefBillAddress = defaultBillingAddressId === address.id;
   const dispatch = useDispatch<AppDispatch>();
   const { message } = useSelector((state: RootState) => state.message);
+  const { status } = useSelector((state: RootState) => state.profile);
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -433,7 +434,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
           <ProfileEditBlock
             onClickSubmit={onClickSubmit}
             onClickCancel={onClickCancel}
-            disabled={isSuccess}
+            disabled={isSuccess || status === Status.LOADING}
           />
         ) : null}
         <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
