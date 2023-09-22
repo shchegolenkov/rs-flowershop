@@ -245,7 +245,13 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
     dispatch(clearMessage());
     setCheckedShipBillAddress(billingAddressIds.includes(address.id));
     setCheckedShipDefAddress(defaultShippingAddressId === address.id);
-    reset();
+    reset({
+      streetName: address.streetName,
+      postalCode: address.postalCode,
+      country: address.country,
+      city: address.city,
+      id: address.id,
+    });
   };
 
   const addressName = () => {

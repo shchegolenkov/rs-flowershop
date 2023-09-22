@@ -166,8 +166,10 @@ const ProfilePage: React.FC = () => {
     setIsSuccess(false);
     setFormError(false);
     dispatch(clearMessage());
-    reset();
     reset({
+      password: user ? user.password : '',
+      firstName: user ? user.firstName : '',
+      lastName: user ? user.lastName : '',
       dateOfBirth: user && user.dateOfBirth ? new Date(user.dateOfBirth) : undefined,
     });
   };
