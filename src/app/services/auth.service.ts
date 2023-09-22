@@ -226,7 +226,8 @@ const refreshAccessToken = async (refreshToken: string) => {
 
 const getUser = async () => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   return axios.get(`${REG_USER_URL}/${userId}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });

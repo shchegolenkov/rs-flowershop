@@ -42,7 +42,6 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await AuthService.loginUser(data);
       if (response) {
-        localStorage.setItem('userId', response.data.customer.id);
         localStorage.setItem('user', JSON.stringify(response.data.customer));
         localStorage.setItem('cart', JSON.stringify(response.data.cart));
         thunkAPI.dispatch(setCartData(response.data.cart));
