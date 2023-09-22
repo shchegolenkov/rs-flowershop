@@ -43,10 +43,12 @@ export const loginUser = createAsyncThunk(
       const response = await AuthService.loginUser(data);
       if (response) {
         localStorage.setItem('user', JSON.stringify(response.data.customer));
-        localStorage.setItem('cart', JSON.stringify(response.data.cart));
-        thunkAPI.dispatch(setCartData(response.data.cart));
-        if (response.data.cart.discountCodes.length > 0) {
-          thunkAPI.dispatch(setPromoStatus(Status.SUCCESS));
+        if (response.data.cart) {
+          localStorage.setItem('cart', JSON.stringify(response.data.cart));
+          thunkAPI.dispatch(setCartData(response.data.cart));
+          if (response.data.cart.discountCodes.length > 0) {
+            thunkAPI.dispatch(setPromoStatus(Status.SUCCESS));
+          }
         }
         return response.data.customer;
       }
