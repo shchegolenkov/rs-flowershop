@@ -23,8 +23,8 @@ const getAnonymousToken = async () => {
 
     const anonymousToken = await response.data.access_token;
     const refreshAnonymousToken = await response.data.refresh_token;
-    localStorage.setItem('anonymousToken', anonymousToken);
-    localStorage.setItem('refreshAnonymousToken', refreshAnonymousToken);
+    localStorage.setItem('accessToken', anonymousToken);
+    localStorage.setItem('refreshToken', refreshAnonymousToken);
     return anonymousToken;
   } catch (error) {
     throw new Error('Error getting Anonymous Token');
@@ -57,10 +57,7 @@ interface UpdateCartRequest {
 }
 
 const updateCart = async (data: UpdateCart) => {
-  const accessToken =
-    localStorage.getItem('accessToken') ||
-    localStorage.getItem('anonymousToken') ||
-    (await getAnonymousToken());
+  const accessToken = localStorage.getItem('accessToken') || (await getAnonymousToken());
   const cartData = localStorage.getItem('cart') || null;
   const cart = cartData ? JSON.parse(cartData) : '';
   if (cart) {
@@ -96,10 +93,7 @@ const updateCart = async (data: UpdateCart) => {
 };
 
 const clearCart = async (data: UpdateCart[]) => {
-  const accessToken =
-    localStorage.getItem('accessToken') ||
-    localStorage.getItem('anonymousToken') ||
-    (await getAnonymousToken());
+  const accessToken = localStorage.getItem('accessToken') || (await getAnonymousToken());
   const cartData = localStorage.getItem('cart') || null;
   const cart = cartData ? JSON.parse(cartData) : '';
   if (cart) {
@@ -123,10 +117,7 @@ const clearCart = async (data: UpdateCart[]) => {
 };
 
 const applyPromo = async (data: UpdateCart) => {
-  const accessToken =
-    localStorage.getItem('accessToken') ||
-    localStorage.getItem('anonymousToken') ||
-    (await getAnonymousToken());
+  const accessToken = localStorage.getItem('accessToken') || (await getAnonymousToken());
   const cartData = localStorage.getItem('cart') || null;
   const cart = cartData ? JSON.parse(cartData) : '';
   if (cart) {
@@ -158,10 +149,7 @@ const applyPromo = async (data: UpdateCart) => {
 };
 
 const resetPromo = async () => {
-  const accessToken =
-    localStorage.getItem('accessToken') ||
-    localStorage.getItem('anonymousToken') ||
-    (await getAnonymousToken());
+  const accessToken = localStorage.getItem('accessToken') || (await getAnonymousToken());
   const cartData = localStorage.getItem('cart') || null;
   const cart = cartData ? JSON.parse(cartData) : '';
   if (cart) {

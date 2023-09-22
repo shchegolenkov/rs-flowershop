@@ -171,7 +171,7 @@ const authSlice = createSlice({
         state.user = null;
       })
       .addCase(tokenIntrospection.fulfilled, (state, action) => {
-        if (action.payload.active) {
+        if (action.payload.active && user) {
           state.isLoggedIn = true;
         } else {
           state.isLoggedIn = false;
