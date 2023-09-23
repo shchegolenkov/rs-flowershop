@@ -42,12 +42,13 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await AuthService.loginUser(data);
       if (response) {
-        localStorage.setItem('userId', response.data.customer.id);
         localStorage.setItem('user', JSON.stringify(response.data.customer));
-        localStorage.setItem('cart', JSON.stringify(response.data.cart));
-        thunkAPI.dispatch(setCartData(response.data.cart));
-        if (response.data.cart.discountCodes.length > 0) {
-          thunkAPI.dispatch(setPromoStatus(Status.SUCCESS));
+        if (response.data.cart) {
+          localStorage.setItem('cart', JSON.stringify(response.data.cart));
+          thunkAPI.dispatch(setCartData(response.data.cart));
+          if (response.data.cart.discountCodes.length > 0) {
+            thunkAPI.dispatch(setPromoStatus(Status.SUCCESS));
+          }
         }
         return response.data.customer;
       }
@@ -171,7 +172,7 @@ const authSlice = createSlice({
         state.user = null;
       })
       .addCase(tokenIntrospection.fulfilled, (state, action) => {
-        if (action.payload.active) {
+        if (action.payload.active && user) {
           state.isLoggedIn = true;
         } else {
           state.isLoggedIn = false;

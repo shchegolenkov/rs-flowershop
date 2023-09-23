@@ -118,7 +118,7 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
     const refreshToken = await tokenResponse.refresh_token;
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
-    const anonymousToken = localStorage.getItem('anonymousToken') || null;
+    const cartData = localStorage.getItem('cart') || null;
 
     if (accessToken) {
       const requestPayload: requestPayloadLogin = {
@@ -126,9 +126,8 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
         password: data.password,
       };
 
-      if (anonymousToken) {
-        const cartData = localStorage.getItem('cart') || null;
-        const cart = cartData ? JSON.parse(cartData) : '';
+      if (cartData) {
+        const cart = JSON.parse(cartData);
         if (cart.anonymousId) {
           requestPayload['anonymousCart'] = {
             id: cart.id,
@@ -227,7 +226,8 @@ const refreshAccessToken = async (refreshToken: string) => {
 
 const getUser = async () => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   return axios.get(`${REG_USER_URL}/${userId}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });

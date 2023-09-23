@@ -13,8 +13,8 @@ const REG_USER_URL = process.env.CTP_REGUSER_URL as string;
 
 const setDefaultShippingAddress = async (data: ProfileForm) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const action = 'setDefaultShippingAddress';
   const requestPayload = {
     version: user.version,
@@ -36,8 +36,8 @@ const setDefaultShippingAddress = async (data: ProfileForm) => {
 
 const setDefaultBillingAddress = async (data: ProfileForm) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const action = 'setDefaultBillingAddress';
   const requestPayload = {
     version: user.version,
@@ -59,8 +59,8 @@ const setDefaultBillingAddress = async (data: ProfileForm) => {
 
 const addAddress = async (data: ProfileForm) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const requestPayload = {
     version: user.version,
     actions: [
@@ -87,8 +87,8 @@ const addAddress = async (data: ProfileForm) => {
 
 const addShippingBillingAddresses = async (data: AddShipBillProperty) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const action = data.typeAddress === 'shipping' ? 'addShippingAddressId' : 'addBillingAddressId';
 
   const requestPayload = {
@@ -111,8 +111,8 @@ const addShippingBillingAddresses = async (data: AddShipBillProperty) => {
 
 const removeAddress = async (data: DelAddress) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const requestPayload = {
     version: user.version,
     actions: [
@@ -144,8 +144,8 @@ type Action =
 
 const updateUser = async (data: CustomerData) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const requestPayload = {
     version: user.version,
     actions: [] as Action[],
@@ -189,8 +189,8 @@ const updateUser = async (data: CustomerData) => {
 
 const updateUserAddress = async (data: ProfileForm) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const requestPayload = {
     version: user.version,
     actions: [
@@ -218,8 +218,8 @@ const updateUserAddress = async (data: ProfileForm) => {
 
 const updateBillingAddress = async (data: ProfileForm) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const action = data.shippingBillingAddress ? 'addBillingAddressId' : 'removeBillingAddressId';
   const requestPayload = {
     version: user.version,
@@ -241,8 +241,8 @@ const updateBillingAddress = async (data: ProfileForm) => {
 
 const updateShippingAddress = async (data: ProfileForm) => {
   const accessToken = localStorage.getItem('accessToken') || 'notFoundToken';
-  const userId = localStorage.getItem('userId') || 'notFoundId';
   const user = JSON.parse(localStorage.getItem('user') as string);
+  const userId = user.id;
   const action = data.billingShippingAddress ? 'addShippingAddressId' : 'removeShippingAddressId';
   const requestPayload = {
     version: user.version,
