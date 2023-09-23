@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, UseFormProps, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
 import s from '../ProfilePage.module.scss';
 
 import SimpleInput from '../../../components/UI/FormFields/SimpleInput';
@@ -15,8 +14,9 @@ import EditIcoErr from '../../../assets/svg/editErr.svg';
 import DeleteAddress from '../../../assets/svg/delAddress.svg';
 
 import { countries } from '../../../constants/const';
-import { AddressAction, ProfileAddress, ProfileForm, User } from '../../../types/types';
+import { AddressAction, ProfileAddress, ProfileForm, Status, User } from '../../../types/types';
 import ProfileEditBlock from '../ProfileEditBlock';
+import ProfileAlertBlock from '../ProfileAlertBlock';
 
 import { getUser } from '../../../app/slices/auth';
 import {
@@ -52,13 +52,16 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
   const defInitStateDefBillAddress = defaultBillingAddressId === address.id;
   const dispatch = useDispatch<AppDispatch>();
   const { message } = useSelector((state: RootState) => state.message);
+  const { status } = useSelector((state: RootState) => state.profile);
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDisabledAddress, setIsDisabledAddress] = useState(true);
+  const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
 
   const switchEditModeField = () => {
     setIsDisabledAddress(!isDisabledAddress);
+    setIsOpenEditBlock(true);
   };
 
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(
@@ -142,6 +145,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
             }
           }
         })
+        .then(() => dispatch(getUser()))
         .then(() => {
           if (typeAddress === 'shipping') {
             if (
@@ -169,11 +173,12 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
           }
         })
         .then(() => {
+          disabledAllFields();
           setTimeout(() => {
             dispatch(clearMessage());
             setIsSuccess(false);
-            disabledAllFields();
-          }, 4000);
+            setIsOpenEditBlock(false);
+          }, 3000);
         });
     }
   };
@@ -201,7 +206,9 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
         if (response.meta.requestStatus === 'rejected') {
           setIsSuccess(false);
         } else {
-          setIsSuccess(true);
+          setTimeout(() => {
+            setIsSuccess(true);
+          }, 1000);
           return dispatch(getUser());
         }
       })
@@ -238,6 +245,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
     }
   };
   const onClickCancel = () => {
+    setIsOpenEditBlock(false);
     disabledAllFields();
     setCancelSubmit(!cancelSubmit);
     setIsSuccess(false);
@@ -245,7 +253,13 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
     dispatch(clearMessage());
     setCheckedShipBillAddress(billingAddressIds.includes(address.id));
     setCheckedShipDefAddress(defaultShippingAddressId === address.id);
-    reset();
+    reset({
+      streetName: address.streetName,
+      postalCode: address.postalCode,
+      country: address.country,
+      city: address.city,
+      id: address.id,
+    });
   };
 
   const addressName = () => {
@@ -286,7 +300,11 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
               </div>
             )}
           </button>
-          <button type="button" onClick={deleteAddress}>
+          <button
+            type="button"
+            onClick={deleteAddress}
+            disabled={isSuccess || status === Status.LOADING}
+          >
             <div>
               <DeleteAddress />
             </div>
@@ -419,17 +437,14 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
             )}
           </div>
         ) : null}
-        {!isDisabledAddress ? (
-          <div className={clsx(s.width_full)}>
-            <ProfileEditBlock
-              onClickSubmit={onClickSubmit}
-              onClickCancel={onClickCancel}
-              formError={formError}
-              isSuccess={isSuccess}
-              message={message}
-            />
-          </div>
+        {isOpenEditBlock ? (
+          <ProfileEditBlock
+            onClickSubmit={onClickSubmit}
+            onClickCancel={onClickCancel}
+            disabled={isSuccess || status === Status.LOADING}
+          />
         ) : null}
+        <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
       </form>
     </ThemeProvider>
   );

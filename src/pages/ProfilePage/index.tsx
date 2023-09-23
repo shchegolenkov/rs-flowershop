@@ -13,9 +13,10 @@ import ProfileEditBlock from './ProfileEditBlock/';
 import ProfileAddressBlock from './ProfileAddressBlock';
 import NewAddressBlock from './NewAddressBlock';
 import EmailForm from './EmailEditBlock';
+import ProfileAlertBlock from './ProfileAlertBlock';
 
 import { Typography } from '../../components/UI/Typography';
-import { CustomerData, ProfileAddress } from '../../types/types';
+import { CustomerData, ProfileAddress, Status } from '../../types/types';
 
 import FormTheme from '../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
@@ -37,6 +38,7 @@ const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
   const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = useState(true);
   const [isCancelledAddBillingAddress, setIsCancelledAddBillingAddress] = useState(true);
 
@@ -45,7 +47,7 @@ const ProfilePage: React.FC = () => {
 
   const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
   const { message } = useSelector((state: RootState) => state.message);
-  const { isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } = useSelector(
+  const { status, isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } = useSelector(
     (state: RootState) => state.profile
   );
 
@@ -145,11 +147,12 @@ const ProfilePage: React.FC = () => {
           dispatch(getUser());
         })
         .then(() => {
+          dispatch(setDisabledAllFields());
           setTimeout(() => {
             dispatch(clearMessage());
             setIsSuccess(false);
-            dispatch(setDisabledAllFields());
-          }, 4000);
+            setIsOpenEditBlock(false);
+          }, 3000);
         });
     }
   };
@@ -162,18 +165,22 @@ const ProfilePage: React.FC = () => {
   };
   const onClickCancel = () => {
     dispatch(setDisabledAllFields());
+    setIsOpenEditBlock(false);
     setCancelSubmit(!cancelSubmit);
     setIsSuccess(false);
     setFormError(false);
     dispatch(clearMessage());
-    reset();
     reset({
+      password: user ? user.password : '',
+      firstName: user ? user.firstName : '',
+      lastName: user ? user.lastName : '',
       dateOfBirth: user && user.dateOfBirth ? new Date(user.dateOfBirth) : undefined,
     });
   };
 
   const handleFirstNameClick = () => {
     dispatch(setIsDisabledFirstName());
+    setIsOpenEditBlock(!isOpenEditBlock);
     if (!isDisabledFirstName) {
       reset({ firstName: user ? user.firstName : '' });
     }
@@ -181,12 +188,14 @@ const ProfilePage: React.FC = () => {
 
   const handleLastNameClick = () => {
     dispatch(setIsDisabledLastName());
+    setIsOpenEditBlock(!isOpenEditBlock);
     if (!isDisabledLastName) {
       reset({ lastName: user ? user.lastName : '' });
     }
   };
   const handleDateOfBirthClick = () => {
     dispatch(setIsDisabledDateOfBirth());
+    setIsOpenEditBlock(!isOpenEditBlock);
     if (!isDisabledDateOfBirth) {
       reset({
         dateOfBirth: user && user.dateOfBirth ? new Date(user.dateOfBirth) : undefined,
@@ -271,17 +280,19 @@ const ProfilePage: React.FC = () => {
                 isDisabled={isDisabledDateOfBirth}
                 switchEditModeField={handleDateOfBirthClick}
               />
-              {!isDisabledFirstName || !isDisabledLastName || !isDisabledDateOfBirth ? (
+              {!isDisabledFirstName ||
+              !isDisabledLastName ||
+              !isDisabledDateOfBirth ||
+              isOpenEditBlock ? (
                 <div className={clsx(s.width_full)}>
                   <ProfileEditBlock
                     onClickSubmit={onClickSubmit}
                     onClickCancel={onClickCancel}
-                    formError={formError}
-                    isSuccess={isSuccess}
-                    message={message}
+                    disabled={isSuccess || status === Status.LOADING}
                   />
                 </div>
               ) : null}
+              <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
             </div>
           </div>
         </form>

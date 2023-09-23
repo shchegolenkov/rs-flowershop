@@ -9,7 +9,7 @@ import s from './PasswordPage.module.scss';
 
 import * as yup from 'yup';
 
-import { PasswordForm } from '../../types/types';
+import { PasswordForm, Status } from '../../types/types';
 import { clearMessage } from '../../app/slices/message';
 import { AppDispatch, RootState } from '../../app/store';
 import { changePassword } from '../../app/slices/profile';
@@ -20,6 +20,7 @@ import { Typography } from '../../components/UI/Typography';
 import FormTheme from '../../themes/FormTheme';
 import ProfileEditBlock from '../ProfilePage/ProfileEditBlock';
 import PasswordInput from '../../components/UI/FormFields/PasswordInput';
+import ProfileAlertBlock from '../ProfilePage/ProfileAlertBlock';
 
 const PasswordPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,6 +28,8 @@ const PasswordPage: React.FC = () => {
 
   const { message } = useSelector((state: RootState) => state.message);
   const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
+  const { status } = useSelector((state: RootState) => state.profile);
+
   const [formError, setFormError] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
 
@@ -174,10 +177,9 @@ const PasswordPage: React.FC = () => {
               <ProfileEditBlock
                 onClickSubmit={onClickSubmit}
                 onClickCancel={onClickCancel}
-                formError={formError}
-                isSuccess={isSuccess}
-                message={message}
+                disabled={isSuccess || status === Status.LOADING}
               />
+              <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
             </div>
           </div>
         </form>

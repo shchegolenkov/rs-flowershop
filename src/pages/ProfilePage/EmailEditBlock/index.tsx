@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
@@ -13,25 +13,26 @@ import { ThemeProvider } from '@mui/material/styles';
 import EmailInput from '../../../components/UI/FormFields/EmailInput';
 import Button from '../../../components/UI/Button';
 
-import { RootState, AppDispatch } from '../../../app/store';
-import { setIsDisabledEmail } from '../../../app/slices/profile';
+import { AppDispatch, RootState } from '../../../app/store';
+import { setIsDisabledEmail, updateUser } from '../../../app/slices/profile';
 import { clearMessage } from '../../../app/slices/message';
 import { getUser } from '../../../app/slices/auth';
-import { updateUser } from '../../../app/slices/profile';
-import { CustomerData } from '../../../types/types';
+import { CustomerData, Status } from '../../../types/types';
 import ProfileEditBlock from '../ProfileEditBlock';
+import ProfileAlertBlock from '../ProfileAlertBlock';
 
 const EmailForm: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);
+  const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const { user } = useSelector((state: RootState) => state.auth);
   const { message } = useSelector((state: RootState) => state.message);
-  const { isDisabledEmail } = useSelector((state: RootState) => state.profile);
+  const { status, isDisabledEmail } = useSelector((state: RootState) => state.profile);
 
   useEffect(() => {
     dispatch(getUser());
@@ -47,6 +48,7 @@ const EmailForm: React.FC = () => {
   const onClickCancel = () => {
     dispatch(setIsDisabledEmail());
     setCancelSubmit(!cancelSubmit);
+    setIsOpenEditBlock(false);
     setIsSuccess(false);
     setFormError(false);
     dispatch(clearMessage());
@@ -97,10 +99,11 @@ const EmailForm: React.FC = () => {
         }
         setIsSuccess(true);
         await dispatch(getUser());
+        dispatch(setIsDisabledEmail());
         setTimeout(() => {
           dispatch(clearMessage());
-          dispatch(setIsDisabledEmail());
           setIsSuccess(false);
+          setIsOpenEditBlock(false);
         }, 3000);
       } catch (error) {}
     }
@@ -108,6 +111,7 @@ const EmailForm: React.FC = () => {
 
   const handleEmailClick = () => {
     dispatch(setIsDisabledEmail());
+    setIsOpenEditBlock(!isOpenEditBlock);
     reset({
       email: user && user.email ? user.email : '',
     });
@@ -136,15 +140,14 @@ const EmailForm: React.FC = () => {
         >
           CHANGE PASSWORD
         </Button>
-        {!isDisabledEmail ? (
+        {isOpenEditBlock ? (
           <ProfileEditBlock
             onClickSubmit={onClickSubmit}
             onClickCancel={onClickCancel}
-            formError={formError}
-            isSuccess={isSuccess}
-            message={message}
+            disabled={isSuccess || status === Status.LOADING}
           />
         ) : null}
+        <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
       </form>
     </ThemeProvider>
   );
