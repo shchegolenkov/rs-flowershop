@@ -127,7 +127,7 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
       };
 
       if (cartData) {
-        const cart = cartData ? JSON.parse(cartData) : '';
+        const cart = JSON.parse(cartData);
         if (cart.anonymousId) {
           requestPayload['anonymousCart'] = {
             id: cart.id,
