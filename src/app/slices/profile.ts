@@ -13,7 +13,7 @@ import {
 
 import ProfileService from '../services/profile.service';
 import { setMessage } from './message';
-import { AxiosError } from 'axios/index';
+import { AxiosError } from 'axios';
 
 const getErrorMessage = (error: AxiosError | unknown, thunkAPI: ThunkAPI) => {
   if (axios.isAxiosError(error)) {
@@ -182,7 +182,26 @@ export const changePassword = createAsyncThunk(
   }
 );
 
-const asyncActionHandlers = (builder, actions) => {
+const asyncActionHandlers = (
+  builder: {
+    addCase: <ReturnedAction>(
+      action: ReturnedAction,
+      callback: (state: ProfileState) => void
+    ) => void;
+  },
+  actions: Array<
+    | typeof updateUser
+    | typeof updateUserAddress
+    | typeof addAddress
+    | typeof updateBillingAddress
+    | typeof updateShippingAddress
+    | typeof addShippingBillingAddresses
+    | typeof setDefaultShippingAddress
+    | typeof setDefaultBillingAddress
+    | typeof removeAddress
+    | typeof changePassword
+  >
+) => {
   actions.forEach((action) => {
     builder.addCase(action.pending, (state) => {
       state.status = Status.LOADING;
