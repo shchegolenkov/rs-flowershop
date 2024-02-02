@@ -88,18 +88,38 @@ function Header() {
           </li>
           {links.map((link) => (
             <li key={link.text} className={s.listItem}>
-              <MenuLink to={link.to}>{link.text}</MenuLink>
+              <MenuLink
+                to={link.to}
+                onClick={() => {
+                  setMenuActive(false);
+                }}
+              >
+                {link.text}
+              </MenuLink>
             </li>
           ))}
           {isLoggedIn ? (
             <>
               <li className={s.listItem}>
-                <MenuLink to={'/'} ico={<LogoutIco />} onClick={handleLogout}>
+                <MenuLink
+                  to={'/'}
+                  ico={<LogoutIco />}
+                  onClick={() => {
+                    handleLogout();
+                    setMenuActive(false);
+                  }}
+                >
                   Log Out
                 </MenuLink>
               </li>
               <li className={s.listItem}>
-                <MenuLink to={'/profile'} ico={<ProfileIco />}>
+                <MenuLink
+                  to={'/profile'}
+                  ico={<ProfileIco />}
+                  onClick={() => {
+                    setMenuActive(false);
+                  }}
+                >
                   Profile
                 </MenuLink>
               </li>
@@ -107,7 +127,13 @@ function Header() {
           ) : (
             anonymLinks.map((link) => (
               <li key={link.text} className={s.listItem}>
-                <MenuLink to={link.to} ico={link.ico}>
+                <MenuLink
+                  to={link.to}
+                  ico={link.ico}
+                  onClick={() => {
+                    setMenuActive(false);
+                  }}
+                >
                   {link.text}
                 </MenuLink>
               </li>
