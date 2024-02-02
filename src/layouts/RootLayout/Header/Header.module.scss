@@ -1,6 +1,6 @@
 .bg {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -58,7 +58,7 @@
     right: 0px;
     top: 0px;
     transform: translateX(100dvw);
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     grid-template-columns: 350px;
     grid-template-areas:
       '.'
