@@ -1,4 +1,12 @@
 import { useState, useRef, useEffect, MutableRefObject } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { RootState, AppDispatch } from '../../../app/store';
+import { logoutUser, tokenIntrospection } from '../../../app/slices/auth';
+import { MenuLink } from '../../../components/UI/MenuLink';
+import { Typography } from '../../../components/UI/Typography';
+import { Logout } from '../../../types/types';
+
 import CartIco from '../../../assets/svg/cart.svg';
 import logoIco from '../../../assets/svg/logo.svg?url';
 import MenuIco from '../../../assets/svg/menu.svg';
@@ -6,14 +14,8 @@ import ProfileIco from '../../../assets/svg/person.svg';
 import LoginIco from '../../../assets/svg/login.svg';
 import CloseIco from '../../../assets/svg/close.svg';
 import LogoutIco from '../../../assets/svg/logout.svg';
-import { MenuLink } from '../../../components/UI/MenuLink';
+
 import s from './header.module.scss';
-import { useSelector } from 'react-redux';
-import { logoutUser, tokenIntrospection } from '../../../app/slices/auth';
-import { useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../../../app/store';
-import { Typography } from '../../../components/UI/Typography';
-import { Logout } from '../../../types/types';
 
 const links = [
   { to: '/catalog', text: 'Catalog' },
