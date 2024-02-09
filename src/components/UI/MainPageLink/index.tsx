@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
-import { Typography } from '../Typography';
-import s from './MainPageLink.module.scss';
 import { capitalize, map } from 'lodash';
+import { Link } from 'react-router-dom';
+
+import { Typography } from '../Typography';
+
 import ArrowIco from '../../../assets/svg/arrowLeft.svg';
+
+import s from './MainPageLink.module.scss';
 
 function MainPageLink({ to, title }: { to: string; title: string }) {
   const imgLink = map(title.split(' '), capitalize).join('');

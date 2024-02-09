@@ -1,5 +1,7 @@
 import React from 'react';
+
 import ContentLoader from 'react-content-loader';
+
 import s from './CatalogCard.module.scss';
 
 export const Skeleton = () => (

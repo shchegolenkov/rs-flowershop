@@ -1,7 +1,10 @@
 import clsx from 'clsx';
+
 import { Typography } from '../../../components/UI/Typography';
-import s from './PersonDescription.module.scss';
+
 import GhLogo from '../../../assets/svg/ghLogo.svg';
+
+import s from './PersonDescription.module.scss';
 
 export default function PersonDescription({
   name,

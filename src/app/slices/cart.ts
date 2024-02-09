@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import { Cart, Status, UpdateCart } from '../../types/types';
 import CartService from '../services/cart.service';
+
 const cart = JSON.parse(localStorage.getItem('cart') as string) as Cart;
 
 export const createCart = createAsyncThunk('cart/createCart', async (_, thunkAPI) => {

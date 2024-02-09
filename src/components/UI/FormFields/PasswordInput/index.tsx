@@ -1,5 +1,6 @@
 import React, { MouseEvent, useState } from 'react';
-import { FieldError, UseFormRegister, FieldValues, Path } from 'react-hook-form';
+
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import ErrorIcon from '@mui/icons-material/Error';
 import {
   FormControl,
@@ -9,7 +10,7 @@ import {
   InputLabel,
   OutlinedInput,
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { FieldError, UseFormRegister, FieldValues, Path } from 'react-hook-form';
 
 import s from '../FormFields.module.scss';
 

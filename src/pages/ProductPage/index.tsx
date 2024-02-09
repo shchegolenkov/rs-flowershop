@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../app/store';
-import { fetchProduct } from '../../app/slices/product';
+
 import { Breadcrumbs } from '@mui/material';
-import { Typography } from '../../components/UI/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
+import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+
+import { createCart, updateCart } from '../../app/slices/cart';
+import { fetchProduct } from '../../app/slices/product';
+import { AppDispatch, RootState } from '../../app/store';
 import Button from '../../components/UI/Button';
 import ImageSlider from '../../components/UI/ImageSlider';
 import ModalWindow from '../../components/UI/ModalWindow';
-import s from './ProductPage.module.scss';
+import { Typography } from '../../components/UI/Typography';
+import NotFoundPage from '../../pages/NotFoundPage';
 import {
   CategoryAttr,
   CompositionAttr,
@@ -17,13 +22,12 @@ import {
   UpdateCart,
   LineItem,
 } from '../../types/types';
-import formatPrice from '../../utils/formatPrice';
 import changeHyphenToSpace from '../../utils/changeHyphenToSpace';
-import NotFoundPage from '../../pages/NotFoundPage';
-import CircularProgress from '@mui/material/CircularProgress';
-import clsx from 'clsx';
-import { createCart, updateCart } from '../../app/slices/cart';
+import formatPrice from '../../utils/formatPrice';
+
 import AlertBlock from './AlertBlock';
+
+import s from './ProductPage.module.scss';
 
 function ProductPage() {
   const [modalOpen, setModalOpen] = useState(false);

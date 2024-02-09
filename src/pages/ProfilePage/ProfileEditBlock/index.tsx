@@ -1,7 +1,10 @@
 import React from 'react';
+
 import clsx from 'clsx';
-import s from '../ProfilePage.module.scss';
+
 import Button from '../../../components/UI/Button';
+
+import s from '../ProfilePage.module.scss';
 
 interface ProfileEditBlockProps {
   onClickSubmit: () => void;

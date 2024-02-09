@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Resolver, useForm, UseFormProps } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
+import { ThemeProvider } from '@mui/material/styles';
+import { Resolver, useForm, UseFormProps } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
 
-import s from '../ProfilePage.module.scss';
-
-import FormTheme from '../../../themes/FormTheme';
-import { ThemeProvider } from '@mui/material/styles';
-import EmailInput from '../../../components/UI/FormFields/EmailInput';
-import Button from '../../../components/UI/Button';
-
-import { AppDispatch, RootState } from '../../../app/store';
-import { setIsDisabledEmail, updateUser } from '../../../app/slices/profile';
-import { clearMessage } from '../../../app/slices/message';
 import { getUser } from '../../../app/slices/auth';
+import { clearMessage } from '../../../app/slices/message';
+import { setIsDisabledEmail, updateUser } from '../../../app/slices/profile';
+import { AppDispatch, RootState } from '../../../app/store';
+import Button from '../../../components/UI/Button';
+import EmailInput from '../../../components/UI/FormFields/EmailInput';
+import FormTheme from '../../../themes/FormTheme';
 import { CustomerData, Status } from '../../../types/types';
-import ProfileEditBlock from '../ProfileEditBlock';
 import ProfileAlertBlock from '../ProfileAlertBlock';
+import ProfileEditBlock from '../ProfileEditBlock';
+
+import s from '../ProfilePage.module.scss';
 
 const EmailForm: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);

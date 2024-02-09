@@ -1,5 +1,7 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
+
 import clsx from 'clsx';
+
 import s from './Button.module.scss';
 
 interface IButton

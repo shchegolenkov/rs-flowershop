@@ -1,9 +1,11 @@
 import clsx from 'clsx';
-import s from './MainPage.module.scss';
-import { Typography } from '../../components/UI/Typography';
-import MainPageLink from '../../components/UI/MainPageLink';
-import Button from '../../components/UI/Button';
 import { useNavigate } from 'react-router-dom';
+
+import Button from '../../components/UI/Button';
+import MainPageLink from '../../components/UI/MainPageLink';
+import { Typography } from '../../components/UI/Typography';
+
+import s from './MainPage.module.scss';
 
 const links = [
   { to: '/catalog', title: 'All products' },

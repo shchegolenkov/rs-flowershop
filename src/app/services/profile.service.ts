@@ -1,4 +1,5 @@
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 import {
   AddShipBillProperty,
@@ -7,7 +8,6 @@ import {
   DelAddress,
   ProfileForm,
 } from '../../types/types';
-import dayjs from 'dayjs';
 
 const REG_USER_URL = process.env.CTP_REGUSER_URL as string;
 

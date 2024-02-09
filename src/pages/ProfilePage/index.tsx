@@ -1,38 +1,37 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
-import clsx from 'clsx';
-import s from './ProfilePage.module.scss';
-
-import SimpleInput from '../../components/UI/FormFields/SimpleInput';
-import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
-import Button from '../../components/UI/Button';
-import ProfileEditBlock from './ProfileEditBlock/';
-import ProfileAddressBlock from './ProfileAddressBlock';
-import NewAddressBlock from './NewAddressBlock';
-import EmailForm from './EmailEditBlock';
-import ProfileAlertBlock from './ProfileAlertBlock';
-
-import { Typography } from '../../components/UI/Typography';
-import { CustomerData, ProfileAddress, Status } from '../../types/types';
-
-import FormTheme from '../../themes/FormTheme';
 import { ThemeProvider } from '@mui/material/styles';
-
+import clsx from 'clsx';
+import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { RootState, AppDispatch } from '../../app/store';
+import { getUser } from '../../app/slices/auth';
+import { clearMessage } from '../../app/slices/message';
 import {
   setIsDisabledFirstName,
   setIsDisabledLastName,
   setIsDisabledDateOfBirth,
   setDisabledAllFields,
 } from '../../app/slices/profile';
-import { clearMessage } from '../../app/slices/message';
-import { getUser } from '../../app/slices/auth';
 import { updateUser } from '../../app/slices/profile';
+import { RootState, AppDispatch } from '../../app/store';
+import Button from '../../components/UI/Button';
+import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
+import SimpleInput from '../../components/UI/FormFields/SimpleInput';
+import { Typography } from '../../components/UI/Typography';
+import FormTheme from '../../themes/FormTheme';
+import { CustomerData, ProfileAddress, Status } from '../../types/types';
+
+import EmailForm from './EmailEditBlock';
+import NewAddressBlock from './NewAddressBlock';
+import ProfileAddressBlock from './ProfileAddressBlock';
+import ProfileAlertBlock from './ProfileAlertBlock';
+import ProfileEditBlock from './ProfileEditBlock/';
+
+import s from './ProfilePage.module.scss';
 
 const ProfilePage: React.FC = () => {
   const [cancelSubmit, setCancelSubmit] = useState(false);

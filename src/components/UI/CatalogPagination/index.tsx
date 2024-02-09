@@ -1,9 +1,11 @@
-import clsx from 'clsx';
 import { Pagination } from '@mui/material';
 import { PaginationProps } from '@mui/material/Pagination/Pagination';
+import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { setPage } from '../../../app/slices/catalog';
 import { AppDispatch, RootState } from '../../../app/store';
+
 import s from './CatalogPagination.module.scss';
 
 function CatalogPagination({ className }: PaginationProps) {

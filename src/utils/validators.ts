@@ -1,5 +1,5 @@
-import dayjs, { Dayjs } from 'dayjs';
 import { DateValidationError } from '@mui/x-date-pickers/models';
+import dayjs, { Dayjs } from 'dayjs';
 
 export const validateDate = (date: Dayjs | null): DateValidationError | null => {
   if (!date) {

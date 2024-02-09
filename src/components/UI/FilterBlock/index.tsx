@@ -1,10 +1,8 @@
+import { useEffect, useRef } from 'react';
+
 import clsx from 'clsx';
-import s from './FilterBlock.module.scss';
-import { Typography } from '../Typography';
-import Checkbox from '../Checkbox';
-import Button from '../Button';
-import { Status } from '../../../types/types';
 import { useSelector, useDispatch } from 'react-redux';
+
 import {
   setSizes,
   resetSizes,
@@ -15,7 +13,12 @@ import {
   setFilters,
 } from '../../../app/slices/catalog';
 import { RootState, AppDispatch } from '../../../app/store';
-import { useEffect, useRef } from 'react';
+import { Status } from '../../../types/types';
+import Button from '../Button';
+import Checkbox from '../Checkbox';
+import { Typography } from '../Typography';
+
+import s from './FilterBlock.module.scss';
 
 function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
   const { status, category } = useSelector((state: RootState) => state.products);

@@ -1,12 +1,15 @@
-import axios, { AxiosError } from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { setMessage } from './message';
-import { setCartData, setPromoStatus } from './cart';
+import axios, { AxiosError } from 'axios';
+
 import { CustomerData, Logout, Status, ThunkAPI, User } from '../../types/types';
+import AuthService from '../services/auth.service';
+
+import { setCartData, setPromoStatus } from './cart';
+import { setMessage } from './message';
+
 const user = JSON.parse(localStorage.getItem('user') as string);
 const accessToken = localStorage.getItem('accessToken');
 const refreshToken = localStorage.getItem('refreshToken');
-import AuthService from '../services/auth.service';
 
 const getErrorMessage = (error: AxiosError | unknown, thunkAPI: ThunkAPI) => {
   if (axios.isAxiosError(error)) {

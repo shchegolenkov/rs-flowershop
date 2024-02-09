@@ -1,7 +1,8 @@
 import React from 'react';
-import { UseFormRegister, FieldErrors, FieldError, FieldValues, Path } from 'react-hook-form';
-import TextField from '@mui/material/TextField';
+
 import ErrorIcon from '@mui/icons-material/Error';
+import TextField from '@mui/material/TextField';
+import { UseFormRegister, FieldErrors, FieldError, FieldValues, Path } from 'react-hook-form';
 
 import s from '../FormFields.module.scss';
 

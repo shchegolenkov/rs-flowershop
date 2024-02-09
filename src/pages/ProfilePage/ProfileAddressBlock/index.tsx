@@ -1,24 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import s from '../ProfilePage.module.scss';
-
-import SimpleInput from '../../../components/UI/FormFields/SimpleInput';
-import SimpleSelect from '../../../components/UI/FormFields/SimpleSelect';
-import SimpleCheckbox from '../../../components/UI/FormFields/SimpleCheckbox';
-import { Typography } from '../../../components/UI/Typography';
-import EditIco from '../../../assets/svg/edit.svg';
-import EditIcoActive from '../../../assets/svg/editActive.svg';
-import EditIcoErr from '../../../assets/svg/editErr.svg';
-import DeleteAddress from '../../../assets/svg/delAddress.svg';
-
-import { countries } from '../../../constants/const';
-import { AddressAction, ProfileAddress, ProfileForm, Status, User } from '../../../types/types';
-import ProfileEditBlock from '../ProfileEditBlock';
-import ProfileAlertBlock from '../ProfileAlertBlock';
+import { ThemeProvider } from '@mui/material/styles';
+import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
 
 import { getUser } from '../../../app/slices/auth';
+import { clearMessage } from '../../../app/slices/message';
 import {
   updateUserAddress,
   updateBillingAddress,
@@ -27,14 +16,23 @@ import {
   setDefaultBillingAddress,
   removeAddress,
 } from '../../../app/slices/profile';
-import { clearMessage } from '../../../app/slices/message';
-
-import FormTheme from '../../../themes/FormTheme';
-import { ThemeProvider } from '@mui/material/styles';
-
-import * as yup from 'yup';
-
 import { AppDispatch, RootState } from '../../../app/store';
+import SimpleCheckbox from '../../../components/UI/FormFields/SimpleCheckbox';
+import SimpleInput from '../../../components/UI/FormFields/SimpleInput';
+import SimpleSelect from '../../../components/UI/FormFields/SimpleSelect';
+import { Typography } from '../../../components/UI/Typography';
+import { countries } from '../../../constants/const';
+import FormTheme from '../../../themes/FormTheme';
+import { AddressAction, ProfileAddress, ProfileForm, Status, User } from '../../../types/types';
+import ProfileAlertBlock from '../ProfileAlertBlock';
+import ProfileEditBlock from '../ProfileEditBlock';
+
+import DeleteAddress from '../../../assets/svg/delAddress.svg';
+import EditIco from '../../../assets/svg/edit.svg';
+import EditIcoActive from '../../../assets/svg/editActive.svg';
+import EditIcoErr from '../../../assets/svg/editErr.svg';
+
+import s from '../ProfilePage.module.scss';
 
 interface ProfileEditBlockProps {
   address: ProfileAddress;

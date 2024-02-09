@@ -1,8 +1,7 @@
 import { configureStore, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
+
 import authReducer from './slices/auth';
-import messageReducer from './slices/message';
-import profileReducer from './slices/profile';
-import productReducer from './slices/product';
+import cartReducer from './slices/cart';
 import productsReducer, {
   fetchProducts,
   setQuery,
@@ -10,7 +9,9 @@ import productsReducer, {
   setPage,
   setFilters,
 } from './slices/catalog';
-import cartReducer from './slices/cart';
+import messageReducer from './slices/message';
+import productReducer from './slices/product';
+import profileReducer from './slices/profile';
 
 const reducer = {
   auth: authReducer,
