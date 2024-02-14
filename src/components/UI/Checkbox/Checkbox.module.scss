@@ -17,7 +17,7 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  background: url(../../../assets/svg/checkboxUnchecked.svg) 0 0 no-repeat;
+  background: url(/src/assets/svg/checkboxUnchecked.svg) 0 0 no-repeat;
   transition: all 0.2s;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .input:checked + .label::before {
-  background: url(../../../assets/svg/checkboxChecked.svg) 0 0 no-repeat;
+  background: url(/src/assets/svg/checkboxChecked.svg) 0 0 no-repeat;
 }
 
 .input:disabled + .label {

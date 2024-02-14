@@ -31,7 +31,7 @@
         display: block;
         width: 24px;
         height: 24px;
-        background: url(../../../assets/svg/tune.svg) 0 0 no-repeat;
+        background: url(/src/assets/svg/tune.svg) 0 0 no-repeat;
       }
 
       &::after {
@@ -39,7 +39,7 @@
         display: block;
         width: 24px;
         height: 24px;
-        background: url(../../../assets/svg/chevron.svg) 0 0 no-repeat;
+        background: url(/src/assets/svg/chevron.svg) 0 0 no-repeat;
         transition: all 0.2s;
       }
     }

@@ -26,19 +26,19 @@
 }
 
 .name::before {
-  background: center / cover no-repeat url('../../../assets/svg/person.svg');
+  background: center / cover no-repeat url('/src/assets/svg/person.svg');
 }
 
 .job:before {
-  background: center / cover no-repeat url('../../../assets/svg/work.svg');
+  background: center / cover no-repeat url('/src/assets/svg/work.svg');
 }
 
 .bio:before {
-  background: center / cover no-repeat url('../../../assets/svg/editActive.svg');
+  background: center / cover no-repeat url('/src/assets/svg/editActive.svg');
 }
 
 .contributions:before {
-  background: top / cover no-repeat url('../../../assets/svg/trophy.svg');
+  background: top / cover no-repeat url('/src/assets/svg/trophy.svg');
 }
 
 .tasksList {
