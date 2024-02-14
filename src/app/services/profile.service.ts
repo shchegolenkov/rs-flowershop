@@ -7,7 +7,7 @@ import {
   CustomerData,
   DelAddress,
   ProfileForm,
-} from '../../types/types';
+} from '@/types/types';
 
 const REG_USER_URL = process.env.CTP_REGUSER_URL as string;
 

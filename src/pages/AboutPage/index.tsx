@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 
-import { Typography } from '../../components/UI/Typography';
-
 import PersonDescription from './PersonDescription/PersonDescription';
 
-import RsLogo from '../../assets/svg/rs_school_js.svg';
+import { Typography } from '@/components/UI/Typography';
+
+import RsLogo from '@/assets/svg/rs_school_js.svg';
 
 import s from './AboutPage.module.scss';
 

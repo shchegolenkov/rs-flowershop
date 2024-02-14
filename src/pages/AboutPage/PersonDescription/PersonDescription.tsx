@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-import { Typography } from '../../../components/UI/Typography';
+import { Typography } from '@/components/UI/Typography';
 
-import GhLogo from '../../../assets/svg/ghLogo.svg';
+import GhLogo from '@/assets/svg/ghLogo.svg';
 
 import s from './PersonDescription.module.scss';
 

@@ -5,8 +5,8 @@ import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 
-import { Typography } from '../../../components/UI/Typography';
-import { Status } from '../../../types/types';
+import { Typography } from '@/components/UI/Typography';
+import { Status } from '@/types/types';
 
 interface AlertBlock {
   openAlert: boolean;

@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 
-import { CustomerData, Logout, Status, ThunkAPI, User } from '../../types/types';
-import AuthService from '../services/auth.service';
-
 import { setCartData, setPromoStatus } from './cart';
 import { setMessage } from './message';
+
+import AuthService from '@/app/services/auth.service';
+import { CustomerData, Logout, Status, ThunkAPI, User } from '@/types/types';
 
 const user = JSON.parse(localStorage.getItem('user') as string);
 const accessToken = localStorage.getItem('accessToken');

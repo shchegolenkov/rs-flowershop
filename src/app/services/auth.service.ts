@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-import { CustomerData, RequestPayload } from '../../types/types';
+import { CustomerData, RequestPayload } from '@/types/types';
 
 const ACC_TOKEN_URL = process.env.CTP_ACCTOKEN_URL as string;
 const REG_USER_URL = process.env.CTP_REGUSER_URL as string;

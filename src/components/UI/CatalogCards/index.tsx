@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 
-import { RootState } from '../../../app/store';
-import { ITEMS_PER_PAGE } from '../../../constants/const';
-import { Status } from '../../../types/types';
 import CatalogCard from '../CatalogCard';
 import { Skeleton } from '../CatalogCard/Skeleton';
 import { Typography } from '../Typography';
+
+import { RootState } from '@/app/store';
+import { ITEMS_PER_PAGE } from '@/constants/const';
+import { Status } from '@/types/types';
 
 import s from './CatalogCards.module.scss';
 

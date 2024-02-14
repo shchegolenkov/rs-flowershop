@@ -6,13 +6,13 @@ import Fade from '@mui/material/Fade';
 import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { clearCart } from '../../../app/slices/cart';
-import { AppDispatch, RootState } from '../../../app/store';
-import Button from '../../../components/UI/Button';
-import { Typography } from '../../../components/UI/Typography';
-import { LineItem, UpdateCart } from '../../../types/types';
+import { clearCart } from '@/app/slices/cart';
+import { AppDispatch, RootState } from '@/app/store';
+import Button from '@/components/UI/Button';
+import { Typography } from '@/components/UI/Typography';
+import { LineItem, UpdateCart } from '@/types/types';
 
-import CloseIco from '../../../assets/svg/close.svg';
+import CloseIco from '@/assets/svg/close.svg';
 
 import s from './ClearCart.module.scss';
 

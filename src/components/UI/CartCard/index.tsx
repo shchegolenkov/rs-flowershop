@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateCart } from '../../../app/slices/cart';
-import { AppDispatch, RootState } from '../../../app/store';
-import { LineItem, Status, UpdateCart } from '../../../types/types';
-import formatPrice from '../../../utils/formatPrice';
 import Counter from '../Counter';
 import { Typography } from '../Typography';
 
-import RemoveItemIco from '../../../assets/svg/delItem.svg';
+import { updateCart } from '@/app/slices/cart';
+import { AppDispatch, RootState } from '@/app/store';
+import { LineItem, Status, UpdateCart } from '@/types/types';
+import formatPrice from '@/utils/formatPrice';
+
+import RemoveItemIco from '@/assets/svg/delItem.svg';
 
 import s from './CartCard.module.scss';
 

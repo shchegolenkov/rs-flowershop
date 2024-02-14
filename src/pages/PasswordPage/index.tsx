@@ -8,16 +8,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { getUser, loginUser } from '../../app/slices/auth';
-import { clearMessage } from '../../app/slices/message';
-import { changePassword } from '../../app/slices/profile';
-import { AppDispatch, RootState } from '../../app/store';
-import PasswordInput from '../../components/UI/FormFields/PasswordInput';
-import { Typography } from '../../components/UI/Typography';
-import FormTheme from '../../themes/FormTheme';
-import { PasswordForm, Status } from '../../types/types';
 import ProfileAlertBlock from '../ProfilePage/ProfileAlertBlock';
 import ProfileEditBlock from '../ProfilePage/ProfileEditBlock';
+
+import { getUser, loginUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
+import { changePassword } from '@/app/slices/profile';
+import { AppDispatch, RootState } from '@/app/store';
+import PasswordInput from '@/components/UI/FormFields/PasswordInput';
+import { Typography } from '@/components/UI/Typography';
+import FormTheme from '@/themes/FormTheme';
+import { PasswordForm, Status } from '@/types/types';
 
 import s from './PasswordPage.module.scss';
 

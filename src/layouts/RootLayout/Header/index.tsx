@@ -2,19 +2,23 @@ import { useState, useRef, useEffect, MutableRefObject } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { logoutUser, tokenIntrospection } from '../../../app/slices/auth';
-import { RootState, AppDispatch } from '../../../app/store';
-import { MenuLink } from '../../../components/UI/MenuLink';
-import { Typography } from '../../../components/UI/Typography';
-import { Logout } from '../../../types/types';
+import { logoutUser, tokenIntrospection } from '@/app/slices/auth';
 
-import CartIco from '../../../assets/svg/cart.svg';
-import CloseIco from '../../../assets/svg/close.svg';
-import LoginIco from '../../../assets/svg/login.svg';
-import logoIco from '../../../assets/svg/logo.svg?url';
-import LogoutIco from '../../../assets/svg/logout.svg';
-import MenuIco from '../../../assets/svg/menu.svg';
-import ProfileIco from '../../../assets/svg/person.svg';
+import { RootState, AppDispatch } from '@/app/store';
+
+import { MenuLink } from '@/components/UI/MenuLink';
+
+import { Typography } from '@/components/UI/Typography';
+
+import { Logout } from '@/types/types';
+
+import CartIco from '@/assets/svg/cart.svg';
+import CloseIco from '@/assets/svg/close.svg';
+import LoginIco from '@/assets/svg/login.svg';
+import logoIco from '@/assets/svg/logo.svg?url';
+import LogoutIco from '@/assets/svg/logout.svg';
+import MenuIco from '@/assets/svg/menu.svg';
+import ProfileIco from '@/assets/svg/person.svg';
 
 import s from './header.module.scss';
 

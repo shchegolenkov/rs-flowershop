@@ -3,6 +3,10 @@ import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Button from '../Button';
+import Checkbox from '../Checkbox';
+import { Typography } from '../Typography';
+
 import {
   setSizes,
   resetSizes,
@@ -11,12 +15,9 @@ import {
   setDiscount,
   resetDiscount,
   setFilters,
-} from '../../../app/slices/catalog';
-import { RootState, AppDispatch } from '../../../app/store';
-import { Status } from '../../../types/types';
-import Button from '../Button';
-import Checkbox from '../Checkbox';
-import { Typography } from '../Typography';
+} from '@/app/slices/catalog';
+import { RootState, AppDispatch } from '@/app/store';
+import { Status } from '@/types/types';
 
 import s from './FilterBlock.module.scss';
 

@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 
-import Button from '../../components/UI/Button';
-import MainPageLink from '../../components/UI/MainPageLink';
-import { Typography } from '../../components/UI/Typography';
+import Button from '@/components/UI/Button';
+import MainPageLink from '@/components/UI/MainPageLink';
+import { Typography } from '@/components/UI/Typography';
 
 import s from './MainPage.module.scss';
 

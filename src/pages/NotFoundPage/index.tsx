@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import Button from '../../components/UI/Button';
-import { Typography } from '../../components/UI/Typography';
+import Button from '@/components/UI/Button';
+import { Typography } from '@/components/UI/Typography';
 
 import s from './NotFoundPage.module.scss';
 

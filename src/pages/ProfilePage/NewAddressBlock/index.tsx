@@ -8,23 +8,23 @@ import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
-import { getUser } from '../../../app/slices/auth';
-import { clearMessage } from '../../../app/slices/message';
+import { getUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
 import {
   addAddress,
   addShippingBillingAddresses,
   setDefaultBillingAddress,
   setDefaultShippingAddress,
-} from '../../../app/slices/profile';
-import { AppDispatch, RootState } from '../../../app/store';
-import Button from '../../../components/UI/Button';
-import SimpleCheckbox from '../../../components/UI/FormFields/SimpleCheckbox';
-import SimpleInput from '../../../components/UI/FormFields/SimpleInput';
-import SimpleSelect from '../../../components/UI/FormFields/SimpleSelect';
-import { Typography } from '../../../components/UI/Typography';
-import { countries } from '../../../constants/const';
-import FormTheme from '../../../themes/FormTheme';
-import { AddressAction, ApiResponse, ProfileForm, Status, User } from '../../../types/types';
+} from '@/app/slices/profile';
+import { AppDispatch, RootState } from '@/app/store';
+import Button from '@/components/UI/Button';
+import SimpleCheckbox from '@/components/UI/FormFields/SimpleCheckbox';
+import SimpleInput from '@/components/UI/FormFields/SimpleInput';
+import SimpleSelect from '@/components/UI/FormFields/SimpleSelect';
+import { Typography } from '@/components/UI/Typography';
+import { countries } from '@/constants/const';
+import FormTheme from '@/themes/FormTheme';
+import { AddressAction, ApiResponse, ProfileForm, Status, User } from '@/types/types';
 
 import s from '../ProfilePage.module.scss';
 

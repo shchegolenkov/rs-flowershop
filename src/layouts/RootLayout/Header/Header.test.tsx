@@ -5,9 +5,9 @@ import '@testing-library/jest-dom/extend-expect';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
-import { store } from '../../../app/store';
-
 import Header from './';
+
+import { store } from '@/app/store';
 
 describe('Header', () => {
   it('renders without errors', () => {

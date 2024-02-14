@@ -7,18 +7,18 @@ import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { applyPromo, resetPromo, setPromoStatus } from '../../app/slices/cart';
-import { AppDispatch, RootState } from '../../app/store';
-import Button from '../../components/UI/Button';
-import CartCard from '../../components/UI/CartCard';
-import { Typography } from '../../components/UI/Typography';
-import FormTheme from '../../themes/FormTheme';
-import { Status, WelcomeCodes } from '../../types/types';
-import formatPrice from '../../utils/formatPrice';
-
 import ClearCart from './ClearCart/';
 
-import ClearCartIco from '../../assets/svg/delCart.svg';
+import { applyPromo, resetPromo, setPromoStatus } from '@/app/slices/cart';
+import { AppDispatch, RootState } from '@/app/store';
+import Button from '@/components/UI/Button';
+import CartCard from '@/components/UI/CartCard';
+import { Typography } from '@/components/UI/Typography';
+import FormTheme from '@/themes/FormTheme';
+import { Status, WelcomeCodes } from '@/types/types';
+import formatPrice from '@/utils/formatPrice';
+
+import ClearCartIco from '@/assets/svg/delCart.svg';
 
 import s from './CartPage.module.scss';
 

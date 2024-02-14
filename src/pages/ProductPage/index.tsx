@@ -6,14 +6,16 @@ import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
-import { createCart, updateCart } from '../../app/slices/cart';
-import { fetchProduct } from '../../app/slices/product';
-import { AppDispatch, RootState } from '../../app/store';
-import Button from '../../components/UI/Button';
-import ImageSlider from '../../components/UI/ImageSlider';
-import ModalWindow from '../../components/UI/ModalWindow';
-import { Typography } from '../../components/UI/Typography';
-import NotFoundPage from '../../pages/NotFoundPage';
+import AlertBlock from './AlertBlock';
+
+import { createCart, updateCart } from '@/app/slices/cart';
+import { fetchProduct } from '@/app/slices/product';
+import { AppDispatch, RootState } from '@/app/store';
+import Button from '@/components/UI/Button';
+import ImageSlider from '@/components/UI/ImageSlider';
+import ModalWindow from '@/components/UI/ModalWindow';
+import { Typography } from '@/components/UI/Typography';
+import NotFoundPage from '@/pages/NotFoundPage';
 import {
   CategoryAttr,
   CompositionAttr,
@@ -21,11 +23,9 @@ import {
   Status,
   UpdateCart,
   LineItem,
-} from '../../types/types';
-import changeHyphenToSpace from '../../utils/changeHyphenToSpace';
-import formatPrice from '../../utils/formatPrice';
-
-import AlertBlock from './AlertBlock';
+} from '@/types/types';
+import changeHyphenToSpace from '@/utils/changeHyphenToSpace';
+import formatPrice from '@/utils/formatPrice';
 
 import s from './ProductPage.module.scss';
 

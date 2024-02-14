@@ -10,20 +10,20 @@ import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
 
-import { registerUser, loginUser, getUser } from '../../app/slices/auth';
-import { clearMessage } from '../../app/slices/message';
-import { RootState, AppDispatch } from '../../app/store';
-import Button from '../../components/UI/Button';
-import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
-import EmailInput from '../../components/UI/FormFields/EmailInput';
-import PasswordInput from '../../components/UI/FormFields/PasswordInput';
-import SimpleCheckbox from '../../components/UI/FormFields/SimpleCheckbox';
-import SimpleInput from '../../components/UI/FormFields/SimpleInput';
-import SimpleSelect from '../../components/UI/FormFields/SimpleSelect';
-import { Typography } from '../../components/UI/Typography';
-import { countries } from '../../constants/const';
-import FormTheme from '../../themes/FormTheme';
-import { CustomerData } from '../../types/types';
+import { registerUser, loginUser, getUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
+import { RootState, AppDispatch } from '@/app/store';
+import Button from '@/components/UI/Button';
+import BirthDateInput from '@/components/UI/FormFields/BirthDateInput';
+import EmailInput from '@/components/UI/FormFields/EmailInput';
+import PasswordInput from '@/components/UI/FormFields/PasswordInput';
+import SimpleCheckbox from '@/components/UI/FormFields/SimpleCheckbox';
+import SimpleInput from '@/components/UI/FormFields/SimpleInput';
+import SimpleSelect from '@/components/UI/FormFields/SimpleSelect';
+import { Typography } from '@/components/UI/Typography';
+import { countries } from '@/constants/const';
+import FormTheme from '@/themes/FormTheme';
+import { CustomerData } from '@/types/types';
 
 import s from './RegisterPage.module.scss';
 

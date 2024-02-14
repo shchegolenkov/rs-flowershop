@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { RootState } from '../../../app/store';
-import { Categories } from '../../../types/types';
 import { Typography } from '../Typography';
+
+import { RootState } from '@/app/store';
+import { Categories } from '@/types/types';
 
 import s from './CatalogBreadcrumbs.module.scss';
 

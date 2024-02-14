@@ -8,28 +8,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { getUser } from '../../app/slices/auth';
-import { clearMessage } from '../../app/slices/message';
-import {
-  setIsDisabledFirstName,
-  setIsDisabledLastName,
-  setIsDisabledDateOfBirth,
-  setDisabledAllFields,
-} from '../../app/slices/profile';
-import { updateUser } from '../../app/slices/profile';
-import { RootState, AppDispatch } from '../../app/store';
-import Button from '../../components/UI/Button';
-import BirthDateInput from '../../components/UI/FormFields/BirthDateInput';
-import SimpleInput from '../../components/UI/FormFields/SimpleInput';
-import { Typography } from '../../components/UI/Typography';
-import FormTheme from '../../themes/FormTheme';
-import { CustomerData, ProfileAddress, Status } from '../../types/types';
-
 import EmailForm from './EmailEditBlock';
 import NewAddressBlock from './NewAddressBlock';
 import ProfileAddressBlock from './ProfileAddressBlock';
 import ProfileAlertBlock from './ProfileAlertBlock';
 import ProfileEditBlock from './ProfileEditBlock/';
+
+import { getUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
+import {
+  setIsDisabledFirstName,
+  setIsDisabledLastName,
+  setIsDisabledDateOfBirth,
+  setDisabledAllFields,
+} from '@/app/slices/profile';
+import { updateUser } from '@/app/slices/profile';
+import { RootState, AppDispatch } from '@/app/store';
+import Button from '@/components/UI/Button';
+import BirthDateInput from '@/components/UI/FormFields/BirthDateInput';
+import SimpleInput from '@/components/UI/FormFields/SimpleInput';
+import { Typography } from '@/components/UI/Typography';
+import FormTheme from '@/themes/FormTheme';
+import { CustomerData, ProfileAddress, Status } from '@/types/types';
 
 import s from './ProfilePage.module.scss';
 

@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { resetCatalogState, setFilters } from '../../app/slices/catalog';
-import { AppDispatch } from '../../app/store';
-import { Typography } from '../../components/UI/Typography';
+import { resetCatalogState, setFilters } from '@/app/slices/catalog';
+import { AppDispatch } from '@/app/store';
+import { Typography } from '@/components/UI/Typography';
 
 import s from './CatalogPage.module.scss';
 

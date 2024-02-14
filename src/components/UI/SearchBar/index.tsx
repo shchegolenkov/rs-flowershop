@@ -3,9 +3,10 @@ import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setQuery } from '../../../app/slices/catalog';
-import { AppDispatch, RootState } from '../../../app/store';
 import Button from '../Button';
+
+import { setQuery } from '@/app/slices/catalog';
+import { AppDispatch, RootState } from '@/app/store';
 
 import s from './SearchBar.module.scss';
 

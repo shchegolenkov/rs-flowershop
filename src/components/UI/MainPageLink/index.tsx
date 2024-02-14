@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Typography } from '../Typography';
 
-import ArrowIco from '../../../assets/svg/arrowLeft.svg';
+import ArrowIco from '@/assets/svg/arrowLeft.svg';
 
 import s from './MainPageLink.module.scss';
 

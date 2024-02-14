@@ -2,7 +2,7 @@ import React from 'react';
 
 import clsx from 'clsx';
 
-import Button from '../../../components/UI/Button';
+import Button from '@/components/UI/Button';
 
 import s from '../ProfilePage.module.scss';
 

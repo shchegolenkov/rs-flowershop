@@ -4,15 +4,16 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { createCart, updateCart } from '../../../app/slices/cart';
-import { AppDispatch, RootState } from '../../../app/store';
-import { IProduct, SizeAttr, Status, UpdateCart } from '../../../types/types';
-import formatPrice from '../../../utils/formatPrice';
 import Button from '../Button';
 import { Typography } from '../Typography';
 
-import CartBtnIco from '../../../assets/svg/cartBtnIco.svg';
-import productLabel from '../../../assets/svg/dummy.svg?url';
+import { createCart, updateCart } from '@/app/slices/cart';
+import { AppDispatch, RootState } from '@/app/store';
+import { IProduct, SizeAttr, Status, UpdateCart } from '@/types/types';
+import formatPrice from '@/utils/formatPrice';
+
+import CartBtnIco from '@/assets/svg/cartBtnIco.svg';
+import productLabel from '@/assets/svg/dummy.svg?url';
 
 import s from './CatalogCard.module.scss';
 

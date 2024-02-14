@@ -11,15 +11,15 @@ import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
 
-import { getUser, loginUser } from '../../app/slices/auth';
-import { clearMessage } from '../../app/slices/message';
-import { RootState, AppDispatch } from '../../app/store';
-import Button from '../../components/UI/Button';
-import EmailInput from '../../components/UI/FormFields/EmailInput';
-import PasswordInput from '../../components/UI/FormFields/PasswordInput';
-import { Typography } from '../../components/UI/Typography';
-import FormTheme from '../../themes/FormTheme';
-import { CustomerData } from '../../types/types';
+import { getUser, loginUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
+import { RootState, AppDispatch } from '@/app/store';
+import Button from '@/components/UI/Button';
+import EmailInput from '@/components/UI/FormFields/EmailInput';
+import PasswordInput from '@/components/UI/FormFields/PasswordInput';
+import { Typography } from '@/components/UI/Typography';
+import FormTheme from '@/themes/FormTheme';
+import { CustomerData } from '@/types/types';
 
 import s from './LoginPage.module.scss';
 

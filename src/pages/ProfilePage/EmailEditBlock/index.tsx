@@ -8,16 +8,17 @@ import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
 
-import { getUser } from '../../../app/slices/auth';
-import { clearMessage } from '../../../app/slices/message';
-import { setIsDisabledEmail, updateUser } from '../../../app/slices/profile';
-import { AppDispatch, RootState } from '../../../app/store';
-import Button from '../../../components/UI/Button';
-import EmailInput from '../../../components/UI/FormFields/EmailInput';
-import FormTheme from '../../../themes/FormTheme';
-import { CustomerData, Status } from '../../../types/types';
 import ProfileAlertBlock from '../ProfileAlertBlock';
 import ProfileEditBlock from '../ProfileEditBlock';
+
+import { getUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
+import { setIsDisabledEmail, updateUser } from '@/app/slices/profile';
+import { AppDispatch, RootState } from '@/app/store';
+import Button from '@/components/UI/Button';
+import EmailInput from '@/components/UI/FormFields/EmailInput';
+import FormTheme from '@/themes/FormTheme';
+import { CustomerData, Status } from '@/types/types';
 
 import s from '../ProfilePage.module.scss';
 
