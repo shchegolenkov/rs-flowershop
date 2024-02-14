@@ -7,6 +7,7 @@ module.exports = {
       '<rootDir>/src/mocks/fileMock.ts',
     '\\.svg\\?url$': '<rootDir>/src/mocks/fileMock.ts',
     '\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
     '^.+\\.jsx?$': 'babel-jest',

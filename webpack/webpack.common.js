@@ -1,12 +1,16 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: ['./src/index.tsx'],
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
+    alias: {
+      '@': path.resolve(__dirname, '..', './src'),
+    },
   },
   module: {
     rules: [

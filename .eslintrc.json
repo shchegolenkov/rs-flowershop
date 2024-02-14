@@ -46,7 +46,7 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "type", "unknown"],
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "unknown", "type"],
         "pathGroups": [
           {
             "pattern": "react",
@@ -55,13 +55,13 @@
           },
           {
             "pattern": "*.+(svg|svg?url|jpg|jpeg)",
-            "group": "index",
+            "group": "type",
             "patternOptions": { "matchBase": true },
             "position": "after"
           },
           {
             "pattern": "*.scss",
-            "group": "index",
+            "group": "type",
             "patternOptions": { "matchBase": true },
             "position": "after"
             }
