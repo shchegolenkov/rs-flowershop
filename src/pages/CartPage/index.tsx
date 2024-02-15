@@ -1,20 +1,25 @@
-import clsx from 'clsx';
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../../app/store';
-import { applyPromo, resetPromo, setPromoStatus } from '../../app/slices/cart';
+
+import ErrorIcon from '@mui/icons-material/Error';
 import { ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import ErrorIcon from '@mui/icons-material/Error';
-import FormTheme from '../../themes/FormTheme';
-import Button from '../../components/UI/Button';
-import CartCard from '../../components/UI/CartCard';
-import { Typography } from '../../components/UI/Typography';
-import ClearCartIco from '../../assets/svg/delCart.svg';
+import clsx from 'clsx';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import ClearCart from './ClearCart/';
-import { Status, WelcomeCodes } from '../../types/types';
-import formatPrice from '../../utils/formatPrice';
+
+import { applyPromo, resetPromo, setPromoStatus } from '@/app/slices/cart';
+import { AppDispatch, RootState } from '@/app/store';
+import Button from '@/components/UI/Button';
+import CartCard from '@/components/UI/CartCard';
+import { Typography } from '@/components/UI/Typography';
+import FormTheme from '@/themes/FormTheme';
+import { Status, WelcomeCodes } from '@/types/types';
+import formatPrice from '@/utils/formatPrice';
+
+import ClearCartIco from '@/assets/svg/delCart.svg';
+
 import s from './CartPage.module.scss';
 
 const CartPage = () => {

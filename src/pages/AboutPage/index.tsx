@@ -1,8 +1,12 @@
 import clsx from 'clsx';
-import { Typography } from '../../components/UI/Typography';
-import s from './AboutPage.module.scss';
-import RsLogo from '../../assets/svg/rs_school_js.svg';
+
 import PersonDescription from './PersonDescription/PersonDescription';
+
+import { Typography } from '@/components/UI/Typography';
+
+import RsLogo from '@/assets/svg/rs_school_js.svg';
+
+import s from './AboutPage.module.scss';
 
 export default function AboutPage() {
   return (

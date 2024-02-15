@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+
 import CatalogService from '../services/catalog.service';
-import { Status, IPageQueryResult, Categories } from '../../types/types';
 import { RootState } from '../store';
-import { ITEMS_PER_PAGE } from '../../constants/const';
+
+import { ITEMS_PER_PAGE } from '@/constants/const';
+import { Status, IPageQueryResult, Categories } from '@/types/types';
 
 export const fetchProducts = createAsyncThunk('catalog/allProducts', async (_, thunkAPI) => {
   try {

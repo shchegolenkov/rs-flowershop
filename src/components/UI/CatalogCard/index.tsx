@@ -1,16 +1,21 @@
-import { IProduct, SizeAttr, Status, UpdateCart } from '../../../types/types';
-import { Typography } from '../Typography';
-import productLabel from '../../../assets/svg/dummy.svg?url';
-import s from './CatalogCard.module.scss';
-import { Link } from 'react-router-dom';
-import formatPrice from '../../../utils/formatPrice';
-import Button from '../Button';
-import CartBtnIco from '../../../assets/svg/cartBtnIco.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../app/store';
-import { createCart, updateCart } from '../../../app/slices/cart';
 import { useEffect, useState, useCallback } from 'react';
+
 import CircularProgress from '@mui/material/CircularProgress';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import Button from '../Button';
+import { Typography } from '../Typography';
+
+import { createCart, updateCart } from '@/app/slices/cart';
+import { AppDispatch, RootState } from '@/app/store';
+import { IProduct, SizeAttr, Status, UpdateCart } from '@/types/types';
+import formatPrice from '@/utils/formatPrice';
+
+import CartBtnIco from '@/assets/svg/cartBtnIco.svg';
+import productLabel from '@/assets/svg/dummy.svg?url';
+
+import s from './CatalogCard.module.scss';
 
 interface ICatalogCard {
   data: IProduct;

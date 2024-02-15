@@ -1,9 +1,13 @@
 import { useState } from 'react';
+
 import clsx from 'clsx';
+
+import { ProductImage } from '@/types/types';
+
+import ArrowPageIco from '@/assets/svg/arrowSlidePageRight.svg';
+import ArrowIco from '@/assets/svg/arrowSlideRight.svg';
+
 import s from './ImageSlider.module.scss';
-import ArrowIco from '../../../assets/svg/arrowSlideRight.svg';
-import ArrowPageIco from '../../../assets/svg/arrowSlidePageRight.svg';
-import { ProductImage } from '../../../types/types';
 
 interface IImageSlider {
   data: ProductImage[];

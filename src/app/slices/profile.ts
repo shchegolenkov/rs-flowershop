@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
+import ProfileService from '../services/profile.service';
+
+import { setMessage } from './message';
 
 import {
   CustomerData,
@@ -9,11 +13,7 @@ import {
   ChangePassword,
   ThunkAPI,
   Status,
-} from '../../types/types';
-
-import ProfileService from '../services/profile.service';
-import { setMessage } from './message';
-import { AxiosError } from 'axios';
+} from '@/types/types';
 
 const getErrorMessage = (error: AxiosError | unknown, thunkAPI: ThunkAPI) => {
   if (axios.isAxiosError(error)) {

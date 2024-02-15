@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { UpdateCart } from '../../types/types';
+
+import { UpdateCart } from '@/types/types';
 
 const CLIENT_ID = process.env.CTP_CLIENT_ID as string;
 const CLIENT_SECRET = process.env.CTP_CLIENT_SECRET as string;

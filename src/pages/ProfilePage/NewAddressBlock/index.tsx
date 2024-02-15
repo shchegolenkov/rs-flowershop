@@ -1,35 +1,32 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Resolver, useForm, UseFormProps } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
-import s from '../ProfilePage.module.scss';
-
-import SimpleInput from '../../../components/UI/FormFields/SimpleInput';
-import SimpleSelect from '../../../components/UI/FormFields/SimpleSelect';
-import SimpleCheckbox from '../../../components/UI/FormFields/SimpleCheckbox';
-import Button from '../../../components/UI/Button';
-import { Typography } from '../../../components/UI/Typography';
 import Alert from '@mui/material/Alert';
+import { ThemeProvider } from '@mui/material/styles';
+import clsx from 'clsx';
+import { Resolver, useForm, UseFormProps } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
 
-import { countries } from '../../../constants/const';
-import { AddressAction, ApiResponse, ProfileForm, Status, User } from '../../../types/types';
-
-import { getUser } from '../../../app/slices/auth';
+import { getUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
 import {
   addAddress,
   addShippingBillingAddresses,
   setDefaultBillingAddress,
   setDefaultShippingAddress,
-} from '../../../app/slices/profile';
-import { clearMessage } from '../../../app/slices/message';
+} from '@/app/slices/profile';
+import { AppDispatch, RootState } from '@/app/store';
+import Button from '@/components/UI/Button';
+import SimpleCheckbox from '@/components/UI/FormFields/SimpleCheckbox';
+import SimpleInput from '@/components/UI/FormFields/SimpleInput';
+import SimpleSelect from '@/components/UI/FormFields/SimpleSelect';
+import { Typography } from '@/components/UI/Typography';
+import { countries } from '@/constants/const';
+import FormTheme from '@/themes/FormTheme';
+import { AddressAction, ApiResponse, ProfileForm, Status, User } from '@/types/types';
 
-import FormTheme from '../../../themes/FormTheme';
-import { ThemeProvider } from '@mui/material/styles';
-
-import * as yup from 'yup';
-
-import { AppDispatch, RootState } from '../../../app/store';
+import s from '../ProfilePage.module.scss';
 
 interface ProfileEditBlockProps {
   user: User;

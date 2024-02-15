@@ -1,7 +1,9 @@
 import React from 'react';
-import clsx from 'clsx';
-import s from '../ProfilePage.module.scss';
+
 import Alert from '@mui/material/Alert';
+import clsx from 'clsx';
+
+import s from '../ProfilePage.module.scss';
 
 interface ProfileAlertBlockProps {
   formError: boolean;

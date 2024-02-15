@@ -1,6 +1,8 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
-import s from './RadioButton.module.scss';
+
 import { Typography } from '../Typography';
+
+import s from './RadioButton.module.scss';
 
 function RadioButton({
   name,

@@ -1,5 +1,6 @@
-import { validateDate } from './validators';
 import dayjs, { Dayjs } from 'dayjs';
+
+import { validateDate } from './validators';
 
 describe('validateDate', () => {
   it('returns "invalidDate" for null date', () => {

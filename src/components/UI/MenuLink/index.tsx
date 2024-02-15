@@ -1,6 +1,7 @@
-import { Link, LinkProps } from 'react-router-dom';
-import s from './MenuLink.module.scss';
 import clsx from 'clsx';
+import { Link, LinkProps } from 'react-router-dom';
+
+import s from './MenuLink.module.scss';
 
 interface IMenuLink extends LinkProps {
   ico?: JSX.Element;

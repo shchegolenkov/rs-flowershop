@@ -21,7 +21,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "prettier", "react-hooks"],
+  "plugins": ["@typescript-eslint", "react", "prettier", "react-hooks", "import"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
@@ -42,7 +42,38 @@
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-var-requires": "off",
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "unknown", "type"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "*.+(svg|svg?url|jpg|jpeg)",
+            "group": "type",
+            "patternOptions": { "matchBase": true },
+            "position": "after"
+          },
+          {
+            "pattern": "*.scss",
+            "group": "type",
+            "patternOptions": { "matchBase": true },
+            "position": "after"
+            }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always-and-inside-groups",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
   },
   "settings": {
     "react": {

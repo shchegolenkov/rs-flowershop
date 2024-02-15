@@ -1,22 +1,25 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import RootLayout from './layouts/RootLayout';
-import MainPage from './pages/MainPage';
-import NotFoundPage from './pages/NotFoundPage';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
-import ScrollToTop from './utils/scrollToTop';
-import ProfilePage from './pages/ProfilePage';
+
 import CatalogLayout from './layouts/CatalogLayout';
-import CatalogPage from './pages/CatalogPage';
-import FreshFlowersPage from './pages/CatalogPage/FreshFlowersPage';
-import DriedFlowersPage from './pages/CatalogPage/DriedFlowersPage';
-import LivePLantsPage from './pages/CatalogPage/LivePLantsPage';
-import FreshenersPage from './pages/CatalogPage/FreshenersPage';
-import CandlesPage from './pages/CatalogPage/CandlesPage';
-import ProductPage from './pages/ProductPage';
-import PasswordPage from './pages/PasswordPage';
+import RootLayout from './layouts/RootLayout';
+
 import AboutPage from './pages/AboutPage';
 import CartPage from './pages/CartPage';
+import CatalogPage from './pages/CatalogPage';
+import CandlesPage from './pages/CatalogPage/CandlesPage';
+import DriedFlowersPage from './pages/CatalogPage/DriedFlowersPage';
+import FreshenersPage from './pages/CatalogPage/FreshenersPage';
+import FreshFlowersPage from './pages/CatalogPage/FreshFlowersPage';
+import LivePLantsPage from './pages/CatalogPage/LivePLantsPage';
+import LoginPage from './pages/LoginPage';
+import MainPage from './pages/MainPage';
+import NotFoundPage from './pages/NotFoundPage';
+import PasswordPage from './pages/PasswordPage';
+import ProductPage from './pages/ProductPage';
+import ProfilePage from './pages/ProfilePage';
+import RegisterPage from './pages/RegisterPage';
+
+import ScrollToTop from './utils/scrollToTop';
 
 export default function App() {
   return (

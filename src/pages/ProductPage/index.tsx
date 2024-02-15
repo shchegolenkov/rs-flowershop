@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../app/store';
-import { fetchProduct } from '../../app/slices/product';
+
 import { Breadcrumbs } from '@mui/material';
-import { Typography } from '../../components/UI/Typography';
-import Button from '../../components/UI/Button';
-import ImageSlider from '../../components/UI/ImageSlider';
-import ModalWindow from '../../components/UI/ModalWindow';
-import s from './ProductPage.module.scss';
+import CircularProgress from '@mui/material/CircularProgress';
+import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+
+import AlertBlock from './AlertBlock';
+
+import { createCart, updateCart } from '@/app/slices/cart';
+import { fetchProduct } from '@/app/slices/product';
+import { AppDispatch, RootState } from '@/app/store';
+import Button from '@/components/UI/Button';
+import ImageSlider from '@/components/UI/ImageSlider';
+import ModalWindow from '@/components/UI/ModalWindow';
+import { Typography } from '@/components/UI/Typography';
+import NotFoundPage from '@/pages/NotFoundPage';
 import {
   CategoryAttr,
   CompositionAttr,
@@ -16,14 +23,11 @@ import {
   Status,
   UpdateCart,
   LineItem,
-} from '../../types/types';
-import formatPrice from '../../utils/formatPrice';
-import changeHyphenToSpace from '../../utils/changeHyphenToSpace';
-import NotFoundPage from '../../pages/NotFoundPage';
-import CircularProgress from '@mui/material/CircularProgress';
-import clsx from 'clsx';
-import { createCart, updateCart } from '../../app/slices/cart';
-import AlertBlock from './AlertBlock';
+} from '@/types/types';
+import changeHyphenToSpace from '@/utils/changeHyphenToSpace';
+import formatPrice from '@/utils/formatPrice';
+
+import s from './ProductPage.module.scss';
 
 function ProductPage() {
   const [modalOpen, setModalOpen] = useState(false);

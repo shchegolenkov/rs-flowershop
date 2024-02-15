@@ -1,7 +1,10 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+
 import clsx from 'clsx';
-import s from './Checkbox.module.scss';
+
 import { Typography } from '../Typography';
+
+import s from './Checkbox.module.scss';
 
 interface ICheckbox
   extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {

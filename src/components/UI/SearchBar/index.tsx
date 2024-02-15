@@ -1,10 +1,14 @@
+import { useState, useEffect, useRef } from 'react';
+
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../app/store';
-import { setQuery } from '../../../app/slices/catalog';
+
 import Button from '../Button';
+
+import { setQuery } from '@/app/slices/catalog';
+import { AppDispatch, RootState } from '@/app/store';
+
 import s from './SearchBar.module.scss';
-import { useState, useEffect, useRef } from 'react';
 
 function SearchBar({ className }: JSX.IntrinsicElements['form']) {
   const [isText, setIsText] = useState(false);

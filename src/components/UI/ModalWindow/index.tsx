@@ -1,10 +1,13 @@
 import React from 'react';
-import s from './ModalWindow.module.scss';
+
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import CloseIco from '../../../assets/svg/close.svg';
+import Modal from '@mui/material/Modal';
+
+import CloseIco from '@/assets/svg/close.svg';
+
+import s from './ModalWindow.module.scss';
 
 const ModalWindow = ({
   children,

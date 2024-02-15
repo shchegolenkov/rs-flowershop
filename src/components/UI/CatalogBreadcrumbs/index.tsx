@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom';
-import { Typography } from '../Typography';
-import { Categories } from '../../../types/types';
-import s from './CatalogBreadcrumbs.module.scss';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../app/store';
+import { Link } from 'react-router-dom';
+
+import { Typography } from '../Typography';
+
+import { RootState } from '@/app/store';
+import { Categories } from '@/types/types';
+
+import s from './CatalogBreadcrumbs.module.scss';
 
 function CatalogBreadcrumbs() {
   const { category } = useSelector((state: RootState) => state.products);

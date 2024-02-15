@@ -1,26 +1,26 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
 import clsx from 'clsx';
-
-import s from './PasswordPage.module.scss';
-
+import { useForm, UseFormProps, Resolver } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { PasswordForm, Status } from '../../types/types';
-import { clearMessage } from '../../app/slices/message';
-import { AppDispatch, RootState } from '../../app/store';
-import { changePassword } from '../../app/slices/profile';
-import { getUser, loginUser } from '../../app/slices/auth';
-
-import { ThemeProvider } from '@mui/material/styles';
-import { Typography } from '../../components/UI/Typography';
-import FormTheme from '../../themes/FormTheme';
-import ProfileEditBlock from '../ProfilePage/ProfileEditBlock';
-import PasswordInput from '../../components/UI/FormFields/PasswordInput';
 import ProfileAlertBlock from '../ProfilePage/ProfileAlertBlock';
+import ProfileEditBlock from '../ProfilePage/ProfileEditBlock';
+
+import { getUser, loginUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
+import { changePassword } from '@/app/slices/profile';
+import { AppDispatch, RootState } from '@/app/store';
+import PasswordInput from '@/components/UI/FormFields/PasswordInput';
+import { Typography } from '@/components/UI/Typography';
+import FormTheme from '@/themes/FormTheme';
+import { PasswordForm, Status } from '@/types/types';
+
+import s from './PasswordPage.module.scss';
 
 const PasswordPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

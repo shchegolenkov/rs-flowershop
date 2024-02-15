@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import clsx from 'clsx';
-import * as yup from 'yup';
-import { Resolver, useForm, UseFormProps } from 'react-hook-form';
-import { ThemeProvider } from '@mui/material/styles';
+
 import { yupResolver } from '@hookform/resolvers/yup';
+import Alert from '@mui/material/Alert';
+import { ThemeProvider } from '@mui/material/styles';
+import clsx from 'clsx';
+import { Resolver, useForm, UseFormProps } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import isEmail from 'validator/lib/isEmail';
+import * as yup from 'yup';
+
+import { getUser, loginUser } from '@/app/slices/auth';
+import { clearMessage } from '@/app/slices/message';
+import { RootState, AppDispatch } from '@/app/store';
+import Button from '@/components/UI/Button';
+import EmailInput from '@/components/UI/FormFields/EmailInput';
+import PasswordInput from '@/components/UI/FormFields/PasswordInput';
+import { Typography } from '@/components/UI/Typography';
+import FormTheme from '@/themes/FormTheme';
+import { CustomerData } from '@/types/types';
 
 import s from './LoginPage.module.scss';
-import FormTheme from '../../themes/FormTheme';
-import { Typography } from '../../components/UI/Typography';
-import Button from '../../components/UI/Button';
-import EmailInput from '../../components/UI/FormFields/EmailInput';
-import PasswordInput from '../../components/UI/FormFields/PasswordInput';
-import { CustomerData } from '../../types/types';
-import { useDispatch } from 'react-redux';
-import { clearMessage } from '../../app/slices/message';
-import { getUser, loginUser } from '../../app/slices/auth';
-import { useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../app/store';
-import Alert from '@mui/material/Alert';
-import isEmail from 'validator/lib/isEmail';
 
 const LoginPage: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);

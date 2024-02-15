@@ -1,10 +1,13 @@
 import React from 'react';
+
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { MemoryRouter } from 'react-router-dom';
-import Header from './';
 import { Provider } from 'react-redux';
-import { store } from '../../../app/store';
+import { MemoryRouter } from 'react-router-dom';
+
+import Header from './';
+
+import { store } from '@/app/store';
 
 describe('Header', () => {
   it('renders without errors', () => {

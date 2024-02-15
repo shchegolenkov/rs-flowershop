@@ -1,11 +1,14 @@
-import { useSelector } from 'react-redux';
 import clsx from 'clsx';
-import { RootState } from '../../../app/store';
-import { Status } from '../../../types/types';
-import { Typography } from '../Typography';
+import { useSelector } from 'react-redux';
+
 import CatalogCard from '../CatalogCard';
 import { Skeleton } from '../CatalogCard/Skeleton';
-import { ITEMS_PER_PAGE } from '../../../constants/const';
+import { Typography } from '../Typography';
+
+import { RootState } from '@/app/store';
+import { ITEMS_PER_PAGE } from '@/constants/const';
+import { Status } from '@/types/types';
+
 import s from './CatalogCards.module.scss';
 
 function CatalogCards({ className }: JSX.IntrinsicElements['div']) {

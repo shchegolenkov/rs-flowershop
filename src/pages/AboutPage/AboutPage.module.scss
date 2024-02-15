@@ -66,7 +66,7 @@
 
 .rsBlockImage {
   background:
-    center / cover no-repeat url('../../assets/images/heroImg.png'),
+    center / cover no-repeat url('/src/assets/images/heroImg.png'),
     lightgray 0px -353.086px / 100% 149.97% no-repeat;
 }
 
@@ -125,15 +125,15 @@
 }
 
 .denImg {
-  background: top / cover no-repeat url('../../assets/images/Den.jpg');
+  background: top / cover no-repeat url('/src/assets/images/Den.jpg');
 }
 
 .aliakseyImg {
-  background: top / cover no-repeat url('../../assets/images/Aliaksey.jpg');
+  background: top / cover no-repeat url('/src/assets/images/Aliaksey.jpg');
 }
 
 .glebImg {
-  background: top / cover no-repeat url('../../assets/images/Gleb.jpg');
+  background: top / cover no-repeat url('/src/assets/images/Gleb.jpg');
 }
 
 .collaborationBlock {

@@ -1,10 +1,13 @@
-import SortingBlock from '../SortingBlock';
-import FilterBlock from '../FilterBlock';
-import s from './Filters.module.scss';
-import CatalogBreadcrumbs from '../CatalogBreadcrumbs';
-import clsx from 'clsx';
-import { Typography } from '../Typography';
 import { useState } from 'react';
+
+import clsx from 'clsx';
+
+import CatalogBreadcrumbs from '../CatalogBreadcrumbs';
+import FilterBlock from '../FilterBlock';
+import SortingBlock from '../SortingBlock';
+import { Typography } from '../Typography';
+
+import s from './Filters.module.scss';
 
 function Filters({ className }: JSX.IntrinsicElements['div']) {
   const [open, setOpen] = useState(false);

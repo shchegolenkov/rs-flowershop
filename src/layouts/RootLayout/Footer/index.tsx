@@ -1,6 +1,8 @@
-import LogoIco from '../../../assets/svg/logo.svg';
-import { Typography } from '../../../components/UI/Typography';
-import { MenuLink } from '../../../components/UI/MenuLink';
+import { MenuLink } from '@/components/UI/MenuLink';
+import { Typography } from '@/components/UI/Typography';
+
+import LogoIco from '@/assets/svg/logo.svg';
+
 import s from './Footer.module.scss';
 
 const links = [

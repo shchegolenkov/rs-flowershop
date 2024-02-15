@@ -1,13 +1,11 @@
 import React from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+
 import ErrorIcon from '@mui/icons-material/Error';
-import EditIco from '../../../../assets/svg/edit.svg';
-import EditIcoActive from '../../../../assets/svg/editActive.svg';
-import EditIcoErr from '../../../../assets/svg/editErr.svg';
-import { CustomerData } from '../../../../types/types';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateValidationError } from '@mui/x-date-pickers/models';
+import dayjs, { Dayjs } from 'dayjs';
 import {
   Control,
   Controller,
@@ -16,8 +14,13 @@ import {
   KeepStateOptions,
   UseFormRegister,
 } from 'react-hook-form';
-import { DateValidationError } from '@mui/x-date-pickers/models';
-import { validateDate } from '../../../../utils/validators';
+
+import { CustomerData } from '@/types/types';
+import { validateDate } from '@/utils/validators';
+
+import EditIco from '@/assets/svg/edit.svg';
+import EditIcoActive from '@/assets/svg/editActive.svg';
+import EditIcoErr from '@/assets/svg/editErr.svg';
 
 import s from '../FormFields.module.scss';
 

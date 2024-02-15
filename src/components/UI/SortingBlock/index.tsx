@@ -1,10 +1,13 @@
-import s from './SortingBlock.module.scss';
-import { Typography } from '../Typography';
-import RadioButton from '../RadioButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../../../app/store';
-import { setSort } from '../../../app/slices/catalog';
-import { Status } from '../../../types/types';
+
+import RadioButton from '../RadioButton';
+import { Typography } from '../Typography';
+
+import { setSort } from '@/app/slices/catalog';
+import { RootState, AppDispatch } from '@/app/store';
+import { Status } from '@/types/types';
+
+import s from './SortingBlock.module.scss';
 
 function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
   const { sort, status } = useSelector((state: RootState) => state.products);

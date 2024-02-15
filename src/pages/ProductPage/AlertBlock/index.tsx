@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
+
 import CloseIcon from '@mui/icons-material/Close';
-import { Status } from '../../../types/types';
-import { Typography } from '../../../components/UI/Typography';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+
+import { Typography } from '@/components/UI/Typography';
+import { Status } from '@/types/types';
 
 interface AlertBlock {
   openAlert: boolean;

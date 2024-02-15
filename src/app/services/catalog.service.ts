@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { IPageQueryResult } from '../../types/types';
-import { ITEMS_PER_PAGE } from '../../constants/const';
+
+import { ITEMS_PER_PAGE } from '@/constants/const';
+import { IPageQueryResult } from '@/types/types';
 
 const ACC_TOKEN_URL = process.env.CTP_ACCTOKEN_URL as string;
 const CLIENT_ID = process.env.CTP_CLIENT_ID as string;
