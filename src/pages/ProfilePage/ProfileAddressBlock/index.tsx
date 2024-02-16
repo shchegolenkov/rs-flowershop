@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ThemeProvider } from '@mui/material/styles';
 import { useForm, UseFormProps, Resolver } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -25,7 +24,6 @@ import SimpleInput from '@/components/UI/FormFields/SimpleInput';
 import SimpleSelect from '@/components/UI/FormFields/SimpleSelect';
 import { Typography } from '@/components/UI/Typography';
 import { countries } from '@/constants/const';
-import FormTheme from '@/themes/FormTheme';
 import { AddressAction, ProfileAddress, ProfileForm, Status, User } from '@/types/types';
 
 import DeleteAddress from '@/assets/svg/delAddress.svg';
@@ -314,138 +312,136 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
   };
 
   return (
-    <ThemeProvider theme={FormTheme}>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
-        {typeAddress === 'shipping'
-          ? shippingAddressIds.includes(address.id)
-            ? addressName()
-            : null
-          : null}
-        {typeAddress === 'billing'
-          ? billingAddressIds.includes(address.id)
-            ? addressName()
-            : null
-          : null}
+    <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
+      {typeAddress === 'shipping'
+        ? shippingAddressIds.includes(address.id)
+          ? addressName()
+          : null
+        : null}
+      {typeAddress === 'billing'
+        ? billingAddressIds.includes(address.id)
+          ? addressName()
+          : null
+        : null}
+      <SimpleInput
+        register={register}
+        errors={errors}
+        err={errors.streetName}
+        errMessage={errors.streetName?.message}
+        name={`streetName`}
+        label="Street *"
+        id={`streetName-${address.id}`}
+        defaultValue={address.streetName}
+        isEditField={true}
+        isDisabled={isDisabledAddress}
+        isAddressField={true}
+      />
+      <SimpleInput
+        register={register}
+        errors={errors}
+        err={errors.city}
+        errMessage={errors.city?.message}
+        name={`city`}
+        label="City *"
+        id={`city-${address.id}`}
+        defaultValue={address.city}
+        isEditField={true}
+        isDisabled={isDisabledAddress}
+        isAddressField={true}
+      />
+      <div className={s.two__items_container}>
         <SimpleInput
           register={register}
           errors={errors}
-          err={errors.streetName}
-          errMessage={errors.streetName?.message}
-          name={`streetName`}
-          label="Street *"
-          id={`streetName-${address.id}`}
-          defaultValue={address.streetName}
+          err={errors.postalCode}
+          errMessage={errors.postalCode?.message}
+          name={`postalCode`}
+          label="Postal Code *"
+          id={`postalCode-${address.id}`}
+          defaultValue={address.postalCode}
           isEditField={true}
           isDisabled={isDisabledAddress}
           isAddressField={true}
         />
-        <SimpleInput
+        <SimpleSelect
           register={register}
           errors={errors}
-          err={errors.city}
-          errMessage={errors.city?.message}
-          name={`city`}
-          label="City *"
-          id={`city-${address.id}`}
-          defaultValue={address.city}
+          err={errors.country}
+          errMessage={errors.country?.message}
+          name={'country'}
+          label="Country *"
+          id={`country-${address.id}`}
+          selectData={countries}
+          defaultValue={address.country}
           isEditField={true}
           isDisabled={isDisabledAddress}
-          isAddressField={true}
         />
-        <div className={s.two__items_container}>
-          <SimpleInput
-            register={register}
-            errors={errors}
-            err={errors.postalCode}
-            errMessage={errors.postalCode?.message}
-            name={`postalCode`}
-            label="Postal Code *"
-            id={`postalCode-${address.id}`}
-            defaultValue={address.postalCode}
-            isEditField={true}
-            isDisabled={isDisabledAddress}
-            isAddressField={true}
-          />
-          <SimpleSelect
-            register={register}
-            errors={errors}
-            err={errors.country}
-            errMessage={errors.country?.message}
-            name={'country'}
-            label="Country *"
-            id={`country-${address.id}`}
-            selectData={countries}
-            defaultValue={address.country}
-            isEditField={true}
-            isDisabled={isDisabledAddress}
-          />
+      </div>
+      {shippingAddressIds.includes(address.id) && typeAddress === 'shipping' ? (
+        <div className={s.checkboxes_container}>
+          {billingAddressIds.includes(address.id) ? null : (
+            <SimpleCheckbox
+              id="shippingBillingAddress"
+              register={register}
+              name={'shippingBillingAddress'}
+              label="Set as billing address"
+              isChecked={checkedShipBillAddress}
+              setChecked={setCheckedShipBillAddress}
+              isEditField={true}
+              isDisabled={isDisabledAddress}
+            />
+          )}
+          {defaultShippingAddressId === address.id && typeAddress === 'shipping' ? null : (
+            <SimpleCheckbox
+              id="shippingDefaultAddress"
+              register={register}
+              name={'shippingDefaultAddress'}
+              label="Set as default shipping address"
+              isChecked={checkedShipDefAddress}
+              setChecked={setCheckedShipDefAddress}
+              isEditField={true}
+              isDisabled={isDisabledAddress}
+            />
+          )}
         </div>
-        {shippingAddressIds.includes(address.id) && typeAddress === 'shipping' ? (
-          <div className={s.checkboxes_container}>
-            {billingAddressIds.includes(address.id) ? null : (
-              <SimpleCheckbox
-                id="shippingBillingAddress"
-                register={register}
-                name={'shippingBillingAddress'}
-                label="Set as billing address"
-                isChecked={checkedShipBillAddress}
-                setChecked={setCheckedShipBillAddress}
-                isEditField={true}
-                isDisabled={isDisabledAddress}
-              />
-            )}
-            {defaultShippingAddressId === address.id && typeAddress === 'shipping' ? null : (
-              <SimpleCheckbox
-                id="shippingDefaultAddress"
-                register={register}
-                name={'shippingDefaultAddress'}
-                label="Set as default shipping address"
-                isChecked={checkedShipDefAddress}
-                setChecked={setCheckedShipDefAddress}
-                isEditField={true}
-                isDisabled={isDisabledAddress}
-              />
-            )}
-          </div>
-        ) : null}
-        {billingAddressIds.includes(address.id) && typeAddress === 'billing' ? (
-          <div className={s.checkboxes_container}>
-            {shippingAddressIds.includes(address.id) ? null : (
-              <SimpleCheckbox
-                id="billingShippingAddress"
-                register={register}
-                name={'billingShippingAddress'}
-                label="Set as shipping address"
-                isChecked={checkedBillShipAddress}
-                setChecked={setCheckedBillShipAddress}
-                isEditField={true}
-                isDisabled={isDisabledAddress}
-              />
-            )}
-            {defaultBillingAddressId === address.id && typeAddress === 'billing' ? null : (
-              <SimpleCheckbox
-                id="billingDefaultAddress"
-                register={register}
-                name={'billingDefaultAddress'}
-                label="Set as default billing address"
-                isChecked={checkedBillDefAddress}
-                setChecked={setCheckedBillDefAddress}
-                isEditField={true}
-                isDisabled={isDisabledAddress}
-              />
-            )}
-          </div>
-        ) : null}
-        {isOpenEditBlock ? (
-          <ProfileEditBlock
-            onClickSubmit={onClickSubmit}
-            onClickCancel={onClickCancel}
-            disabled={isSuccess || status === Status.LOADING}
-          />
-        ) : null}
-        <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
-      </form>
-    </ThemeProvider>
+      ) : null}
+      {billingAddressIds.includes(address.id) && typeAddress === 'billing' ? (
+        <div className={s.checkboxes_container}>
+          {shippingAddressIds.includes(address.id) ? null : (
+            <SimpleCheckbox
+              id="billingShippingAddress"
+              register={register}
+              name={'billingShippingAddress'}
+              label="Set as shipping address"
+              isChecked={checkedBillShipAddress}
+              setChecked={setCheckedBillShipAddress}
+              isEditField={true}
+              isDisabled={isDisabledAddress}
+            />
+          )}
+          {defaultBillingAddressId === address.id && typeAddress === 'billing' ? null : (
+            <SimpleCheckbox
+              id="billingDefaultAddress"
+              register={register}
+              name={'billingDefaultAddress'}
+              label="Set as default billing address"
+              isChecked={checkedBillDefAddress}
+              setChecked={setCheckedBillDefAddress}
+              isEditField={true}
+              isDisabled={isDisabledAddress}
+            />
+          )}
+        </div>
+      ) : null}
+      {isOpenEditBlock ? (
+        <ProfileEditBlock
+          onClickSubmit={onClickSubmit}
+          onClickCancel={onClickCancel}
+          disabled={isSuccess || status === Status.LOADING}
+        />
+      ) : null}
+      <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
+    </form>
   );
 };
 

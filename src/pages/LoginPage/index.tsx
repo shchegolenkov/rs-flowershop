@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import Alert from '@mui/material/Alert';
-import { ThemeProvider } from '@mui/material/styles';
 import clsx from 'clsx';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -18,7 +17,6 @@ import Button from '@/components/UI/Button';
 import EmailInput from '@/components/UI/FormFields/EmailInput';
 import PasswordInput from '@/components/UI/FormFields/PasswordInput';
 import { Typography } from '@/components/UI/Typography';
-import FormTheme from '@/themes/FormTheme';
 import { CustomerData } from '@/types/types';
 
 import s from './LoginPage.module.scss';
@@ -118,32 +116,30 @@ const LoginPage: React.FC = () => {
         </div>
         <div>
           <div className={s.wrapper}>
-            <ThemeProvider theme={FormTheme}>
-              <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-                <EmailInput register={register} errors={errors} />
-                <PasswordInput
-                  register={register}
-                  name={'password'}
-                  err={errors.password}
-                  errMessage={errors.password?.message}
-                  label={'Password *'}
-                  id={'password-login'}
-                />
-                <Button full={true} type="submit" className={s.buttonLogin}>
-                  Login
-                </Button>
-                {isSuccess ? (
-                  <Alert severity="success" variant="outlined">
-                    Successful!
-                  </Alert>
-                ) : null}
-                {message ? (
-                  <Alert variant="outlined" severity="error">
-                    {message}
-                  </Alert>
-                ) : null}
-              </form>
-            </ThemeProvider>
+            <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+              <EmailInput register={register} errors={errors} />
+              <PasswordInput
+                register={register}
+                name={'password'}
+                err={errors.password}
+                errMessage={errors.password?.message}
+                label={'Password *'}
+                id={'password-login'}
+              />
+              <Button full={true} type="submit" className={s.buttonLogin}>
+                Login
+              </Button>
+              {isSuccess ? (
+                <Alert severity="success" variant="outlined">
+                  Successful!
+                </Alert>
+              ) : null}
+              {message ? (
+                <Alert variant="outlined" severity="error">
+                  {message}
+                </Alert>
+              ) : null}
+            </form>
           </div>
         </div>
       </div>

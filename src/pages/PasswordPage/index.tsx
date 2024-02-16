@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ThemeProvider } from '@mui/material/styles';
 import clsx from 'clsx';
 import { useForm, UseFormProps, Resolver } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +16,6 @@ import { changePassword } from '@/app/slices/profile';
 import { AppDispatch, RootState } from '@/app/store';
 import PasswordInput from '@/components/UI/FormFields/PasswordInput';
 import { Typography } from '@/components/UI/Typography';
-import FormTheme from '@/themes/FormTheme';
 import { PasswordForm, Status } from '@/types/types';
 
 import s from './PasswordPage.module.scss';
@@ -141,49 +139,47 @@ const PasswordPage: React.FC = () => {
           </div>
         </div>
       </div>
-      <ThemeProvider theme={FormTheme}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={clsx(s.elements__flow)}>
-            <div className={clsx(s.form__element, s.form__element_left, s.no__border_bottom_left)}>
-              <Typography variant="h2" className={s.form__title_size}>
-                Change Password
-              </Typography>
-            </div>
-            <div className={clsx(s.form__element, s.form__element_flow, s.no__border_bottom)}>
-              <PasswordInput
-                register={register}
-                name={'currentPassword'}
-                err={errors.currentPassword}
-                errMessage={errors.currentPassword?.message}
-                label={'Current password *'}
-                id={'current-password'}
-              />
-              <PasswordInput
-                register={register}
-                name={'newPassword'}
-                err={errors.newPassword}
-                errMessage={errors.newPassword?.message}
-                label={'New password *'}
-                id={'new-password'}
-              />
-              <PasswordInput
-                register={register}
-                name={'confirmNewPassword'}
-                err={errors.confirmNewPassword}
-                errMessage={errors.confirmNewPassword?.message}
-                label={'Confirm new password *'}
-                id={'confirm-new-password'}
-              />
-              <ProfileEditBlock
-                onClickSubmit={onClickSubmit}
-                onClickCancel={onClickCancel}
-                disabled={isSuccess || status === Status.LOADING}
-              />
-              <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
-            </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={clsx(s.elements__flow)}>
+          <div className={clsx(s.form__element, s.form__element_left, s.no__border_bottom_left)}>
+            <Typography variant="h2" className={s.form__title_size}>
+              Change Password
+            </Typography>
           </div>
-        </form>
-      </ThemeProvider>
+          <div className={clsx(s.form__element, s.form__element_flow, s.no__border_bottom)}>
+            <PasswordInput
+              register={register}
+              name={'currentPassword'}
+              err={errors.currentPassword}
+              errMessage={errors.currentPassword?.message}
+              label={'Current password *'}
+              id={'current-password'}
+            />
+            <PasswordInput
+              register={register}
+              name={'newPassword'}
+              err={errors.newPassword}
+              errMessage={errors.newPassword?.message}
+              label={'New password *'}
+              id={'new-password'}
+            />
+            <PasswordInput
+              register={register}
+              name={'confirmNewPassword'}
+              err={errors.confirmNewPassword}
+              errMessage={errors.confirmNewPassword?.message}
+              label={'Confirm new password *'}
+              id={'confirm-new-password'}
+            />
+            <ProfileEditBlock
+              onClickSubmit={onClickSubmit}
+              onClickCancel={onClickCancel}
+              disabled={isSuccess || status === Status.LOADING}
+            />
+            <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
+          </div>
+        </div>
+      </form>
     </main>
   );
 };

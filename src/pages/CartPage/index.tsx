@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import ErrorIcon from '@mui/icons-material/Error';
-import { ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,7 +13,6 @@ import { AppDispatch, RootState } from '@/app/store';
 import Button from '@/components/UI/Button';
 import CartCard from '@/components/UI/CartCard';
 import { Typography } from '@/components/UI/Typography';
-import FormTheme from '@/themes/FormTheme';
 import { Status, WelcomeCodes } from '@/types/types';
 import formatPrice from '@/utils/formatPrice';
 
@@ -136,61 +134,59 @@ const CartPage = () => {
               <Typography variant={'body'}>
                 If you have our promo code, enter the&nbsp;code to&nbsp;get&nbsp;discount
               </Typography>
-              <ThemeProvider theme={FormTheme}>
-                <form
-                  className={clsx(s.promoForm, [
-                    promoStatus === Status.SUCCESS && s.promoFormSuccess,
-                  ])}
-                  onSubmit={handleSubmit}
-                  onReset={handleReset}
-                >
-                  <TextField
-                    value={inputValue}
-                    label={'Promo code'}
-                    id={'promocode-input'}
-                    className={s.textInput}
+              <form
+                className={clsx(s.promoForm, [
+                  promoStatus === Status.SUCCESS && s.promoFormSuccess,
+                ])}
+                onSubmit={handleSubmit}
+                onReset={handleReset}
+              >
+                <TextField
+                  value={inputValue}
+                  label={'Promo code'}
+                  id={'promocode-input'}
+                  className={s.textInput}
+                  disabled={
+                    !cartItems ||
+                    promoStatus === Status.SUCCESS ||
+                    statusCart === Status.LOADING ||
+                    cartItems.length === 0
+                  }
+                  name="promo"
+                  error={promoStatus === Status.ERROR}
+                  helperText={
+                    promoStatus === Status.ERROR ? (
+                      <span className={clsx(s.errMessage, s.errMessageActive)}>
+                        <ErrorIcon color="error" /> {'Enter valid promo code'}
+                      </span>
+                    ) : (
+                      <span className={s.errMessage}></span>
+                    )
+                  }
+                  onChange={handleChange}
+                />
+                {promoStatus !== Status.SUCCESS ? (
+                  <Button
+                    type="submit"
+                    variant={'secondary'}
+                    className={s.promoButton}
                     disabled={
-                      !cartItems ||
-                      promoStatus === Status.SUCCESS ||
-                      statusCart === Status.LOADING ||
-                      cartItems.length === 0
+                      !cartItems || statusCart === Status.LOADING || inputValue.length === 0
                     }
-                    name="promo"
-                    error={promoStatus === Status.ERROR}
-                    helperText={
-                      promoStatus === Status.ERROR ? (
-                        <span className={clsx(s.errMessage, s.errMessageActive)}>
-                          <ErrorIcon color="error" /> {'Enter valid promo code'}
-                        </span>
-                      ) : (
-                        <span className={s.errMessage}></span>
-                      )
-                    }
-                    onChange={handleChange}
-                  />
-                  {promoStatus !== Status.SUCCESS ? (
-                    <Button
-                      type="submit"
-                      variant={'secondary'}
-                      className={s.promoButton}
-                      disabled={
-                        !cartItems || statusCart === Status.LOADING || inputValue.length === 0
-                      }
-                    >
-                      Apply
-                    </Button>
-                  ) : (
-                    <Button
-                      type="reset"
-                      variant={'secondary'}
-                      className={s.promoButton}
-                      disabled={!cartItems || statusCart === Status.LOADING}
-                    >
-                      Reset
-                    </Button>
-                  )}
-                </form>
-              </ThemeProvider>
+                  >
+                    Apply
+                  </Button>
+                ) : (
+                  <Button
+                    type="reset"
+                    variant={'secondary'}
+                    className={s.promoButton}
+                    disabled={!cartItems || statusCart === Status.LOADING}
+                  >
+                    Reset
+                  </Button>
+                )}
+              </form>
             </div>
             <div className={s.checkoutBlock}>
               <div>

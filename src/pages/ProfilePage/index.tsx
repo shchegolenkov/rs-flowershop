@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ThemeProvider } from '@mui/material/styles';
 import clsx from 'clsx';
 import { useForm, UseFormProps, Resolver } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +27,6 @@ import Button from '@/components/UI/Button';
 import BirthDateInput from '@/components/UI/FormFields/BirthDateInput';
 import SimpleInput from '@/components/UI/FormFields/SimpleInput';
 import { Typography } from '@/components/UI/Typography';
-import FormTheme from '@/themes/FormTheme';
 import { CustomerData, ProfileAddress, Status } from '@/types/types';
 
 import s from './ProfilePage.module.scss';
@@ -234,68 +232,66 @@ const ProfilePage: React.FC = () => {
           <EmailForm key={'email-form'} />
         </div>
       </div>
-      <ThemeProvider theme={FormTheme}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={clsx(s.elements__flow)}>
-            <div className={clsx(s.form__element, s.form__element_left)}>
-              <Typography variant="h2" className={s.form__title_size}>
-                2. User Info
-              </Typography>
-            </div>
-            <div className={clsx(s.form__element, s.form__element_flow)}>
-              <SimpleInput
-                register={register}
-                errors={errors}
-                err={errors.firstName}
-                errMessage={errors.firstName?.message}
-                name={'firstName'}
-                label="First name *"
-                id="firstName-input"
-                defaultValue={user ? user.firstName : ''}
-                isEditField={true}
-                isDisabled={isDisabledFirstName}
-                switchEditModeField={handleFirstNameClick}
-              />
-              <SimpleInput
-                register={register}
-                errors={errors}
-                err={errors.lastName}
-                errMessage={errors.lastName?.message}
-                name={'lastName'}
-                label="Last name *"
-                id="lastName-input"
-                defaultValue={user ? user.lastName : ''}
-                isEditField={true}
-                isDisabled={isDisabledLastName}
-                switchEditModeField={handleLastNameClick}
-              />
-              <BirthDateInput
-                register={register}
-                errors={errors}
-                control={control}
-                reset={reset}
-                defaultValue={user && user.dateOfBirth ? new Date(user.dateOfBirth) : null}
-                isEditField={true}
-                isDisabled={isDisabledDateOfBirth}
-                switchEditModeField={handleDateOfBirthClick}
-              />
-              {!isDisabledFirstName ||
-              !isDisabledLastName ||
-              !isDisabledDateOfBirth ||
-              isOpenEditBlock ? (
-                <div className={clsx(s.width_full)}>
-                  <ProfileEditBlock
-                    onClickSubmit={onClickSubmit}
-                    onClickCancel={onClickCancel}
-                    disabled={isSuccess || status === Status.LOADING}
-                  />
-                </div>
-              ) : null}
-              <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
-            </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={clsx(s.elements__flow)}>
+          <div className={clsx(s.form__element, s.form__element_left)}>
+            <Typography variant="h2" className={s.form__title_size}>
+              2. User Info
+            </Typography>
           </div>
-        </form>
-      </ThemeProvider>
+          <div className={clsx(s.form__element, s.form__element_flow)}>
+            <SimpleInput
+              register={register}
+              errors={errors}
+              err={errors.firstName}
+              errMessage={errors.firstName?.message}
+              name={'firstName'}
+              label="First name *"
+              id="firstName-input"
+              defaultValue={user ? user.firstName : ''}
+              isEditField={true}
+              isDisabled={isDisabledFirstName}
+              switchEditModeField={handleFirstNameClick}
+            />
+            <SimpleInput
+              register={register}
+              errors={errors}
+              err={errors.lastName}
+              errMessage={errors.lastName?.message}
+              name={'lastName'}
+              label="Last name *"
+              id="lastName-input"
+              defaultValue={user ? user.lastName : ''}
+              isEditField={true}
+              isDisabled={isDisabledLastName}
+              switchEditModeField={handleLastNameClick}
+            />
+            <BirthDateInput
+              register={register}
+              errors={errors}
+              control={control}
+              reset={reset}
+              defaultValue={user && user.dateOfBirth ? new Date(user.dateOfBirth) : null}
+              isEditField={true}
+              isDisabled={isDisabledDateOfBirth}
+              switchEditModeField={handleDateOfBirthClick}
+            />
+            {!isDisabledFirstName ||
+            !isDisabledLastName ||
+            !isDisabledDateOfBirth ||
+            isOpenEditBlock ? (
+              <div className={clsx(s.width_full)}>
+                <ProfileEditBlock
+                  onClickSubmit={onClickSubmit}
+                  onClickCancel={onClickCancel}
+                  disabled={isSuccess || status === Status.LOADING}
+                />
+              </div>
+            ) : null}
+            <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
+          </div>
+        </div>
+      </form>
       <div className={clsx(s.elements__flow)}>
         <div className={clsx(s.form__element, s.form__element_left)}>
           <div className={s.address_addBtn}>

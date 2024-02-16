@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ThemeProvider } from '@mui/material/styles';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +16,6 @@ import { setIsDisabledEmail, updateUser } from '@/app/slices/profile';
 import { AppDispatch, RootState } from '@/app/store';
 import Button from '@/components/UI/Button';
 import EmailInput from '@/components/UI/FormFields/EmailInput';
-import FormTheme from '@/themes/FormTheme';
 import { CustomerData, Status } from '@/types/types';
 
 import s from '../ProfilePage.module.scss';
@@ -119,38 +117,36 @@ const EmailForm: React.FC = () => {
   };
 
   return (
-    <ThemeProvider theme={FormTheme}>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
-        <EmailInput
-          register={register}
-          errors={errors}
-          defaultValue={user ? user.email : ''}
-          isEditField={true}
-          isDisabled={isDisabledEmail}
-          switchEditModeField={handleEmailClick}
+    <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
+      <EmailInput
+        register={register}
+        errors={errors}
+        defaultValue={user ? user.email : ''}
+        isEditField={true}
+        isDisabled={isDisabledEmail}
+        switchEditModeField={handleEmailClick}
+      />
+      <Button
+        full={true}
+        type="button"
+        variant="secondary"
+        onClick={() => {
+          const path = '/profile/change-password';
+          navigate(path);
+        }}
+        className={s.change_password_btn}
+      >
+        CHANGE PASSWORD
+      </Button>
+      {isOpenEditBlock ? (
+        <ProfileEditBlock
+          onClickSubmit={onClickSubmit}
+          onClickCancel={onClickCancel}
+          disabled={isSuccess || status === Status.LOADING}
         />
-        <Button
-          full={true}
-          type="button"
-          variant="secondary"
-          onClick={() => {
-            const path = '/profile/change-password';
-            navigate(path);
-          }}
-          className={s.change_password_btn}
-        >
-          CHANGE PASSWORD
-        </Button>
-        {isOpenEditBlock ? (
-          <ProfileEditBlock
-            onClickSubmit={onClickSubmit}
-            onClickCancel={onClickCancel}
-            disabled={isSuccess || status === Status.LOADING}
-          />
-        ) : null}
-        <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
-      </form>
-    </ThemeProvider>
+      ) : null}
+      <ProfileAlertBlock formError={formError} isSuccess={isSuccess} message={message} />
+    </form>
   );
 };
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import Alert from '@mui/material/Alert';
-import { ThemeProvider } from '@mui/material/styles';
 import clsx from 'clsx';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +22,6 @@ import SimpleInput from '@/components/UI/FormFields/SimpleInput';
 import SimpleSelect from '@/components/UI/FormFields/SimpleSelect';
 import { Typography } from '@/components/UI/Typography';
 import { countries } from '@/constants/const';
-import FormTheme from '@/themes/FormTheme';
 import { AddressAction, ApiResponse, ProfileForm, Status, User } from '@/types/types';
 
 import s from '../ProfilePage.module.scss';
@@ -196,129 +194,127 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
   };
 
   return (
-    <ThemeProvider theme={FormTheme}>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
-        {typeAddress === 'shipping' || typeAddress === 'billing' ? addressName() : null}
+    <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
+      {typeAddress === 'shipping' || typeAddress === 'billing' ? addressName() : null}
+      <SimpleInput
+        register={register}
+        errors={errors}
+        err={errors.streetName}
+        errMessage={errors.streetName?.message}
+        name={`streetName`}
+        label="Street *"
+        id={`streetName-${user.id}`}
+      />
+      <SimpleInput
+        register={register}
+        errors={errors}
+        err={errors.city}
+        errMessage={errors.city?.message}
+        name={`city`}
+        label="City *"
+        id={`city-${user.id}`}
+      />
+      <div className={s.two__items_container}>
         <SimpleInput
           register={register}
           errors={errors}
-          err={errors.streetName}
-          errMessage={errors.streetName?.message}
-          name={`streetName`}
-          label="Street *"
-          id={`streetName-${user.id}`}
+          err={errors.postalCode}
+          errMessage={errors.postalCode?.message}
+          name={`postalCode`}
+          label="Postal Code *"
+          id={`postalCode-${user.id}`}
         />
-        <SimpleInput
+        <SimpleSelect
           register={register}
           errors={errors}
-          err={errors.city}
-          errMessage={errors.city?.message}
-          name={`city`}
-          label="City *"
-          id={`city-${user.id}`}
+          err={errors.country}
+          errMessage={errors.country?.message}
+          name={'country'}
+          label="Country *"
+          id={`country-${user.id}`}
+          selectData={countries}
         />
-        <div className={s.two__items_container}>
-          <SimpleInput
+      </div>
+      {typeAddress === 'shipping' ? (
+        <div className={s.checkboxes_container}>
+          <SimpleCheckbox
+            id="shippingBillingAddress"
             register={register}
-            errors={errors}
-            err={errors.postalCode}
-            errMessage={errors.postalCode?.message}
-            name={`postalCode`}
-            label="Postal Code *"
-            id={`postalCode-${user.id}`}
+            name={'shippingBillingAddress'}
+            label="Set as billing address"
+            isChecked={checkedShipBillAddress}
+            setChecked={setCheckedShipBillAddress}
           />
-          <SimpleSelect
+          <SimpleCheckbox
+            id="shippingDefaultAddress"
             register={register}
-            errors={errors}
-            err={errors.country}
-            errMessage={errors.country?.message}
-            name={'country'}
-            label="Country *"
-            id={`country-${user.id}`}
-            selectData={countries}
+            name={'shippingDefaultAddress'}
+            label="Set as default shipping address"
+            isChecked={checkedShipDefAddress}
+            setChecked={setCheckedShipDefAddress}
           />
         </div>
-        {typeAddress === 'shipping' ? (
-          <div className={s.checkboxes_container}>
-            <SimpleCheckbox
-              id="shippingBillingAddress"
-              register={register}
-              name={'shippingBillingAddress'}
-              label="Set as billing address"
-              isChecked={checkedShipBillAddress}
-              setChecked={setCheckedShipBillAddress}
-            />
-            <SimpleCheckbox
-              id="shippingDefaultAddress"
-              register={register}
-              name={'shippingDefaultAddress'}
-              label="Set as default shipping address"
-              isChecked={checkedShipDefAddress}
-              setChecked={setCheckedShipDefAddress}
-            />
+      ) : null}
+      {typeAddress === 'billing' ? (
+        <div className={s.checkboxes_container}>
+          <SimpleCheckbox
+            id="billingShippingAddress"
+            register={register}
+            name={'billingShippingAddress'}
+            label="Set as shipping address"
+            isChecked={checkedBillShipAddress}
+            setChecked={setCheckedBillShipAddress}
+          />
+          <SimpleCheckbox
+            id="billingDefaultAddress"
+            register={register}
+            name={'billingDefaultAddress'}
+            label="Set as default billing address"
+            isChecked={checkedBillDefAddress}
+            setChecked={setCheckedBillDefAddress}
+          />
+        </div>
+      ) : null}
+      <div className={clsx(s.width_full)}>
+        <div className={s.submit__btn__container}>
+          <div className={s.save_edit_container}>
+            <Button
+              type="submit"
+              variant="primary"
+              onClick={onClickSubmit}
+              disabled={isSuccess || status === Status.LOADING}
+            >
+              ADD ADDRESS
+            </Button>
+            <Button
+              type="button"
+              variant="underlined"
+              onClick={onClickCancel}
+              disabled={isSuccess || status === Status.LOADING}
+            >
+              Cancel
+            </Button>
           </div>
-        ) : null}
-        {typeAddress === 'billing' ? (
-          <div className={s.checkboxes_container}>
-            <SimpleCheckbox
-              id="billingShippingAddress"
-              register={register}
-              name={'billingShippingAddress'}
-              label="Set as shipping address"
-              isChecked={checkedBillShipAddress}
-              setChecked={setCheckedBillShipAddress}
-            />
-            <SimpleCheckbox
-              id="billingDefaultAddress"
-              register={register}
-              name={'billingDefaultAddress'}
-              label="Set as default billing address"
-              isChecked={checkedBillDefAddress}
-              setChecked={setCheckedBillDefAddress}
-            />
-          </div>
-        ) : null}
-        <div className={clsx(s.width_full)}>
-          <div className={s.submit__btn__container}>
-            <div className={s.save_edit_container}>
-              <Button
-                type="submit"
-                variant="primary"
-                onClick={onClickSubmit}
-                disabled={isSuccess || status === Status.LOADING}
-              >
-                ADD ADDRESS
-              </Button>
-              <Button
-                type="button"
-                variant="underlined"
-                onClick={onClickCancel}
-                disabled={isSuccess || status === Status.LOADING}
-              >
-                Cancel
-              </Button>
-            </div>
-            <div className={s.alert_position}>
-              {formError ? (
-                <Alert variant="outlined" severity="error">
-                  Something went wrong - please check the form!
-                </Alert>
-              ) : null}
-              {isSuccess ? (
-                <Alert severity="success" variant="outlined">
-                  Address was added successfully!
-                </Alert>
-              ) : null}
-              {message ? (
-                <Alert variant="outlined" severity="error">
-                  {message}
-                </Alert>
-              ) : null}
-            </div>
+          <div className={s.alert_position}>
+            {formError ? (
+              <Alert variant="outlined" severity="error">
+                Something went wrong - please check the form!
+              </Alert>
+            ) : null}
+            {isSuccess ? (
+              <Alert severity="success" variant="outlined">
+                Address was added successfully!
+              </Alert>
+            ) : null}
+            {message ? (
+              <Alert variant="outlined" severity="error">
+                {message}
+              </Alert>
+            ) : null}
           </div>
         </div>
-      </form>
-    </ThemeProvider>
+      </div>
+    </form>
   );
 };
 

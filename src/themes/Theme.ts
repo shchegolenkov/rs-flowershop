@@ -1,11 +1,11 @@
-import { createTheme, Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 interface CustomTypographyOptions extends TypographyOptions {
   fontWeight?: number;
 }
 
-const FormTheme: Theme = createTheme({
+const Theme = createTheme({
   palette: {
     primary: {
       main: '#D2D2D7',
@@ -66,4 +66,4 @@ const FormTheme: Theme = createTheme({
   },
 });
 
-export default FormTheme;
+export default Theme;
