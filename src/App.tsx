@@ -30,15 +30,17 @@ export default function App() {
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="cart" element={<CartPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="profile/change-password" element={<PasswordPage />} />
+          <Route path="profile">
+            <Route index element={<ProfilePage />} />
+            <Route path="change-password" element={<PasswordPage />} />
+          </Route>
           <Route path="catalog" element={<CatalogLayout />}>
+            <Route index element={<CatalogPage />} />
             <Route path="fresh-flowers" element={<FreshFlowersPage />} />
             <Route path="dried-flowers" element={<DriedFlowersPage />} />
             <Route path="live-plants" element={<LivePLantsPage />} />
             <Route path="fresheners" element={<FreshenersPage />} />
             <Route path="candles" element={<CandlesPage />} />
-            <Route index element={<CatalogPage />} />
           </Route>
           <Route path="catalog/:id" element={<ProductPage />} />
           <Route path="about" element={<AboutPage />} />
