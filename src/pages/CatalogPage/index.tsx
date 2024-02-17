@@ -8,7 +8,7 @@ import { Typography } from '@/components/UI/Typography';
 
 import s from './CatalogPage.module.scss';
 
-function CatalogPage() {
+const CatalogPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -23,6 +23,6 @@ function CatalogPage() {
       <Typography variant="h1">Find the best flowers and gifts</Typography>
     </div>
   );
-}
+};
 
 export default CatalogPage;

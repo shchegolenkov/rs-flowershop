@@ -8,7 +8,7 @@ import { AppDispatch, RootState } from '@/app/store';
 
 import s from './CatalogPagination.module.scss';
 
-function CatalogPagination({ className }: PaginationProps) {
+const CatalogPagination = ({ className }: PaginationProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { pages, page } = useSelector((state: RootState) => state.products);
@@ -26,6 +26,6 @@ function CatalogPagination({ className }: PaginationProps) {
       className={clsx(s.pagination, className)}
     />
   );
-}
+};
 
 export default CatalogPagination;

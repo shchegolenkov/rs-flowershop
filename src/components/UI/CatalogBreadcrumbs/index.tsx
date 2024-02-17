@@ -8,7 +8,7 @@ import { Categories } from '@/types/types';
 
 import s from './CatalogBreadcrumbs.module.scss';
 
-function CatalogBreadcrumbs() {
+const CatalogBreadcrumbs = () => {
   const { category } = useSelector((state: RootState) => state.products);
 
   const links = [
@@ -58,6 +58,6 @@ function CatalogBreadcrumbs() {
       )}
     </nav>
   );
-}
+};
 
 export default CatalogBreadcrumbs;

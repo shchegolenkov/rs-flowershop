@@ -10,7 +10,7 @@ import { AppDispatch, RootState } from '@/app/store';
 
 import s from './SearchBar.module.scss';
 
-function SearchBar({ className }: JSX.IntrinsicElements['form']) {
+const SearchBar = ({ className }: JSX.IntrinsicElements['form']) => {
   const [isText, setIsText] = useState(false);
   const { query, category } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
@@ -64,6 +64,6 @@ function SearchBar({ className }: JSX.IntrinsicElements['form']) {
       <Button type="submit">Search</Button>
     </form>
   );
-}
+};
 
 export default SearchBar;

@@ -8,7 +8,7 @@ interface IMenuLink extends LinkProps {
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-export function MenuLink({ children, className, ico, onClick, ...props }: IMenuLink) {
+export const MenuLink = ({ children, className, ico, onClick, ...props }: IMenuLink) => {
   return (
     <Link
       className={ico ? clsx(s.linkIco, className) : clsx(s.link, className)}
@@ -19,4 +19,4 @@ export function MenuLink({ children, className, ico, onClick, ...props }: IMenuL
       {children}
     </Link>
   );
-}
+};

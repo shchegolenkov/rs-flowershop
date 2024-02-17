@@ -9,7 +9,7 @@ import { Categories } from '@/types/types';
 
 import s from '../CatalogPage.module.scss';
 
-function CandlesPage() {
+const CandlesPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -24,6 +24,6 @@ function CandlesPage() {
       <Typography variant="h1">Aroma therapy</Typography>
     </div>
   );
-}
+};
 
 export default CandlesPage;

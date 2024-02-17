@@ -7,7 +7,7 @@ import SearchBar from '@/components/UI/SearchBar';
 
 import s from './CatalogLayout.module.scss';
 
-function CatalogLayout() {
+const CatalogLayout = () => {
   return (
     <>
       <main>
@@ -21,6 +21,6 @@ function CatalogLayout() {
       </main>
     </>
   );
-}
+};
 
 export default CatalogLayout;

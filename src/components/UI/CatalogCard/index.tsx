@@ -21,7 +21,7 @@ interface ICatalogCard {
   data: IProduct;
 }
 
-function CatalogCard({ data }: ICatalogCard) {
+const CatalogCard = ({ data }: ICatalogCard) => {
   const dispatch = useDispatch<AppDispatch>();
   const { status } = useSelector((state: RootState) => state.cart);
   const [localStatus, setLocalStatus] = useState(Status.SUCCESS);
@@ -118,6 +118,6 @@ function CatalogCard({ data }: ICatalogCard) {
       )}
     </div>
   );
-}
+};
 
 export default CatalogCard;

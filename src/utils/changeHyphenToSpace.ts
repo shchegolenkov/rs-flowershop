@@ -1,3 +1,3 @@
-export default function changeHyphenToSpace(input: string): string {
-  return input.replace(/-/g, ' ');
-}
+const changeHyphenToSpace = (input: string): string => input.replace(/-/g, ' ');
+
+export default changeHyphenToSpace;

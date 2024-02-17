@@ -25,12 +25,12 @@ interface TypographyProps<T extends ElementType> {
   variant?: TypographyVariant;
 }
 
-export function Typography<T extends ElementType = 'p'>({
+export const Typography = <T extends ElementType = 'p'>({
   as,
   className,
   variant = 'body',
   children,
-}: TypographyProps<T>) {
+}: TypographyProps<T>) => {
   let Tag = as ?? 'p';
 
   if (variant.includes('h')) {
@@ -46,4 +46,4 @@ export function Typography<T extends ElementType = 'p'>({
       {children}
     </Tag>
   );
-}
+};

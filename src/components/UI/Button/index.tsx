@@ -12,7 +12,7 @@ interface IButton
   children?: ReactNode;
 }
 
-function Button({
+const Button = ({
   children,
   className,
   variant = 'primary',
@@ -20,7 +20,7 @@ function Button({
   type = 'button',
   disabled = false,
   ...props
-}: IButton) {
+}: IButton) => {
   return (
     <button
       className={clsx(s.button, s[variant], { [s.full]: full }, className)}
@@ -31,6 +31,6 @@ function Button({
       {children}
     </button>
   );
-}
+};
 
 export default Button;

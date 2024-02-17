@@ -6,7 +6,7 @@ import GhLogo from '@/assets/svg/ghLogo.svg';
 
 import s from './PersonDescription.module.scss';
 
-export default function PersonDescription({
+const PersonDescription = ({
   name,
   role,
   bio,
@@ -20,7 +20,7 @@ export default function PersonDescription({
   contributions: string[];
   link: string;
   className?: string;
-}) {
+}) => {
   return (
     <div className={clsx(s.person, className)}>
       <div className={s.personBlock}>
@@ -64,4 +64,6 @@ export default function PersonDescription({
       </a>
     </div>
   );
-}
+};
+
+export default PersonDescription;

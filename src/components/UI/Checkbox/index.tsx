@@ -11,7 +11,7 @@ interface ICheckbox
   text: string;
 }
 
-function CheckBox({ text, className, value, ...props }: ICheckbox) {
+const CheckBox = ({ text, className, value, ...props }: ICheckbox) => {
   return (
     <label className={clsx(s.group, className)}>
       <input type="checkbox" value={value} className={s.input} {...props} />
@@ -20,6 +20,6 @@ function CheckBox({ text, className, value, ...props }: ICheckbox) {
       </Typography>
     </label>
   );
-}
+};
 
 export default CheckBox;

@@ -9,7 +9,7 @@ import { Categories } from '@/types/types';
 
 import s from '../CatalogPage.module.scss';
 
-function FreshenersPage() {
+const FreshenersPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -24,6 +24,6 @@ function FreshenersPage() {
       <Typography variant="h1">Mood in the house</Typography>
     </div>
   );
-}
+};
 
 export default FreshenersPage;

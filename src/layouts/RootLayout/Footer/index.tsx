@@ -14,7 +14,7 @@ const links = [
   { to: '/catalog/fresheners', text: 'Freshener Diffuser' },
 ];
 
-function Footer() {
+const Footer = () => {
   return (
     <footer className={s.layout}>
       <div className={s.item}>
@@ -52,6 +52,6 @@ function Footer() {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

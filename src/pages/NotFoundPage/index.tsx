@@ -5,7 +5,7 @@ import { Typography } from '@/components/UI/Typography';
 
 import s from './NotFoundPage.module.scss';
 
-function NotFoundPage() {
+const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
     <main>
@@ -38,6 +38,6 @@ function NotFoundPage() {
       </div>
     </main>
   );
-}
+};
 
 export default NotFoundPage;

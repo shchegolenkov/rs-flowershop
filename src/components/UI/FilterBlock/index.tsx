@@ -21,7 +21,7 @@ import { Status } from '@/types/types';
 
 import s from './FilterBlock.module.scss';
 
-function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
+const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
   const { status, category } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -143,6 +143,6 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
       </div>
     </form>
   );
-}
+};
 
 export default FilterBlock;

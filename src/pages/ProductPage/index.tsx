@@ -29,7 +29,7 @@ import formatPrice from '@/utils/formatPrice';
 
 import s from './ProductPage.module.scss';
 
-function ProductPage() {
+const ProductPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openAlert, setOpenAlert] = useState(false);
@@ -230,6 +230,6 @@ function ProductPage() {
       </ModalWindow>
     </main>
   );
-}
+};
 
 export default ProductPage;

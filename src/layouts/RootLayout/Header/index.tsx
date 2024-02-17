@@ -32,7 +32,7 @@ const anonymLinks = [
   { to: '/register', text: 'Sign up', ico: <ProfileIco /> },
 ];
 
-function Header() {
+const Header = () => {
   const { cartData } = useSelector((state: RootState) => state.cart);
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [isMenuActive, setMenuActive] = useState(false);
@@ -166,6 +166,6 @@ function Header() {
       {isMenuActive && <div className={s.bg} ref={ref}></div>}
     </>
   );
-}
+};
 
 export default Header;

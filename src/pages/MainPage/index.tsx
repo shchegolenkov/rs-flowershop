@@ -16,7 +16,7 @@ const links = [
   { to: '/catalog/fresheners', title: 'Fresheners' },
 ];
 
-function MainPage() {
+const MainPage = () => {
   const navigate = useNavigate();
   return (
     <main>
@@ -89,6 +89,6 @@ function MainPage() {
       </section>
     </main>
   );
-}
+};
 
 export default MainPage;

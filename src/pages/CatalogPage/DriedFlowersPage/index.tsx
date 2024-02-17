@@ -9,7 +9,7 @@ import { Categories } from '@/types/types';
 
 import s from '../CatalogPage.module.scss';
 
-function DriedFlowersPage() {
+const DriedFlowersPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -24,6 +24,6 @@ function DriedFlowersPage() {
       <Typography variant="h1">Mystic dried flowers</Typography>
     </div>
   );
-}
+};
 
 export default DriedFlowersPage;

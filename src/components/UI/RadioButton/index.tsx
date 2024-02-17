@@ -4,14 +4,14 @@ import { Typography } from '../Typography';
 
 import s from './RadioButton.module.scss';
 
-function RadioButton({
+const RadioButton = ({
   name,
   disabled = false,
   className,
   value,
   onChange,
   checked,
-}: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) {
+}: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
   return (
     <label className={className}>
       <input
@@ -25,6 +25,6 @@ function RadioButton({
       <Typography className={s.label}>{name}</Typography>
     </label>
   );
-}
+};
 
 export default RadioButton;

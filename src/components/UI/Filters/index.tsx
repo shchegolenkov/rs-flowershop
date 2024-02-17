@@ -9,7 +9,7 @@ import { Typography } from '../Typography';
 
 import s from './Filters.module.scss';
 
-function Filters({ className }: JSX.IntrinsicElements['div']) {
+const Filters = ({ className }: JSX.IntrinsicElements['div']) => {
   const [open, setOpen] = useState(false);
   return (
     <div className={clsx(s.group, className)}>
@@ -31,6 +31,6 @@ function Filters({ className }: JSX.IntrinsicElements['div']) {
       </div>
     </div>
   );
-}
+};
 
 export default Filters;

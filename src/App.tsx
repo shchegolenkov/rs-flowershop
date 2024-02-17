@@ -21,7 +21,7 @@ import RegisterPage from './pages/RegisterPage';
 
 import ScrollToTop from './utils/scrollToTop';
 
-export default function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -50,4 +50,6 @@ export default function App() {
       <ScrollToTop />
     </BrowserRouter>
   );
-}
+};
+
+export default App;

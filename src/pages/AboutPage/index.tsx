@@ -8,7 +8,7 @@ import RsLogo from '@/assets/svg/rs_school_js.svg';
 
 import s from './AboutPage.module.scss';
 
-export default function AboutPage() {
+const AboutPage = () => {
   return (
     <main>
       <section className={s.grid}>
@@ -108,4 +108,6 @@ export default function AboutPage() {
       </section>
     </main>
   );
-}
+};
+
+export default AboutPage;

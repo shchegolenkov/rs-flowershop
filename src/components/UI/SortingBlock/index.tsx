@@ -9,7 +9,7 @@ import { Status } from '@/types/types';
 
 import s from './SortingBlock.module.scss';
 
-function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
+const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
   const { sort, status } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -43,6 +43,6 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
       </div>
     </div>
   );
-}
+};
 
 export default FilterBlock;

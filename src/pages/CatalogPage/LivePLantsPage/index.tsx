@@ -9,7 +9,7 @@ import { Categories } from '@/types/types';
 
 import s from '../CatalogPage.module.scss';
 
-function LivePlantsPage() {
+const LivePlantsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -24,6 +24,6 @@ function LivePlantsPage() {
       <Typography variant="h1">Wild urban jungle</Typography>
     </div>
   );
-}
+};
 
 export default LivePlantsPage;

@@ -16,7 +16,7 @@ interface IImageSlider {
   initialIndex?: number;
 }
 
-function ImageSlider({ data, className, imageClick, initialIndex = 0 }: IImageSlider) {
+const ImageSlider = ({ data, className, imageClick, initialIndex = 0 }: IImageSlider) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const handleImageClick = () => {
@@ -85,6 +85,6 @@ function ImageSlider({ data, className, imageClick, initialIndex = 0 }: IImageSl
       </div>
     </div>
   );
-}
+};
 
 export default ImageSlider;

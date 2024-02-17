@@ -7,7 +7,7 @@ import ArrowIco from '@/assets/svg/arrowLeft.svg';
 
 import s from './MainPageLink.module.scss';
 
-function MainPageLink({ to, title }: { to: string; title: string }) {
+const MainPageLink = ({ to, title }: { to: string; title: string }) => {
   const imgLink = map(title.split(' '), capitalize).join('');
   return (
     <section className={s.item}>
@@ -26,6 +26,6 @@ function MainPageLink({ to, title }: { to: string; title: string }) {
       </Link>
     </section>
   );
-}
+};
 
 export default MainPageLink;
