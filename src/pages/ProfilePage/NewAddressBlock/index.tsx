@@ -229,7 +229,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
           errors={errors}
           err={errors.country}
           errMessage={errors.country?.message}
-          name={'country'}
+          name="country"
           label="Country *"
           id={`country-${user.id}`}
           selectData={countries}
@@ -240,7 +240,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
           <SimpleCheckbox
             id="shippingBillingAddress"
             register={register}
-            name={'shippingBillingAddress'}
+            name="shippingBillingAddress"
             label="Set as billing address"
             isChecked={checkedShipBillAddress}
             setChecked={setCheckedShipBillAddress}
@@ -248,7 +248,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
           <SimpleCheckbox
             id="shippingDefaultAddress"
             register={register}
-            name={'shippingDefaultAddress'}
+            name="shippingDefaultAddress"
             label="Set as default shipping address"
             isChecked={checkedShipDefAddress}
             setChecked={setCheckedShipDefAddress}
@@ -260,7 +260,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
           <SimpleCheckbox
             id="billingShippingAddress"
             register={register}
-            name={'billingShippingAddress'}
+            name="billingShippingAddress"
             label="Set as shipping address"
             isChecked={checkedBillShipAddress}
             setChecked={setCheckedBillShipAddress}
@@ -268,7 +268,7 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
           <SimpleCheckbox
             id="billingDefaultAddress"
             register={register}
-            name={'billingDefaultAddress'}
+            name="billingDefaultAddress"
             label="Set as default billing address"
             isChecked={checkedBillDefAddress}
             setChecked={setCheckedBillDefAddress}

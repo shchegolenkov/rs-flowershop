@@ -27,7 +27,7 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
 
   return (
     <div className={className}>
-      <Typography variant={'h5'}>Sorting by</Typography>
+      <Typography variant="h5">Sorting by</Typography>
       <div className={s.group}>
         {sortOptions.map(({ id, name, value }) => (
           <RadioButton

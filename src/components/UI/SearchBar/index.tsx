@@ -61,7 +61,7 @@ function SearchBar({ className }: JSX.IntrinsicElements['form']) {
         />
         {isText && <button type="reset" className={s.reset}></button>}
       </div>
-      <Button type={'submit'}>Search</Button>
+      <Button type="submit">Search</Button>
     </form>
   );
 }

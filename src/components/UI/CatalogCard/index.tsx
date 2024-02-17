@@ -78,38 +78,38 @@ function CatalogCard({ data }: ICatalogCard) {
     <div className={s.card}>
       <Link to={`${productUrl}`} className={s.link} style={{ backgroundImage: `url(${imgUrl})` }}>
         {discountPrice && (
-          <Typography variant={'h4'} className={s.sale}>
+          <Typography variant="h4" className={s.sale}>
             SALE
           </Typography>
         )}
         <div className={s.description}>
-          <Typography variant={'h5'}>{data.name['en-US']}</Typography>
-          <Typography variant={'caption'} className={s.caption} as={'span'}>
+          <Typography variant="h5">{data.name['en-US']}</Typography>
+          <Typography variant="caption" className={s.caption} as="span">
             {`${description.value} `}
             {`Size: ${size}`}
           </Typography>
           <div className={s.prices}>
             {discountPrice ? (
               <>
-                <Typography variant={'h5'}>{formatPrice(discountPrice)} €</Typography>
-                <Typography variant={'h6'} className={s.oldPrice}>
+                <Typography variant="h5">{formatPrice(discountPrice)} €</Typography>
+                <Typography variant="h6" className={s.oldPrice}>
                   {formatPrice(price)} €
                 </Typography>
               </>
             ) : (
-              <Typography variant={'h5'}>{formatPrice(price)} €</Typography>
+              <Typography variant="h5">{formatPrice(price)} €</Typography>
             )}
           </div>
         </div>
       </Link>
       {localStatus === Status.LOADING ? (
         <div className={s.loadBlock}>
-          <CircularProgress color={'inherit'} size={26} />
+          <CircularProgress color="inherit" size={26} />
         </div>
       ) : (
         <Button
           className={s.btn}
-          variant={'ico'}
+          variant="ico"
           onClick={handleCartBtnClick}
           disabled={status === Status.LOADING ? true : isButtonDisabled}
         >

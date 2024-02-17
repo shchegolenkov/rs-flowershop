@@ -20,7 +20,7 @@ function CatalogCards({ className }: JSX.IntrinsicElements['div']) {
         skeletons
       ) : (queryResult && queryResult?.total === 0) || status === Status.ERROR ? (
         <div className={clsx(s.items, s.notFound)}>
-          <Typography variant={'h2'}>No products found</Typography>
+          <Typography variant="h2">No products found</Typography>
           <Typography>Sorry, we couldn&apos;t find any products</Typography>
         </div>
       ) : (

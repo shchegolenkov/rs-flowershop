@@ -88,12 +88,12 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
       onSubmit={handleSubmit}
       onReset={handleReset}
     >
-      <Typography variant={'h5'} className={s.title}>
+      <Typography variant="h5" className={s.title}>
         Filter by
       </Typography>
       <div className={s.groups}>
         <div className={s.group}>
-          <Typography variant={'h6'}>Size</Typography>
+          <Typography variant="h6">Size</Typography>
           {sizeOptions.map(({ name, value, text }) => (
             <Checkbox
               key={value}
@@ -106,7 +106,7 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
           ))}
         </div>
         <div className={s.group}>
-          <Typography variant={'h6'}>Price</Typography>
+          <Typography variant="h6">Price</Typography>
           {priceOptions.map(({ name, value, text }) => (
             <Checkbox
               key={value}
@@ -119,22 +119,22 @@ function FilterBlock({ className }: JSX.IntrinsicElements['div']) {
           ))}
         </div>
         <div className={s.group}>
-          <Typography variant={'h6'}>Special offers</Typography>
+          <Typography variant="h6">Special offers</Typography>
           <Checkbox
             className={s.input}
-            name={'discount'}
-            text={'Discount only'}
+            name="discount"
+            text="Discount only"
             disabled={status === Status.LOADING || status === Status.ERROR}
           />
         </div>
       </div>
       <div className={s.buttons}>
-        <Button type={'submit'} disabled={status === Status.LOADING || status === Status.ERROR}>
+        <Button type="submit" disabled={status === Status.LOADING || status === Status.ERROR}>
           Apply
         </Button>
         <Button
-          type={'reset'}
-          variant={'secondary'}
+          type="reset"
+          variant="secondary"
           disabled={status === Status.LOADING || status === Status.ERROR}
           className={s.button}
         >

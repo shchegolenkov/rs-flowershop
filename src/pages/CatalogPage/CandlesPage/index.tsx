@@ -21,7 +21,7 @@ function CandlesPage() {
   }, [dispatch]);
   return (
     <div className={s.wrapper}>
-      <Typography variant={'h1'}>Aroma therapy</Typography>
+      <Typography variant="h1">Aroma therapy</Typography>
     </div>
   );
 }

@@ -60,7 +60,7 @@ function ProductPage() {
     return (
       <main>
         <div className={s.loadingBlock}>
-          <CircularProgress color={'inherit'} size={60} />
+          <CircularProgress color="inherit" size={60} />
         </div>
       </main>
     );
@@ -136,7 +136,7 @@ function ProductPage() {
           <ImageSlider data={productImages} imageClick={handleImageClick} />
           {productSalePrice && (
             <div className={s.saleBlock}>
-              <Typography variant={'h4'} className={s.saleText}>
+              <Typography variant="h4" className={s.saleText}>
                 Sale
               </Typography>
             </div>
@@ -145,51 +145,51 @@ function ProductPage() {
         <div className={s.contentBlock}>
           <div className={s.wrapper}>
             <Breadcrumbs className={s.breadcrumbs}>
-              <Link to={'/catalog'} className={s.link}>
-                <Typography variant={'overline'} className={s.linkText}>
+              <Link to="/catalog" className={s.link}>
+                <Typography variant="overline" className={s.linkText}>
                   Catalog
                 </Typography>
               </Link>
               <Link to={`/catalog/${productCategory}`} className={s.link}>
-                <Typography variant={'overline'} className={s.linkText}>
+                <Typography variant="overline" className={s.linkText}>
                   {changeHyphenToSpace(productCategory)}
                 </Typography>
               </Link>
-              <Typography variant={'overline'} className={s.overline}>
+              <Typography variant="overline" className={s.overline}>
                 {productName}
               </Typography>
             </Breadcrumbs>
-            <Typography variant={'h2'} className={s.h2}>
+            <Typography variant="h2" className={s.h2}>
               {productName}
             </Typography>
             <div className={s.priceBlock}>
-              <Typography variant={'h3'}>
+              <Typography variant="h3">
                 {productSalePrice ? formatPrice(productSalePrice) : formatPrice(productPrice)} €
               </Typography>
               {productSalePrice && (
-                <Typography variant={'h4'} className={s.h4}>
+                <Typography variant="h4" className={s.h4}>
                   {formatPrice(productPrice)} €
                 </Typography>
               )}
             </div>
             <div className={s.descriptionBlock}>
               <div>
-                <Typography variant={'body'} className={s.subtitle}>
+                <Typography variant="body" className={s.subtitle}>
                   Product description:
                 </Typography>
-                <Typography variant={'body'}>{productDescription}</Typography>
+                <Typography variant="body">{productDescription}</Typography>
               </div>
               <div>
-                <Typography variant={'body'} className={s.subtitle}>
+                <Typography variant="body" className={s.subtitle}>
                   Composition:
                 </Typography>
-                <Typography variant={'body'}>{productComposition}</Typography>
+                <Typography variant="body">{productComposition}</Typography>
               </div>
               <div className={s.sizeBlock}>
-                <Typography variant={'body'} className={s.subtitle}>
+                <Typography variant="body" className={s.subtitle}>
                   Size:
                 </Typography>
-                <Typography variant={'body'}>{productSize}</Typography>
+                <Typography variant="body">{productSize}</Typography>
               </div>
             </div>
             <div className={s.btnBlock}>

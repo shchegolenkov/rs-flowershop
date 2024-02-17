@@ -17,8 +17,8 @@ function Filters({ className }: JSX.IntrinsicElements['div']) {
         <CatalogBreadcrumbs />
         <button className={s.show} onClick={() => setOpen((open) => !open)}>
           <Typography
-            variant={'subtitle'}
-            as={'span'}
+            variant="subtitle"
+            as="span"
             className={clsx(s.showCaption, [open && s.showActive])}
           >
             Show advanced search options

@@ -24,17 +24,17 @@ function MainPage() {
         <div className={s.left}>
           <section className={s.sticky}>
             <div className={clsx(s.wrapper, s.startBlock)}>
-              <Typography variant={'h1'}>Rolling Scopes Flowers</Typography>
-              <Typography variant={'subtitle'}>
+              <Typography variant="h1">Rolling Scopes Flowers</Typography>
+              <Typography variant="subtitle">
                 Experience exquisitely curated bouquets and gifts for every occasion: spread joy
                 with the convenience of our online flower delivery service.
               </Typography>
             </div>
             <div className={clsx(s.wrapper, s.startBlock, s.promo)}>
-              <Typography variant={'h4'} className={s.promotitle}>
+              <Typography variant="h4" className={s.promotitle}>
                 Get 10% off your first order with promo code
               </Typography>
-              <Typography variant={'h2'}>WELCOME</Typography>
+              <Typography variant="h2">WELCOME</Typography>
             </div>
           </section>
         </div>
@@ -47,15 +47,15 @@ function MainPage() {
       <div className={s.grid}>
         <div className={s.left}>
           <section className={clsx(s.wrapper, s.sticky, s.about)}>
-            <Typography variant={'h2'}>About us</Typography>
+            <Typography variant="h2">About us</Typography>
           </section>
         </div>
         <div className={clsx(s.right, s.wrapper)}>
           <section>
-            <Typography variant={'overline'} className={s.overline}>
+            <Typography variant="overline" className={s.overline}>
               our story
             </Typography>
-            <Typography variant={'h3'} className={s.aboutHeader}>
+            <Typography variant="h3" className={s.aboutHeader}>
               Rolling Scopes Flowers
             </Typography>
             <Typography>

@@ -21,7 +21,7 @@ function FreshenersPage() {
   }, [dispatch]);
   return (
     <div className={s.wrapper}>
-      <Typography variant={'h1'}>Mood in the house</Typography>
+      <Typography variant="h1">Mood in the house</Typography>
     </div>
   );
 }

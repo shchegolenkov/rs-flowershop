@@ -277,11 +277,11 @@ const RegisterPage: React.FC = () => {
             <EmailInput register={register} errors={errors} />
             <PasswordInput
               register={register}
-              name={'password'}
+              name="password"
               err={errors.password}
               errMessage={errors.password?.message}
-              label={'Password *'}
-              id={'password-reg'}
+              label="Password *"
+              id="password-reg"
             />
           </div>
         </div>
@@ -297,7 +297,7 @@ const RegisterPage: React.FC = () => {
               errors={errors}
               err={errors.firstName}
               errMessage={errors.firstName?.message}
-              name={'firstName'}
+              name="firstName"
               label="First name *"
               id="firstName-input"
             />
@@ -306,7 +306,7 @@ const RegisterPage: React.FC = () => {
               errors={errors}
               err={errors.lastName}
               errMessage={errors.lastName?.message}
-              name={'lastName'}
+              name="lastName"
               label="Last name *"
               id="lastName-input"
             />
@@ -333,7 +333,7 @@ const RegisterPage: React.FC = () => {
               errors={errors}
               err={errors.shippingStreet}
               errMessage={errors.shippingStreet?.message}
-              name={'shippingStreet'}
+              name="shippingStreet"
               label="Street *"
               id="street-input"
             />
@@ -352,7 +352,7 @@ const RegisterPage: React.FC = () => {
                 errors={errors}
                 err={errors.shippingPostalCode}
                 errMessage={errors.shippingPostalCode?.message}
-                name={'shippingPostalCode'}
+                name="shippingPostalCode"
                 label="Postal Code *"
                 id="shippingPostalCode-input"
               />
@@ -361,7 +361,7 @@ const RegisterPage: React.FC = () => {
                 errors={errors}
                 err={errors.shippingCountry}
                 errMessage={errors.shippingCountry?.message}
-                name={'shippingCountry'}
+                name="shippingCountry"
                 label="Country *"
                 id="shippingCountry-input"
                 selectData={countries}
@@ -372,7 +372,7 @@ const RegisterPage: React.FC = () => {
               <SimpleCheckbox
                 id="shippingBillingAddress"
                 register={register}
-                name={'shippingBillingAddress'}
+                name="shippingBillingAddress"
                 label="Set as default billing address"
                 isChecked={checkedShipBillAddress}
                 setChecked={setCheckedShipBillAddress}
@@ -380,7 +380,7 @@ const RegisterPage: React.FC = () => {
               <SimpleCheckbox
                 id="shippingDefaultAddress"
                 register={register}
-                name={'shippingDefaultAddress'}
+                name="shippingDefaultAddress"
                 label="Set as default shipping address"
                 isChecked={checkedShipDefAddress}
                 setChecked={setCheckedShipDefAddress}
@@ -439,7 +439,7 @@ const RegisterPage: React.FC = () => {
                 errors={errors}
                 err={errors.billingStreet}
                 errMessage={errors.billingStreet?.message}
-                name={'billingStreet'}
+                name="billingStreet"
                 label="Street *"
                 id="billing-street-input"
               />
@@ -458,7 +458,7 @@ const RegisterPage: React.FC = () => {
                   errors={errors}
                   err={errors.billingPostalCode}
                   errMessage={errors.billingPostalCode?.message}
-                  name={'billingPostalCode'}
+                  name="billingPostalCode"
                   label="Postal Code *"
                   id="billingPostalCode-input"
                 />
@@ -467,7 +467,7 @@ const RegisterPage: React.FC = () => {
                   errors={errors}
                   err={errors.billingCountry}
                   errMessage={errors.billingCountry?.message}
-                  name={'billingCountry'}
+                  name="billingCountry"
                   label="Country *"
                   id="billingCountry-input"
                   selectData={countries}
@@ -478,7 +478,7 @@ const RegisterPage: React.FC = () => {
                 <SimpleCheckbox
                   id="billingDefaultAddress"
                   register={register}
-                  name={'billingDefaultAddress'}
+                  name="billingDefaultAddress"
                   label="Set as default billing address"
                   isChecked={checkedBillDefAddress}
                   setChecked={setCheckedBillDefAddress}

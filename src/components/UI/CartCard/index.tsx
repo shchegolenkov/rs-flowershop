@@ -54,16 +54,16 @@ const CartCard = ({ data }: ICartCard) => {
       </div>
       <div className={s.info}>
         <div className={s.infoBlock}>
-          <Typography variant={'h5'}>{data.name['en-US']}</Typography>
+          <Typography variant="h5">{data.name['en-US']}</Typography>
           {discountItemPrice ? (
             <div className={s.pricesBlock}>
-              <Typography variant={'subtitle'}>{formatPrice(discountItemPrice)} €</Typography>
-              <Typography variant={'overline'} className={s.oldPrice}>
+              <Typography variant="subtitle">{formatPrice(discountItemPrice)} €</Typography>
+              <Typography variant="overline" className={s.oldPrice}>
                 {formatPrice(itemPrice)} €
               </Typography>
             </div>
           ) : (
-            <Typography variant={'subtitle'}>{formatPrice(itemPrice)} €</Typography>
+            <Typography variant="subtitle">{formatPrice(itemPrice)} €</Typography>
           )}
         </div>
         <div className={s.totalBlock}>
@@ -73,7 +73,7 @@ const CartCard = ({ data }: ICartCard) => {
             handleIncrease={handleChangeItemQuantity('increase')}
             disableState={statusCart === Status.LOADING}
           />
-          <Typography variant={'h5'} className={s.totalPrice}>
+          <Typography variant="h5" className={s.totalPrice}>
             {formatPrice((discountItemPrice ? discountItemPrice : itemPrice) * data.quantity)} €
           </Typography>
         </div>

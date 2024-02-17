@@ -21,7 +21,7 @@ function FreshFlowersPage() {
   }, [dispatch]);
   return (
     <div className={s.wrapper}>
-      <Typography variant={'h1'}>Perfect fresh flowers</Typography>
+      <Typography variant="h1">Perfect fresh flowers</Typography>
     </div>
   );
 }

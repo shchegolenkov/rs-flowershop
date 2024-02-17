@@ -21,7 +21,7 @@ function LivePlantsPage() {
   }, [dispatch]);
   return (
     <div className={s.wrapper}>
-      <Typography variant={'h1'}>Wild urban jungle</Typography>
+      <Typography variant="h1">Wild urban jungle</Typography>
     </div>
   );
 }

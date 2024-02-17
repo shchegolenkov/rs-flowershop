@@ -31,23 +31,23 @@ function CatalogBreadcrumbs() {
     <nav className={s.nav}>
       {category ? (
         <>
-          <Link to={'./'} className={s.link}>
-            <Typography variant={'overline'} as={'span'}>
+          <Link to="./" className={s.link}>
+            <Typography variant="overline" as="span">
               Catalog
             </Typography>
           </Link>
-          <Typography variant={'overline'} as={'span'}>
+          <Typography variant="overline" as="span">
             /{categoriesNames[category]}
           </Typography>
         </>
       ) : (
         <>
-          <Typography variant={'overline'}>Catalog/</Typography>
+          <Typography variant="overline">Catalog/</Typography>
           <ul className={s.links}>
             {links.map(({ to, text }) => (
               <li key={to} className={s.listItem}>
                 <Link to={to} className={s.link}>
-                  <Typography variant={'overline'} as={'span'}>
+                  <Typography variant="overline" as="span">
                     {text}
                   </Typography>
                 </Link>

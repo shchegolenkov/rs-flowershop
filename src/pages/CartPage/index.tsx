@@ -92,7 +92,7 @@ const CartPage = () => {
         </div>
         <div className={s.content}>
           <div className={s.wrapper}>
-            <Typography variant={'overline'} className={s.overline}>
+            <Typography variant="overline" className={s.overline}>
               Order summary
             </Typography>
             {cartItems?.length ? (
@@ -102,7 +102,7 @@ const CartPage = () => {
                   onClick={handleBtnClearCartClick}
                   disabled={statusCart === Status.LOADING}
                 >
-                  <Typography variant={'subtitle'}>Clear all cart</Typography>
+                  <Typography variant="subtitle">Clear all cart</Typography>
                   <ClearCartIco />
                 </button>
                 <div>
@@ -113,7 +113,7 @@ const CartPage = () => {
               </div>
             ) : (
               <div className={s.emptyCartBlock}>
-                <Typography variant={'h2'} className={s.h2}>
+                <Typography variant="h2" className={s.h2}>
                   Your cart is&nbsp;empty
                 </Typography>
                 <Typography>
@@ -131,7 +131,7 @@ const CartPage = () => {
               </div>
             )}
             <div className={s.promoBlock}>
-              <Typography variant={'body'}>
+              <Typography variant="body">
                 If you have our promo code, enter the&nbsp;code to&nbsp;get&nbsp;discount
               </Typography>
               <form
@@ -143,8 +143,8 @@ const CartPage = () => {
               >
                 <TextField
                   value={inputValue}
-                  label={'Promo code'}
-                  id={'promocode-input'}
+                  label="Promo code"
+                  id="promocode-input"
                   className={s.textInput}
                   disabled={
                     !cartItems ||
@@ -168,7 +168,7 @@ const CartPage = () => {
                 {promoStatus !== Status.SUCCESS ? (
                   <Button
                     type="submit"
-                    variant={'secondary'}
+                    variant="secondary"
                     className={s.promoButton}
                     disabled={
                       !cartItems || statusCart === Status.LOADING || inputValue.length === 0
@@ -179,7 +179,7 @@ const CartPage = () => {
                 ) : (
                   <Button
                     type="reset"
-                    variant={'secondary'}
+                    variant="secondary"
                     className={s.promoButton}
                     disabled={!cartItems || statusCart === Status.LOADING}
                   >
@@ -191,12 +191,12 @@ const CartPage = () => {
             <div className={s.checkoutBlock}>
               <div>
                 <div className={s.subpriceBlock}>
-                  <Typography variant={'body'}>Subtotal</Typography>
-                  <Typography variant={'body'}>{formatPrice(subTotal || 0)} €</Typography>
+                  <Typography variant="body">Subtotal</Typography>
+                  <Typography variant="body">{formatPrice(subTotal || 0)} €</Typography>
                 </div>
                 <div className={s.totalpriceBlock}>
-                  <Typography variant={'body'}>Total</Typography>
-                  <Typography variant={'h4'}>
+                  <Typography variant="body">Total</Typography>
+                  <Typography variant="h4">
                     {formatPrice(cartData?.totalPrice.centAmount || 0)} €
                   </Typography>
                 </div>

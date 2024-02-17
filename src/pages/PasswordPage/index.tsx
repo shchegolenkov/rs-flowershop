@@ -149,27 +149,27 @@ const PasswordPage: React.FC = () => {
           <div className={clsx(s.form__element, s.form__element_flow, s.no__border_bottom)}>
             <PasswordInput
               register={register}
-              name={'currentPassword'}
+              name="currentPassword"
               err={errors.currentPassword}
               errMessage={errors.currentPassword?.message}
-              label={'Current password *'}
-              id={'current-password'}
+              label="Current password *"
+              id="current-password"
             />
             <PasswordInput
               register={register}
-              name={'newPassword'}
+              name="newPassword"
               err={errors.newPassword}
               errMessage={errors.newPassword?.message}
-              label={'New password *'}
-              id={'new-password'}
+              label="New password *"
+              id="new-password"
             />
             <PasswordInput
               register={register}
-              name={'confirmNewPassword'}
+              name="confirmNewPassword"
               err={errors.confirmNewPassword}
               errMessage={errors.confirmNewPassword?.message}
-              label={'Confirm new password *'}
-              id={'confirm-new-password'}
+              label="Confirm new password *"
+              id="confirm-new-password"
             />
             <ProfileEditBlock
               onClickSubmit={onClickSubmit}

@@ -229,7 +229,7 @@ const ProfilePage: React.FC = () => {
           </Typography>
         </div>
         <div className={clsx(s.form__element, s.form__element_flow)}>
-          <EmailForm key={'email-form'} />
+          <EmailForm key="email-form" />
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -245,7 +245,7 @@ const ProfilePage: React.FC = () => {
               errors={errors}
               err={errors.firstName}
               errMessage={errors.firstName?.message}
-              name={'firstName'}
+              name="firstName"
               label="First name *"
               id="firstName-input"
               defaultValue={user ? user.firstName : ''}
@@ -258,7 +258,7 @@ const ProfilePage: React.FC = () => {
               errors={errors}
               err={errors.lastName}
               errMessage={errors.lastName?.message}
-              name={'lastName'}
+              name="lastName"
               label="Last name *"
               id="lastName-input"
               defaultValue={user ? user.lastName : ''}
@@ -317,7 +317,7 @@ const ProfilePage: React.FC = () => {
                     address={address}
                     indexMap={index}
                     user={user}
-                    typeAddress={'shipping'}
+                    typeAddress="shipping"
                   />
                 ) : null;
               })
@@ -333,7 +333,7 @@ const ProfilePage: React.FC = () => {
                     address={address}
                     indexMap={index}
                     user={user}
-                    typeAddress={'shipping'}
+                    typeAddress="shipping"
                   />
                 ) : null;
               })
@@ -352,7 +352,7 @@ const ProfilePage: React.FC = () => {
             <div ref={newShippingAddressBlockRef} className={s.width_full}>
               <NewAddressBlock
                 user={user}
-                typeAddress={'shipping'}
+                typeAddress="shipping"
                 setIsCancelledAdd={setIsCancelledAddShippingAddress}
               />
             </div>
@@ -384,7 +384,7 @@ const ProfilePage: React.FC = () => {
                     address={address}
                     indexMap={index}
                     user={user}
-                    typeAddress={'billing'}
+                    typeAddress="billing"
                   />
                 ) : null;
               })
@@ -400,7 +400,7 @@ const ProfilePage: React.FC = () => {
                     address={address}
                     indexMap={index}
                     user={user}
-                    typeAddress={'billing'}
+                    typeAddress="billing"
                   />
                 ) : null;
               })
@@ -419,7 +419,7 @@ const ProfilePage: React.FC = () => {
             <div ref={newBillingAddressBlockRef} className={s.width_full}>
               <NewAddressBlock
                 user={user}
-                typeAddress={'billing'}
+                typeAddress="billing"
                 setIsCancelledAdd={setIsCancelledAddBillingAddress}
               />
             </div>

@@ -368,7 +368,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
           errors={errors}
           err={errors.country}
           errMessage={errors.country?.message}
-          name={'country'}
+          name="country"
           label="Country *"
           id={`country-${address.id}`}
           selectData={countries}
@@ -383,7 +383,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
             <SimpleCheckbox
               id="shippingBillingAddress"
               register={register}
-              name={'shippingBillingAddress'}
+              name="shippingBillingAddress"
               label="Set as billing address"
               isChecked={checkedShipBillAddress}
               setChecked={setCheckedShipBillAddress}
@@ -395,7 +395,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
             <SimpleCheckbox
               id="shippingDefaultAddress"
               register={register}
-              name={'shippingDefaultAddress'}
+              name="shippingDefaultAddress"
               label="Set as default shipping address"
               isChecked={checkedShipDefAddress}
               setChecked={setCheckedShipDefAddress}
@@ -411,7 +411,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
             <SimpleCheckbox
               id="billingShippingAddress"
               register={register}
-              name={'billingShippingAddress'}
+              name="billingShippingAddress"
               label="Set as shipping address"
               isChecked={checkedBillShipAddress}
               setChecked={setCheckedBillShipAddress}
@@ -423,7 +423,7 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
             <SimpleCheckbox
               id="billingDefaultAddress"
               register={register}
-              name={'billingDefaultAddress'}
+              name="billingDefaultAddress"
               label="Set as default billing address"
               isChecked={checkedBillDefAddress}
               setChecked={setCheckedBillDefAddress}

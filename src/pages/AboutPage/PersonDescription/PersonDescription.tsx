@@ -24,30 +24,30 @@ export default function PersonDescription({
   return (
     <div className={clsx(s.person, className)}>
       <div className={s.personBlock}>
-        <Typography variant={'caption'} className={clsx(s.title, s.name)}>
+        <Typography variant="caption" className={clsx(s.title, s.name)}>
           name
         </Typography>
-        <Typography variant={'h5'}>{name}</Typography>
+        <Typography variant="h5">{name}</Typography>
       </div>
       <div className={s.personBlock}>
-        <Typography variant={'caption'} className={clsx(s.title, s.job)}>
+        <Typography variant="caption" className={clsx(s.title, s.job)}>
           job title
         </Typography>
-        <Typography variant={'h5'}>{role}</Typography>
+        <Typography variant="h5">{role}</Typography>
       </div>
       <div className={s.personBlock}>
-        <Typography variant={'caption'} className={clsx(s.title, s.bio)}>
+        <Typography variant="caption" className={clsx(s.title, s.bio)}>
           short bio
         </Typography>
-        <Typography variant={'h5'}>{bio}</Typography>
+        <Typography variant="h5">{bio}</Typography>
       </div>
       <div className={s.personBlock}>
-        <Typography variant={'caption'} className={clsx(s.title, s.contributions)}>
+        <Typography variant="caption" className={clsx(s.title, s.contributions)}>
           significant contributions
         </Typography>
         <ul className={s.tasksList}>
           {contributions.map((item, index) => (
-            <Typography key={index} variant={'h5'} as={'li'} className={s.listItem}>
+            <Typography key={index} variant="h5" as="li" className={s.listItem}>
               {item}
             </Typography>
           ))}
@@ -60,7 +60,7 @@ export default function PersonDescription({
         className={clsx(s.personBlock, s.link)}
       >
         <GhLogo />
-        <Typography variant={'captionBold'}>@{link}</Typography>
+        <Typography variant="captionBold">@{link}</Typography>
       </a>
     </div>
   );

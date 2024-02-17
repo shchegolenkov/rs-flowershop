@@ -64,12 +64,12 @@ const ClearCart: React.FC<ClearCartProps> = ({ open, setOpen }) => {
               <CloseIco />
             </button>
             <div className={s.contentContainer}>
-              <Typography variant={'h5'}>Are you sure you want to clear your cart?</Typography>
+              <Typography variant="h5">Are you sure you want to clear your cart?</Typography>
               <div className={s.dialogActions}>
-                <Button variant={'secondary'} onClick={handleClearCart} className={s.btnChoice}>
+                <Button variant="secondary" onClick={handleClearCart} className={s.btnChoice}>
                   YES
                 </Button>
-                <Button variant={'primary'} onClick={handleClose} className={s.btnChoice}>
+                <Button variant="primary" onClick={handleClose} className={s.btnChoice}>
                   NO
                 </Button>
               </div>

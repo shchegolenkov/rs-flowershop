@@ -109,7 +109,7 @@ function Header() {
               <>
                 <li className={s.listItem}>
                   <MenuLink
-                    to={'/'}
+                    to="/"
                     ico={<LogoutIco />}
                     onClick={() => {
                       handleLogout();
@@ -121,7 +121,7 @@ function Header() {
                 </li>
                 <li className={s.listItem}>
                   <MenuLink
-                    to={'/profile'}
+                    to="/profile"
                     ico={<ProfileIco />}
                     onClick={() => {
                       setMenuActive(false);
@@ -156,7 +156,7 @@ function Header() {
           <div className={s.ico}>
             <MenuLink to="/cart" className={s.cartLink}>
               <CartIco />
-              <Typography className={s.counter} variant={'captionSmall'}>
+              <Typography className={s.counter} variant="captionSmall">
                 {cartData && cartData.totalLineItemQuantity ? cartData.totalLineItemQuantity : '0'}
               </Typography>
             </MenuLink>

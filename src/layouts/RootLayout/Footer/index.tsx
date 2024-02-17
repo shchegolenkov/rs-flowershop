@@ -18,7 +18,7 @@ function Footer() {
   return (
     <footer className={s.layout}>
       <div className={s.item}>
-        <Typography as={'h5'} className={s.header}>
+        <Typography as="h5" className={s.header}>
           Catalog
         </Typography>
         <ul className={s.list}>
@@ -30,12 +30,12 @@ function Footer() {
         </ul>
       </div>
       <div className={s.item}>
-        <Typography as={'h5'} className={s.header}>
+        <Typography as="h5" className={s.header}>
           Info
         </Typography>
         <ul className={s.list}>
           <li>
-            <MenuLink to={'/about'}>About us</MenuLink>
+            <MenuLink to="/about">About us</MenuLink>
           </li>
         </ul>
       </div>

@@ -94,11 +94,11 @@ const LoginPage: React.FC = () => {
       <div className={s.grid}>
         <div className={s.headerBlock}>
           <div className={s.wrapper}>
-            <Typography variant={'h2'} className={s.h2}>
+            <Typography variant="h2" className={s.h2}>
               Welcome back!<br></br>Let`s log in
             </Typography>
             <div className={s.regBlock}>
-              <Typography variant={'body'} className={s.body}>
+              <Typography variant="body" className={s.body}>
                 No account yet?
               </Typography>
               <Button
@@ -120,11 +120,11 @@ const LoginPage: React.FC = () => {
               <EmailInput register={register} errors={errors} />
               <PasswordInput
                 register={register}
-                name={'password'}
+                name="password"
                 err={errors.password}
                 errMessage={errors.password?.message}
-                label={'Password *'}
-                id={'password-login'}
+                label="Password *"
+                id="password-login"
               />
               <Button full={true} type="submit" className={s.buttonLogin}>
                 Login

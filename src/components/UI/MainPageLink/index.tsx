@@ -15,10 +15,10 @@ function MainPageLink({ to, title }: { to: string; title: string }) {
         <img className={s.coverImg} src={`images/${imgLink}Card.jpg`} alt={`${title} cover`} />
       </div>
       <Link className={s.link} to={to}>
-        <Typography variant={'h3'} className={s.linkName}>
+        <Typography variant="h3" className={s.linkName}>
           {title}
         </Typography>
-        <Typography variant={'subtitle'} className={s.arrow}>
+        <Typography variant="subtitle" className={s.arrow}>
           <ArrowIco />
           Shop now
           <ArrowIco />
