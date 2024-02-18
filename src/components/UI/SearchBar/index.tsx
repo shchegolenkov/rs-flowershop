@@ -48,7 +48,7 @@ const SearchBar = ({ className }: JSX.IntrinsicElements['form']) => {
     <form
       ref={ref}
       className={clsx(s.form, className)}
-      onSubmit={(e) => handleSubmit(e)}
+      onSubmit={handleSubmit}
       onReset={handleReset}
     >
       <div className={s.borders}>
@@ -57,7 +57,7 @@ const SearchBar = ({ className }: JSX.IntrinsicElements['form']) => {
           placeholder="Search"
           name="search"
           className={s.input}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           autoComplete="off"
         />
         {isText && <button type="reset" className={s.reset}></button>}
