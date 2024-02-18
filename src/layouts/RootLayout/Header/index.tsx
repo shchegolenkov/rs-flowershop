@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect, MutableRefObject } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
+import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectAuth, selectCart } from '@/app/selectors';
@@ -27,15 +28,17 @@ const links = [
 ];
 
 const anonymLinks = [
-  { to: '/login', text: 'Log In', ico: <LoginIco /> },
-  { to: '/register', text: 'Sign up', ico: <ProfileIco /> },
+  { to: '/login', text: 'Log In', icon: <LoginIco /> },
+  { to: '/register', text: 'Sign up', icon: <ProfileIco /> },
 ];
 
 const Header = () => {
   const { cartData } = useSelector(selectCart);
-  const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
-  const [isMenuActive, setMenuActive] = useState(false);
   const { isLoggedIn, accessToken, refreshToken } = useSelector(selectAuth);
+
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const [isMenuActive, setMenuActive] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -86,7 +89,7 @@ const Header = () => {
               <img src={logoIco} className={s.logoIco} alt="logo" />
             </MenuLink>
           </div>
-          <ul className={!isMenuActive ? s.items : [s.items, s.active].join(' ')}>
+          <ul className={clsx(s.items, { [s.active]: isMenuActive })}>
             <li className={s.menuClose}>
               <button onClick={handleMenuClick}>
                 <CloseIco />
@@ -135,7 +138,7 @@ const Header = () => {
                 <li key={link.text} className={s.listItem}>
                   <MenuLink
                     to={link.to}
-                    ico={link.ico}
+                    ico={link.icon}
                     onClick={() => {
                       setMenuActive(false);
                     }}
@@ -147,7 +150,7 @@ const Header = () => {
             )}
             <li className={s.empty}></li>
           </ul>
-          <div className={[s.menuOpen, s.ico].join(' ')}>
+          <div className={clsx(s.menuOpen, s.ico)}>
             <button onClick={handleMenuClick}>
               <MenuIco />
             </button>
