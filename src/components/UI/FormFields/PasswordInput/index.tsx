@@ -17,8 +17,8 @@ import s from '../FormFields.module.scss';
 interface PasswordInputProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   name: Path<T>;
-  err: FieldError | undefined;
-  errMessage: string | undefined;
+  err?: FieldError;
+  errMessage?: string;
   label: string;
   id: string;
 }

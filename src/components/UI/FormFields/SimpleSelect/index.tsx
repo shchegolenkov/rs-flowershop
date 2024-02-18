@@ -9,8 +9,8 @@ import s from '../FormFields.module.scss';
 interface SelectInputProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   name: Path<T>;
-  err: FieldError | undefined;
-  errMessage: string | undefined;
+  err?: FieldError;
+  errMessage?: string;
   errors: FieldErrors<T>;
   label: string;
   id: string;
@@ -28,7 +28,7 @@ interface SelectData {
 const SimpleSelect = <T extends FieldValues>({
   register,
   err,
-  errMessage,
+  errMessage = '',
   name,
   label,
   id,

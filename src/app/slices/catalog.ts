@@ -23,7 +23,7 @@ export const fetchProducts = createAsyncThunk('catalog/allProducts', async (_, t
 });
 
 interface CatalogState {
-  queryResult: IPageQueryResult | undefined | null;
+  queryResult?: IPageQueryResult | null;
   status: Status;
   query: string;
   pages: number;

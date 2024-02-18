@@ -13,8 +13,8 @@ import s from '../FormFields.module.scss';
 interface SimpleInputProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   name: Path<T>;
-  err: FieldError | undefined;
-  errMessage: string | undefined;
+  err?: FieldError;
+  errMessage?: string;
   errors: FieldErrors<T>;
   label: string;
   id: string;

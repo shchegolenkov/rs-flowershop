@@ -11,7 +11,7 @@ import s from './ImageSlider.module.scss';
 
 interface IImageSlider {
   data: ProductImage[];
-  className?: string | undefined;
+  className?: string;
   imageClick: (currentIndex: number) => void;
   initialIndex?: number;
 }
