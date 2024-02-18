@@ -31,7 +31,7 @@ const NotFoundPage = () => {
                 navigate(path);
               }}
             >
-              Go back
+              Back to home
             </Button>
           </div>
         </div>
