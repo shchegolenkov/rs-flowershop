@@ -100,7 +100,9 @@ const LoginPage: React.FC = () => {
         <div className={s.headerBlock}>
           <div className={s.wrapper}>
             <Typography variant="h2" className={s.h2}>
-              Welcome back!<br></br>Let`s log in
+              Welcome back!
+              <br />
+              Let`s log in
             </Typography>
             <div className={s.regBlock}>
               <Typography variant="body" className={s.body}>

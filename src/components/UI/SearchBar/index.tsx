@@ -60,7 +60,7 @@ const SearchBar = ({ className }: JSX.IntrinsicElements['form']) => {
           onChange={handleChange}
           autoComplete="off"
         />
-        {isText && <button type="reset" className={s.reset}></button>}
+        {isText && <button type="reset" className={s.reset} />}
       </div>
       <Button type="submit">Search</Button>
     </form>

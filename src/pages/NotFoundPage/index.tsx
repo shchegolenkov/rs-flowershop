@@ -20,7 +20,8 @@ const NotFoundPage = () => {
               Page not found
             </Typography>
             <Typography variant="body">
-              Sorry, the page you are looking for doesn`t exist or has been moved.<br></br>
+              Sorry, the page you are looking for doesn`t exist or has been moved.
+              <br />
               Came back to the main page — there is still a lot of interesting and beautiful.
             </Typography>
             <Button
