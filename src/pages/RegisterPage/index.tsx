@@ -26,31 +26,37 @@ import { CustomerData } from '@/types/types';
 import s from './RegisterPage.module.scss';
 
 const RegisterPage: React.FC = () => {
-  const { message } = useSelector((state: RootState) => state.message);
   const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    dispatch(clearMessage());
-  }, [dispatch]);
+
   const navigate = useNavigate();
+
+  const { message } = useSelector((state: RootState) => state.message);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+
   const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(true);
   const [checkedBillDefAddress, setCheckedBillDefAddress] = React.useState(true);
   const [formError, setFormError] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
+
   const currentDate = new Date();
+
   const thirteenYearsAgo = new Date(
     currentDate.getFullYear() - 13,
     currentDate.getMonth(),
     currentDate.getDate()
   );
   const minDate = new Date(1900, 1, 1);
-
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
 
   const schema = yup.object().shape({
     email: yup

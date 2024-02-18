@@ -30,18 +30,18 @@ import formatPrice from '@/utils/formatPrice';
 import s from './ProductPage.module.scss';
 
 const ProductPage = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openAlert, setOpenAlert] = useState(false);
-
-  const productKey = useLocation().pathname.split('/').pop() || '';
 
   const productState = useSelector((state: RootState) => state.product);
   const { status: statusCart, cartData } = useSelector((state: RootState) => state.cart);
 
   const { status, product } = productState;
 
-  const dispatch = useDispatch<AppDispatch>();
+  const productKey = useLocation().pathname.split('/').pop() || '';
 
   useEffect(() => {
     dispatch(fetchProduct(productKey));

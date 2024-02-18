@@ -94,6 +94,7 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({
       reset({ dateOfBirth: formattedDate || undefined });
     }
   };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className={s.form__field_size_birthday}>

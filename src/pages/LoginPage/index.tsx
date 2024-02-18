@@ -22,15 +22,19 @@ import { CustomerData } from '@/types/types';
 import s from './LoginPage.module.scss';
 
 const LoginPage: React.FC = () => {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { message } = useSelector((state: RootState) => state.message);
   const navigate = useNavigate();
+
   const dispatch = useDispatch<AppDispatch>();
+
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const { message } = useSelector((state: RootState) => state.message);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
 
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/');

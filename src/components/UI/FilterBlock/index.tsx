@@ -22,8 +22,9 @@ import { Status } from '@/types/types';
 import s from './FilterBlock.module.scss';
 
 const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
-  const { status, category } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
+
+  const { status, category } = useSelector((state: RootState) => state.products);
 
   const ref = useRef<HTMLFormElement | null>(null);
 

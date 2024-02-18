@@ -21,8 +21,9 @@ import { PasswordForm, Status } from '@/types/types';
 import s from './PasswordPage.module.scss';
 
 const PasswordPage: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const { message } = useSelector((state: RootState) => state.message);
   const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);

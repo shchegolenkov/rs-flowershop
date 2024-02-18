@@ -41,20 +41,23 @@ interface ProfileEditBlockProps {
 }
 
 const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, typeAddress }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { message } = useSelector((state: RootState) => state.message);
+  const { status } = useSelector((state: RootState) => state.profile);
+
+  const [cancelSubmit, setCancelSubmit] = useState(false);
+  const [formError, setFormError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isDisabledAddress, setIsDisabledAddress] = useState(true);
+  const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
+
   const defaultBillingAddressId = user.defaultBillingAddressId || null;
   const defaultShippingAddressId = user.defaultShippingAddressId || '';
   const billingAddressIds = user.billingAddressIds || [];
   const shippingAddressIds = user.shippingAddressIds || [];
   const defInitStateDefShippingAddress = defaultShippingAddressId === address.id;
   const defInitStateDefBillAddress = defaultBillingAddressId === address.id;
-  const dispatch = useDispatch<AppDispatch>();
-  const { message } = useSelector((state: RootState) => state.message);
-  const { status } = useSelector((state: RootState) => state.profile);
-  const [cancelSubmit, setCancelSubmit] = useState(false);
-  const [formError, setFormError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isDisabledAddress, setIsDisabledAddress] = useState(true);
-  const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
 
   const switchEditModeField = () => {
     setIsDisabledAddress(!isDisabledAddress);

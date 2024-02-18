@@ -246,7 +246,7 @@ const initialState: ProfileState = {
   isDisabledDateOfBirth: true,
 };
 
-const messageSlice = createSlice({
+const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
@@ -273,7 +273,7 @@ const messageSlice = createSlice({
   },
 });
 
-const { reducer, actions } = messageSlice;
+const { reducer, actions } = profileSlice;
 
 export const {
   setIsDisabledEmail,

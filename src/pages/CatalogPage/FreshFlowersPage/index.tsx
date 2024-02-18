@@ -19,6 +19,7 @@ const FreshFlowersPage = () => {
       dispatch(resetCatalogState());
     };
   }, [dispatch]);
+
   return (
     <div className={s.wrapper}>
       <Typography variant="h1">Perfect fresh flowers</Typography>

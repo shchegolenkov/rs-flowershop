@@ -18,6 +18,7 @@ const links = [
 
 const MainPage = () => {
   const navigate = useNavigate();
+
   return (
     <main>
       <div className={s.grid}>

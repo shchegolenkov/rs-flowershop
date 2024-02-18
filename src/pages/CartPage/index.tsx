@@ -22,21 +22,23 @@ import s from './CartPage.module.scss';
 
 const CartPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const dispatch = useDispatch<AppDispatch>();
+
   const { cartData, promoStatus } = useSelector((state: RootState) => state.cart);
-  const cartItems = cartData?.lineItems || null;
+  const { status: statusCart } = useSelector((state: RootState) => state.cart);
 
   const [openClearCart, setOpenClearCart] = useState(false);
+  const [inputValue, setInputValue] = useState(
+    cartData?.discountCodes[0]?.discountCode.id === WelcomeCodes.WELCOME ? 'welcome' : ''
+  );
 
-  const { status: statusCart } = useSelector((state: RootState) => state.cart);
+  const cartItems = cartData?.lineItems || null;
 
   const handleBtnClearCartClick = () => {
     setOpenClearCart(!openClearCart);
   };
-
-  const [inputValue, setInputValue] = useState(
-    cartData?.discountCodes[0]?.discountCode.id === WelcomeCodes.WELCOME ? 'welcome' : ''
-  );
 
   const subTotal = cartData?.lineItems.reduce(
     (acc, item) =>
@@ -70,8 +72,6 @@ const CartPage = () => {
       dispatch(setPromoStatus(Status.LOADING));
     }
   };
-
-  const location = useLocation();
 
   useEffect(() => {
     if (promoStatus === Status.ERROR) dispatch(setPromoStatus(Status.LOADING));

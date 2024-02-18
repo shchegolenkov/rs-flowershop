@@ -23,9 +23,12 @@ interface ICatalogCard {
 
 const CatalogCard = ({ data }: ICatalogCard) => {
   const dispatch = useDispatch<AppDispatch>();
+
   const { status } = useSelector((state: RootState) => state.cart);
+
   const [localStatus, setLocalStatus] = useState(Status.SUCCESS);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const productUrl = data.slug['en-US'];
   const responceImg = data.masterVariant.images;
   const imgUrl = responceImg.length > 0 ? responceImg[0].url : productLabel;
@@ -71,9 +74,11 @@ const CatalogCard = ({ data }: ICatalogCard) => {
     }
     return false;
   }, [data.id]);
+
   useEffect(() => {
     setIsButtonDisabled(isDisable());
   }, [isDisable]);
+
   return (
     <div className={s.card}>
       <Link to={`${productUrl}`} className={s.link} style={{ backgroundImage: `url(${imgUrl})` }}>

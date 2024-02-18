@@ -21,13 +21,14 @@ import { CustomerData, Status } from '@/types/types';
 import s from '../ProfilePage.module.scss';
 
 const EmailForm: React.FC = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
+
   const [isSuccess, setIsSuccess] = useState(false);
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
-
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
 
   const { user } = useSelector((state: RootState) => state.auth);
   const { message } = useSelector((state: RootState) => state.message);

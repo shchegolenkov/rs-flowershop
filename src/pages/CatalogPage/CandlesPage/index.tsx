@@ -19,6 +19,7 @@ const CandlesPage = () => {
       dispatch(resetCatalogState());
     };
   }, [dispatch]);
+
   return (
     <div className={s.wrapper}>
       <Typography variant="h1">Aroma therapy</Typography>

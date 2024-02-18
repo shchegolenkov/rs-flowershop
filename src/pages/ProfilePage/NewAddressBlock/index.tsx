@@ -38,16 +38,16 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
   setIsCancelledAdd,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
+
   const { message } = useSelector((state: RootState) => state.message);
+  const { status } = useSelector((state: RootState) => state.profile);
+
   const [formError, setFormError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
   const [checkedShipBillAddress, setCheckedShipBillAddress] = useState(false);
   const [checkedBillShipAddress, setCheckedBillShipAddress] = useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = useState(false);
   const [checkedBillDefAddress, setCheckedBillDefAddress] = useState(false);
-
-  const { status } = useSelector((state: RootState) => state.profile);
 
   const schema = yup.object().shape({
     streetName: yup

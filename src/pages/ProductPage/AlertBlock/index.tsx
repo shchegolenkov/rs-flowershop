@@ -23,6 +23,7 @@ const AlertBlock: React.FC<AlertBlock> = ({ openAlert, setOpenAlert, responseSta
       return () => clearTimeout(timer);
     }
   }, [openAlert, setOpenAlert]);
+
   return (
     <Collapse in={openAlert}>
       <Alert

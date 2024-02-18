@@ -9,6 +9,7 @@ import s from './MainPageLink.module.scss';
 
 const MainPageLink = ({ to, title }: { to: string; title: string }) => {
   const imgLink = map(title.split(' '), capitalize).join('');
+
   return (
     <section className={s.item}>
       <div className={s.cover}>

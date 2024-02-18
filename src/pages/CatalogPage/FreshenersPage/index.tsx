@@ -19,6 +19,7 @@ const FreshenersPage = () => {
       dispatch(resetCatalogState());
     };
   }, [dispatch]);
+
   return (
     <div className={s.wrapper}>
       <Typography variant="h1">Mood in the house</Typography>

@@ -7,6 +7,7 @@ import s from './NotFoundPage.module.scss';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
+
   return (
     <main>
       <div className={s.grid}>

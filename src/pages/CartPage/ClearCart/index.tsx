@@ -23,6 +23,7 @@ interface ClearCartProps {
 
 const ClearCart: React.FC<ClearCartProps> = ({ open, setOpen }) => {
   const { cartData } = useSelector((state: RootState) => state.cart);
+
   const dispatch = useDispatch<AppDispatch>();
 
   async function handleClearCart() {

@@ -11,6 +11,7 @@ import s from './Filters.module.scss';
 
 const Filters = ({ className }: JSX.IntrinsicElements['div']) => {
   const [open, setOpen] = useState(false);
+
   return (
     <div className={clsx(s.group, className)}>
       <div className={s.block}>

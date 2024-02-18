@@ -13,7 +13,9 @@ import s from './CatalogCards.module.scss';
 
 const CatalogCards = ({ className }: JSX.IntrinsicElements['div']) => {
   const { status, queryResult } = useSelector((state: RootState) => state.products);
+
   const skeletons = [...new Array(ITEMS_PER_PAGE)].map((_, index) => <Skeleton key={index} />);
+
   return (
     <div className={clsx(s.wrapper, className)}>
       {status === Status.LOADING ? (

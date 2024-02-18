@@ -32,15 +32,16 @@ import { CustomerData, ProfileAddress, Status } from '@/types/types';
 import s from './ProfilePage.module.scss';
 
 const ProfilePage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
+
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
   const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = useState(true);
   const [isCancelledAddBillingAddress, setIsCancelledAddBillingAddress] = useState(true);
-
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
 
   const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
   const { message } = useSelector((state: RootState) => state.message);

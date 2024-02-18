@@ -11,6 +11,7 @@ import s from './SortingBlock.module.scss';
 
 const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
   const { sort, status } = useSelector((state: RootState) => state.products);
+
   const dispatch = useDispatch<AppDispatch>();
 
   function handleChangeValue(e: React.ChangeEvent<HTMLInputElement>) {
