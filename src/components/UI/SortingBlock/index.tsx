@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import RadioButton from '../RadioButton';
 import { Typography } from '../Typography';
 
+import { sortOptions } from './conts';
+
 import { selectProducts } from '@/app/selectors';
 import { setSort } from '@/app/slices/catalog';
 import { AppDispatch } from '@/app/store';
@@ -18,14 +20,6 @@ const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
   function handleChangeValue(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch(setSort(e.target.value));
   }
-
-  const sortOptions = [
-    { name: 'Default', value: '', id: 'default_option' },
-    { name: 'Price (low to high)', value: 'price asc', id: 'price_asc' },
-    { name: 'Price (high to low)', value: 'price desc', id: 'price_desc' },
-    { name: 'Name (A to Z)', value: 'name.en-US asc', id: 'name_asc' },
-    { name: 'Name (Z to A)', value: 'name.en-US desc', id: 'name_desc' },
-  ];
 
   return (
     <div className={className}>

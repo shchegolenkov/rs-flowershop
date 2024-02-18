@@ -6,7 +6,7 @@ import { Skeleton } from '../CatalogCard/Skeleton';
 import { Typography } from '../Typography';
 
 import { selectProducts } from '@/app/selectors';
-import { ITEMS_PER_PAGE } from '@/constants/const';
+import { ITEMS_PER_PAGE } from '@/constants';
 import { Status } from '@/types/types';
 
 import s from './CatalogCards.module.scss';

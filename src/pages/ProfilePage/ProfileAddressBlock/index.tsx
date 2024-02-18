@@ -24,7 +24,7 @@ import SimpleCheckbox from '@/components/UI/FormFields/SimpleCheckbox';
 import SimpleInput from '@/components/UI/FormFields/SimpleInput';
 import SimpleSelect from '@/components/UI/FormFields/SimpleSelect';
 import { Typography } from '@/components/UI/Typography';
-import { countries } from '@/constants/const';
+import { countries } from '@/constants';
 import { AddressAction, ProfileAddress, ProfileForm, Status, User } from '@/types/types';
 
 import DeleteAddress from '@/assets/svg/delAddress.svg';

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ITEMS_PER_PAGE } from '@/constants/const';
+import { ITEMS_PER_PAGE } from '@/constants';
 import { IPageQueryResult } from '@/types/types';
 
 const ACC_TOKEN_URL = process.env.CTP_ACCTOKEN_URL as string;
