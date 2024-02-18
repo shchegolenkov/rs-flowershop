@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 
 import ErrorIcon from '@mui/icons-material/Error';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -53,9 +53,9 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({
   isDisabled,
   switchEditModeField,
 }) => {
-  const [dataError, setDataError] = React.useState<DateValidationError | null>(null);
+  const [dataError, setDataError] = useState<DateValidationError | null>(null);
 
-  const errorMessage = React.useMemo(() => {
+  const errorMessage = useMemo(() => {
     switch (dataError) {
       case 'maxDate': {
         return (

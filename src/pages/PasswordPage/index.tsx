@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
@@ -29,8 +29,8 @@ const PasswordPage: React.FC = () => {
   const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
   const { status } = useSelector((state: RootState) => state.profile);
 
-  const [formError, setFormError] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [formError, setFormError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (!isLoggedIn) {

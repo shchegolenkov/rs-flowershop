@@ -64,18 +64,16 @@ const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, t
     setIsOpenEditBlock(true);
   };
 
-  const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(
+  const [checkedShipBillAddress, setCheckedShipBillAddress] = useState(
     billingAddressIds.includes(address.id)
   );
-  const [checkedBillShipAddress, setCheckedBillShipAddress] = React.useState(
+  const [checkedBillShipAddress, setCheckedBillShipAddress] = useState(
     shippingAddressIds.includes(address.id)
   );
-  const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(
+  const [checkedShipDefAddress, setCheckedShipDefAddress] = useState(
     defInitStateDefShippingAddress
   );
-  const [checkedBillDefAddress, setCheckedBillDefAddress] = React.useState(
-    defInitStateDefBillAddress
-  );
+  const [checkedBillDefAddress, setCheckedBillDefAddress] = useState(defInitStateDefBillAddress);
 
   const disabledAllFields = () => {
     setIsDisabledAddress(true);

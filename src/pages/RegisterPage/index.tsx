@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import Alert from '@mui/material/Alert';
@@ -33,11 +33,11 @@ const RegisterPage: React.FC = () => {
   const { message } = useSelector((state: RootState) => state.message);
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 
-  const [checkedShipBillAddress, setCheckedShipBillAddress] = React.useState(false);
-  const [checkedShipDefAddress, setCheckedShipDefAddress] = React.useState(true);
-  const [checkedBillDefAddress, setCheckedBillDefAddress] = React.useState(true);
-  const [formError, setFormError] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [checkedShipBillAddress, setCheckedShipBillAddress] = useState(false);
+  const [checkedShipDefAddress, setCheckedShipDefAddress] = useState(true);
+  const [checkedBillDefAddress, setCheckedBillDefAddress] = useState(true);
+  const [formError, setFormError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     dispatch(clearMessage());
