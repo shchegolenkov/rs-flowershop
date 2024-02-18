@@ -1,17 +1,15 @@
-import React from 'react';
-
 import Alert from '@mui/material/Alert';
 import clsx from 'clsx';
 
 import s from '../ProfilePage.module.scss';
 
-interface ProfileAlertBlockProps {
+interface ProfileAlertBlock {
   formError: boolean;
   isSuccess: boolean;
   message: string | null;
 }
 
-const ProfileAlertBlock: React.FC<ProfileAlertBlockProps> = ({ formError, isSuccess, message }) => {
+const ProfileAlertBlock = ({ formError, isSuccess, message }: ProfileAlertBlock) => {
   return (
     <div className={clsx(s.width_full)}>
       <div className={s.alert_position}>

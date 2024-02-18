@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import Alert from '@mui/material/Alert';
@@ -22,7 +22,7 @@ import { CustomerData } from '@/types/types';
 
 import s from './LoginPage.module.scss';
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
@@ -21,7 +21,7 @@ import { PasswordForm, Status } from '@/types/types';
 
 import s from './PasswordPage.module.scss';
 
-const PasswordPage: React.FC = () => {
+const PasswordPage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();

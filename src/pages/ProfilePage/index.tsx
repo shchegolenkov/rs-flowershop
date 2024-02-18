@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
@@ -32,7 +32,7 @@ import { CustomerData, ProfileAddress, Status } from '@/types/types';
 
 import s from './ProfilePage.module.scss';
 
-const ProfilePage: React.FC = () => {
+const ProfilePage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();

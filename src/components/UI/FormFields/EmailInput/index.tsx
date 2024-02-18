@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ErrorIcon from '@mui/icons-material/Error';
 import TextField from '@mui/material/TextField';
 import { FieldError, UseFormRegister } from 'react-hook-form';
@@ -12,7 +10,7 @@ import EditIcoErr from '@/assets/svg/editErr.svg';
 
 import s from '../FormFields.module.scss';
 
-interface EmailInputProps {
+interface EmailInput {
   register: UseFormRegister<CustomerData>;
   errors: {
     email?: FieldError;
@@ -23,14 +21,14 @@ interface EmailInputProps {
   switchEditModeField?: () => void;
 }
 
-const EmailInput: React.FC<EmailInputProps> = ({
+const EmailInput = ({
   register,
   errors,
   defaultValue,
   isEditField,
   isDisabled,
   switchEditModeField,
-}) => {
+}: EmailInput) => {
   return (
     <div className={s.edit__field_container}>
       <div className={s.form__field_size}>

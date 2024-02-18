@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import Alert from '@mui/material/Alert';
@@ -27,17 +27,13 @@ import { AddressAction, ApiResponse, ProfileForm, Status, User } from '@/types/t
 
 import s from '../ProfilePage.module.scss';
 
-interface ProfileEditBlockProps {
+interface ProfileEditBlock {
   user: User;
   typeAddress: AddressAction;
   setIsCancelledAdd: (value: boolean) => void;
 }
 
-const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
-  user,
-  typeAddress,
-  setIsCancelledAdd,
-}) => {
+const AddNewAddressBlock = ({ user, typeAddress, setIsCancelledAdd }: ProfileEditBlock) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { message } = useSelector(selectMessage);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
@@ -21,7 +21,7 @@ import { CustomerData, Status } from '@/types/types';
 
 import s from '../ProfilePage.module.scss';
 
-const EmailForm: React.FC = () => {
+const EmailForm = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();

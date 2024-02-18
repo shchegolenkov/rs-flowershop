@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
@@ -17,12 +15,12 @@ import CloseIco from '@/assets/svg/close.svg';
 
 import s from './ClearCart.module.scss';
 
-interface ClearCartProps {
+interface ClearCart {
   open: boolean;
   setOpen: (value: boolean) => void;
 }
 
-const ClearCart: React.FC<ClearCartProps> = ({ open, setOpen }) => {
+const ClearCart = ({ open, setOpen }: ClearCart) => {
   const { cartData } = useSelector(selectCart);
 
   const dispatch = useDispatch<AppDispatch>();

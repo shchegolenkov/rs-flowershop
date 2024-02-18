@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import Alert from '@mui/material/Alert';
@@ -14,7 +14,7 @@ interface AlertBlock {
   responseStatus: string;
 }
 
-const AlertBlock: React.FC<AlertBlock> = ({ openAlert, setOpenAlert, responseStatus }) => {
+const AlertBlock = ({ openAlert, setOpenAlert, responseStatus }: AlertBlock) => {
   useEffect(() => {
     if (openAlert) {
       const timer = setTimeout(() => {

@@ -1,22 +1,16 @@
-import React from 'react';
-
 import clsx from 'clsx';
 
 import Button from '@/components/UI/Button';
 
 import s from '../ProfilePage.module.scss';
 
-interface ProfileEditBlockProps {
+interface ProfileEditBlock {
   onClickSubmit: () => void;
   onClickCancel: () => void;
   disabled: boolean;
 }
 
-const ProfileEditBlock: React.FC<ProfileEditBlockProps> = ({
-  onClickSubmit,
-  onClickCancel,
-  disabled = false,
-}) => {
+const ProfileEditBlock = ({ onClickSubmit, onClickCancel, disabled = false }: ProfileEditBlock) => {
   return (
     <div className={clsx(s.width_full)}>
       <div className={clsx(s.save_edit_container)}>

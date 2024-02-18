@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 
 import ErrorIcon from '@mui/icons-material/Error';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -43,7 +43,7 @@ interface BirthDateInputProps {
 const thirteenYearsAgo = dayjs().subtract(13, 'year');
 const minDate1900 = dayjs('1900-01-01');
 
-const BirthDateInput: React.FC<BirthDateInputProps> = ({
+const BirthDateInput = ({
   register,
   errors,
   control,
@@ -52,7 +52,7 @@ const BirthDateInput: React.FC<BirthDateInputProps> = ({
   isEditField,
   isDisabled,
   switchEditModeField,
-}) => {
+}: BirthDateInputProps) => {
   const [dataError, setDataError] = useState<DateValidationError | null>(null);
 
   const errorMessage = useMemo(() => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import Alert from '@mui/material/Alert';
@@ -26,7 +26,7 @@ import { CustomerData } from '@/types/types';
 
 import s from './RegisterPage.module.scss';
 
-const RegisterPage: React.FC = () => {
+const RegisterPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();

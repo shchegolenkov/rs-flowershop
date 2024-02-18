@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, UseFormProps, Resolver } from 'react-hook-form';
@@ -41,7 +41,7 @@ interface ProfileEditBlockProps {
   typeAddress: AddressAction;
 }
 
-const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, typeAddress }) => {
+const ProfileAddressBlock = ({ address, user, typeAddress }: ProfileEditBlockProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { message } = useSelector(selectMessage);
