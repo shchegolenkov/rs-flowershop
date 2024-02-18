@@ -11,7 +11,10 @@ interface IMenuLink extends LinkProps {
 export const MenuLink = ({ children, className, ico, onClick, ...props }: IMenuLink) => {
   return (
     <Link
-      className={ico ? clsx(s.linkIco, className) : clsx(s.link, className)}
+      className={clsx(className, {
+        [s.linkIco]: !!ico,
+        [s.link]: !ico,
+      })}
       onClick={onClick}
       {...props}
     >
