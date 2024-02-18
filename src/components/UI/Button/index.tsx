@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import s from './Button.module.scss';
 
-interface IButton
+interface Button
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'underlined' | 'ico';
   full?: boolean;
@@ -20,7 +20,7 @@ const Button = ({
   type = 'button',
   disabled = false,
   ...props
-}: IButton) => {
+}: Button) => {
   return (
     <button
       className={clsx(s.button, s[variant], { [s.full]: full }, className)}

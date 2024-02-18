@@ -13,11 +13,11 @@ import RemoveItemIco from '@/assets/svg/delItem.svg';
 
 import s from './CartCard.module.scss';
 
-interface ICartCard {
+interface CartCard {
   data: LineItem;
 }
 
-const CartCard = ({ data }: ICartCard) => {
+const CartCard = ({ data }: CartCard) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { status: statusCart } = useSelector(selectCart);

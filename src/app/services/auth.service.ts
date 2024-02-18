@@ -102,7 +102,7 @@ const registerUser = async (data: CustomerData) => {
   }
 };
 
-interface requestPayloadLogin {
+interface RequestPayloadLogin {
   email: string;
   password: string;
   anonymousCart?: {
@@ -121,7 +121,7 @@ const loginUser = async (data: Pick<CustomerData, 'email' | 'password'>) => {
     const cartData = localStorage.getItem('cart') || null;
 
     if (accessToken) {
-      const requestPayload: requestPayloadLogin = {
+      const requestPayload: RequestPayloadLogin = {
         email: data.email,
         password: data.password,
       };

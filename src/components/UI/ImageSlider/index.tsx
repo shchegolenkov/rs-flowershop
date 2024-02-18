@@ -9,14 +9,14 @@ import ArrowIco from '@/assets/svg/arrowSlideRight.svg';
 
 import s from './ImageSlider.module.scss';
 
-interface IImageSlider {
+interface ImageSlider {
   data: ProductImage[];
   className?: string;
   imageClick: (currentIndex: number) => void;
   initialIndex?: number;
 }
 
-const ImageSlider = ({ data, className, imageClick, initialIndex = 0 }: IImageSlider) => {
+const ImageSlider = ({ data, className, imageClick, initialIndex = 0 }: ImageSlider) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const handleImageClick = () => {

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import ProductService from '../services/product.service';
 
-import { IProduct, Status } from '@/types/types';
+import { Product, Status } from '@/types/types';
 
 export const fetchProduct = createAsyncThunk(
   'catalog/product',
@@ -18,12 +18,12 @@ export const fetchProduct = createAsyncThunk(
   }
 );
 
-interface IProductState {
+interface ProductState {
   status: Status;
-  product: IProduct | null;
+  product: Product | null;
 }
 
-const initialState: IProductState = {
+const initialState: ProductState = {
   status: Status.LOADING,
   product: null,
 };

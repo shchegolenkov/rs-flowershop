@@ -6,6 +6,15 @@ import GhLogo from '@/assets/svg/ghLogo.svg';
 
 import s from './PersonDescription.module.scss';
 
+interface PersonDescription {
+  name: string;
+  role: string;
+  bio: string;
+  contributions: string[];
+  link: string;
+  className?: string;
+}
+
 const PersonDescription = ({
   name,
   role,
@@ -13,14 +22,7 @@ const PersonDescription = ({
   contributions,
   link,
   className,
-}: {
-  name: string;
-  role: string;
-  bio: string;
-  contributions: string[];
-  link: string;
-  className?: string;
-}) => {
+}: PersonDescription) => {
   return (
     <div className={clsx(s.person, className)}>
       <div className={s.personBlock}>

@@ -4,7 +4,7 @@ import CatalogService from '../services/catalog.service';
 import { RootState } from '../store';
 
 import { ITEMS_PER_PAGE } from '@/constants';
-import { Status, IPageQueryResult, Categories } from '@/types/types';
+import { Status, PageQueryResult, Categories } from '@/types/types';
 
 export const fetchProducts = createAsyncThunk('catalog/allProducts', async (_, thunkAPI) => {
   try {
@@ -23,7 +23,7 @@ export const fetchProducts = createAsyncThunk('catalog/allProducts', async (_, t
 });
 
 interface CatalogState {
-  queryResult?: IPageQueryResult | null;
+  queryResult?: PageQueryResult | null;
   status: Status;
   query: string;
   pages: number;

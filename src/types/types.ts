@@ -156,7 +156,7 @@ export interface CategoryAttr {
 
 type ProductAttribute = SizeAttr | DiscountAttr | CompositionAttr | CategoryAttr;
 
-export interface IProduct {
+export interface Product {
   id: string;
   version: number;
   productType: { typeId: string; id: string };
@@ -203,12 +203,12 @@ export interface IProduct {
   lastModifiedAt: string;
 }
 
-export interface IPageQueryResult {
+export interface PageQueryResult {
   offset: number;
   limit: number;
   count: number;
   total: number;
-  results: IProduct[];
+  results: Product[];
 }
 
 export enum Categories {
@@ -376,13 +376,4 @@ export type DiscountCode = {
 
 export enum WelcomeCodes {
   WELCOME = '3019b1a7-de93-48e5-93a4-87e8d87fec25',
-}
-
-export interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  contributions: string[];
-  link: string;
-  imageTag: string;
 }

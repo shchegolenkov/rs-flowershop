@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import RadioButton from '../RadioButton';
 import { Typography } from '../Typography';
 
-import { sortOptions } from './conts';
+import { sortOptions } from './const';
 
 import { selectProducts } from '@/app/selectors';
 import { setSort } from '@/app/slices/catalog';

@@ -3,12 +3,12 @@ import { Link, LinkProps } from 'react-router-dom';
 
 import s from './MenuLink.module.scss';
 
-interface IMenuLink extends LinkProps {
+interface MenuLink extends LinkProps {
   ico?: JSX.Element;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-export const MenuLink = ({ children, className, ico, onClick, ...props }: IMenuLink) => {
+export const MenuLink = ({ children, className, ico, onClick, ...props }: MenuLink) => {
   return (
     <Link
       className={clsx(className, {

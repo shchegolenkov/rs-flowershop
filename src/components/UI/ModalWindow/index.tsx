@@ -9,15 +9,13 @@ import CloseIco from '@/assets/svg/close.svg';
 
 import s from './ModalWindow.module.scss';
 
-const ModalWindow = ({
-  children,
-  open,
-  handleClose,
-}: {
+interface ModalWindow {
   children: React.ReactNode;
   open: boolean;
   handleClose: () => void;
-}) => {
+}
+
+const ModalWindow = ({ children, open, handleClose }: ModalWindow) => {
   return (
     <div>
       <Modal

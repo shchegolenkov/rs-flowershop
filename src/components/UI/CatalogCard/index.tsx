@@ -10,7 +10,7 @@ import { Typography } from '../Typography';
 import { selectCart } from '@/app/selectors';
 import { createCart, updateCart } from '@/app/slices/cart';
 import { AppDispatch } from '@/app/store';
-import { IProduct, SizeAttr, Status, UpdateCart } from '@/types/types';
+import { Product, SizeAttr, Status, UpdateCart } from '@/types/types';
 import formatPrice from '@/utils/formatPrice';
 
 import CartBtnIco from '@/assets/svg/cartBtnIco.svg';
@@ -18,11 +18,11 @@ import productLabel from '@/assets/svg/dummy.svg?url';
 
 import s from './CatalogCard.module.scss';
 
-interface ICatalogCard {
-  data: IProduct;
+interface CatalogCard {
+  data: Product;
 }
 
-const CatalogCard = ({ data }: ICatalogCard) => {
+const CatalogCard = ({ data }: CatalogCard) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { status } = useSelector(selectCart);

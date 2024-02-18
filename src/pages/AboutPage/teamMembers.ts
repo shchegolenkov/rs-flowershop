@@ -1,4 +1,11 @@
-import { TeamMember } from '@/types/types';
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  contributions: string[];
+  link: string;
+  imageTag: string;
+}
 
 export const teamMembers: TeamMember[] = [
   {

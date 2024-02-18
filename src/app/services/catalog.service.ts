@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { ITEMS_PER_PAGE } from '@/constants';
-import { IPageQueryResult } from '@/types/types';
+import { PageQueryResult } from '@/types/types';
 
 const ACC_TOKEN_URL = process.env.CTP_ACCTOKEN_URL as string;
 const CLIENT_ID = process.env.CTP_CLIENT_ID as string;
@@ -28,7 +28,7 @@ const getAccessToken = async () => {
   }
 };
 
-interface IQueryParams {
+interface QueryParams {
   limit: string;
   offset: string;
   filter: string | string[];
@@ -44,7 +44,7 @@ const getProducts = async (
 ) => {
   const accessToken = await getAccessToken();
   try {
-    const queryParams: IQueryParams = {
+    const queryParams: QueryParams = {
       limit: `${ITEMS_PER_PAGE}`,
       offset: `${ITEMS_PER_PAGE * pageNumber - ITEMS_PER_PAGE}`,
       filter: filters,
@@ -55,7 +55,7 @@ const getProducts = async (
     } else if (Object.hasOwn(queryParams, 'sort') && !sortQuery) {
       delete queryParams.sort;
     }
-    const response = await axios.get<IPageQueryResult>(
+    const response = await axios.get<PageQueryResult>(
       `${API_URL}/${PROJECT_KEY}/product-projections/search`,
       {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -74,7 +74,7 @@ const getProducts = async (
 const getProduct = async (productKey: string) => {
   const accessToken = await getAccessToken();
   try {
-    const response = await axios.get<IPageQueryResult>(
+    const response = await axios.get<PageQueryResult>(
       `${API_URL}/${PROJECT_KEY}/product-projections/key=${productKey}`,
       {
         headers: { Authorization: `Bearer ${accessToken}` },
