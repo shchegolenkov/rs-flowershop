@@ -377,3 +377,12 @@ export type DiscountCode = {
 export enum WelcomeCodes {
   WELCOME = '3019b1a7-de93-48e5-93a4-87e8d87fec25',
 }
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  contributions: string[];
+  link: string;
+  imageTag: string;
+}
