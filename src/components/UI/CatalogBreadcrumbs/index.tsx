@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 import { Typography } from '../Typography';
 
-import { RootState } from '@/app/store';
+import { selectProducts } from '@/app/selectors';
 import { Categories } from '@/types/types';
 
 import s from './CatalogBreadcrumbs.module.scss';
 
 const CatalogBreadcrumbs = () => {
-  const { category } = useSelector((state: RootState) => state.products);
+  const { category } = useSelector(selectProducts);
 
   const links = [
     { to: './fresh-flowers', text: 'fresh flowers' },

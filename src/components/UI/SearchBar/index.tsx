@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '../Button';
 
+import { selectProducts } from '@/app/selectors';
 import { setQuery } from '@/app/slices/catalog';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 
 import s from './SearchBar.module.scss';
 
 const SearchBar = ({ className }: JSX.IntrinsicElements['form']) => {
   const [isText, setIsText] = useState(false);
-  const { query, category } = useSelector((state: RootState) => state.products);
+  const { query, category } = useSelector(selectProducts);
   const dispatch = useDispatch<AppDispatch>();
 
   const ref = useRef<HTMLFormElement | null>(null);

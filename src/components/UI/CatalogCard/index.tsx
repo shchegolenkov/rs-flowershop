@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 import { Typography } from '../Typography';
 
+import { selectCart } from '@/app/selectors';
 import { createCart, updateCart } from '@/app/slices/cart';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import { IProduct, SizeAttr, Status, UpdateCart } from '@/types/types';
 import formatPrice from '@/utils/formatPrice';
 
@@ -24,7 +25,7 @@ interface ICatalogCard {
 const CatalogCard = ({ data }: ICatalogCard) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { status } = useSelector((state: RootState) => state.cart);
+  const { status } = useSelector(selectCart);
 
   const [localStatus, setLocalStatus] = useState(Status.SUCCESS);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);

@@ -13,6 +13,7 @@ import ProfileAddressBlock from './ProfileAddressBlock';
 import ProfileAlertBlock from './ProfileAlertBlock';
 import ProfileEditBlock from './ProfileEditBlock/';
 
+import { selectAuth, selectMessage, selectProfile } from '@/app/selectors';
 import { getUser } from '@/app/slices/auth';
 import { clearMessage } from '@/app/slices/message';
 import {
@@ -22,7 +23,7 @@ import {
   setDisabledAllFields,
 } from '@/app/slices/profile';
 import { updateUser } from '@/app/slices/profile';
-import { RootState, AppDispatch } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import BirthDateInput from '@/components/UI/FormFields/BirthDateInput';
 import SimpleInput from '@/components/UI/FormFields/SimpleInput';
@@ -43,11 +44,10 @@ const ProfilePage: React.FC = () => {
   const [isCancelledAddShippingAddress, setIsCancelledAddShippingAddress] = useState(true);
   const [isCancelledAddBillingAddress, setIsCancelledAddBillingAddress] = useState(true);
 
-  const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
-  const { message } = useSelector((state: RootState) => state.message);
-  const { status, isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } = useSelector(
-    (state: RootState) => state.profile
-  );
+  const { isLoggedIn, user } = useSelector(selectAuth);
+  const { message } = useSelector(selectMessage);
+  const { status, isDisabledFirstName, isDisabledLastName, isDisabledDateOfBirth } =
+    useSelector(selectProfile);
 
   const newShippingAddressBlockRef = useRef<HTMLDivElement | null>(null);
   const newBillingAddressBlockRef = useRef<HTMLDivElement | null>(null);

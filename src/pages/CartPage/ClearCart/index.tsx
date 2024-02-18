@@ -6,8 +6,9 @@ import Fade from '@mui/material/Fade';
 import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectCart } from '@/app/selectors';
 import { clearCart } from '@/app/slices/cart';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import { Typography } from '@/components/UI/Typography';
 import { LineItem, UpdateCart } from '@/types/types';
@@ -22,7 +23,7 @@ interface ClearCartProps {
 }
 
 const ClearCart: React.FC<ClearCartProps> = ({ open, setOpen }) => {
-  const { cartData } = useSelector((state: RootState) => state.cart);
+  const { cartData } = useSelector(selectCart);
 
   const dispatch = useDispatch<AppDispatch>();
 

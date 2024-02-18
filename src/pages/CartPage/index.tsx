@@ -8,8 +8,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import ClearCart from './ClearCart/';
 
+import { selectCart } from '@/app/selectors';
 import { applyPromo, resetPromo, setPromoStatus } from '@/app/slices/cart';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import CartCard from '@/components/UI/CartCard';
 import { Typography } from '@/components/UI/Typography';
@@ -26,8 +27,8 @@ const CartPage = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const { cartData, promoStatus } = useSelector((state: RootState) => state.cart);
-  const { status: statusCart } = useSelector((state: RootState) => state.cart);
+  const { cartData, promoStatus } = useSelector(selectCart);
+  const { status: statusCart } = useSelector(selectCart);
 
   const [openClearCart, setOpenClearCart] = useState(false);
   const [inputValue, setInputValue] = useState(

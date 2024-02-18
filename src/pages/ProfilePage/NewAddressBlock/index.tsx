@@ -7,6 +7,7 @@ import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
+import { selectMessage, selectProfile } from '@/app/selectors';
 import { getUser } from '@/app/slices/auth';
 import { clearMessage } from '@/app/slices/message';
 import {
@@ -15,7 +16,7 @@ import {
   setDefaultBillingAddress,
   setDefaultShippingAddress,
 } from '@/app/slices/profile';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import SimpleCheckbox from '@/components/UI/FormFields/SimpleCheckbox';
 import SimpleInput from '@/components/UI/FormFields/SimpleInput';
@@ -39,8 +40,8 @@ const AddNewAddressBlock: React.FC<ProfileEditBlockProps> = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { message } = useSelector((state: RootState) => state.message);
-  const { status } = useSelector((state: RootState) => state.profile);
+  const { message } = useSelector(selectMessage);
+  const { status } = useSelector(selectProfile);
 
   const [formError, setFormError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);

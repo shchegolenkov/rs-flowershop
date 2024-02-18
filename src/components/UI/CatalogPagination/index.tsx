@@ -3,15 +3,16 @@ import { PaginationProps } from '@mui/material/Pagination/Pagination';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectProducts } from '@/app/selectors';
 import { setPage } from '@/app/slices/catalog';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 
 import s from './CatalogPagination.module.scss';
 
 const CatalogPagination = ({ className }: PaginationProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { pages, page } = useSelector((state: RootState) => state.products);
+  const { pages, page } = useSelector(selectProducts);
 
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(setPage(value));

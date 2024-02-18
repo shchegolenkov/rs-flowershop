@@ -10,10 +10,11 @@ import * as yup from 'yup';
 import ProfileAlertBlock from '../ProfilePage/ProfileAlertBlock';
 import ProfileEditBlock from '../ProfilePage/ProfileEditBlock';
 
+import { selectAuth, selectMessage, selectProfile } from '@/app/selectors';
 import { getUser, loginUser } from '@/app/slices/auth';
 import { clearMessage } from '@/app/slices/message';
 import { changePassword } from '@/app/slices/profile';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import PasswordInput from '@/components/UI/FormFields/PasswordInput';
 import { Typography } from '@/components/UI/Typography';
 import { PasswordForm, Status } from '@/types/types';
@@ -25,9 +26,9 @@ const PasswordPage: React.FC = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const { message } = useSelector((state: RootState) => state.message);
-  const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
-  const { status } = useSelector((state: RootState) => state.profile);
+  const { message } = useSelector(selectMessage);
+  const { isLoggedIn, user } = useSelector(selectAuth);
+  const { status } = useSelector(selectProfile);
 
   const [formError, setFormError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);

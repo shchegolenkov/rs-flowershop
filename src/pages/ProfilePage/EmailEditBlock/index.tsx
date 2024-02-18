@@ -10,10 +10,11 @@ import * as yup from 'yup';
 import ProfileAlertBlock from '../ProfileAlertBlock';
 import ProfileEditBlock from '../ProfileEditBlock';
 
+import { selectAuth, selectMessage, selectProfile } from '@/app/selectors';
 import { getUser } from '@/app/slices/auth';
 import { clearMessage } from '@/app/slices/message';
 import { setIsDisabledEmail, updateUser } from '@/app/slices/profile';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import EmailInput from '@/components/UI/FormFields/EmailInput';
 import { CustomerData, Status } from '@/types/types';
@@ -30,9 +31,9 @@ const EmailForm: React.FC = () => {
   const [formError, setFormError] = useState(false);
   const [isOpenEditBlock, setIsOpenEditBlock] = useState(false);
 
-  const { user } = useSelector((state: RootState) => state.auth);
-  const { message } = useSelector((state: RootState) => state.message);
-  const { status, isDisabledEmail } = useSelector((state: RootState) => state.profile);
+  const { user } = useSelector(selectAuth);
+  const { message } = useSelector(selectMessage);
+  const { status, isDisabledEmail } = useSelector(selectProfile);
 
   useEffect(() => {
     dispatch(getUser());

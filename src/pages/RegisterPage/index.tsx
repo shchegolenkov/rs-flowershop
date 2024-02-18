@@ -9,9 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
 
+import { selectAuth, selectMessage } from '@/app/selectors';
 import { registerUser, loginUser, getUser } from '@/app/slices/auth';
 import { clearMessage } from '@/app/slices/message';
-import { RootState, AppDispatch } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import BirthDateInput from '@/components/UI/FormFields/BirthDateInput';
 import EmailInput from '@/components/UI/FormFields/EmailInput';
@@ -30,8 +31,8 @@ const RegisterPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const { message } = useSelector((state: RootState) => state.message);
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const { message } = useSelector(selectMessage);
+  const { isLoggedIn } = useSelector(selectAuth);
 
   const [checkedShipBillAddress, setCheckedShipBillAddress] = useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = useState(true);

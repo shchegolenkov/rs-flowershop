@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Counter from '../Counter';
 import { Typography } from '../Typography';
 
+import { selectCart } from '@/app/selectors';
 import { updateCart } from '@/app/slices/cart';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import { LineItem, Status, UpdateCart } from '@/types/types';
 import formatPrice from '@/utils/formatPrice';
 
@@ -19,7 +20,7 @@ interface ICartCard {
 const CartCard = ({ data }: ICartCard) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { status: statusCart } = useSelector((state: RootState) => state.cart);
+  const { status: statusCart } = useSelector(selectCart);
 
   const itemPrice = data.variant.prices[0].value.centAmount;
   const discountItemPrice =

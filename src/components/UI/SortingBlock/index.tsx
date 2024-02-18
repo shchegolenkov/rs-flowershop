@@ -3,14 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import RadioButton from '../RadioButton';
 import { Typography } from '../Typography';
 
+import { selectProducts } from '@/app/selectors';
 import { setSort } from '@/app/slices/catalog';
-import { RootState, AppDispatch } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import { Status } from '@/types/types';
 
 import s from './SortingBlock.module.scss';
 
 const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
-  const { sort, status } = useSelector((state: RootState) => state.products);
+  const { sort, status } = useSelector(selectProducts);
 
   const dispatch = useDispatch<AppDispatch>();
 

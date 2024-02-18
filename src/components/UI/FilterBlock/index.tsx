@@ -7,6 +7,7 @@ import Button from '../Button';
 import Checkbox from '../Checkbox';
 import { Typography } from '../Typography';
 
+import { selectProducts } from '@/app/selectors';
 import {
   setSizes,
   resetSizes,
@@ -16,7 +17,7 @@ import {
   resetDiscount,
   setFilters,
 } from '@/app/slices/catalog';
-import { RootState, AppDispatch } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import { Status } from '@/types/types';
 
 import s from './FilterBlock.module.scss';
@@ -24,7 +25,7 @@ import s from './FilterBlock.module.scss';
 const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { status, category } = useSelector((state: RootState) => state.products);
+  const { status, category } = useSelector(selectProducts);
 
   const ref = useRef<HTMLFormElement | null>(null);
 

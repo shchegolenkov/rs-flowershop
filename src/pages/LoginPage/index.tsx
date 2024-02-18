@@ -10,9 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
 
+import { selectAuth, selectMessage } from '@/app/selectors';
 import { getUser, loginUser } from '@/app/slices/auth';
 import { clearMessage } from '@/app/slices/message';
-import { RootState, AppDispatch } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import EmailInput from '@/components/UI/FormFields/EmailInput';
 import PasswordInput from '@/components/UI/FormFields/PasswordInput';
@@ -28,8 +29,8 @@ const LoginPage: React.FC = () => {
 
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const { message } = useSelector((state: RootState) => state.message);
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const { message } = useSelector(selectMessage);
+  const { isLoggedIn } = useSelector(selectAuth);
 
   useEffect(() => {
     dispatch(clearMessage());

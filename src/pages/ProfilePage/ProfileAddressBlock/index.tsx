@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import ProfileAlertBlock from '../ProfileAlertBlock';
 import ProfileEditBlock from '../ProfileEditBlock';
 
+import { selectMessage, selectProfile } from '@/app/selectors';
 import { getUser } from '@/app/slices/auth';
 import { clearMessage } from '@/app/slices/message';
 import {
@@ -18,7 +19,7 @@ import {
   setDefaultBillingAddress,
   removeAddress,
 } from '@/app/slices/profile';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import SimpleCheckbox from '@/components/UI/FormFields/SimpleCheckbox';
 import SimpleInput from '@/components/UI/FormFields/SimpleInput';
 import SimpleSelect from '@/components/UI/FormFields/SimpleSelect';
@@ -43,8 +44,8 @@ interface ProfileEditBlockProps {
 const ProfileAddressBlock: React.FC<ProfileEditBlockProps> = ({ address, user, typeAddress }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { message } = useSelector((state: RootState) => state.message);
-  const { status } = useSelector((state: RootState) => state.profile);
+  const { message } = useSelector(selectMessage);
+  const { status } = useSelector(selectProfile);
 
   const [cancelSubmit, setCancelSubmit] = useState(false);
   const [formError, setFormError] = useState(false);

@@ -5,14 +5,14 @@ import CatalogCard from '../CatalogCard';
 import { Skeleton } from '../CatalogCard/Skeleton';
 import { Typography } from '../Typography';
 
-import { RootState } from '@/app/store';
+import { selectProducts } from '@/app/selectors';
 import { ITEMS_PER_PAGE } from '@/constants/const';
 import { Status } from '@/types/types';
 
 import s from './CatalogCards.module.scss';
 
 const CatalogCards = ({ className }: JSX.IntrinsicElements['div']) => {
-  const { status, queryResult } = useSelector((state: RootState) => state.products);
+  const { status, queryResult } = useSelector(selectProducts);
 
   const skeletons = [...new Array(ITEMS_PER_PAGE)].map((_, index) => <Skeleton key={index} />);
 

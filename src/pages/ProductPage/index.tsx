@@ -8,9 +8,10 @@ import { Link, useLocation } from 'react-router-dom';
 
 import AlertBlock from './AlertBlock';
 
+import { selectCart, selectProduct } from '@/app/selectors';
 import { createCart, updateCart } from '@/app/slices/cart';
 import { fetchProduct } from '@/app/slices/product';
-import { AppDispatch, RootState } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import ImageSlider from '@/components/UI/ImageSlider';
 import ModalWindow from '@/components/UI/ModalWindow';
@@ -36,8 +37,8 @@ const ProductPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openAlert, setOpenAlert] = useState(false);
 
-  const productState = useSelector((state: RootState) => state.product);
-  const { status: statusCart, cartData } = useSelector((state: RootState) => state.cart);
+  const productState = useSelector(selectProduct);
+  const { status: statusCart, cartData } = useSelector(selectCart);
 
   const { status, product } = productState;
 

@@ -2,12 +2,11 @@ import { useState, useRef, useEffect, MutableRefObject } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectAuth, selectCart } from '@/app/selectors';
 import { logoutUser, tokenIntrospection } from '@/app/slices/auth';
-
-import { RootState, AppDispatch } from '@/app/store';
+import { AppDispatch } from '@/app/store';
 
 import { MenuLink } from '@/components/UI/MenuLink';
-
 import { Typography } from '@/components/UI/Typography';
 
 import { Logout } from '@/types/types';
@@ -33,10 +32,10 @@ const anonymLinks = [
 ];
 
 const Header = () => {
-  const { cartData } = useSelector((state: RootState) => state.cart);
+  const { cartData } = useSelector(selectCart);
   const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [isMenuActive, setMenuActive] = useState(false);
-  const { isLoggedIn, accessToken, refreshToken } = useSelector((state: RootState) => state.auth);
+  const { isLoggedIn, accessToken, refreshToken } = useSelector(selectAuth);
 
   const dispatch = useDispatch<AppDispatch>();
 
