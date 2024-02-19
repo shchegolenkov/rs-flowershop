@@ -42,11 +42,11 @@
 }
 
 .imageBlock {
+  max-width: 100%;
+  min-height: 370px;
   background-image: url('/src/assets/images/loginBg.jpg');
   background-size: cover;
   background-position: 50% 80%;
-  max-width: 100%;
-  min-height: 370px;
   border-bottom: 1px solid var(--color-black);
 
   @include media-tablet {

@@ -1,7 +1,8 @@
 .nav {
   margin-bottom: 32px;
+
   @include media-large {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 }
 
@@ -19,12 +20,13 @@
 }
 
 .links {
-  margin-top: 16px;
-  list-style: none;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 12px;
+  margin-top: 16px;
+  list-style: none;
+
   @include media-large {
     height: 100px;
   }

@@ -46,11 +46,11 @@
 }
 
 .listItem {
-  margin-left: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
   height: auto;
+  margin-left: 10px;
 
   &::before {
     content: '';
@@ -63,11 +63,11 @@
 }
 
 .link {
-  width: min-content;
   display: grid;
   grid-template-columns: min-content min-content;
   align-items: center;
   gap: 8px;
+  width: min-content;
   color: var(--color-black);
   text-decoration: none;
   text-wrap: nowrap;

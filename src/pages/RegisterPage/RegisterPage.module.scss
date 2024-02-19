@@ -3,10 +3,10 @@
 }
 
 .form__element {
-  flex-basis: 50%;
-  width: 100%;
   display: flex;
   justify-content: center;
+  flex-basis: 50%;
+  width: 100%;
 }
 
 .elements__flow {
@@ -20,6 +20,7 @@
   .form__element:first-child {
     border-bottom: 1px solid var(--color-black);
     border-right: 1px solid var(--color-black);
+
     @include media-tablet {
       border-right: none;
     }
@@ -79,9 +80,9 @@
 }
 
 .login__container {
-  margin-top: 36px;
   display: flex;
   align-items: center;
+  margin-top: 36px;
 
   .login__text {
     @include link-text;
@@ -96,6 +97,7 @@
 .submit__btn__container {
   width: 100%;
   margin-bottom: 107px;
+
   @include media-mobile {
     margin-bottom: 72px;
   }
@@ -143,10 +145,10 @@
 }
 
 .two__items_container {
-  width: 100%;
   display: flex;
   flex-flow: row;
   gap: 24px;
+  width: 100%;
 
   @include media-mobile {
     flex-flow: column;
@@ -154,19 +156,19 @@
 }
 
 .checkboxes_container {
-  width: 100%;
   display: flex;
   flex-flow: column;
   gap: 0;
   justify-content: flex-start;
+  width: 100%;
   padding-bottom: 40px;
 }
 
 .alert_position {
-  margin-top: 10px;
   display: flex;
   flex-flow: column;
   gap: 10px;
+  margin-top: 10px;
 }
 
 .no__border_bottom {
@@ -179,6 +181,7 @@
 
 .no__border_bottom_shipping {
   border-bottom: none !important;
+
   @include media-tablet {
     border-bottom: 1px solid var(--color-black) !important;
   }

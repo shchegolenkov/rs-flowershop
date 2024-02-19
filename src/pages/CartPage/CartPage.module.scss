@@ -43,7 +43,7 @@
   height: 100%;
   max-height: 100vh;
   position: sticky;
-  top: 0px;
+  top: 0;
 
   @include media-tablet {
     aspect-ratio: 1.66/1;
@@ -169,7 +169,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  height: 0px;
+  height: 0;
   transition: height 0.3s;
 }
 

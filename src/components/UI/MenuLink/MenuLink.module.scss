@@ -1,12 +1,12 @@
 .link,
 .linkIco {
+  position: relative;
+  padding: 5px;
   font-size: 16px;
   font-weight: 400;
   line-height: 120%;
-  color: var(--color-black);
   text-decoration: none;
-  padding: 5px;
-  position: relative;
+  color: var(--color-black);
 
   @include media-mobile {
     font-size: 14px;
@@ -16,11 +16,11 @@
 .link::after,
 .linkIco::after {
   content: '';
-  display: block;
   position: absolute;
-  width: 0%;
   left: -1px;
   bottom: 3px;
+  display: block;
+  width: 0%;
   height: 1px;
   background-color: var(--color-black);
   transition: all 0.2s ease-in-out;

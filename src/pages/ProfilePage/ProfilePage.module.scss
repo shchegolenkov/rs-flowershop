@@ -3,10 +3,10 @@
 }
 
 .form__element {
-  flex-basis: 50%;
-  width: 100%;
   display: flex;
   justify-content: center;
+  flex-basis: 50%;
+  width: 100%;
 }
 
 .elements__flow {
@@ -20,6 +20,7 @@
   .form__element:first-child {
     border-bottom: 1px solid var(--color-black);
     border-right: 1px solid var(--color-black);
+
     @include media-tablet {
       border-right: none;
     }
@@ -65,10 +66,10 @@
 
 .header__message {
   display: flex;
-  height: 220px;
-  padding: 0 80px;
   align-items: center;
   justify-content: flex-start;
+  height: 220px;
+  padding: 0 80px;
 
   @include media-tablet {
     justify-content: center;
@@ -120,22 +121,23 @@
 }
 
 .save_edit_container {
-  width: 100%;
   display: flex;
   flex-flow: row;
   gap: 24px;
   align-items: flex-start;
   flex-wrap: wrap;
+  width: 100%;
+
   @include media-mobile {
     justify-content: space-between;
   }
 }
 
 .alert_position {
-  margin-top: 20px;
   display: flex;
   flex-flow: column;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .submit__btn__container {
@@ -155,6 +157,7 @@
 
 .no__border_bottom_billing {
   border-bottom: none !important;
+
   @include media-tablet {
     border-bottom: 1px solid var(--color-black) !important;
   }
@@ -182,11 +185,11 @@
 }
 
 .checkboxes_container {
-  width: 100%;
   display: flex;
   flex-flow: column;
   gap: 0;
   justify-content: flex-start;
+  width: 100%;
   padding-bottom: 40px;
 }
 
@@ -198,8 +201,9 @@
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  padding-bottom: 30px;
   align-items: center;
+  padding-bottom: 30px;
+
   div {
     display: flex;
     flex-flow: row;
@@ -209,7 +213,7 @@
 }
 
 .dont_have_address_message {
-  width: 100%;
   display: flex;
   flex-flow: column;
+  width: 100%;
 }

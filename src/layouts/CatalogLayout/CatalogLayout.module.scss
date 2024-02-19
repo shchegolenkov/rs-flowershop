@@ -44,10 +44,10 @@
 }
 
 .notFound {
-  height: 100%;
-  padding: 80px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 100%;
+  padding: 80px;
   border-bottom: 1px solid var(--color-black);
 }

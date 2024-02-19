@@ -10,8 +10,8 @@
 }
 
 .content {
-  border-right: 1px solid var(--color-black);
   height: 100%;
+  border-right: 1px solid var(--color-black);
 
   @include media-tablet {
     border-right: none;
@@ -40,14 +40,14 @@
 }
 
 .imageBlock {
+  max-width: 100%;
   background-image: url('/src/assets/images/notFoundBg.jpg');
   background-size: cover;
   background-position: center;
-  max-width: 100%;
 
   @include media-tablet {
-    aspect-ratio: 1.66/1;
     min-height: 350px;
+    aspect-ratio: 1.66/1;
   }
 
   @include media-mobile {

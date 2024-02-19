@@ -28,8 +28,8 @@
 }
 
 .saleText {
-  text-transform: uppercase;
   padding: 8px 12px;
+  text-transform: uppercase;
 }
 
 .contentBlock {
@@ -88,12 +88,12 @@
 }
 
 .contentBlock .breadcrumbs {
-  color: var(--color-black);
-  line-height: inherit;
   margin-bottom: 24px;
   font-family: inherit;
   font-size: 14px;
+  line-height: inherit;
   text-transform: uppercase;
+  color: var(--color-black);
 
   @include media-mobile {
     font-size: 12px;
@@ -111,8 +111,8 @@
 }
 
 .link {
-  text-decoration: none;
   position: relative;
+  text-decoration: none;
 
   &:before {
     content: '';
@@ -127,27 +127,27 @@
   }
 
   &:hover::before {
-    visibility: visible;
     width: 100%;
+    visibility: visible;
   }
 }
 
 .loadingBlock {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
   color: var(--color-light-gray);
 }
 
 .btnBlock {
-  margin-top: 40px;
-  width: 100%;
   display: flex;
   flex-flow: row;
   gap: 24px;
   align-items: flex-start;
   flex-wrap: wrap;
+  width: 100%;
+  margin-top: 40px;
 
   @include media-mobile {
     justify-content: space-between;

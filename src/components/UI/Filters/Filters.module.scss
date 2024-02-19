@@ -1,15 +1,15 @@
 .block {
-  padding: 40px;
   position: sticky;
   top: 5px;
+  padding: 40px;
 
   @include media-large {
-    padding: 40px 80px;
     position: static;
     display: flex;
-    gap: 10px;
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
+    padding: 40px 80px;
   }
 
   @include media-small {
@@ -19,6 +19,7 @@
 
 .show {
   display: none;
+
   @include media-large {
     display: block;
     align-self: flex-start;
@@ -31,7 +32,7 @@
         display: block;
         width: 24px;
         height: 24px;
-        background: url(/src/assets/svg/tune.svg) 0 0 no-repeat;
+        background: url('/src/assets/svg/tune.svg') 0 0 no-repeat;
       }
 
       &::after {
@@ -39,7 +40,7 @@
         display: block;
         width: 24px;
         height: 24px;
-        background: url(/src/assets/svg/chevron.svg) 0 0 no-repeat;
+        background: url('/src/assets/svg/chevron.svg') 0 0 no-repeat;
         transition: all 0.2s;
       }
     }
@@ -52,10 +53,11 @@
 
 .options {
   @include media-large {
-    max-height: 0px;
+    max-height: 0;
     margin-top: 10px;
     overflow: hidden;
     transition: max-height 0.2s;
+
     &Active {
       max-height: 550px;
     }

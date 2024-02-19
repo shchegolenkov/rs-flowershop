@@ -1,24 +1,24 @@
 .button {
+  position: relative;
+  box-sizing: border-box;
+  width: 175px;
+  padding: 16px;
   font-size: 16px;
-  font-weight: 400;
   line-height: 120%;
+  font-weight: 400;
   letter-spacing: 0.8px;
   text-transform: uppercase;
   text-decoration: none;
-  width: 175px;
-  box-sizing: border-box;
-  padding: 16px;
   transition: all 0.2s ease-in-out;
-  position: relative;
 
   &:disabled {
     cursor: default;
   }
 
   @include media-mobile {
+    width: 100%;
     font-size: 14px;
     line-height: 100%;
-    width: 100%;
   }
 }
 
@@ -62,8 +62,8 @@
 
   &:hover {
     color: var(--color-white);
-    border: 1px solid var(--color-black);
     background-color: var(--color-black);
+    border: 1px solid var(--color-black);
   }
 
   &:active {
@@ -81,8 +81,8 @@
 .underlined {
   width: 125px;
   color: var(--color-error);
-  text-transform: inherit;
   background-color: inherit;
+  text-transform: inherit;
   border: 1px solid transparent;
 
   @include media-mobile {
@@ -91,18 +91,18 @@
 
   &::after {
     content: '';
-    display: block;
     position: absolute;
-    width: 80%;
     left: 10%;
     bottom: 10px;
+    display: block;
+    width: 80%;
     height: 1px;
     background-color: var(--color-black);
     transition: all 0.2s ease-in-out;
 
     @include media-mobile {
-      width: 30%;
       left: 35%;
+      width: 30%;
     }
   }
 
@@ -112,9 +112,10 @@
       &::after {
         width: 80%;
         background-color: var(--color-black);
+
         @include media-mobile {
-          width: 30%;
           left: 35%;
+          width: 30%;
         }
       }
     }
@@ -125,9 +126,10 @@
 
         &::after {
           width: 80%;
+
           @include media-mobile {
-            width: 30%;
             left: 35%;
+            width: 30%;
           }
         }
       }
