@@ -19,6 +19,10 @@ const links = [
 const MainPage = () => {
   const navigate = useNavigate();
 
+  const handleMore = () => {
+    navigate('/about');
+  };
+
   return (
     <main>
       <div className={s.grid}>
@@ -69,14 +73,7 @@ const MainPage = () => {
               someone&apos;s day amazing by sending flowers, plants and gifts the same or next day.
               Ordering flowers online has never been easier.
             </Typography>
-            <Button
-              className={s.button}
-              variant="secondary"
-              onClick={() => {
-                const path = 'about';
-                navigate(path);
-              }}
-            >
+            <Button className={s.button} variant="secondary" onClick={handleMore}>
               Learn more
             </Button>
           </section>

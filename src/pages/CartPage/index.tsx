@@ -85,6 +85,10 @@ const CartPage = () => {
     }
   }, [cartItems]);
 
+  const handleCatalogClick = () => {
+    navigate('/catalog');
+  };
+
   return (
     <main>
       <div className={s.grid}>
@@ -120,13 +124,7 @@ const CartPage = () => {
                 <Typography>
                   Looks like you haven`t added anything to&nbsp;your&nbsp;cart&nbsp;yet
                 </Typography>
-                <Button
-                  className={s.buttonCatalog}
-                  onClick={() => {
-                    const path = '/catalog';
-                    navigate(path);
-                  }}
-                >
+                <Button className={s.buttonCatalog} onClick={handleCatalogClick}>
                   Start shopping
                 </Button>
               </div>
@@ -136,9 +134,9 @@ const CartPage = () => {
                 If you have our promo code, enter the&nbsp;code to&nbsp;get&nbsp;discount
               </Typography>
               <form
-                className={clsx(s.promoForm, [
-                  promoStatus === Status.SUCCESS && s.promoFormSuccess,
-                ])}
+                className={clsx(s.promoForm, {
+                  [s.promoFormSuccess]: promoStatus === Status.SUCCESS,
+                })}
                 onSubmit={handleSubmit}
                 onReset={handleReset}
               >

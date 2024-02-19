@@ -247,6 +247,10 @@ const RegisterPage = () => {
     }
   };
 
+  const handleLogIn = () => {
+    navigate('/login');
+  };
+
   return (
     <main>
       <div className={s.container}>
@@ -259,14 +263,7 @@ const RegisterPage = () => {
             </Typography>
             <div className={s.login__container}>
               <span className={s.login__text}>Already have an account?</span>
-              <Button
-                className={s.login__btn}
-                variant="secondary"
-                onClick={() => {
-                  const path = '/login';
-                  navigate(path);
-                }}
-              >
+              <Button className={s.login__btn} variant="secondary" onClick={handleLogIn}>
                 LOG IN
               </Button>
             </div>

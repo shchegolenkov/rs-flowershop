@@ -118,6 +118,10 @@ const EmailForm = () => {
     });
   };
 
+  const handlePasswordChange = () => {
+    navigate('/profile/change-password');
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
       <EmailInput
@@ -132,10 +136,7 @@ const EmailForm = () => {
         full={true}
         type="button"
         variant="secondary"
-        onClick={() => {
-          const path = '/profile/change-password';
-          navigate(path);
-        }}
+        onClick={handlePasswordChange}
         className={s.change_password_btn}
       >
         CHANGE PASSWORD

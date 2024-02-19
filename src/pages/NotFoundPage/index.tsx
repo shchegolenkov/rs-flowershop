@@ -8,6 +8,10 @@ import s from './NotFoundPage.module.scss';
 const NotFoundPage = () => {
   const navigate = useNavigate();
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   return (
     <main>
       <div className={s.grid}>
@@ -24,14 +28,7 @@ const NotFoundPage = () => {
               <br />
               Came back to the main page — there is still a lot of interesting and beautiful.
             </Typography>
-            <Button
-              className={s.button}
-              variant="secondary"
-              onClick={() => {
-                const path = '/';
-                navigate(path);
-              }}
-            >
+            <Button className={s.button} variant="secondary" onClick={handleBack}>
               Back to home
             </Button>
           </div>

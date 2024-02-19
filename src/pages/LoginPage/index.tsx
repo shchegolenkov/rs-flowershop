@@ -4,8 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Alert from '@mui/material/Alert';
 import clsx from 'clsx';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
@@ -93,6 +92,10 @@ const LoginPage = () => {
       });
   };
 
+  const handleSignUp = () => {
+    navigate('/register');
+  };
+
   return (
     <main>
       <div className={s.imageBlock}></div>
@@ -111,10 +114,7 @@ const LoginPage = () => {
               <Button
                 className={clsx(s.button, s.buttonSignUp)}
                 variant="secondary"
-                onClick={() => {
-                  const path = '/register';
-                  navigate(path);
-                }}
+                onClick={handleSignUp}
               >
                 Sign up
               </Button>
