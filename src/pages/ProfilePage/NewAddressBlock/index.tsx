@@ -27,6 +27,18 @@ import { AddressAction, ApiResponse, ProfileForm, Status, User } from '@/types/t
 
 import s from '../ProfilePage.module.scss';
 
+const getAddressName = (typeAddress: string) => {
+  let message = '';
+  if (typeAddress === 'shipping') {
+    message = `Add Shipping Address`;
+  }
+  if (typeAddress === 'billing') {
+    message = `Add Billing Address`;
+  }
+
+  return message;
+};
+
 interface ProfileEditBlock {
   user: User;
   typeAddress: AddressAction;
@@ -172,27 +184,15 @@ const AddNewAddressBlock = ({ user, typeAddress, setIsCancelledAdd }: ProfileEdi
     reset();
   };
 
-  const addressName = () => {
-    let message = '';
-    if (typeAddress === 'shipping') {
-      message = `Add Shipping Address`;
-    }
-    if (typeAddress === 'billing') {
-      message = `Add Billing Address`;
-    }
-
-    return (
-      <div className={s.address_control}>
-        <Typography variant="h4" className={s.form__title_size}>
-          {message}
-        </Typography>
-      </div>
-    );
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.width_full}>
-      {typeAddress === 'shipping' || typeAddress === 'billing' ? addressName() : null}
+      {(typeAddress === 'shipping' || typeAddress === 'billing') && (
+        <div className={s.address_control}>
+          <Typography variant="h4" className={s.form__title_size}>
+            {getAddressName(typeAddress)}
+          </Typography>
+        </div>
+      )}
       <SimpleInput
         register={register}
         errors={errors}
