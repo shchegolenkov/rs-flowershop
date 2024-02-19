@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -10,7 +10,7 @@ import CloseIco from '@/assets/svg/close.svg';
 import s from './ModalWindow.module.scss';
 
 interface ModalWindow {
-  children: React.ReactNode;
+  children: ReactNode;
   open: boolean;
   handleClose: () => void;
 }

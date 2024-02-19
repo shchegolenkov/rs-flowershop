@@ -1,3 +1,5 @@
+import { MouseEventHandler } from 'react';
+
 import clsx from 'clsx';
 import { Link, LinkProps } from 'react-router-dom';
 
@@ -5,7 +7,7 @@ import s from './MenuLink.module.scss';
 
 interface MenuLink extends LinkProps {
   ico?: JSX.Element;
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export const MenuLink = ({ children, className, ico, onClick, ...props }: MenuLink) => {

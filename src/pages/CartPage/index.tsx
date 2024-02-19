@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SyntheticEvent, ChangeEvent } from 'react';
 
 import ErrorIcon from '@mui/icons-material/Error';
 import TextField from '@mui/material/TextField';
@@ -49,7 +49,7 @@ const CartPage = () => {
     0
   );
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       promo: { value: string };
@@ -65,7 +65,7 @@ const CartPage = () => {
     dispatch(setPromoStatus(Status.LOADING));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     if (e.target.value.length === 0 && promoStatus === Status.SUCCESS) {
       dispatch(resetPromo());

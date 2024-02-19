@@ -1,4 +1,4 @@
-import React from 'react';
+import { ChangeEvent } from 'react';
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -25,7 +25,7 @@ const SimpleCheckbox = <T extends FieldValues>({
   isEditField,
   isDisabled,
 }: SimpleCheckboxProps<T>) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
 

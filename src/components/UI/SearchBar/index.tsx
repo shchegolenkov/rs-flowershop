@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, SyntheticEvent, ChangeEvent } from 'react';
 
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +22,7 @@ const SearchBar = ({ className }: JSX.IntrinsicElements['form']) => {
     ref.current && ref.current.reset();
   }, [category]);
 
-  function handleSubmit(e: React.SyntheticEvent) {
+  function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       search: { value: string };
@@ -30,7 +30,7 @@ const SearchBar = ({ className }: JSX.IntrinsicElements['form']) => {
     dispatch(setQuery(target.search.value));
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.value.length > 0) {
       setIsText(true);
     } else {

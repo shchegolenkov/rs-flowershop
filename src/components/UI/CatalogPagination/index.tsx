@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 import { Pagination } from '@mui/material';
 import { PaginationProps } from '@mui/material/Pagination/Pagination';
 import clsx from 'clsx';
@@ -14,7 +16,7 @@ const CatalogPagination = ({ className }: PaginationProps) => {
 
   const { pages, page } = useSelector(selectProducts);
 
-  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_event: ChangeEvent<unknown>, value: number) => {
     dispatch(setPage(value));
   };
 

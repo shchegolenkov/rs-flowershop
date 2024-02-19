@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
@@ -33,7 +33,7 @@ const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
     ref.current && ref.current.reset();
   }, [category]);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);

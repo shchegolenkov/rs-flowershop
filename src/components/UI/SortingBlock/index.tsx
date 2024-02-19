@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import RadioButton from '../RadioButton';
@@ -17,7 +19,7 @@ const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  function handleChangeValue(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChangeValue(e: ChangeEvent<HTMLInputElement>) {
     dispatch(setSort(e.target.value));
   }
 
