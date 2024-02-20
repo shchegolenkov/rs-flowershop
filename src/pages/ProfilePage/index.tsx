@@ -28,7 +28,8 @@ import Button from '@/components/UI/Button';
 import BirthDateInput from '@/components/UI/FormFields/BirthDateInput';
 import SimpleInput from '@/components/UI/FormFields/SimpleInput';
 import { Typography } from '@/components/UI/Typography';
-import { CustomerData, ProfileAddress, Status } from '@/types/types';
+import { CustomerData, ProfileAddress, RouteLinks, Status } from '@/types/types';
+import { dateOfBirthRules, firstNameRules, lastNameRules } from '@/utils/validationRules';
 
 import s from './ProfilePage.module.scss';
 
@@ -65,45 +66,18 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('/');
+      navigate(RouteLinks.MAIN);
     }
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch, cancelSubmit]);
-  const currentDate = new Date();
-  const thirteenYearsAgo = new Date(
-    currentDate.getFullYear() - 13,
-    currentDate.getMonth(),
-    currentDate.getDate()
-  );
-
-  const minDate = new Date(1900, 1, 1);
 
   const schema = yup.object().shape({
-    firstName: isDisabledFirstName
-      ? yup.string()
-      : yup
-          .string()
-          .required('First name is required.')
-          .matches(/^[a-zA-Z]+$/, 'First name cannot contain special characters or numbers.'),
-
-    lastName: isDisabledLastName
-      ? yup.string()
-      : yup
-          .string()
-          .required('Last name is required.')
-          .matches(/^[a-zA-Z]+$/, 'Last name cannot contain special characters or numbers.'),
-
-    dateOfBirth: isDisabledDateOfBirth
-      ? yup.string()
-      : yup
-          .date()
-          .max(thirteenYearsAgo)
-          .min(minDate)
-          .typeError('Please enter a valid date.')
-          .required('Date is required.'),
+    firstName: isDisabledFirstName ? yup.string() : firstNameRules,
+    lastName: isDisabledLastName ? yup.string() : lastNameRules,
+    dateOfBirth: isDisabledDateOfBirth ? yup.string() : dateOfBirthRules,
   });
 
   const {

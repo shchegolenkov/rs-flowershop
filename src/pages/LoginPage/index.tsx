@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
 
 import { selectAuth, selectMessage } from '@/app/selectors';
@@ -17,7 +16,8 @@ import Button from '@/components/UI/Button';
 import EmailInput from '@/components/UI/FormFields/EmailInput';
 import PasswordInput from '@/components/UI/FormFields/PasswordInput';
 import { Typography } from '@/components/UI/Typography';
-import { CustomerData } from '@/types/types';
+import { CustomerData, RouteLinks } from '@/types/types';
+import { emailRules, passwordRules } from '@/utils/validationRules';
 
 import s from './LoginPage.module.scss';
 
@@ -37,32 +37,13 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/');
+      navigate(RouteLinks.MAIN);
     }
   }, [isLoggedIn, navigate]);
 
   const schema = yup.object().shape({
-    email: yup
-      .string()
-      .required('Email is required.')
-      .email('Invalid email (e.g., example@example.com)')
-      .test('is-valid', 'Invalid email (e.g., example@example.com)', (value) =>
-        value
-          ? isEmail(value)
-          : new yup.ValidationError('Invalid email (e.g., example@example.com)')
-      ),
-    password: yup
-      .string()
-      .required('Password is required')
-      .min(8, 'Password must be at least 8 characters')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter (e.g., [A-Z])')
-      .matches(/[a-z]/, 'Password must contain at least one lowercase letter (e.g., [a-z])')
-      .matches(/[0-9]/, 'Password must contain at least one digit (e.g., [0-9])')
-      .matches(
-        /[!@#$%^&*]/,
-        'Password must contain at least one special character (e.g., !@#$%^&*)'
-      )
-      .matches(/^\S*$/, 'Password cannot contain spaces'),
+    email: emailRules,
+    password: passwordRules,
   });
 
   const {
@@ -93,7 +74,7 @@ const LoginPage = () => {
   };
 
   const handleSignUp = () => {
-    navigate('/register');
+    navigate(RouteLinks.REGISTER);
   };
 
   return (

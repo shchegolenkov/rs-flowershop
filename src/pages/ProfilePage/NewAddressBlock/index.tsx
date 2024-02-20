@@ -5,7 +5,8 @@ import Alert from '@mui/material/Alert';
 import clsx from 'clsx';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import * as yup from 'yup';
+
+import { schema } from '../ProfileAddressBlock/addressValidation';
 
 import { selectMessage, selectProfile } from '@/app/selectors';
 import { getUser } from '@/app/slices/auth';
@@ -57,23 +58,6 @@ const AddNewAddressBlock = ({ user, typeAddress, setIsCancelledAdd }: ProfileEdi
   const [checkedBillShipAddress, setCheckedBillShipAddress] = useState(false);
   const [checkedShipDefAddress, setCheckedShipDefAddress] = useState(false);
   const [checkedBillDefAddress, setCheckedBillDefAddress] = useState(false);
-
-  const schema = yup.object().shape({
-    streetName: yup
-      .string()
-      .required('Street is required.')
-      .max(100, 'Street must be at most 100 characters.'),
-    postalCode: yup
-      .string()
-      .required('Postal code is required.')
-      .matches(/^(?:NL-)?(\d{4})\s*([A-Z]{2})$/i, 'Invalid postal code (e.g., 2378AP)'),
-    country: yup.string().required('Country is required.'),
-    city: yup
-      .string()
-      .required('City is required.')
-      .max(100, 'City must be at most 100 characters.')
-      .matches(/^[a-zA-Z]+$/, 'City cannot contain special characters or numbers.'),
-  });
 
   const {
     register,

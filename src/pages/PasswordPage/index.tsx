@@ -17,7 +17,8 @@ import { changePassword } from '@/app/slices/profile';
 import { AppDispatch } from '@/app/store';
 import PasswordInput from '@/components/UI/FormFields/PasswordInput';
 import { Typography } from '@/components/UI/Typography';
-import { PasswordForm, Status } from '@/types/types';
+import { PasswordForm, RouteLinks, Status } from '@/types/types';
+import { passwordRules } from '@/utils/validationRules';
 
 import s from './PasswordPage.module.scss';
 
@@ -35,48 +36,14 @@ const PasswordPage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('/');
+      navigate(RouteLinks.MAIN);
     }
   }, [isLoggedIn, navigate]);
 
   const schema = yup.object().shape({
-    currentPassword: yup
-      .string()
-      .required('Password is required.')
-      .min(8, 'Password must be at least 8 characters')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter (e.g., [A-Z])')
-      .matches(/[a-z]/, 'Password must contain at least one lowercase letter (e.g., [a-z])')
-      .matches(/[0-9]/, 'Password must contain at least one digit (e.g., [0-9])')
-      .matches(
-        /[!@#$%^&*]/,
-        'Password must contain at least one special character (e.g., !@#$%^&*)'
-      )
-      .matches(/^\S*$/, 'Password cannot contain spaces.'),
-    newPassword: yup
-      .string()
-      .required('Password is required.')
-      .min(8, 'Password must be at least 8 characters')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter (e.g., [A-Z])')
-      .matches(/[a-z]/, 'Password must contain at least one lowercase letter (e.g., [a-z])')
-      .matches(/[0-9]/, 'Password must contain at least one digit (e.g., [0-9])')
-      .matches(
-        /[!@#$%^&*]/,
-        'Password must contain at least one special character (e.g., !@#$%^&*)'
-      )
-      .matches(/^\S*$/, 'Password cannot contain spaces.'),
-    confirmNewPassword: yup
-      .string()
-      .required('Password is required.')
-      .min(8, 'Password must be at least 8 characters')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter (e.g., [A-Z])')
-      .matches(/[a-z]/, 'Password must contain at least one lowercase letter (e.g., [a-z])')
-      .matches(/[0-9]/, 'Password must contain at least one digit (e.g., [0-9])')
-      .matches(
-        /[!@#$%^&*]/,
-        'Password must contain at least one special character (e.g., !@#$%^&*)'
-      )
-      .matches(/^\S*$/, 'Password cannot contain spaces.')
-      .oneOf([yup.ref('newPassword')], 'Passwords must match'),
+    currentPassword: passwordRules,
+    newPassword: passwordRules,
+    confirmNewPassword: passwordRules.oneOf([yup.ref('newPassword')], 'Passwords must match'),
   });
 
   const {
@@ -112,7 +79,7 @@ const PasswordPage = () => {
           dispatch(clearMessage());
           setIsSuccess(false);
           reset();
-          navigate('/profile');
+          navigate(RouteLinks.PROFILE);
         }, 2000);
       } catch (error) {
         console.error('Failed to reset password:', error);
@@ -128,7 +95,7 @@ const PasswordPage = () => {
   };
   const onClickCancel = () => {
     reset();
-    navigate('/profile');
+    navigate(RouteLinks.PROFILE);
   };
 
   return (

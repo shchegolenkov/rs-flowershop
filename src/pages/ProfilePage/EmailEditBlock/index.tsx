@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, useForm, UseFormProps } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import isEmail from 'validator/lib/isEmail';
 import * as yup from 'yup';
 
 import ProfileAlertBlock from '../ProfileAlertBlock';
@@ -18,6 +17,7 @@ import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import EmailInput from '@/components/UI/FormFields/EmailInput';
 import { CustomerData, RouteLinks, Status } from '@/types/types';
+import { emailRules } from '@/utils/validationRules';
 
 import s from '../ProfilePage.module.scss';
 
@@ -61,20 +61,11 @@ const EmailForm = () => {
   const schema = yup.object().shape({
     email: isDisabledEmail
       ? yup.string()
-      : yup
-          .string()
-          .required('Email is required.')
-          .email('Invalid email (e.g., example@example.com)')
-          .test('is-valid', 'Invalid email (e.g., example@example.com)', (value) =>
-            value
-              ? isEmail(value)
-              : new yup.ValidationError('Invalid email (e.g., example@example.com)')
-          )
-          .test('not-default-email', 'Email should not be the previous value', (value) => {
-            if (user) {
-              return value !== user.email;
-            }
-          }),
+      : emailRules.test('not-default-email', 'Email should not be the previous value', (value) => {
+          if (user) {
+            return value !== user.email;
+          }
+        }),
   });
 
   const {
