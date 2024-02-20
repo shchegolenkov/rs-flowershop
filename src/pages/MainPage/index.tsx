@@ -22,7 +22,7 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const handleMore = () => {
-    navigate('/about');
+    navigate(RouteLinks.ABOUT);
   };
 
   return (

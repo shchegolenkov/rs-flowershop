@@ -14,7 +14,7 @@ import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import CartCard from '@/components/UI/CartCard';
 import { Typography } from '@/components/UI/Typography';
-import { Status, WelcomeCodes } from '@/types/types';
+import { RouteLinks, Status, WelcomeCodes } from '@/types/types';
 import formatPrice from '@/utils/formatPrice';
 
 import ClearCartIco from '@/assets/svg/delCart.svg';
@@ -86,7 +86,7 @@ const CartPage = () => {
   }, [cartItems]);
 
   const handleCatalogClick = () => {
-    navigate('/catalog');
+    navigate(RouteLinks.CATALOG);
   };
 
   return (

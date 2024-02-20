@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/UI/Button';
 import { Typography } from '@/components/UI/Typography';
+import { RouteLinks } from '@/types/types';
 
 import s from './NotFoundPage.module.scss';
 
@@ -9,7 +10,7 @@ const NotFoundPage = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate('/');
+    navigate(RouteLinks.MAIN);
   };
 
   return (

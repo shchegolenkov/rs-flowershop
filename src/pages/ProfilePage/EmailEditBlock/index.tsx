@@ -17,7 +17,7 @@ import { setIsDisabledEmail, updateUser } from '@/app/slices/profile';
 import { AppDispatch } from '@/app/store';
 import Button from '@/components/UI/Button';
 import EmailInput from '@/components/UI/FormFields/EmailInput';
-import { CustomerData, Status } from '@/types/types';
+import { CustomerData, RouteLinks, Status } from '@/types/types';
 
 import s from '../ProfilePage.module.scss';
 
@@ -119,7 +119,7 @@ const EmailForm = () => {
   };
 
   const handlePasswordChange = () => {
-    navigate('/profile/change-password');
+    navigate(RouteLinks.CHANGE_PASSWORD);
   };
 
   return (
