@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Typography } from '../Typography';
 
 import { selectProducts } from '@/app/selectors';
-import { Categories } from '@/types/types';
+import { Categories, RouteLinks } from '@/types/types';
 
 import s from './CatalogBreadcrumbs.module.scss';
 
@@ -12,11 +12,11 @@ const CatalogBreadcrumbs = () => {
   const { category } = useSelector(selectProducts);
 
   const links = [
-    { to: './fresh-flowers', text: 'fresh flowers' },
-    { to: './dried-flowers', text: 'dried flowers' },
-    { to: './live-plants', text: 'live plants' },
-    { to: './fresheners', text: 'fresheners' },
-    { to: './candles', text: 'candles' },
+    { to: RouteLinks.CATALOG_FRESH, text: 'fresh flowers' },
+    { to: RouteLinks.CATALOG_DRY, text: 'dried flowers' },
+    { to: RouteLinks.CATALOG_LIVE, text: 'live plants' },
+    { to: RouteLinks.CATALOG_FRESHENERS, text: 'fresheners' },
+    { to: RouteLinks.CATALOG_CANDLES, text: 'candles' },
   ];
 
   const categoriesNames = {
@@ -31,7 +31,7 @@ const CatalogBreadcrumbs = () => {
     <nav className={s.nav}>
       {category ? (
         <>
-          <Link to="./" className={s.link}>
+          <Link to={RouteLinks.CATALOG} className={s.link}>
             <Typography variant="overline" as="span">
               Catalog
             </Typography>

@@ -1,17 +1,19 @@
 import { MenuLink } from '@/components/UI/MenuLink';
 import { Typography } from '@/components/UI/Typography';
 
+import { RouteLinks } from '@/types/types';
+
 import LogoIco from '@/assets/svg/logo.svg';
 
 import s from './Footer.module.scss';
 
 const links = [
-  { to: '/catalog', text: 'All products' },
-  { to: '/catalog/fresh-flowers', text: 'Fresh Flowers' },
-  { to: '/catalog/dried-flowers', text: 'Dried Flowers' },
-  { to: '/catalog/live-plants', text: 'Live Plants' },
-  { to: '/catalog/candles', text: 'Aroma Candles' },
-  { to: '/catalog/fresheners', text: 'Freshener Diffuser' },
+  { to: RouteLinks.CATALOG, text: 'All products' },
+  { to: RouteLinks.CATALOG_FRESH, text: 'Fresh Flowers' },
+  { to: RouteLinks.CATALOG_DRY, text: 'Dried Flowers' },
+  { to: RouteLinks.CATALOG_LIVE, text: 'Live Plants' },
+  { to: RouteLinks.CATALOG_CANDLES, text: 'Aroma Candles' },
+  { to: RouteLinks.CATALOG_FRESHENERS, text: 'Freshener Diffuser' },
 ];
 
 const Footer = () => {
@@ -35,7 +37,7 @@ const Footer = () => {
         </Typography>
         <ul className={s.list}>
           <li>
-            <MenuLink to="/about">About us</MenuLink>
+            <MenuLink to={RouteLinks.ABOUT}>About us</MenuLink>
           </li>
         </ul>
       </div>

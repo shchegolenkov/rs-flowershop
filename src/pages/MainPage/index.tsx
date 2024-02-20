@@ -5,15 +5,17 @@ import Button from '@/components/UI/Button';
 import MainPageLink from '@/components/UI/MainPageLink';
 import { Typography } from '@/components/UI/Typography';
 
+import { RouteLinks } from '@/types/types';
+
 import s from './MainPage.module.scss';
 
 const links = [
-  { to: '/catalog', title: 'All products' },
-  { to: '/catalog/fresh-flowers', title: 'Fresh flowers' },
-  { to: '/catalog/dried-flowers', title: 'Dried flowers' },
-  { to: '/catalog/live-plants', title: 'Live plants' },
-  { to: '/catalog/candles', title: 'Aroma candles' },
-  { to: '/catalog/fresheners', title: 'Fresheners' },
+  { to: RouteLinks.CATALOG, title: 'All products' },
+  { to: RouteLinks.CATALOG_FRESH, title: 'Fresh flowers' },
+  { to: RouteLinks.CATALOG_DRY, title: 'Dried flowers' },
+  { to: RouteLinks.CATALOG_LIVE, title: 'Live plants' },
+  { to: RouteLinks.CATALOG_CANDLES, title: 'Aroma candles' },
+  { to: RouteLinks.CATALOG_FRESHENERS, title: 'Fresheners' },
 ];
 
 const MainPage = () => {

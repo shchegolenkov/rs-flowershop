@@ -24,6 +24,7 @@ import {
   Status,
   UpdateCart,
   LineItem,
+  RouteLinks,
 } from '@/types/types';
 import changeHyphenToSpace from '@/utils/changeHyphenToSpace';
 import formatPrice from '@/utils/formatPrice';
@@ -146,12 +147,12 @@ const ProductPage = () => {
         <div className={s.contentBlock}>
           <div className={s.wrapper}>
             <Breadcrumbs className={s.breadcrumbs}>
-              <Link to="/catalog" className={s.link}>
+              <Link to={RouteLinks.CATALOG} className={s.link}>
                 <Typography variant="overline" className={s.linkText}>
                   Catalog
                 </Typography>
               </Link>
-              <Link to={`/catalog/${productCategory}`} className={s.link}>
+              <Link to={`${RouteLinks.CATALOG}/${productCategory}`} className={s.link}>
                 <Typography variant="overline" className={s.linkText}>
                   {changeHyphenToSpace(productCategory)}
                 </Typography>

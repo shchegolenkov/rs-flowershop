@@ -10,7 +10,7 @@ import { AppDispatch } from '@/app/store';
 import { MenuLink } from '@/components/UI/MenuLink';
 import { Typography } from '@/components/UI/Typography';
 
-import { Logout } from '@/types/types';
+import { Logout, RouteLinks } from '@/types/types';
 
 import CartIco from '@/assets/svg/cart.svg';
 import CloseIco from '@/assets/svg/close.svg';
@@ -23,13 +23,13 @@ import ProfileIco from '@/assets/svg/person.svg';
 import s from './header.module.scss';
 
 const links = [
-  { to: '/catalog', text: 'Catalog' },
-  { to: '/about', text: 'About us' },
+  { to: RouteLinks.CATALOG, text: 'Catalog' },
+  { to: RouteLinks.ABOUT, text: 'About us' },
 ];
 
 const anonymLinks = [
-  { to: '/login', text: 'Log In', icon: <LoginIco /> },
-  { to: '/register', text: 'Sign up', icon: <ProfileIco /> },
+  { to: RouteLinks.LOGIN, text: 'Log In', icon: <LoginIco /> },
+  { to: RouteLinks.REGISTER, text: 'Sign up', icon: <ProfileIco /> },
 ];
 
 const Header = () => {
@@ -85,7 +85,7 @@ const Header = () => {
       <header>
         <nav className={s.nav}>
           <div className={s.ico}>
-            <MenuLink to="/">
+            <MenuLink to={RouteLinks.MAIN}>
               <img src={logoIco} className={s.logoIco} alt="logo" />
             </MenuLink>
           </div>
@@ -111,7 +111,7 @@ const Header = () => {
               <>
                 <li className={s.listItem}>
                   <MenuLink
-                    to="/"
+                    to={RouteLinks.MAIN}
                     ico={<LogoutIco />}
                     onClick={() => {
                       handleLogout();
@@ -123,7 +123,7 @@ const Header = () => {
                 </li>
                 <li className={s.listItem}>
                   <MenuLink
-                    to="/profile"
+                    to={RouteLinks.PROFILE}
                     ico={<ProfileIco />}
                     onClick={() => {
                       setMenuActive(false);
@@ -156,7 +156,7 @@ const Header = () => {
             </button>
           </div>
           <div className={s.ico}>
-            <MenuLink to="/cart" className={s.cartLink}>
+            <MenuLink to={RouteLinks.CART} className={s.cartLink}>
               <CartIco />
               <Typography className={s.counter} variant="captionSmall">
                 {cartData && cartData.totalLineItemQuantity ? cartData.totalLineItemQuantity : '0'}

@@ -377,3 +377,19 @@ export type DiscountCode = {
 export enum WelcomeCodes {
   WELCOME = '3019b1a7-de93-48e5-93a4-87e8d87fec25',
 }
+
+export enum RouteLinks {
+  MAIN = '/',
+  ABOUT = '/about',
+  LOGIN = '/login',
+  REGISTER = '/register',
+  PROFILE = '/profile',
+  CHANGE_PASSWORD = '/profile/change-password',
+  CART = '/cart',
+  CATALOG = '/catalog',
+  CATALOG_FRESH = '/catalog/fresh-flowers',
+  CATALOG_DRY = '/catalog/dried-flowers',
+  CATALOG_LIVE = '/catalog/live-plants',
+  CATALOG_FRESHENERS = '/catalog/fresheners',
+  CATALOG_CANDLES = '/catalog/candles',
+}
