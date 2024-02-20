@@ -212,11 +212,11 @@ export interface PageQueryResult {
 }
 
 export enum Categories {
-  FRESH = '"c54e10d9-2556-4433-93bf-f7b32ee7614a"',
-  DRY = '"7adbf30f-055b-485a-9914-6b778934373f"',
-  LIVE = '"cfa5c147-fac3-48d6-89e9-9a4be3ffa382"',
-  FRESHENERS = '"2093d9b8-4a2a-4db2-a49a-6af3de7ce3e0"',
-  CANDLES = '"b1898ea3-45ea-4306-ad02-3914c1e38610"',
+  FRESH = '"f9720d24-fb5d-45da-b8ca-20d79ce061a3"',
+  DRY = '"dd9d83e3-3a78-4b91-945a-1a422cbc7d14"',
+  LIVE = '"12ae4f0c-ce2f-47a4-bcc7-dc75aee141f2"',
+  FRESHENERS = '"ecca7074-45be-435b-8af2-407b0240f292"',
+  CANDLES = '"328ca892-44f3-4fbf-9c74-c4b50c6b8dcd"',
 }
 
 export interface PasswordForm {
@@ -375,7 +375,7 @@ export type DiscountCode = {
 };
 
 export enum WelcomeCodes {
-  WELCOME = '3019b1a7-de93-48e5-93a4-87e8d87fec25',
+  WELCOME = 'b7bec616-a25d-482d-8242-29805b61283f',
 }
 
 export enum RouteLinks {
