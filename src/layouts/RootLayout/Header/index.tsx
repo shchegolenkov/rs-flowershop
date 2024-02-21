@@ -44,10 +44,13 @@ const Header = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
+
     if (token) {
       dispatch(tokenIntrospection());
     }
+  }, []);
 
+  useEffect(() => {
     const checkOutside = (e: MouseEvent) => {
       if (isMenuActive && ref.current && ref.current.contains(e.target as Node)) {
         setMenuActive(false);
@@ -64,7 +67,7 @@ const Header = () => {
       document.removeEventListener('mousedown', checkOutside);
       document.body.style.overflowY = 'scroll';
     };
-  }, [dispatch, isMenuActive]);
+  }, [isMenuActive]);
 
   function handleMenuClick() {
     setMenuActive(!isMenuActive);
