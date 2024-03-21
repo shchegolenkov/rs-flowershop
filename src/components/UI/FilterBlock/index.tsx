@@ -83,6 +83,8 @@ const FilterBlock = ({ className = '' }: JSX.IntrinsicElements['div']) => {
     { name: 'price', value: '(10001 to *)', text: 'From 100 €' },
   ];
 
+  const isDisabled = status === Status.LOADING || status === Status.ERROR;
+
   return (
     <form
       ref={ref}
@@ -103,7 +105,7 @@ const FilterBlock = ({ className = '' }: JSX.IntrinsicElements['div']) => {
               name={name}
               value={value}
               text={text}
-              disabled={status === Status.LOADING || status === Status.ERROR}
+              disabled={isDisabled}
             />
           ))}
         </div>
@@ -116,7 +118,7 @@ const FilterBlock = ({ className = '' }: JSX.IntrinsicElements['div']) => {
               name={name}
               value={value}
               text={text}
-              disabled={status === Status.LOADING || status === Status.ERROR}
+              disabled={isDisabled}
             />
           ))}
         </div>
@@ -126,20 +128,15 @@ const FilterBlock = ({ className = '' }: JSX.IntrinsicElements['div']) => {
             className={s.input}
             name="discount"
             text="Discount only"
-            disabled={status === Status.LOADING || status === Status.ERROR}
+            disabled={isDisabled}
           />
         </div>
       </div>
       <div className={s.buttons}>
-        <Button type="submit" disabled={status === Status.LOADING || status === Status.ERROR}>
+        <Button type="submit" disabled={isDisabled}>
           Apply
         </Button>
-        <Button
-          type="reset"
-          variant="secondary"
-          disabled={status === Status.LOADING || status === Status.ERROR}
-          className={s.button}
-        >
+        <Button type="reset" variant="secondary" disabled={isDisabled} className={s.button}>
           Clear All
         </Button>
       </div>
