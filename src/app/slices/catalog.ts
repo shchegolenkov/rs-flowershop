@@ -36,6 +36,8 @@ interface CatalogState {
   category: string;
 }
 
+const initialPrices = 'variants.prices:exists';
+
 const initialState: CatalogState = {
   queryResult: null,
   status: Status.LOADING,
@@ -44,9 +46,9 @@ const initialState: CatalogState = {
   page: 1,
   sort: '',
   sizes: '',
-  prices: 'variants.prices:exists',
+  prices: initialPrices,
   discount: '',
-  filters: ['variants.prices:exists'],
+  filters: [initialPrices],
   category: '',
 };
 
@@ -81,7 +83,7 @@ const catalogSlice = createSlice({
       state.prices = `variants.price.centAmount:range ${action.payload}`;
     },
     resetPrices: (state) => {
-      state.prices = 'variants.prices:exists';
+      state.prices = initialPrices;
     },
     setDiscount: (state) => {
       state.discount = 'variants.attributes.discount:true';
