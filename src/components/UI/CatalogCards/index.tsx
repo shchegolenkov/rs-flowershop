@@ -11,7 +11,7 @@ import { Status } from '@/types/types';
 
 import s from './CatalogCards.module.scss';
 
-const CatalogCards = ({ className }: JSX.IntrinsicElements['div']) => {
+const CatalogCards = ({ className = '' }: JSX.IntrinsicElements['div']) => {
   const { status, queryResult } = useSelector(selectProducts);
 
   const skeletons = [...new Array(ITEMS_PER_PAGE)].map((_, index) => <Skeleton key={index} />);

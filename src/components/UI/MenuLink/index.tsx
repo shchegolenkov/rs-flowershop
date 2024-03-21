@@ -10,7 +10,7 @@ interface MenuLink extends LinkProps {
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
-export const MenuLink = ({ children, className, ico, onClick, ...props }: MenuLink) => {
+export const MenuLink = ({ children, className = '', ico, onClick, ...props }: MenuLink) => {
   return (
     <Link
       className={clsx(className, {

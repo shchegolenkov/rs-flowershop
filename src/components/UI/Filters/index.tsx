@@ -9,7 +9,7 @@ import { Typography } from '../Typography';
 
 import s from './Filters.module.scss';
 
-const Filters = ({ className }: JSX.IntrinsicElements['div']) => {
+const Filters = ({ className = '' }: JSX.IntrinsicElements['div']) => {
   const [open, setOpen] = useState(false);
 
   return (

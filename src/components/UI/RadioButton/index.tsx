@@ -7,7 +7,7 @@ import s from './RadioButton.module.scss';
 const RadioButton = ({
   name,
   disabled = false,
-  className,
+  className = '',
   value,
   onChange,
   checked,

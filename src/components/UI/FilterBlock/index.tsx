@@ -22,7 +22,7 @@ import { Status } from '@/types/types';
 
 import s from './FilterBlock.module.scss';
 
-const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
+const FilterBlock = ({ className = '' }: JSX.IntrinsicElements['div']) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { status, category } = useSelector(selectProducts);

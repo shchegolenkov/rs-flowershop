@@ -14,7 +14,7 @@ import { Status } from '@/types/types';
 
 import s from './SortingBlock.module.scss';
 
-const FilterBlock = ({ className }: JSX.IntrinsicElements['div']) => {
+const FilterBlock = ({ className = '' }: JSX.IntrinsicElements['div']) => {
   const { sort, status } = useSelector(selectProducts);
 
   const dispatch = useDispatch<AppDispatch>();

@@ -11,7 +11,7 @@ import { AppDispatch } from '@/app/store';
 
 import s from './CatalogPagination.module.scss';
 
-const CatalogPagination = ({ className }: PaginationProps) => {
+const CatalogPagination = ({ className = '' }: PaginationProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { pages, page } = useSelector(selectProducts);

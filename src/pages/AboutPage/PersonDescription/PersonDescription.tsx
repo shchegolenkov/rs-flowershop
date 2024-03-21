@@ -21,7 +21,7 @@ const PersonDescription = ({
   bio,
   contributions,
   link,
-  className,
+  className = '',
 }: PersonDescription) => {
   return (
     <div className={clsx(s.person, className)}>

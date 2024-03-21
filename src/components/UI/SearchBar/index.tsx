@@ -11,7 +11,7 @@ import { AppDispatch } from '@/app/store';
 
 import s from './SearchBar.module.scss';
 
-const SearchBar = ({ className }: JSX.IntrinsicElements['form']) => {
+const SearchBar = ({ className = '' }: JSX.IntrinsicElements['form']) => {
   const [isText, setIsText] = useState(false);
   const { query, category } = useSelector(selectProducts);
   const dispatch = useDispatch<AppDispatch>();

@@ -14,7 +14,7 @@ interface Button
 
 const Button = ({
   children,
-  className,
+  className = '',
   variant = 'primary',
   full = false,
   type = 'button',

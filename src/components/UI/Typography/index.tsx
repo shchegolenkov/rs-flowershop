@@ -27,7 +27,7 @@ interface TypographyProps<T extends ElementType> {
 
 export const Typography = <T extends ElementType = 'p'>({
   as,
-  className,
+  className = '',
   variant = 'body',
   children,
 }: TypographyProps<T>) => {

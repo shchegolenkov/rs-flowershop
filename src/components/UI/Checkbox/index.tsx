@@ -11,7 +11,7 @@ interface Checkbox
   text: string;
 }
 
-const CheckBox = ({ text, className, value, ...props }: Checkbox) => {
+const CheckBox = ({ text, className = '', value, ...props }: Checkbox) => {
   return (
     <label className={clsx(s.group, className)}>
       <input type="checkbox" value={value} className={s.input} {...props} />

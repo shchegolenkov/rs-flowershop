@@ -16,7 +16,7 @@ interface ImageSlider {
   initialIndex?: number;
 }
 
-const ImageSlider = ({ data, className, imageClick, initialIndex = 0 }: ImageSlider) => {
+const ImageSlider = ({ data, className = '', imageClick, initialIndex = 0 }: ImageSlider) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const handleImageClick = () => {
