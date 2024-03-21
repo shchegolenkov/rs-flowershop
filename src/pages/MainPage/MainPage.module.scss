@@ -56,7 +56,7 @@
   color: white;
   background:
     linear-gradient(0deg, rgba(18, 18, 18, 0.4) 0%, rgba(18, 18, 18, 0.4) 100%),
-    url('/src/assets/images/promoBg.png'),
+    url('/src/assets/images/promoBg.webp'),
     lightgray 0px -702.034px / 100% 299.766% no-repeat;
   background-position: bottom -50px right;
   background-size: cover;
@@ -93,7 +93,7 @@
   border-left: 1px solid var(--color-black);
   border-right: 1px solid var(--color-black);
   background-image: linear-gradient(0deg, rgba(18, 18, 18, 0.4) 0%, rgba(18, 18, 18, 0.4) 100%),
-    url('/src/assets/images/quoteBg.png');
+    url('/src/assets/images/quoteBg.webp');
   background-size: cover;
   background-position: center;
 
