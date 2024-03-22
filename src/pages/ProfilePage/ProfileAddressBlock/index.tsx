@@ -29,9 +29,9 @@ import { countries } from '@/constants';
 import { AddressAction, ProfileAddress, ProfileForm, Status, User } from '@/types/types';
 
 import DeleteAddress from '@/assets/svg/delAddress.svg';
-import EditIco from '@/assets/svg/edit.svg';
-import EditIcoActive from '@/assets/svg/editActive.svg';
-import EditIcoErr from '@/assets/svg/editErr.svg';
+import EditIcon from '@/assets/svg/edit.svg';
+import EditIconActive from '@/assets/svg/editActive.svg';
+import EditIconErr from '@/assets/svg/editErr.svg';
 
 import s from '../ProfilePage.module.scss';
 
@@ -271,15 +271,15 @@ const ProfileAddressBlock = ({ address, user, typeAddress }: ProfileEditBlockPro
           <button type="button" onClick={isHasErrors() ? switchEditModeField : undefined}>
             {isDisabledAddress ? (
               <div>
-                <EditIco />
+                <EditIcon />
               </div>
             ) : isHasErrors() ? (
               <div>
-                <EditIcoActive />
+                <EditIconActive />
               </div>
             ) : (
               <div className={s.err_edit_btn}>
-                <EditIcoErr />
+                <EditIconErr />
               </div>
             )}
           </button>

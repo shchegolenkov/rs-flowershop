@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Modal from '@mui/material/Modal';
 
-import CloseIco from '@/assets/svg/close.svg';
+import CloseIcon from '@/assets/svg/close.svg';
 
 import s from './ModalWindow.module.scss';
 
@@ -37,7 +37,7 @@ const ModalWindow = ({ children, open, handleClose }: ModalWindow) => {
         <Fade in={open}>
           <Box sx={{ p: 4, padding: 0 }} className={s.modalContent}>
             <button className={s.closeButton} onClick={handleClose}>
-              <CloseIco />
+              <CloseIcon />
             </button>
             {children}
           </Box>

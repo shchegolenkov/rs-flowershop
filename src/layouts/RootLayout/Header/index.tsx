@@ -12,13 +12,13 @@ import { Typography } from '@/components/UI/Typography';
 
 import { Logout, RouteLinks } from '@/types/types';
 
-import CartIco from '@/assets/svg/cart.svg';
-import CloseIco from '@/assets/svg/close.svg';
-import LoginIco from '@/assets/svg/login.svg';
-import logoIco from '@/assets/svg/logo.svg?url';
-import LogoutIco from '@/assets/svg/logout.svg';
-import MenuIco from '@/assets/svg/menu.svg';
-import ProfileIco from '@/assets/svg/person.svg';
+import CartIcon from '@/assets/svg/cart.svg';
+import CloseIcon from '@/assets/svg/close.svg';
+import LoginIcon from '@/assets/svg/login.svg';
+import logoIcon from '@/assets/svg/logo.svg?url';
+import LogoutIcon from '@/assets/svg/logout.svg';
+import MenuIcon from '@/assets/svg/menu.svg';
+import ProfileIcon from '@/assets/svg/person.svg';
 
 import s from './header.module.scss';
 
@@ -28,8 +28,8 @@ const links = [
 ];
 
 const anonymLinks = [
-  { to: RouteLinks.LOGIN, text: 'Log In', icon: <LoginIco /> },
-  { to: RouteLinks.REGISTER, text: 'Sign up', icon: <ProfileIco /> },
+  { to: RouteLinks.LOGIN, text: 'Log In', icon: <LoginIcon /> },
+  { to: RouteLinks.REGISTER, text: 'Sign up', icon: <ProfileIcon /> },
 ];
 
 const Header = () => {
@@ -87,15 +87,15 @@ const Header = () => {
     <>
       <header>
         <nav className={s.nav}>
-          <div className={s.ico}>
+          <div className={s.icon}>
             <MenuLink to={RouteLinks.MAIN}>
-              <img src={logoIco} className={s.logoIco} alt="logo" />
+              <img src={logoIcon} className={s.logoIcon} alt="logo" />
             </MenuLink>
           </div>
           <ul className={clsx(s.items, { [s.active]: isMenuActive })}>
             <li className={s.menuClose}>
               <button onClick={handleMenuClick}>
-                <CloseIco />
+                <CloseIcon />
               </button>
             </li>
             {links.map((link) => (
@@ -115,7 +115,7 @@ const Header = () => {
                 <li className={s.listItem}>
                   <MenuLink
                     to={RouteLinks.MAIN}
-                    ico={<LogoutIco />}
+                    icon={<LogoutIcon />}
                     onClick={() => {
                       handleLogout();
                       setMenuActive(false);
@@ -127,7 +127,7 @@ const Header = () => {
                 <li className={s.listItem}>
                   <MenuLink
                     to={RouteLinks.PROFILE}
-                    ico={<ProfileIco />}
+                    icon={<ProfileIcon />}
                     onClick={() => {
                       setMenuActive(false);
                     }}
@@ -141,7 +141,7 @@ const Header = () => {
                 <li key={link.text} className={s.listItem}>
                   <MenuLink
                     to={link.to}
-                    ico={link.icon}
+                    icon={link.icon}
                     onClick={() => {
                       setMenuActive(false);
                     }}
@@ -153,14 +153,14 @@ const Header = () => {
             )}
             <li className={s.empty}></li>
           </ul>
-          <div className={clsx(s.menuOpen, s.ico)}>
+          <div className={clsx(s.menuOpen, s.icon)}>
             <button onClick={handleMenuClick}>
-              <MenuIco />
+              <MenuIcon />
             </button>
           </div>
-          <div className={s.ico}>
+          <div className={s.icon}>
             <MenuLink to={RouteLinks.CART} className={s.cartLink}>
-              <CartIco />
+              <CartIcon />
               <Typography className={s.counter} variant="captionSmall">
                 {cartData && cartData.totalLineItemQuantity ? cartData.totalLineItemQuantity : '0'}
               </Typography>

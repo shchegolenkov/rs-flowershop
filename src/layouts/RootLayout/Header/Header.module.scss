@@ -87,7 +87,7 @@
 }
 
 .listItem,
-.ico,
+.icon,
 .menuClose,
 .menuOpen {
   box-sizing: border-box;
@@ -147,7 +147,7 @@
   transform: rotate(90deg);
 }
 
-.ico {
+.icon {
   aspect-ratio: 1 / 1;
 
   &:first-child {
@@ -155,7 +155,7 @@
   }
 }
 
-.logoIco {
+.logoIcon {
   @include media-tablet {
     width: 18px;
   }

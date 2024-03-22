@@ -9,7 +9,7 @@ import { AppDispatch } from '@/app/store';
 import { LineItem, Status, UpdateCart } from '@/types/types';
 import formatPrice from '@/utils/formatPrice';
 
-import RemoveItemIco from '@/assets/svg/delItem.svg';
+import RemoveItemIcon from '@/assets/svg/delItem.svg';
 
 import s from './CartCard.module.scss';
 
@@ -86,7 +86,7 @@ const CartCard = ({ data }: CartCard) => {
         onClick={handleRemoveItem}
         disabled={statusCart === Status.LOADING}
       >
-        <RemoveItemIco />
+        <RemoveItemIcon />
       </button>
     </div>
   );

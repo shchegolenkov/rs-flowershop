@@ -6,21 +6,21 @@ import { Link, LinkProps } from 'react-router-dom';
 import s from './MenuLink.module.scss';
 
 interface MenuLink extends LinkProps {
-  ico?: JSX.Element;
+  icon?: JSX.Element;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
-export const MenuLink = ({ children, className = '', ico, onClick, ...props }: MenuLink) => {
+export const MenuLink = ({ children, className = '', icon, onClick, ...props }: MenuLink) => {
   return (
     <Link
       className={clsx(className, {
-        [s.linkIco]: !!ico,
-        [s.link]: !ico,
+        [s.linkIcon]: !!icon,
+        [s.link]: !icon,
       })}
       onClick={onClick}
       {...props}
     >
-      {ico}
+      {icon}
       {children}
     </Link>
   );

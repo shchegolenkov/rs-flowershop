@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Typography } from '../Typography';
 
-import ArrowIco from '@/assets/svg/arrowLeft.svg';
+import ArrowIcon from '@/assets/svg/arrowLeft.svg';
 
 import s from './MainPageLink.module.scss';
 
@@ -20,9 +20,9 @@ const MainPageLink = ({ to, title }: { to: string; title: string }) => {
           {title}
         </Typography>
         <Typography variant="subtitle" className={s.arrow}>
-          <ArrowIco />
+          <ArrowIcon />
           Shop now
-          <ArrowIco />
+          <ArrowIcon />
         </Typography>
       </Link>
     </section>

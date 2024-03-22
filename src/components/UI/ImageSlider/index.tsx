@@ -4,8 +4,8 @@ import clsx from 'clsx';
 
 import { ProductImage } from '@/types/types';
 
-import ArrowPageIco from '@/assets/svg/arrowSlidePageRight.svg';
-import ArrowIco from '@/assets/svg/arrowSlideRight.svg';
+import ArrowPageIcon from '@/assets/svg/arrowSlidePageRight.svg';
+import ArrowIcon from '@/assets/svg/arrowSlideRight.svg';
 
 import s from './ImageSlider.module.scss';
 
@@ -53,7 +53,7 @@ const ImageSlider = ({ data, className = '', imageClick, initialIndex = 0 }: Ima
     <div className={clsx(s.slider, className)}>
       <div className={s.image_wrapper}>
         <button className={clsx(s.image_button, s.image_button_left)} onClick={prevSlide}>
-          <ArrowIco />
+          <ArrowIcon />
         </button>
         <div
           style={{ backgroundImage: `url(${data[currentIndex].url})` }}
@@ -61,12 +61,12 @@ const ImageSlider = ({ data, className = '', imageClick, initialIndex = 0 }: Ima
           onClick={handleImageClick}
         ></div>
         <button className={clsx(s.image_button, s.image_button_right)} onClick={nextSlide}>
-          <ArrowIco />
+          <ArrowIcon />
         </button>
       </div>
       <div className={s.buttons_panel}>
         <button className={clsx(s.button, s.button_left)} onClick={prevSlide}>
-          <ArrowPageIco />
+          <ArrowPageIcon />
         </button>
         {data.map((slide, slideIndex) => (
           <button
@@ -80,7 +80,7 @@ const ImageSlider = ({ data, className = '', imageClick, initialIndex = 0 }: Ima
           </button>
         ))}
         <button className={s.button} onClick={nextSlide}>
-          <ArrowPageIco />
+          <ArrowPageIcon />
         </button>
       </div>
     </div>

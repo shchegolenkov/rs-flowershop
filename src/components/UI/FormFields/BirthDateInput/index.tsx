@@ -18,9 +18,9 @@ import {
 import { CustomerData } from '@/types/types';
 import { validateDate } from '@/utils/validators';
 
-import EditIco from '@/assets/svg/edit.svg';
-import EditIcoActive from '@/assets/svg/editActive.svg';
-import EditIcoErr from '@/assets/svg/editErr.svg';
+import EditIcon from '@/assets/svg/edit.svg';
+import EditIconActive from '@/assets/svg/editActive.svg';
+import EditIconErr from '@/assets/svg/editErr.svg';
 
 import s from '../FormFields.module.scss';
 
@@ -129,12 +129,12 @@ const BirthDateInput = ({
                 {isEditField ? (
                   <button type="button" onClick={!dataError ? switchEditModeField : undefined}>
                     {isDisabled ? (
-                      <EditIco />
+                      <EditIcon />
                     ) : !dataError ? (
-                      <EditIcoActive />
+                      <EditIconActive />
                     ) : (
                       <div className={s.err_edit_btn}>
-                        <EditIcoErr />
+                        <EditIconErr />
                       </div>
                     )}
                   </button>

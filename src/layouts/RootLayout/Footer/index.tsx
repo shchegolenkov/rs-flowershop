@@ -3,7 +3,7 @@ import { Typography } from '@/components/UI/Typography';
 
 import { RouteLinks } from '@/types/types';
 
-import LogoIco from '@/assets/svg/logo.svg';
+import LogoIcon from '@/assets/svg/logo.svg';
 
 import s from './Footer.module.scss';
 
@@ -42,7 +42,7 @@ const Footer = () => {
         </ul>
       </div>
       <div className={`${s.item} ${s.itemLogo}`}>
-        <LogoIco />
+        <LogoIcon />
         <div>
           <Typography className={s.caption} variant="captionSmall">
             Rolling Scopes Flowers

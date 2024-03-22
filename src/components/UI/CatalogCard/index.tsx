@@ -13,7 +13,7 @@ import { AppDispatch } from '@/app/store';
 import { Product, SizeAttr, Status, UpdateCart } from '@/types/types';
 import formatPrice from '@/utils/formatPrice';
 
-import CartBtnIco from '@/assets/svg/cartBtnIco.svg';
+import CartBtnIcon from '@/assets/svg/cartBtnIcon.svg';
 import productLabel from '@/assets/svg/dummy.svg?url';
 
 import s from './CatalogCard.module.scss';
@@ -115,11 +115,11 @@ const CatalogCard = ({ data }: CatalogCard) => {
       ) : (
         <Button
           className={s.btn}
-          variant="ico"
+          variant="icon"
           onClick={handleCartBtnClick}
           disabled={status === Status.LOADING ? true : isButtonDisabled}
         >
-          <CartBtnIco />
+          <CartBtnIcon />
         </Button>
       )}
     </div>

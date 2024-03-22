@@ -4,9 +4,9 @@ import { FieldError, UseFormRegister } from 'react-hook-form';
 
 import { CustomerData } from '@/types/types';
 
-import EditIco from '@/assets/svg/edit.svg';
-import EditIcoActive from '@/assets/svg/editActive.svg';
-import EditIcoErr from '@/assets/svg/editErr.svg';
+import EditIcon from '@/assets/svg/edit.svg';
+import EditIconActive from '@/assets/svg/editActive.svg';
+import EditIconErr from '@/assets/svg/editErr.svg';
 
 import s from '../FormFields.module.scss';
 
@@ -54,12 +54,12 @@ const EmailInput = ({
       {isEditField ? (
         <button type="button" onClick={!errors.email ? switchEditModeField : undefined}>
           {isDisabled ? (
-            <EditIco />
+            <EditIcon />
           ) : !errors.email ? (
-            <EditIcoActive />
+            <EditIconActive />
           ) : (
             <div className={s.err_edit_btn}>
-              <EditIcoErr />
+              <EditIconErr />
             </div>
           )}
         </button>

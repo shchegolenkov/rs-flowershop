@@ -17,7 +17,7 @@ import { Typography } from '@/components/UI/Typography';
 import { RouteLinks, Status, WelcomeCodes } from '@/types/types';
 import formatPrice from '@/utils/formatPrice';
 
-import ClearCartIco from '@/assets/svg/delCart.svg';
+import ClearCartIcon from '@/assets/svg/delCart.svg';
 
 import s from './CartPage.module.scss';
 
@@ -108,7 +108,7 @@ const CartPage = () => {
                   disabled={statusCart === Status.LOADING}
                 >
                   <Typography variant="subtitle">Clear all cart</Typography>
-                  <ClearCartIco />
+                  <ClearCartIcon />
                 </button>
                 <div>
                   {cartItems.map((item) => (

@@ -4,9 +4,9 @@ import ErrorIcon from '@mui/icons-material/Error';
 import TextField from '@mui/material/TextField';
 import { FieldError, FieldErrors, UseFormRegister, FieldValues, Path } from 'react-hook-form';
 
-import EditIco from '@/assets/svg/edit.svg';
-import EditIcoActive from '@/assets/svg/editActive.svg';
-import EditIcoErr from '@/assets/svg/editErr.svg';
+import EditIcon from '@/assets/svg/edit.svg';
+import EditIconActive from '@/assets/svg/editActive.svg';
+import EditIconErr from '@/assets/svg/editErr.svg';
 
 import s from '../FormFields.module.scss';
 
@@ -63,12 +63,12 @@ const SimpleInput = <T extends FieldValues>({
       {isEditField && isAddressField === undefined ? (
         <button type="button" onClick={!errMessage ? switchEditModeField : undefined}>
           {isDisabled ? (
-            <EditIco />
+            <EditIcon />
           ) : !errMessage ? (
-            <EditIcoActive />
+            <EditIconActive />
           ) : (
             <div className={s.err_edit_btn}>
-              <EditIcoErr />
+              <EditIconErr />
             </div>
           )}
         </button>

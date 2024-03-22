@@ -11,7 +11,7 @@ import Button from '@/components/UI/Button';
 import { Typography } from '@/components/UI/Typography';
 import { LineItem, UpdateCart } from '@/types/types';
 
-import CloseIco from '@/assets/svg/close.svg';
+import CloseIcon from '@/assets/svg/close.svg';
 
 import s from './ClearCart.module.scss';
 
@@ -61,7 +61,7 @@ const ClearCart = ({ open, setOpen }: ClearCart) => {
         <Fade in={open}>
           <Box sx={{ p: 4, padding: 0 }} className={s.modalContent}>
             <button className={s.closeButton} onClick={handleClose}>
-              <CloseIco />
+              <CloseIcon />
             </button>
             <div className={s.contentContainer}>
               <Typography variant="h5">Are you sure you want to clear your cart?</Typography>

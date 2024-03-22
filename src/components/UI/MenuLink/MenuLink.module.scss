@@ -1,5 +1,5 @@
 .link,
-.linkIco {
+.linkIcon {
   position: relative;
   padding: 5px;
   font-size: 16px;
@@ -14,7 +14,7 @@
 }
 
 .link::after,
-.linkIco::after {
+.linkIcon::after {
   content: '';
   position: absolute;
   left: -1px;
@@ -26,7 +26,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-.linkIco {
+.linkIcon {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -34,22 +34,22 @@
 
 @media (hover: hover) {
   .link:hover,
-  .linkIco:hover {
+  .linkIcon:hover {
     color: var(--color-gray);
   }
 
   .link:hover::after,
-  .linkIco:hover::after {
+  .linkIcon:hover::after {
     width: 100%;
   }
 }
 
 .link:active,
-.linkIco:active {
+.linkIcon:active {
   color: var(--color-black);
 }
 
 .link:active::after,
-.linkIco:active::after {
+.linkIcon:active::after {
   width: 100%;
 }
