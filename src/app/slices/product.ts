@@ -9,9 +9,7 @@ export const fetchProduct = createAsyncThunk(
   async (productKey: string, thunkAPI) => {
     try {
       const response = await ProductService.getProduct(productKey);
-      if (response) {
-        return response.data;
-      }
+      return response.data || null;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

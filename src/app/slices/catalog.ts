@@ -14,16 +14,15 @@ export const fetchProducts = createAsyncThunk('catalog/allProducts', async (_, t
     const pageNumber = state.products.page;
     const filters = state.products.filters;
     const response = await CatalogService.getProducts(pageNumber, query, sort, filters);
-    if (response) {
-      return response.data;
-    }
+
+    return response.data || null;
   } catch (error) {
     throw thunkAPI.rejectWithValue(error);
   }
 });
 
 interface CatalogState {
-  queryResult?: PageQueryResult | null;
+  queryResult: PageQueryResult | null;
   status: Status;
   query: string;
   pages: number;
